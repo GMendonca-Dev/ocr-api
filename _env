@@ -1,0 +1,47 @@
+## Não precisa colocar "" aspas
+# SECRET_KEY = 'django-insecure-#xmaxh29z3wqoi4z(y@^udb&d-!(g@7hzoiesv64zar-k*b01o'
+SECRET_KEY = 'django-insecure-uc^rob@l*io%1qpmk5$^6t6m%ja62m@p2rea_&_u3d#iy2nmu%' # Nova
+
+DEBUG=True
+SUPER_USER=ADMIN
+EMAIL=admin@email.com
+
+
+# Local
+# NAME_DB=funcionarios
+# USER_DB=postgres
+# PASSWORD_DB=Aa1234
+# HOST_DB=localhost
+# PORT_DB=5432
+
+
+#DockerLocal
+# NAME_DB=apicnpj
+# USER_DB=postgre
+# PASSWORD_DB=Aa1234
+# HOST_DB=localhost
+# PORT_DB=5432
+
+
+#DockerRemoto
+NAME_DB=apis
+USER_DB=postgres
+PASSWORD_DB=Aa123456@
+HOST_DB=10.100.77.25
+PORT_DB=5432
+
+
+EMAIL_HOST=smtp.office365.com
+EMAIL_HOST_USER=email@hotmail.com
+EMAIL_HOST_PASSWORD=sua_senha
+EMAIL_PORT=587 
+EMAIL_USE_TLS=True 
+DEFAULT_FROM_EMAIL=email@hotmail.com
+SERVER_EMAIL=DEFAULT_FROM_EMAIL
+
+
+RECAPTCHA_PUBLIC_KEY = '6LfguZgpAAAAAD3-RVXC7g0y8LxVYd3Dq3cAZhyk'
+RECAPTCHA_PRIVATE_KEY = '6LfguZgpAAAAAGkYIbJgYHjPIiAH9gz5g0VI0enr'
+
+
+DOMAIN=127.0.0.1:8000
