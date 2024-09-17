@@ -24,7 +24,8 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    
+
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -183,3 +184,7 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
 
 }
+
+
+JAZZMIN_SETTINGS = {}
+JAZZMIN_SETTINGS["show_ui_builder"] = True
