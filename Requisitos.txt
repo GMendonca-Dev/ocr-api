@@ -1,0 +1,1 @@
+#Instalar o Tesseract no servidor

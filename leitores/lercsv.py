@@ -1,21 +1,4 @@
-from django.contrib.postgres.search import SearchVector
 import pandas as pd
-
-
-
-def indexar_texto(documento):
-    documento.search_vector = SearchVector('texto_extraido', 'titulo')
-    documento.save()
-
-
-class Leitores():
-
-    # Documentos ".csv"
-    def ler_csv(arquivo):
-        with open(arquivo, 'r') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                print(row)
 
 
 def read_csv(file_path):
