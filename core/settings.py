@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     
     'easyaudit',
     'django_filters',
+    'rest_framework',
 
     ##### Local apps  #####
     
