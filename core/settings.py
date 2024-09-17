@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
     ##### Local apps  #####
     
+    'ocr',
+    'api',
    
 ]
 
