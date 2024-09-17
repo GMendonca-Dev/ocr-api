@@ -1,6 +1,5 @@
 ## Não precisa colocar "" aspas
-# SECRET_KEY = 'django-insecure-#xmaxh29z3wqoi4z(y@^udb&d-!(g@7hzoiesv64zar-k*b01o'
-SECRET_KEY = 'django-insecure-uc^rob@l*io%1qpmk5$^6t6m%ja62m@p2rea_&_u3d#iy2nmu%' # Nova
+SECRET_KEY = 'django-insecure-4n#_4oimb-5k2q_nic9xop_f7brnjxp69*-28d^v_ay^lt5-t%'
 
 DEBUG=True
 SUPER_USER=ADMIN
@@ -8,11 +7,11 @@ EMAIL=admin@email.com
 
 
 # Local
-# NAME_DB=funcionarios
-# USER_DB=postgres
-# PASSWORD_DB=Aa1234
-# HOST_DB=localhost
-# PORT_DB=5432
+NAME_DB=ocr
+USER_DB=postgres
+PASSWORD_DB=Aa1234
+HOST_DB=localhost
+PORT_DB=5432
 
 
 #DockerLocal
@@ -24,11 +23,11 @@ EMAIL=admin@email.com
 
 
 #DockerRemoto
-NAME_DB=apis
-USER_DB=postgres
-PASSWORD_DB=Aa123456@
-HOST_DB=10.100.77.25
-PORT_DB=5432
+# NAME_DB=apis
+# USER_DB=postgres
+# PASSWORD_DB=Aa123456@
+# HOST_DB=10.100.77.25
+# PORT_DB=5432
 
 
 EMAIL_HOST=smtp.office365.com
