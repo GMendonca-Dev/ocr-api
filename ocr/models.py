@@ -16,6 +16,7 @@ class Documento(models.Model):
     def __str__(self):
         return self.titulo
     
+    # Indexa o texto extraído do documento
     def indexar_texto(documento):
         documento.search_vector = SearchVector('texto_extraido', 'titulo')
         documento.save()
