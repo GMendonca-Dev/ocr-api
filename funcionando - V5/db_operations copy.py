@@ -1,9 +1,8 @@
 import psycopg2
 import warnings
 from dotenv import load_dotenv
-import os
 
-load_dotenv()
+load_dotemv()
 
 # Suprime os avisos do tipo UserWarning, incluindo o aviso do openpyxl
 warnings.simplefilter("ignore", UserWarning)
@@ -11,18 +10,19 @@ warnings.simplefilter("ignore", UserWarning)
 
 def get_db_connection():
     return psycopg2.connect(
-    #     dbname=db_config["dbname"],
-    #     user=db_config["user"],
-    #     password=db_config["password"],
-    #     host=db_config["host"],
-    #     port=db_config["port"]
-    # )
-        dbname=os.getenv("NAME_DB"),
-        user=os.getenv("USER_DB"),
-        password=os.getenv("PASSWORD_DB"),
-        host=os.getenv("HOST_DB"),
-        port=int(os.getenv('PORT_DB'))
+        dbname=db_config["dbname"],
+        user=db_config["user"],
+        password=db_config["password"],
+        host=db_config["host"],
+        port=db_config["port"]
     )
+    # return psycopg2.connect(
+    #     dbname="ocr",  # Nome do banco de dados
+    #     user="postgres",  # Usuário
+    #     password="Aa123456@",  # Senha
+    #     host="10.100.77.25",  # IP do container ou host
+    #     port="5432"  # Porta do PostgreSQL
+    # )
 
 
 def create_table_if_not_exists():
@@ -30,20 +30,20 @@ def create_table_if_not_exists():
         with get_db_connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("""
-                    CREATE TABLE IF NOT EXISTS ocr_documentosocr (
-                        id VARCHAR(15) PRIMARY KEY,
-                        id_documento VARCHAR(15),
+                    CREATE TABLE IF NOT EXISTS documentos_ocr (
+                        id_documento VARCHAR(15) PRIMARY KEY,
                         nome_original VARCHAR(255),
                         arquivo VARCHAR(255),
                         extensao_arquivo VARCHAR(10),
                         pasta VARCHAR(255),
                         caminho TEXT,
                         conteudo TEXT,
+                        ocr BOOLEAN,
                         numero_pagina INT,
-                        data_leitura TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                        data_insercao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                     )
                 """)
-        #print("Tabela verificada ou criada com sucesso.")
+        print("Tabela verificada ou criada com sucesso.")
     except Exception as e:
         print(f"Erro ao criar a tabela: {e}")
 
@@ -53,9 +53,8 @@ def create_error_table_if_not_exists():
         with get_db_connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("""
-                    CREATE TABLE IF NOT EXISTS ocr_documentosocrerros (
-                        id VARCHAR(15) PRIMARY KEY,
-                        id_documento VARCHAR(15) ,
+                    CREATE TABLE IF NOT EXISTS documentos_ocr_erros (
+                        id_documento VARCHAR(15) PRIMARY KEY,
                         nome_original VARCHAR(255),
                         arquivo VARCHAR(255),
                         extensao_arquivo VARCHAR(10),
@@ -66,7 +65,7 @@ def create_error_table_if_not_exists():
                         data_insercao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                     )
                 """)
-        #print("Tabela de erros verificada ou criada com sucesso.")
+        print("Tabela de erros verificada ou criada com sucesso.")
     except Exception as e:
         print(f"Erro ao criar a tabela de erros: {e}")
 
@@ -76,10 +75,10 @@ def insert_data_into_main_table(data):
     cur = conn.cursor()
     try:
         cur.execute("""
-            INSERT INTO ocr_documentosocr (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina)
-            VALUES ( %s, %s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (id_documento, nome_original) DO UPDATE
-            SET conteudo = EXCLUDED.conteudo, numero_pagina = EXCLUDED.numero_pagina
+            INSERT INTO documentos_ocr (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, conteudo, ocr, numero_pagina)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (id_documento) DO UPDATE
+            SET conteudo = EXCLUDED.conteudo, ocr = EXCLUDED.ocr, numero_pagina = EXCLUDED.numero_pagina
         """, data)
         conn.commit()
     except Exception as e:
@@ -95,9 +94,9 @@ def insert_error_into_table(error_data):
     cur = conn.cursor()
     try:
         cur.execute("""
-            INSERT INTO ocr_documentosocrerros (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, numero_pagina, erro)
-            VALUES ( %s, %s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (id_documento, nome_original) DO NOTHING
+            INSERT INTO documentos_ocr_erros (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, numero_pagina, erro)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (id_documento) DO NOTHING
         """, error_data)
         conn.commit()
     except Exception as e:

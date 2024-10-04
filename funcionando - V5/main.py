@@ -20,8 +20,8 @@ warnings.simplefilter("ignore", UserWarning)
 
 
 def save_data_to_db(data, page_number):
-    create_table_if_not_exists()
-    create_error_table_if_not_exists()
+    #create_table_if_not_exists()
+    #create_error_table_if_not_exists()
 
     total_registros = len(data)
     registros_sucesso = 0
@@ -42,9 +42,13 @@ def save_data_to_db(data, page_number):
             # _, extensao = os.path.splitext(item['arquivo'])
             # extensao = extensao.lstrip('.').lower()
 
+            # insert_data_into_main_table((
+            #     item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'], 
+            #     item['caminho'], conteudo, True, page_number
+            # ))
             insert_data_into_main_table((
                 item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'], 
-                item['caminho'], conteudo, True, page_number
+                item['caminho'], conteudo, page_number
             ))
             registros_sucesso += 1
 
