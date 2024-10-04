@@ -7,11 +7,11 @@ EMAIL=admin@email.com
 
 
 # Local
-NAME_DB=ocr
-USER_DB=postgres
-PASSWORD_DB=Aa1234
-HOST_DB=localhost
-PORT_DB=5432
+# NAME_DB=ocr
+# USER_DB=postgres
+# PASSWORD_DB=Aa1234
+# HOST_DB=localhost
+# PORT_DB=5432
 
 
 #DockerLocal
@@ -23,11 +23,19 @@ PORT_DB=5432
 
 
 #DockerRemoto
-# NAME_DB=apis
-# USER_DB=postgres
-# PASSWORD_DB=Aa123456@
-# HOST_DB=10.100.77.25
-# PORT_DB=5432
+NAME_DB=ocr
+USER_DB=postgres
+PASSWORD_DB=Aa123456@
+HOST_DB=10.100.77.25
+PORT_DB=5432
+
+
+# Dados API
+
+EMAIL=api-ocr@email.com
+SENHA=Uf4fWisgF4
+API_URL=https://10.100.77.20/xpertis/documentos
+AUTH_URL=https://10.100.77.20/xpertis/auth/login
 
 
 EMAIL_HOST=smtp.office365.com
