@@ -27,8 +27,7 @@ def is_url(file_path):
 
 def extract_text_by_extension(file_path, id_zip=None):
     """
-    Função que determina a extração de conteúdo com base na extensão do arquivo.
-    Para arquivos ZIP, ela chama o processo de extração e tratamento dos arquivos dentro do ZIP.
+        Função que determina a extração de conteúdo com base na extensão do arquivo.
     """
     # Verifica se é uma URL ou um arquivo local
     if is_url(file_path):
@@ -98,10 +97,10 @@ def extract_text_by_extension(file_path, id_zip=None):
 
         else:
             erro_msg = f"Extensão {extension} não suportada."
-            print(erro_msg)
+            #print(erro_msg)
             return "", False, erro_msg
 
     except Exception as e:
         erro_msg = f"Erro ao processar o arquivo com extensão {extension}: {e}"
-        print(erro_msg)
+        #print(erro_msg)
         return "", False, erro_msg

@@ -29,23 +29,28 @@ def save_data_to_db(data, page_number):
 
     for item in data:
 
+        # print("#############################################################################")
+        # print(f"Erro ao extrair o conteúdo do item com ID: {item['id_operacaodocumentos']}")
+        # print(f"Item com ID: {item['id_operacaodocumentos']}")
+        # print(f"Nome original do arquivo: {item.get('nome')}")
+        # print("#############################################################################")
+
         # Extrai a extensão do arquivo antes do bloco try-except (Adicionado aqui para evitar o erro de extensão de arquivo na tabela de erros)
         _, extensao = os.path.splitext(item['arquivo'])
         extensao = extensao.lstrip('.').lower()
 
         try:
+
+            
+            # _, extensao = os.path.splitext(item['arquivo'])
+            # extensao = extensao.lstrip('.').lower()
+
+
+            # Extrair o conteúdo
             conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
             if not sucesso:
                 raise Exception(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
 
-            # Arquivos originais
-            # _, extensao = os.path.splitext(item['arquivo'])
-            # extensao = extensao.lstrip('.').lower()
-
-            # insert_data_into_main_table((
-            #     item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'], 
-            #     item['caminho'], conteudo, True, page_number
-            # ))
             insert_data_into_main_table((
                 item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'], 
                 item['caminho'], conteudo, page_number
@@ -54,9 +59,17 @@ def save_data_to_db(data, page_number):
 
         except Exception as e:
             erro_msg = str(e)
+            
+            # Captura o nome original do arquivo
+            nome_original = item.get('nome')
+            if not nome_original:  # Se o nome não estiver presente, registrar uma mensagem de aviso
+                # print("Nome original não encontrado")
+                nome_original = "Nome original não encontrado"
+
+            # Registra o erro na tabela de erros
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
-                item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'], 
+                item['id_operacaodocumentos'], nome_original, item['arquivo'], extensao, item['pasta'], 
                 item['caminho'], page_number, erro_msg
             ))
 
