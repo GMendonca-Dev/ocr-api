@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 import warnings
 import pytesseract
 
+# config.py
+start_page = 1
+end_page = 5
 
 # Carrega variáveis de ambiente do arquivo .env
 load_dotenv()
