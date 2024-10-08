@@ -16,7 +16,7 @@ class DocumentosOcr(models.Model):
     conteudo = models.TextField(blank=True, null=True)
     data_leitura = models.DateTimeField(auto_now_add=True)
     #docs_extraidos = models.FilePathField(path='/docs_extraidos')
-    search_vector = SearchVectorField(null=True)
+    #search_vector = SearchVectorField(null=True)
     
     class Meta:
         verbose_name = "OCR Documentos"
@@ -33,10 +33,9 @@ class DocumentosOcr(models.Model):
     #     documento.search_vector = SearchVector('conteudo', 'nome_original')
     #     documento.save()
 
-    @classmethod
-    def indexar_texto(cls, queryset):
-        queryset.update(search_vector=SearchVector(F('conteudo'), F('nome_original'), config='portuguese'))
-
+    # @classmethod
+    # def indexar_texto(cls, queryset):
+    #     queryset.update(search_vector=SearchVector(F('conteudo'), F('nome_original'), config='portuguese'))
 
 class DocumentosOcrErros(models.Model):
     # id = models.BigAutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')

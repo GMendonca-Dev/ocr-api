@@ -32,7 +32,6 @@ def extract_text_by_extension(file_path, id_zip=None):
     # Verifica se é uma URL ou um arquivo local
     if is_url(file_path):
         try:
-            print(f"URL detectada: {file_path}")  # Imprime a URL para verificação
             response = requests.get(file_path, verify=False)
             response.raise_for_status()
             file_content = response.content  # Conteúdo binário do arquivo
@@ -59,22 +58,13 @@ def extract_text_by_extension(file_path, id_zip=None):
             return extract_text_and_images_from_docx(file_content), True, None
         elif extension == 'doc':
             return download_and_convert_doc_to_docx(file_path), True, None
-        # elif extension == 'pdf':
-        #     if isinstance(file_content, bytes):
-        #         return extract_text_from_pdf(BytesIO(file_content)), True, None
-        #     else:
-        #         with open(file_content, 'rb') as file:
-        #             return extract_text_from_pdf(file.read()), True, None
-
         elif extension == 'pdf':
-            if is_url(file_path):
-                return extract_text_from_pdf(file_path), True,  None
-            elif isinstance(file_content, bytes):
-                return extract_text_from_pdf(BytesIO(file_content)),  True,  None
+            if isinstance(file_content, bytes):
+                return extract_text_from_pdf(BytesIO(file_content)), True, None
+
             else:
                 with open(file_content, 'rb') as file:
-                    return extract_text_from_pdf(file.read()),  True,  None
-
+                    return extract_text_from_pdf(file.read()), True, None
         elif extension in ['jpg', 'jpeg', 'png']:
             if isinstance(file_content, bytes):
                 return extract_text_from_image(BytesIO(file_content)), True, None

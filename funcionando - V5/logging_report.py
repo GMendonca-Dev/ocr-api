@@ -29,6 +29,24 @@ def generate_error_log(page_number, data, erro, log_dir="logs_erros"):
         with open(log_path, 'w', encoding='utf-8') as log_file:
             json.dump(log_data, log_file, ensure_ascii=False, indent=4)
         print(f"Log de erros gerado: {log_path}")
+
+## Acrescentei a partir daqui
+        # Gera o arquivo JSON separado com a página e IDs dos documentos com erro
+        error_ids = [item['id_operacaodocumentos'] for item in data]
+        error_summary = {
+            "pagina": page_number,
+            "ids_com_erro": error_ids
+        }
+
+        error_summary_file = os.path.join(log_dir, f"ErrorSummary_pag_{page_number}_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+        with open(error_summary_file, 'w', encoding='utf-8') as summary_file:
+            json.dump(error_summary, summary_file, ensure_ascii=False, indent=4)
+        print(f"Resumo de erros gerado: {error_summary_file}")
+##Acrescentei até aqui
+
+
+
+
     except Exception as e:
         print(f"Erro ao gerar log de erros: {e}")
 

@@ -4,8 +4,8 @@ import warnings
 import pytesseract
 
 # config.py
-start_page = 1
-end_page = 5
+start_page = 6
+end_page = 6
 
 # Carrega variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -30,7 +30,7 @@ auth_url = os.getenv("AUTH_URL")
 email = os.getenv("EMAIL")
 senha = os.getenv("SENHA")
 api_url = os.getenv("API_URL")
-page_number = int(input("Digite o número da página:"))
+#page_number = int(input("Digite o número da página:"))
 
 # Configurações do banco de dados
 db_config = {

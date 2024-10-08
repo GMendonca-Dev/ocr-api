@@ -176,33 +176,33 @@ def extract_text_from_txt(file_path_or_content):
         return "", False
 
 
-# def extract_text_from_pdf(pdf_content):
+def extract_text_from_pdf(pdf_content):
     
-#     try:
-#         doc = fitz.open(stream=pdf_content, filetype="pdf")
-#         all_text = ""
-#         # ocr_status = True
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             text = page.get_text("text")
-#             all_text += text
+    try:
+        doc = fitz.open(stream=pdf_content, filetype="pdf")
+        all_text = ""
+        ocr_status = True
+        for page_num in range(doc.page_count):
+            page = doc.load_page(page_num)
+            text = page.get_text("text")
+            all_text += text
 
-#             images = page.get_images(full=True)
-#             for img in images:
-#                 xref = img[0]
-#                 base_image = doc.extract_image(xref)
-#                 image_data = base_image["image"]
-#                 image = Image.open(BytesIO(image_data))
-#                 try:
-#                     ocr_text = pytesseract.image_to_string(image)
-#                     all_text += ocr_text
-#                 except Exception as ocr_error:
-#                     print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
-#                     # ocr_status = False
-#         return all_text #, ocr_status
-#     except Exception as e:
-#         # print(f"Erro ao extrair texto do PDF: {e}")
-#         return ""
+            images = page.get_images(full=True)
+            for img in images:
+                xref = img[0]
+                base_image = doc.extract_image(xref)
+                image_data = base_image["image"]
+                image = Image.open(BytesIO(image_data))
+                try:
+                    ocr_text = pytesseract.image_to_string(image)
+                    all_text += ocr_text
+                except Exception as ocr_error:
+                    print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
+                    ocr_status = False
+        return all_text, ocr_status
+    except Exception as e:
+        print(f"Erro ao extrair texto do PDF: {e}")
+        return "", False
 
 
 def extract_text_from_xlsx(file_path_or_content):
@@ -406,6 +406,88 @@ def extract_text_from_json(file_path_or_content):
 
 
 def extract_text_from_pptx(file_path_or_content):
+    # try:
+    #     if isinstance(file_path_or_content, (bytes, BytesIO)):
+    #         file_content = BytesIO(file_path_or_content) if isinstance(file_path_or_content, bytes) else file_path_or_content
+    #     elif isinstance(file_path_or_content, str) and (file_path_or_content.startswith("http://") or file_path_or_content.startswith("https://")):
+    #         response = requests.get(file_path_or_content)
+    #         response.raise_for_status()
+    #         file_content = BytesIO(response.content)
+    #     else:
+    #         file_content = open(file_path_or_content, 'rb')
+
+    #     prs = Presentation(file_content)
+    #     all_text = []
+
+    #     # Itera sobre os slides para extrair texto e realizar OCR em imagens
+    #     for slide in prs.slides:
+    #         # Extrair o texto dos shapes
+    #         for shape in slide.shapes:
+    #             if hasattr(shape, "text"):
+    #                 all_text.append(shape.text)
+
+    #         # Realizar OCR sobre imagens
+    #         for shape in slide.shapes:
+    #             if hasattr(shape, "image") and shape.image is not None:
+    #                 image_stream = io.BytesIO(shape.image.blob)
+    #                 image = Image.open(image_stream)
+    #                 ocr_text = pytesseract.image_to_string(image, lang='por')
+    #                 all_text.append(ocr_text)
+
+    #     extracted_text = "\n".join(all_text)
+    #     return extracted_text, True
+
+    # except Exception as e:
+    #     print(f"Erro ao ler ou processar o arquivo PPTX: {e}")
+    #     return "", False
+
+    # finally:
+    #     if isinstance(file_content, BytesIO) is False and not isinstance(file_path_or_content, bytes):
+    #         file_content.close()
+
+    # try:
+    #     if isinstance(file_path_or_content, (bytes, BytesIO)):
+    #         file_content = BytesIO(file_path_or_content) if isinstance(file_path_or_content, bytes) else file_path_or_content
+    #     elif isinstance(file_path_or_content, str) and (file_path_or_content.startswith("http://") or file_path_or_content.startswith("https://")):
+    #         response = requests.get(file_path_or_content)
+    #         response.raise_for_status()
+    #         file_content = BytesIO(response.content)
+    #     else:
+    #         file_content = open(file_path_or_content, 'rb')
+
+    #     prs = Presentation(file_content)
+    #     all_text = []
+
+    #     # Itera sobre os slides para garantir a extração de texto de todos os slides
+    #     for slide_num, slide in enumerate(prs.slides, start=1):
+    #         slide_text = f"\n--- Slide {slide_num} ---\n"
+            
+    #         # Extrair o texto dos shapes
+    #         for shape in slide.shapes:
+    #             if hasattr(shape, "text"):
+    #                 slide_text += shape.text + "\n"
+
+    #         # Realizar OCR sobre imagens dentro dos slides
+    #         for shape in slide.shapes:
+    #             if hasattr(shape, "image") and shape.image is not None:
+    #                 image_stream = io.BytesIO(shape.image.blob)
+    #                 image = Image.open(image_stream)
+    #                 ocr_text = pytesseract.image_to_string(image, lang='por')
+    #                 slide_text += f"\n[Imagem OCR]:\n{ocr_text}\n"
+            
+    #         all_text.append(slide_text)
+
+    #     # Junta todo o texto extraído dos slides
+    #     extracted_text = "\n".join(all_text)
+    #     return extracted_text, True
+
+    # except Exception as e:
+    #     print(f"Erro ao ler ou processar o arquivo PPTX: {e}")
+    #     return "", False
+
+    # finally:
+    #     if isinstance(file_content, BytesIO) is False and not isinstance(file_path_or_content, bytes):
+    #         file_content.close()
 
     try:
         if isinstance(file_path_or_content, (bytes, BytesIO)):
@@ -458,129 +540,3 @@ def extract_text_from_pptx(file_path_or_content):
     finally:
         if isinstance(file_content, BytesIO) is False and not isinstance(file_path_or_content, bytes):
             file_content.close()
-
-
-# def extract_text_from_pdf(pdf_content, pdf_url=None):
-#     try:
-#         doc = fitz.open(stream=pdf_content, filetype="pdf")
-#         all_text = ""
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             text = page.get_text("text")
-#             all_text += text
-
-#             images = page.get_images(full=True)
-#             for img in images:
-#                 xref = img[0]
-#                 base_image = doc.extract_image(xref)
-#                 image_data = base_image["image"]
-#                 image = Image.open(BytesIO(image_data))
-#                 try:
-#                     ocr_text = pytesseract.image_to_string(image)
-#                     all_text += ocr_text
-#                 except Exception as ocr_error:
-#                     print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
-#         return all_text
-#     except Exception as e:
-#         print(f"Erro ao extrair texto do PDF usando a primeira abordagem: {e}")
-#         print("Tentando realizar OCR usando a abordagem de imagem...")
-#         # Se ocorrer um erro, chama a segunda função para tentar extrair o texto usando a URL
-#         if pdf_url:
-#             return extract_text_from_image_pdf(pdf_url)
-#         else:
-#             return ""  # Retorna uma string vazia se a URL não estiver disponível
-
-# def extract_text_from_image_pdf(pdf_url):
-#     # Baixa o arquivo PDF da URL
-#     response = requests.get(pdf_url, verify=False)
-#     response.raise_for_status()  # Verifica se houve algum erro na requisição
-
-#     # Abre o PDF a partir do conteúdo baixado
-#     doc = fitz.open(stream=response.content, filetype="pdf")
-#     all_text = ""
-    
-#     # Percorre cada página do PDF
-#     for page_num in range(doc.page_count):
-#         page = doc.load_page(page_num)
-        
-#         # Extrai a imagem da página como um objeto pixmap
-#         pix = page.get_pixmap()
-        
-#         # Converte o pixmap para um objeto PIL Image
-#         image = Image.open(BytesIO(pix.tobytes()))
-        
-#         # Realiza OCR na imagem para extrair o texto
-#         ocr_text = pytesseract.image_to_string(image)
-#         all_text += f"\nPag {page_num + 1}:\n{ocr_text}\n"
-#         all_text += "-" * 40 + "\n"
-    
-#     return all_text
-
-# def extract_text_from_pdf(pdf_url):
-
-#     page_loop = ""
-
-#     try:
-#         # Baixar o conteúdo do PDF a partir da URL
-#         response = requests.get(pdf_url, verify=False)
-#         response.raise_for_status()
-#         pdf_content = BytesIO(response.content)
-        
-#         doc = fitz.open(stream=pdf_content, filetype="pdf")
-#         all_text = ""
-#         # ocr_status = True
-#         for page_num in range(doc.page_count):
-#             page_loop = page_num
-#             page = doc.load_page(page_num)
-#             text = page.get_text("text")
-#             all_text += text
-
-#             images = page.get_images(full=True)
-#             for img in images:
-#                 xref = img[0]
-#                 base_image = doc.extract_image(xref)
-#                 image_data = base_image["image"]
-#                 image = Image.open(BytesIO(image_data))
-#                 try:
-#                     ocr_text = pytesseract.image_to_string(image)
-#                     all_text += ocr_text
-#                 except Exception as ocr_error:
-#                     print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
-#                     # ocr_status = False
-#         page_loop = ""
-#         return all_text #, ocr_status
-#     except Exception as e:
-#         print(f"Erro ao extrair texto do PDF: {e} -  da página {page_loop}")
-#         return ""
-
-def extract_text_from_pdf(file_path_or_url):
-    # Verifica se é uma URL ou um arquivo local
-    if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
-        # Baixa o arquivo PDF da URL
-        response = requests.get(file_path_or_url, verify=False)
-        response.raise_for_status()  # Verifica se houve algum erro na requisição
-        pdf_content = response.content
-    else:
-        # Lê o arquivo PDF do diretório local
-        with open(file_path_or_url, 'rb') as file:
-            pdf_content = file.read()
-
-    # Abre o PDF a partir do conteúdo baixado ou lido
-    doc = fitz.open(stream=pdf_content, filetype="pdf")
-    all_text = ""
-    
-    # Percorre cada página do PDF
-    for page_num in range(doc.page_count):
-        page = doc.load_page(page_num)
-        
-        # Extrai a imagem da página como um objeto pixmap
-        pix = page.get_pixmap()
-        
-        # Converte o pixmap para um objeto PIL Image
-        image = Image.open(BytesIO(pix.tobytes()))
-        
-        # Realiza OCR na imagem para extrair o texto
-        ocr_text = pytesseract.image_to_string(image)
-        all_text += f"\nPag {page_num + 1}:\n{ocr_text}\n"
-    
-    return all_text

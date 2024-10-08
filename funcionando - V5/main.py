@@ -40,7 +40,7 @@ def save_data_to_db(data, page_number):
         except Exception as e:
             erro_msg = str(e)
             nome_original = item.get('nome')
-            print(f"Nome original do arquivo: {nome_original}")
+            #print(f"Nome original do arquivo: {nome_original}")
 
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
