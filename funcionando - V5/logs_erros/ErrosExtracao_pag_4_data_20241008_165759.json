@@ -1,0 +1,13 @@
+[
+    {
+        "id_documento": "96",
+        "pagina": 4,
+        "nome_original": "Decisão Proc 0800269-11.2019 7QST (1).pdf",
+        "arquivo": "30_7_13022020130620_decisaoproc080026911.20197qst1.pdf",
+        "extensao": ".pdf",
+        "pasta": "decisao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaoproc080026911.20197qst1.pdf",
+        "erro": "A string literal cannot contain NUL (0x00) characters.",
+        "data_insercao": "2024-10-08 16:57:59"
+    }
+]

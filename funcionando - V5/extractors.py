@@ -32,7 +32,7 @@ def extract_text_by_extension(file_path, id_zip=None):
     # Verifica se é uma URL ou um arquivo local
     if is_url(file_path):
         try:
-            print(f"URL detectada: {file_path}")  # Imprime a URL para verificação
+            print(f"URL : {file_path}")  # Imprime a URL para verificação
             response = requests.get(file_path, verify=False)
             response.raise_for_status()
             file_content = response.content  # Conteúdo binário do arquivo

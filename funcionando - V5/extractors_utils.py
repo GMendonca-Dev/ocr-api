@@ -223,13 +223,13 @@ def extract_text_from_csv(file_path_or_content):
         # Verifica se o conteúdo é binário (baixado de uma URL e não de um arquivo local)
         if isinstance(file_path_or_content, bytes):
             # Converte bytes para string usando StringIO
-            file_content = StringIO(file_path_or_content.decode('latin1'))
+            file_content = StringIO(file_path_or_content.decode('utf-8'))
         else:
             # Se for um caminho local, abre o arquivo e lê o conteúdo
             file_content = file_path_or_content
 
         # Usa pandas para ler o CSV e convertê-lo em uma string
-        df = pd.read_csv(file_content)
+        df = pd.read_csv(file_content, on_bad_lines='skip')
         return df.to_string(), True, ""  # Retorna o conteúdo como string, status de sucesso e erro vazio
     except Exception as e:
         erro_msg = f"Erro ao ler arquivo CSV: {e}"
@@ -553,6 +553,40 @@ def extract_text_from_pptx(file_path_or_content):
 #         print(f"Erro ao extrair texto do PDF: {e} -  da página {page_loop}")
 #         return ""
 
+
+# def extract_text_from_pdf(file_path_or_url):
+#     # Verifica se é uma URL ou um arquivo local
+#     if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
+#         # Baixa o arquivo PDF da URL
+#         response = requests.get(file_path_or_url, verify=False)
+#         response.raise_for_status()  # Verifica se houve algum erro na requisição
+#         pdf_content = response.content
+#     else:
+#         # Lê o arquivo PDF do diretório local
+#         with open(file_path_or_url, 'rb') as file:
+#             pdf_content = file.read()
+
+#     # Abre o PDF a partir do conteúdo baixado ou lido
+#     doc = fitz.open(stream=pdf_content, filetype="pdf")
+#     all_text = ""
+    
+#     # Percorre cada página do PDF
+#     for page_num in range(doc.page_count):
+#         page = doc.load_page(page_num)
+        
+#         # Extrai a imagem da página como um objeto pixmap
+#         pix = page.get_pixmap()
+        
+#         # Converte o pixmap para um objeto PIL Image
+#         image = Image.open(BytesIO(pix.tobytes()))
+        
+#         # Realiza OCR na imagem para extrair o texto
+#         ocr_text = pytesseract.image_to_string(image)
+#         all_text += f"\nPag {page_num + 1}:\n{ocr_text}\n"
+    
+#     return all_text
+
+
 def extract_text_from_pdf(file_path_or_url):
     # Verifica se é uma URL ou um arquivo local
     if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
@@ -565,22 +599,31 @@ def extract_text_from_pdf(file_path_or_url):
         with open(file_path_or_url, 'rb') as file:
             pdf_content = file.read()
 
-    # Abre o PDF a partir do conteúdo baixado ou lido
-    doc = fitz.open(stream=pdf_content, filetype="pdf")
-    all_text = ""
+    try:
+        doc = fitz.open(stream=pdf_content, filetype="pdf")
+        all_text = ""
+        # ocr_status = True
+        for page_num in range(doc.page_count):
+            page = doc.load_page(page_num)
+            text = page.get_text("text")
+            all_text += text
+
+            images = page.get_images(full=True)
+            for img in images:
+                xref = img[0]
+                base_image = doc.extract_image(xref)
+                image_data = base_image["image"]
+                image = Image.open(BytesIO(image_data))
+                try:
+                    ocr_text = pytesseract.image_to_string(image)
+                    all_text += ocr_text
+                except Exception as ocr_error:
+                    print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
+                    # ocr_status = False
+        return all_text #, ocr_status
+    except Exception as e:
+        # print(f"Erro ao extrair texto do PDF: {e}")
+        return ""
+
+
     
-    # Percorre cada página do PDF
-    for page_num in range(doc.page_count):
-        page = doc.load_page(page_num)
-        
-        # Extrai a imagem da página como um objeto pixmap
-        pix = page.get_pixmap()
-        
-        # Converte o pixmap para um objeto PIL Image
-        image = Image.open(BytesIO(pix.tobytes()))
-        
-        # Realiza OCR na imagem para extrair o texto
-        ocr_text = pytesseract.image_to_string(image)
-        all_text += f"\nPag {page_num + 1}:\n{ocr_text}\n"
-    
-    return all_text

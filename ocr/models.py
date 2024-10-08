@@ -1,12 +1,16 @@
 from django.db import models
-from django.contrib.postgres.search import SearchVectorField
-from django.contrib.postgres.search import SearchVector
-from django.db.models import F
+# from django.contrib.postgres.search import SearchField
+# from django.contrib.postgres.search import SearchVector
+# from django.db.models import F
+from django.urls import reverse
 
 
 class DocumentosOcr(models.Model):
     # id = models.BigAutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')
     id_documento = models.CharField(max_length=18)
+    email_usuario = models.CharField(max_length=50, null=True, blank=True)
+    num_op = models.CharField(max_length=10, null=True, blank=True)
+    ano_op = models.CharField(max_length=6, null=True, blank=True)
     nome_original = models.CharField(max_length=255, null=True, blank=True)
     arquivo = models.CharField(max_length=255, null=True, blank=True)
     extensao_arquivo = models.CharField(max_length=10, null=True, blank=True)
@@ -37,9 +41,13 @@ class DocumentosOcr(models.Model):
     # def indexar_texto(cls, queryset):
     #     queryset.update(search_vector=SearchVector(F('conteudo'), F('nome_original'), config='portuguese'))
 
+
 class DocumentosOcrErros(models.Model):
     # id = models.BigAutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')
     id_documento = models.CharField(max_length=18)
+    email_usuario = models.CharField(max_length=50, null=True, blank=True)
+    num_op = models.CharField(max_length=10, null=True, blank=True)
+    ano_op = models.CharField(max_length=6, null=True, blank=True)
     nome_original = models.CharField(max_length=255, null=True, blank=True)
     arquivo = models.CharField(max_length=255, null=True, blank=True)
     extensao_arquivo = models.CharField(max_length=10, null=True, blank=True)
@@ -55,7 +63,6 @@ class DocumentosOcrErros(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['id_documento', 'nome_original'], name='erros_unique_id_documento_nome')
         ]
-        
 
     def __str__(self):
         return self.nome_original

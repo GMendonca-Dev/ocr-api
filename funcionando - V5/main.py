@@ -26,13 +26,35 @@ def save_data_to_db(data, page_number):
         _, extensao = os.path.splitext(item['arquivo'])
         extensao = extensao.lstrip('.').lower()
 
+        # try:
+        #     conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
+        #     if not sucesso:
+        #         raise Exception(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
+
+        #     insert_data_into_main_table((
+        #         item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'], 
+        #         item['caminho'], conteudo, page_number
+        #     ))
+        #     registros_sucesso += 1
+
+        # except Exception as e:
+        #     erro_msg = str(e)
+        #     nome_original = item.get('nome')
+        #     #print(f"Nome original do arquivo: {nome_original}")
+
+        #     erros_extracao.append({**item, "erro": erro_msg})
+        #     insert_error_into_table((
+        #         item['id_operacaodocumentos'], nome_original, item['arquivo'], extensao, item['pasta'], 
+        #         item['caminho'], page_number, erro_msg
+        #     ))
+
         try:
             conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
             if not sucesso:
                 raise Exception(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
 
             insert_data_into_main_table((
-                item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'], 
+                item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'], extensao, item['pasta'],
                 item['caminho'], conteudo, page_number
             ))
             registros_sucesso += 1
@@ -44,8 +66,8 @@ def save_data_to_db(data, page_number):
 
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
-                item['id_operacaodocumentos'], nome_original, item['arquivo'], extensao, item['pasta'], 
-                item['caminho'], page_number, erro_msg
+                item['id_operacaodocumentos'], nome_original, item['arquivo'], extensao, item['pasta'],
+                item['caminho'], page_number, erro_msg, item['ano'],  item['email'], item['numero']
             ))
 
     if erros_extracao:
