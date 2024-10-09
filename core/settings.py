@@ -266,15 +266,6 @@ JAZZMIN_SETTINGS = {
         "ocr.DocumentosOcrErros": "fas fa-exclamation-triangle",  # Ícone para o modelo DocumentosOcrErros
     },
 
-
-    # Definir a ordem dos apps e modelos no menu lateral
-    "order_with_respect_to": {
-        "ocr.documentosocr",        # Coloca o modelo DocumentosOcr primeiro
-        "ocr.documentosocrerros",   # Coloca o modelo DocumentosOcrErros depois
-    },
-
-
-    "custom_css": "css/custom.css",
     "show_ui_builder": False,
     ############
     # Top Menu #
@@ -306,5 +297,11 @@ JAZZMIN_SETTINGS = {
     "changeform_format": "horizontal_tabs",
 
     "language_chooser": False,
+
+    # Definir a ordem dos apps e modelos no menu lateral
+    "order_with_respect_to": {
+        "ocr.documentosocr",        # Coloca o modelo DocumentosOcr primeiro
+        "ocr.documentosocrerros",   # Coloca o modelo DocumentosOcrErros depois
+    },
 
 }
