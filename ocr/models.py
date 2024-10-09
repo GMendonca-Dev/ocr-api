@@ -45,16 +45,16 @@ class DocumentosOcr(models.Model):
 class DocumentosOcrErros(models.Model):
     # id = models.BigAutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')
     id_documento = models.CharField(max_length=18)
-    email_usuario = models.CharField(max_length=50, null=True, blank=True)
-    num_op = models.CharField(max_length=10, null=True, blank=True)
-    ano_op = models.CharField(max_length=6, null=True, blank=True)
-    nome_original = models.CharField(max_length=255, null=True, blank=True)
-    arquivo = models.CharField(max_length=255, null=True, blank=True)
-    extensao_arquivo = models.CharField(max_length=10, null=True, blank=True)
-    pasta = models.CharField(max_length=150, null=True, blank=True)
-    caminho = models.TextField(null=True, blank=True)
-    numero_pagina = models.IntegerField(null=True, blank=True)
-    erro = models.TextField(blank=True, null=True)
+    email_usuario = models.CharField(max_length=50, null=True, blank=True, default="N/A")
+    num_op = models.CharField(max_length=10, null=True, blank=True, default="N/A")
+    ano_op = models.CharField(max_length=6, null=True, blank=True, default="N/A")
+    nome_original = models.CharField(max_length=255, null=True, blank=True, default="N/A")
+    arquivo = models.CharField(max_length=255, null=True, blank=True, default="N/A")
+    extensao_arquivo = models.CharField(max_length=10, null=True, blank=True, default="N/A")
+    pasta = models.CharField(max_length=150, null=True, blank=True, default="N/A")
+    caminho = models.TextField(null=True, blank=True, default="N/A")
+    numero_pagina = models.IntegerField(null=True, blank=True, default="N/A")
+    erro = models.TextField(blank=True, null=True, default="N/A")
     data_insercao = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -65,7 +65,7 @@ class DocumentosOcrErros(models.Model):
         ]
 
     def __str__(self):
-        return self.nome_original
+        return self.nome_original if self.nome_original else "Nome não informado"
 
     def get_absolute_url(self):
         return reverse("_detail", kwargs={"pk": self.pk})
