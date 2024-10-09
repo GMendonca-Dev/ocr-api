@@ -30,6 +30,9 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
     # Todos os campos como leitura
     readonly_fields = [field.name for field in DocumentosOcr._meta.fields]
 
+    # Definir paginação para 20 itens por página (ajuste conforme necessário)
+    list_per_page = 10
+
     def conteudo_resumido(self, obj):
         return obj.conteudo[:50] + ('...' if len(obj.conteudo) > 50 else '')
 
