@@ -1,6 +1,5 @@
 from django.contrib import admin
 from . models import DocumentosOcr, DocumentosOcrErros
-from django.contrib.postgres.search import SearchQuery, SearchRank
 
 
 class DocumentosOcrAdmin(admin.ModelAdmin):
@@ -67,17 +66,6 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
     def data_leitura_custom(self, obj):
         return obj.data_leitura
     data_leitura_custom.short_description = 'Data de Leitura'  # Nome personalizado
-
-    def get_search_results(self, request, queryset, search_term):
-        """
-        Sobrescreve o método de busca para usar o PostgreSQL Full Text Search
-        """
-        if search_term:
-            search_query = SearchQuery(search_term)
-            queryset = queryset.annotate(
-                rank=SearchRank('search_vector', search_query)
-            ).filter(search_vector=search_query).order_by('-rank')
-        return queryset, False
 
 
 admin.site.register(DocumentosOcr, DocumentosOcrAdmin)

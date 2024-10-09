@@ -1,9 +1,8 @@
 from django.db import models
-from django.contrib.postgres.search import SearchVectorField, SearchVector, SearchRank, SearchQuery
-from django.contrib.postgres.indexes import GinIndex
+# from django.contrib.postgres.search import SearchField
+# from django.contrib.postgres.search import SearchVector
+# from django.db.models import F
 from django.urls import reverse
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 
 
 class DocumentosOcr(models.Model):
@@ -20,26 +19,14 @@ class DocumentosOcr(models.Model):
     numero_pagina = models.IntegerField(null=True, blank=True)
     conteudo = models.TextField(blank=True, null=True)
     data_leitura = models.DateTimeField(auto_now_add=True)
-  
-    # Campo para armazenar o vetor de busca de texto completo
-    search_vector = SearchVectorField(null=True, blank=True)
-
-    @classmethod
-    def search(cls, query):
-        search_query = SearchQuery(query)
-        return cls.objects.annotate(
-            rank=SearchRank('search_vector', search_query)
-        ).filter(search_vector=search_query).order_by('-rank')
+    #docs_extraidos = models.FilePathField(path='/docs_extraidos')
+    #search_vector = SearchVectorField(null=True)
     
     class Meta:
         verbose_name = "OCR Documentos"
         verbose_name_plural = "OCR Documentos"
         constraints = [
             models.UniqueConstraint(fields=['id_documento', 'nome_original'], name='unique_id_documento_nome')
-        ]
-
-        indexes = [
-            GinIndex(fields=['search_vector']),
         ]
 
     def __str__(self):

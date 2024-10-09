@@ -1,0 +1,35 @@
+[
+    {
+        "id_documento": "251",
+        "pagina": 10,
+        "nome_original": "report_responseWarrant.zip",
+        "arquivo": "24_25_13022020130620_reportresponsewarrant.zip",
+        "extensao": ".zip",
+        "pasta": "emaildaoperadora",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/emaildaoperadora/24_25_13022020130620_reportresponsewarrant.zip",
+        "erro": "Falha ao processar 24_30_13022020130620_anexosprotocolo105208202013012020191001.zip: Extensão zip não suportada.",
+        "data_insercao": "2024-10-09 16:41:57"
+    },
+    {
+        "id_documento": "252",
+        "pagina": 10,
+        "nome_original": "20.000258O.zip",
+        "arquivo": "24_27_13022020130620_20.000258o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_20.000258o.zip",
+        "erro": "Falha ao processar 24_30_13022020130620_anexosprotocolo105208202013012020191001.zip: Extensão zip não suportada.",
+        "data_insercao": "2024-10-09 16:41:57"
+    },
+    {
+        "id_documento": "253",
+        "pagina": 10,
+        "nome_original": "anexos_protocolo_105208_2020_13012020191001.zip",
+        "arquivo": "24_30_13022020130620_anexosprotocolo105208202013012020191001.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_anexosprotocolo105208202013012020191001.zip",
+        "erro": "Falha ao processar 24_30_13022020130620_anexosprotocolo105208202013012020191001.zip: Extensão zip não suportada.",
+        "data_insercao": "2024-10-09 16:41:57"
+    }
+]
