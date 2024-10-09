@@ -40,8 +40,8 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
 
         # Personalização dos campos com cabeçalhos amigáveis
     def id_documento_custom(self, obj):
-        return obj.email_usuario
-    id_documento_custom.short_description = 'Id do documento'  # Nome personalizado
+        return obj.id_documento
+    id_documento_custom.short_description = 'Id '  # Nome personalizado
 
     def email_usuario_custom(self, obj):
         return obj.email_usuario
@@ -76,10 +76,41 @@ class DocumentosOcrErrosAdmin(admin.ModelAdmin):
     list_filter = ("id_documento",'num_op', 'ano_op', 'email_usuario', 'arquivo', 'erro')
     
     # Campos a serem exibidos na tabela do Django Admin
-    list_display = ("id_documento",'num_op', 'ano_op', 'email_usuario', 'arquivo', 'erro', "data_insercao")
+    list_display = ("id_documento_custom", 'email_usuario_custom','num_op_custom', 'ano_op_custom', 'email_usuario_custom', 'arquivo_custom', 'erro', "data_insercao_custom")
 
     # Todos os campos como leitura
     readonly_fields = [field.name for field in DocumentosOcrErros._meta.fields]
+
+    # Definir paginação para 20 itens por página (ajuste conforme necessário)
+    list_per_page = 10
+
+    def id_documento_custom(self, obj):
+        return obj.id_documento
+    id_documento_custom.short_description = 'Id do documento'  # Nome personalizado
+
+    def email_usuario_custom(self, obj):
+        return obj.email_usuario
+    email_usuario_custom.short_description = 'Usuário (Email)'  # Nome personalizado
+
+    def ano_op_custom(self, obj):
+        return obj.ano_op
+    ano_op_custom.short_description = 'Ano'  # Nome personalizado
+
+    def num_op_custom(self, obj):
+        return obj.num_op
+    num_op_custom.short_description = 'Op'  # Nome personalizado
+
+    def arquivo_custom(self, obj):
+        return obj.arquivo
+    arquivo_custom.short_description = 'Nome do Arquivo'  # Nome personalizado
+
+    def numero_pagina_custom(self, obj):
+        return obj.numero_pagina
+    numero_pagina_custom.short_description = 'Página'  # Nome personalizado
+
+    def data_insercao_custom(self, obj):
+        return obj.data_insercao
+    data_insercao_custom.short_description = 'Data de Leitura'  # Nome personalizado
 
 
 admin.site.register(DocumentosOcrErros, DocumentosOcrErrosAdmin)
