@@ -293,15 +293,14 @@ JAZZMIN_SETTINGS = {
     # Hide these apps when generating side menu e.g (auth)
     "hide_apps": ["auth"],
 
-
     "changeform_format": "horizontal_tabs",
 
     "language_chooser": False,
 
     # Definir a ordem dos apps e modelos no menu lateral
     "order_with_respect_to": {
-        "ocr.documentosocr",        # Coloca o modelo DocumentosOcr primeiro
-        "ocr.documentosocrerros",   # Coloca o modelo DocumentosOcrErros depois
+        "ocr.ocr_documentosocr",
+        "ocr.ocr_documentosocrerros",
     },
 
 }

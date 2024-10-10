@@ -17,7 +17,7 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
         'arquivo_custom', 
         'numero_pagina_custom', 
         'conteudo_resumido', 
-        'data_leitura_custom'
+        'data_formatada'
     )
     search_fields = (
         
@@ -64,65 +64,77 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
         return obj.numero_pagina
     numero_pagina_custom.short_description = 'Página'  # Nome personalizado
 
-    def data_leitura_custom(self, obj):
-        return obj.data_leitura
-    data_leitura_custom.short_description = 'Data de Leitura'  # Nome personalizado
+    # def data_leitura_custom(self, obj):
+    #     return obj.data_leitura
+    # data_leitura_custom.short_description = 'Data de Leitura'  # Nome personalizado
 
-    def get_search_results(self, request, queryset, search_term):
-        """
-        Sobrescreve o método de busca para usar o PostgreSQL Full Text Search
-        """
-        if search_term:
-            search_query = SearchQuery(search_term)
-            queryset = queryset.annotate(
-                rank=SearchRank('search_vector', search_query)
-            ).filter(search_vector=search_query).order_by('-rank')
-        return queryset, False
+    def data_formatada(self, obj):
+        # Formata a data no formato dd/mm/aaaa às hh:mm
+        # return obj.data_insercao.strftime("%d/%m/%Y às %H:%M")
+        return obj.data_leitura.strftime("%d/%m/%Y")
+
+    data_formatada.short_description = "Leitura"  # Nome que aparecerá no cabeçalho da coluna
 
 
 admin.site.register(DocumentosOcr, DocumentosOcrAdmin)
 
 
 class DocumentosOcrErrosAdmin(admin.ModelAdmin):
-    # Campos pelos quais queremos aplicar os filtros
+    # Campos de filtro
     list_filter = ("id_documento",'num_op', 'ano_op', 'email_usuario', 'arquivo', 'erro')
     
-    # Campos a serem exibidos na tabela do Django Admin
-    list_display = ("id_documento_custom", 'email_usuario_custom','num_op_custom', 'ano_op_custom', 'email_usuario_custom', 'arquivo_custom', 'erro', "data_insercao_custom")
-
+    # Campos a serem exibidos no Django Admin
+    # list_display = ("id_documento_custom", 'email_usuario_custom','num_op_custom', 'ano_op_custom', 'email_usuario_custom', 'arquivo_custom', 'erro', "data_formatada")
+    list_display = ("id_documento", 'email_usuario','num_op', 'ano_op', 'email_usuario', 'arquivo', 'erro', "data_formatada")
+    
     # Todos os campos como leitura
     readonly_fields = [field.name for field in DocumentosOcrErros._meta.fields]
-
-    # Definir paginação para 20 itens por página (ajuste conforme necessário)
+    search_fields = (
+            
+            "email_usuario",
+            "num_op",
+            "ano_op",
+            "nome_original",
+            "arquivo",
+            "erro",
+        )
+    # Define a paginação
     list_per_page = 10
 
-    def id_documento_custom(self, obj):
-        return obj.id_documento
-    id_documento_custom.short_description = 'Id do documento'  # Nome personalizado
+    # def id_documento_custom(self, obj):
+    #     return obj.id_documento
+    # id_documento_custom.short_description = 'Id'  # Nome personalizado
 
-    def email_usuario_custom(self, obj):
-        return obj.email_usuario
-    email_usuario_custom.short_description = 'Usuário (Email)'  # Nome personalizado
+    # def email_usuario_custom(self, obj):
+    #     return obj.email_usuario
+    # email_usuario_custom.short_description = 'Usuário (Email)'  # Nome personalizado
 
-    def ano_op_custom(self, obj):
-        return obj.ano_op
-    ano_op_custom.short_description = 'Ano'  # Nome personalizado
+    # def ano_op_custom(self, obj):
+    #     return obj.ano_op
+    # ano_op_custom.short_description = 'Ano'  # Nome personalizado
 
-    def num_op_custom(self, obj):
-        return obj.num_op
-    num_op_custom.short_description = 'Op'  # Nome personalizado
+    # def num_op_custom(self, obj):
+    #     return obj.num_op
+    # num_op_custom.short_description = 'Op'  # Nome personalizado
 
-    def arquivo_custom(self, obj):
-        return obj.arquivo
-    arquivo_custom.short_description = 'Nome do Arquivo'  # Nome personalizado
+    # def arquivo_custom(self, obj):
+    #     return obj.arquivo
+    # arquivo_custom.short_description = 'Nome do Arquivo'  # Nome personalizado
 
     def numero_pagina_custom(self, obj):
         return obj.numero_pagina
     numero_pagina_custom.short_description = 'Página'  # Nome personalizado
 
-    def data_insercao_custom(self, obj):
-        return obj.data_insercao
-    data_insercao_custom.short_description = 'Data de Leitura'  # Nome personalizado
+    # def data_insercao_custom(self, obj):
+    #     return obj.data_insercao
+    # data_insercao_custom.short_description = 'Data de Leitura'  # Nome personalizado
+
+    def data_formatada(self, obj):
+        # Formata a data no formato dd/mm/aaaa às hh:mm
+        # return obj.data_insercao.strftime("%d/%m/%Y às %H:%M")
+        return obj.data_insercao.strftime("%d/%m/%Y")
+
+    data_formatada.short_description = "Inserção"  # Nome que aparecerá no cabeçalho da coluna
 
 
 admin.site.register(DocumentosOcrErros, DocumentosOcrErrosAdmin)
