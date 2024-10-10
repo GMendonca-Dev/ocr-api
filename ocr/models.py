@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.postgres.search import SearchVectorField, SearchVector, SearchRank, SearchQuery
 from django.contrib.postgres.indexes import GinIndex
 from django.urls import reverse
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 
 
 class DocumentosOcr(models.Model):
@@ -20,17 +18,7 @@ class DocumentosOcr(models.Model):
     numero_pagina = models.IntegerField(null=True, blank=True, verbose_name="Página")
     conteudo = models.TextField(blank=True, null=True, verbose_name="Conteúdo")
     data_leitura = models.DateTimeField(auto_now_add=True, verbose_name="Leitura")
-  
-    # Campo para armazenar o vetor de busca de texto completo
-    #search_vector = SearchVectorField(null=True, blank=True)
 
-    # @classmethod
-    # def search(cls, query):
-    #     search_query = SearchQuery(query)
-    #     return cls.objects.annotate(
-    #         rank=SearchRank('search_vector', search_query)
-    #     ).filter(search_vector=search_query).order_by('-rank')
-    
     class Meta:
         verbose_name = "OCR Documentos"
         verbose_name_plural = "OCR Documentos"
@@ -44,15 +32,6 @@ class DocumentosOcr(models.Model):
 
     def __str__(self):
         return self.nome_original
-    
-    # Indexa o texto extraído do documento
-    # def indexar_texto(documento):
-    #     documento.search_vector = SearchVector('conteudo', 'nome_original')
-    #     documento.save()
-
-    # @classmethod
-    # def indexar_texto(cls, queryset):
-    #     queryset.update(search_vector=SearchVector(F('conteudo'), F('nome_original'), config='portuguese'))
 
 
 class DocumentosOcrErros(models.Model):
