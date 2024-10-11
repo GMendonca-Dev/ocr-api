@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisa de Documentos</title>
+</head>
+<body>
+    <h1>Pesquisa de Documentos</h1>
+    <form method="get" action="{% url 'pesquisa' %}">
+        <input type="text" name="q" placeholder="Digite o termo de pesquisa" value="{{ query }}">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    {% if query %}
+        <p>Total de resultados encontrados: {{ resultados|length }}</p>
+    {% endif %}
+
+    <h2>Resultados da Pesquisa</h2>
+    {% if resultados %}
+        <ul>
+            {% for documento in resultados %}
+                <li>
+                    <strong>{{ documento.id_documento }}</strong> - <strong>{{ documento.nome_original }}</strong> - {{ documento.email_usuario }}<br>
+                    Conteúdo: {{ documento.conteudo|truncatechars:200 }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</body>
+</html>

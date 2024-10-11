@@ -304,3 +304,10 @@ JAZZMIN_SETTINGS = {
     },
 
 }
+
+
+import logging
+
+# Configuração do logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)

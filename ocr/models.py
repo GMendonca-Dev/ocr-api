@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.postgres.search import SearchVectorField, SearchVector, SearchRank, SearchQuery
-from django.contrib.postgres.indexes import GinIndex
+#from django.contrib.postgres.indexes import GinIndex
 from django.urls import reverse
 
 
 class DocumentosOcr(models.Model):
     # id = models.BigAutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')
-    id_documento = models.CharField(max_length=18)
+    id_documento = models.CharField(max_length=18, verbose_name="Id")
     email_usuario = models.CharField(max_length=50, null=True, blank=True, verbose_name="Usuario")
     num_op = models.CharField(max_length=10, null=True, blank=True, verbose_name="Num")
     ano_op = models.CharField(max_length=6, null=True, blank=True, verbose_name="Op")
@@ -18,6 +18,8 @@ class DocumentosOcr(models.Model):
     numero_pagina = models.IntegerField(null=True, blank=True, verbose_name="Página")
     conteudo = models.TextField(blank=True, null=True, verbose_name="Conteúdo")
     data_leitura = models.DateTimeField(auto_now_add=True, verbose_name="Leitura")
+    # Campo para o vetor de pesquisa
+    search_vector = SearchVectorField(editable=False, null=True)
 
     class Meta:
         verbose_name = "OCR Documentos"
@@ -25,10 +27,6 @@ class DocumentosOcr(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['id_documento', 'nome_original'], name='unique_id_documento_nome')
         ]
-
-        # indexes = [
-        #     GinIndex(fields=['search_vector']),
-        # ]
 
     def __str__(self):
         return self.nome_original
