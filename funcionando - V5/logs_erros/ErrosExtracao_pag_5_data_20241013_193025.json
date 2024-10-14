@@ -8,7 +8,7 @@
         "pasta": null,
         "caminho": null,
         "erro": "'NoneType' object has no attribute 'startswith'",
-        "data_insercao": "2024-10-09 16:39:51"
+        "data_insercao": "2024-10-13 19:30:25"
     },
     {
         "id_documento": "125",
@@ -19,7 +19,7 @@
         "pasta": null,
         "caminho": null,
         "erro": "'NoneType' object has no attribute 'startswith'",
-        "data_insercao": "2024-10-09 16:39:51"
+        "data_insercao": "2024-10-13 19:30:25"
     },
     {
         "id_documento": "126",
@@ -30,7 +30,7 @@
         "pasta": null,
         "caminho": null,
         "erro": "'NoneType' object has no attribute 'startswith'",
-        "data_insercao": "2024-10-09 16:39:51"
+        "data_insercao": "2024-10-13 19:30:25"
     },
     {
         "id_documento": "129",
@@ -41,6 +41,6 @@
         "pasta": null,
         "caminho": null,
         "erro": "'NoneType' object has no attribute 'startswith'",
-        "data_insercao": "2024-10-09 16:39:51"
+        "data_insercao": "2024-10-13 19:30:25"
     }
 ]

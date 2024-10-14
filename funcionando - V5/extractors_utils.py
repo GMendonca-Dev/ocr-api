@@ -1,7 +1,7 @@
 from docx import Document
 import fitz  # PyMuPDF
 import pytesseract
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageOps
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
 import json
@@ -12,6 +12,22 @@ import os
 import zipfile
 from pptx import Presentation
 import pandas as pd
+import pdfplumber
+import warnings
+
+
+# Suprime os avisos do tipo UserWarning, incluindo o aviso do openpyxl
+warnings.simplefilter("ignore", UserWarning)
+
+# Caminho para o executável do Tesseract no Windows (path)
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+# Caminhos do LibreOffice e Tesseract
+libreoffice_path = r"C:\Program Files\LibreOffice\program"
+
+os.environ["PATH"] += os.pathsep + libreoffice_path
+
+tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 def extract_text_from_xml(file_path_or_content):
@@ -460,77 +476,24 @@ def extract_text_from_pptx(file_path_or_content):
             file_content.close()
 
 
-# def extract_text_from_pdf(pdf_content, pdf_url=None):
-#     try:
-#         doc = fitz.open(stream=pdf_content, filetype="pdf")
-#         all_text = ""
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             text = page.get_text("text")
-#             all_text += text
-
-#             images = page.get_images(full=True)
-#             for img in images:
-#                 xref = img[0]
-#                 base_image = doc.extract_image(xref)
-#                 image_data = base_image["image"]
-#                 image = Image.open(BytesIO(image_data))
-#                 try:
-#                     ocr_text = pytesseract.image_to_string(image)
-#                     all_text += ocr_text
-#                 except Exception as ocr_error:
-#                     print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
-#         return all_text
-#     except Exception as e:
-#         print(f"Erro ao extrair texto do PDF usando a primeira abordagem: {e}")
-#         print("Tentando realizar OCR usando a abordagem de imagem...")
-#         # Se ocorrer um erro, chama a segunda função para tentar extrair o texto usando a URL
-#         if pdf_url:
-#             return extract_text_from_image_pdf(pdf_url)
-#         else:
-#             return ""  # Retorna uma string vazia se a URL não estiver disponível
-
-# def extract_text_from_image_pdf(pdf_url):
-#     # Baixa o arquivo PDF da URL
-#     response = requests.get(pdf_url, verify=False)
-#     response.raise_for_status()  # Verifica se houve algum erro na requisição
-
-#     # Abre o PDF a partir do conteúdo baixado
-#     doc = fitz.open(stream=response.content, filetype="pdf")
-#     all_text = ""
-    
-#     # Percorre cada página do PDF
-#     for page_num in range(doc.page_count):
-#         page = doc.load_page(page_num)
-        
-#         # Extrai a imagem da página como um objeto pixmap
-#         pix = page.get_pixmap()
-        
-#         # Converte o pixmap para um objeto PIL Image
-#         image = Image.open(BytesIO(pix.tobytes()))
-        
-#         # Realiza OCR na imagem para extrair o texto
-#         ocr_text = pytesseract.image_to_string(image)
-#         all_text += f"\nPag {page_num + 1}:\n{ocr_text}\n"
-#         all_text += "-" * 40 + "\n"
-    
-#     return all_text
-
-# def extract_text_from_pdf(pdf_url):
-
-#     page_loop = ""
+#  ###############PDF FUNCIONANDO , SALVO IMAGENS E PDF IMAGEM
+# def extract_text_from_pdf(file_path_or_url):
+#     # Verifica se é uma URL ou um arquivo local
+#     if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
+#         # Baixa o arquivo PDF da URL
+#         response = requests.get(file_path_or_url, verify=False)
+#         response.raise_for_status()  # Verifica se houve algum erro na requisição
+#         pdf_content = response.content
+#     else:
+#         # Lê o arquivo PDF do diretório local
+#         with open(file_path_or_url, 'rb') as file:
+#             pdf_content = file.read()
 
 #     try:
-#         # Baixar o conteúdo do PDF a partir da URL
-#         response = requests.get(pdf_url, verify=False)
-#         response.raise_for_status()
-#         pdf_content = BytesIO(response.content)
-        
 #         doc = fitz.open(stream=pdf_content, filetype="pdf")
 #         all_text = ""
 #         # ocr_status = True
 #         for page_num in range(doc.page_count):
-#             page_loop = page_num
 #             page = doc.load_page(page_num)
 #             text = page.get_text("text")
 #             all_text += text
@@ -547,83 +510,323 @@ def extract_text_from_pptx(file_path_or_content):
 #                 except Exception as ocr_error:
 #                     print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
 #                     # ocr_status = False
-#         page_loop = ""
-#         return all_text #, ocr_status
+#         return all_text  # , ocr_status
+    
 #     except Exception as e:
-#         print(f"Erro ao extrair texto do PDF: {e} -  da página {page_loop}")
+#         # print(f"Erro ao extrair texto do PDF: {e}")
 #         return ""
 
 
-# def extract_text_from_pdf(file_path_or_url):
-#     # Verifica se é uma URL ou um arquivo local
-#     if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
-#         # Baixa o arquivo PDF da URL
-#         response = requests.get(file_path_or_url, verify=False)
-#         response.raise_for_status()  # Verifica se houve algum erro na requisição
-#         pdf_content = response.content
-#     else:
-#         # Lê o arquivo PDF do diretório local
-#         with open(file_path_or_url, 'rb') as file:
-#             pdf_content = file.read()
 
-#     # Abre o PDF a partir do conteúdo baixado ou lido
-#     doc = fitz.open(stream=pdf_content, filetype="pdf")
+# ###################   FUNCIONOU LOCALMENTE
+from PIL import ImageFilter
+
+
+# def enhance_image(image):
+#     """Melhora a imagem para OCR com nitidez e contraste."""
+#     image = image.convert("L")  # Converte para escala de cinza
+#     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
+#     enhancer = ImageEnhance.Contrast(image)
+#     return enhancer.enhance(2)  # Aumenta o contraste
+
+
+# def extract_text_from_pdf(pdf_content):
+#     # Verifica se o conteúdo é do tipo correto (bytes)
+#     if isinstance(pdf_content, str):
+#         raise ValueError("O conteúdo do PDF deve ser do tipo 'bytes' e não 'str'. Verifique a leitura do arquivo.")
+
 #     all_text = ""
-    
-#     # Percorre cada página do PDF
-#     for page_num in range(doc.page_count):
-#         page = doc.load_page(page_num)
-        
-#         # Extrai a imagem da página como um objeto pixmap
-#         pix = page.get_pixmap()
-        
-#         # Converte o pixmap para um objeto PIL Image
-#         image = Image.open(BytesIO(pix.tobytes()))
-        
-#         # Realiza OCR na imagem para extrair o texto
-#         ocr_text = pytesseract.image_to_string(image)
-#         all_text += f"\nPag {page_num + 1}:\n{ocr_text}\n"
-    
+
+#     # Tentativa de extrair texto pesquisável e tabelas com pdfplumber
+#     try:
+#         with pdfplumber.open(BytesIO(pdf_content)) as pdf:
+#             for page_num, page in enumerate(pdf.pages):
+#                 try:
+#                     # Extrai texto pesquisável
+#                     page_text = page.extract_text()
+#                     if page_text:
+#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
+#                     else:
+#                         print(f"Página {page_num + 1} sem texto pesquisável. Aplicando OCR...")
+#                         page_image = page.to_image(resolution=300).original
+#                         enhanced_image = enhance_image(page_image)
+#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
+
+#                 except Exception as e:
+#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
+
+#     except Exception as e:
+#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
+
+#     # Tentativa de extrair imagens e aplicar OCR com PyMuPDF
+#     try:
+#         doc = fitz.open(stream=BytesIO(pdf_content), filetype="pdf")
+#         for page_num in range(doc.page_count):
+#             page = doc.load_page(page_num)
+#             images = page.get_images(full=True)
+#             if images:
+#                 for img_index, img in enumerate(images):
+#                     xref = img[0]
+#                     base_image = doc.extract_image(xref)
+#                     image_data = base_image["image"]
+#                     image = Image.open(BytesIO(image_data))
+
+#                     # Aplicar OCR na imagem extraída
+#                     try:
+#                         ocr_text = pytesseract.image_to_string(image, lang='por')
+#                         all_text += f"\nImagem na página {page_num + 1}, imagem {img_index + 1}:\n{ocr_text}\n"
+#                     except Exception as ocr_error:
+#                         print(f"Erro ao realizar OCR na imagem da página {page_num + 1}, imagem {img_index + 1}: {ocr_error}")
+#             else:
+#                 print(f"Nenhuma imagem encontrada na página {page_num + 1}")
+
+#     except Exception as e:
+#         print(f"Erro ao processar imagens do PDF: {e}")
+
 #     return all_text
 
 
-def extract_text_from_pdf(file_path_or_url):
-    # Verifica se é uma URL ou um arquivo local
-    if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
-        # Baixa o arquivo PDF da URL
-        response = requests.get(file_path_or_url, verify=False)
-        response.raise_for_status()  # Verifica se houve algum erro na requisição
-        pdf_content = response.content
-    else:
-        # Lê o arquivo PDF do diretório local
-        with open(file_path_or_url, 'rb') as file:
-            pdf_content = file.read()
+# Está funcionando localmente
+# # Teste da função
+# if __name__ == "__main__":
+#     # Exemplo de uso com leitura de arquivo local
+#     pdf_path = r'D:\Repositorios\ocr-api\funcionando - V5\24_22_1300220.pdf'
+#     with open(pdf_path, 'rb') as f:
+#         pdf_content = f.read()  # Lendo como bytes
+#     resultado = extract_text_from_pdf(pdf_content)
+#     print(resultado)
 
+
+# #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
+# def enhance_image(image):
+#     """Melhora a imagem para OCR com nitidez e contraste."""
+#     image = image.convert("L")  # Converte para escala de cinza
+#     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
+#     enhancer = ImageEnhance.Contrast(image)
+#     return enhancer.enhance(2)  # Aumenta o contraste
+
+
+# def extract_text_from_pdf_content(pdf_content):
+#     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, incluindo imagens."""
+#     all_text = ""
+
+#     # Primeira tentativa: extrair texto com pdfplumber
+#     try:
+#         with pdfplumber.open(BytesIO(pdf_content)) as pdf:
+#             for page_num, page in enumerate(pdf.pages):
+#                 try:
+#                     # Extrai texto pesquisável
+#                     page_text = page.extract_text()
+#                     if page_text:
+#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
+#                     else:
+#                         #print(f"Página {page_num + 1} sem texto pesquisável. Aplicando OCR...")
+#                         # Aplica OCR se não houver texto na página
+#                         page_image = page.to_image(resolution=300).original
+#                         enhanced_image = enhance_image(page_image)
+#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                         all_text += f"{ocr_text}\n"
+#                 except Exception as e:
+#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
+#     except Exception as e:
+#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
+
+#     # Fallback: Extrair imagens e aplicar OCR com PyMuPDF
+#     try:
+#         doc = fitz.open(stream=BytesIO(pdf_content), filetype="pdf")
+#         for page_num in range(doc.page_count):
+#             page = doc.load_page(page_num)
+#             images = page.get_images(full=True)
+#             if images:
+#                 for img_index, img in enumerate(images):
+#                     xref = img[0]
+#                     base_image = doc.extract_image(xref)
+#                     image_data = base_image["image"]
+#                     image = Image.open(BytesIO(image_data))
+
+#                     # Aplicar OCR na imagem extraída
+#                     try:
+#                         ocr_text = pytesseract.image_to_string(image, lang='por')
+#                         all_text += ocr_text
+#                     except Exception as ocr_error:
+#                         print(f"Erro ao realizar OCR na imagem da página {page_num + 1}, imagem {img_index + 1}: {ocr_error}")
+#             else:
+#                 print(f"Nenhuma imagem encontrada na página {page_num + 1}")
+#     except Exception as e:
+#         print(f"Erro ao processar imagens do PDF: {e}")
+
+#     return all_text
+
+
+# # #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
+
+# 
+
+# def extract_text_from_pdf_url(url):
+#     """Combina o download e a extração de texto do PDF a partir de uma URL."""
+#     pdf_content = download_pdf_from_url(url)  # Baixa o PDF da URL
+#     return extract_text_from_pdf_content(pdf_content)  # Extrai o texto e/ou OCR
+
+# url = "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_oficio02920timop00220.pdf"
+# resultado = extract_text_from_pdf_url(url)
+# print(resultado)
+
+
+
+
+#   ################ FUNCIONANDO LOCALMENTE
+
+# def enhance_image(image):
+#     """Melhora a imagem para OCR com nitidez e contraste."""
+#     image = image.convert("L")  # Converte para escala de cinza
+#     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
+#     enhancer = ImageEnhance.Contrast(image)
+#     return enhancer.enhance(2)  # Aumenta o contraste
+
+
+# def download_pdf(url):
+#     """Baixa o PDF da URL e verifica o conteúdo."""
+#     try:
+#         response = requests.get(url, stream=True, verify=False)
+#         response.raise_for_status()
+
+#         # Assegura que todo o conteúdo foi baixado
+#         pdf_content = BytesIO(response.content)
+#         pdf_content.seek(0)  # Garante que o ponteiro está no início
+#         return pdf_content
+#     except Exception as e:
+#         print(f"Erro ao baixar o PDF: {e}")
+#         return None
+
+
+# def extract_text_from_pdf_content(pdf_content):
+#     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
+#     all_text = ""
+
+#     try:
+#         # Primeira tentativa: extrair texto com pdfplumber
+#         with pdfplumber.open(pdf_content) as pdf:
+#             for page_num, page in enumerate(pdf.pages):
+#                 try:
+#                     page_text = page.extract_text()
+#                     if page_text:
+#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
+#                     else:
+#                         print(f"Página {page_num + 1} sem texto pesquisável. Aplicando OCR...")
+#                         page_image = page.to_image(resolution=300).original
+#                         enhanced_image = enhance_image(page_image)
+#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
+#                 except Exception as e:
+#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
+
+#     except Exception as e:
+#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
+
+#     # Fallback: Extrair imagens e aplicar OCR com PyMuPDF
+#     try:
+#         doc = fitz.open(stream=pdf_content, filetype="pdf")
+#         for page_num in range(doc.page_count):
+#             page = doc.load_page(page_num)
+#             pix = page.get_pixmap()
+#             image = Image.open(BytesIO(pix.tobytes()))
+#             enhanced_image = enhance_image(image)
+
+#             try:
+#                 ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                 all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
+#             except Exception as ocr_error:
+#                 print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
+
+#     except Exception as e:
+#         print(f"Erro ao processar imagens do PDF: {e}")
+
+#     return all_text
+
+# Exemplo de uso
+# url = "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaoproc080026911.20197qst1.pdf"
+
+
+# pdf_content = download_pdf(url)
+
+# if pdf_content:
+#     texto_extraido = extract_text_from_pdf_content(pdf_content)
+#     print(texto_extraido)
+# else:
+#     print("Não foi possível baixar ou processar o PDF.")
+
+# ######## FUNCIONANDO url
+
+
+def enhance_image(image):
+    """Melhora a imagem para OCR com nitidez e contraste."""
+    image = image.convert("L")  # Converte para escala de cinza
+    image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
+    enhancer = ImageEnhance.Contrast(image)
+    image = enhancer.enhance(2)  # Aumenta o contraste
+    image = ImageOps.autocontrast(image)  # Ajusta o brilho e contraste automaticamente
+    return image
+
+def download_pdf(url):
+    """Baixa o PDF da URL e verifica o conteúdo."""
+    try:
+        response = requests.get(url, stream=True, verify=False)
+        response.raise_for_status()
+
+        # Assegura que todo o conteúdo foi baixado
+        pdf_content = BytesIO(response.content)
+        pdf_content.seek(0)  # Garante que o ponteiro está no início
+        return pdf_content
+    except Exception as e:
+        print(f"Erro ao baixar o PDF: {e}")
+        return None
+
+
+def extract_text_from_pdf_content(pdf_content):
+    """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
+    if isinstance(pdf_content, str):
+        pdf_content = download_pdf(pdf_content)
+        if not pdf_content:
+            print("Não foi possível baixar ou processar o PDF.")
+            return ""
+   
+    all_text = ""
+
+    # Primeira tentativa: extrair texto com pdfplumber
+    try:
+        with pdfplumber.open(pdf_content) as pdf:
+            for page_num, page in enumerate(pdf.pages):
+                try:
+                    page_text = page.extract_text()
+                    if page_text:
+                        all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
+                    else:
+                        # Se não houver texto, aplica OCR na imagem da página
+                        page_image = page.to_image(resolution=300).original
+                        enhanced_image = enhance_image(page_image)
+                        ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                        all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
+                except Exception as e:
+                    print(f"Erro ao processar a página {page_num + 1}: {e}")
+    except Exception as e:
+        print(f"Erro ao abrir PDF com pdfplumber: {e}")
+
+    # Fallback: PyMuPDF para PDFs com imagens embutidas
     try:
         doc = fitz.open(stream=pdf_content, filetype="pdf")
-        all_text = ""
-        # ocr_status = True
         for page_num in range(doc.page_count):
             page = doc.load_page(page_num)
-            text = page.get_text("text")
-            all_text += text
+            pix = page.get_pixmap()
+            image = Image.open(BytesIO(pix.tobytes()))
+            enhanced_image = enhance_image(image)
 
-            images = page.get_images(full=True)
-            for img in images:
-                xref = img[0]
-                base_image = doc.extract_image(xref)
-                image_data = base_image["image"]
-                image = Image.open(BytesIO(image_data))
-                try:
-                    ocr_text = pytesseract.image_to_string(image)
-                    all_text += ocr_text
-                except Exception as ocr_error:
-                    print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
-                    # ocr_status = False
-        return all_text #, ocr_status
+            try:
+                ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
+            except Exception as ocr_error:
+                print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
     except Exception as e:
-        # print(f"Erro ao extrair texto do PDF: {e}")
-        return ""
+        print(f"Erro ao processar imagens do PDF: {e}")
 
-
-    
+    return all_text

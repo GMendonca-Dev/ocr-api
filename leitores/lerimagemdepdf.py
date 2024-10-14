@@ -1,3 +1,6 @@
+Import requests
+
+
 ##### Funcionando a partir de arquivo local
 
 

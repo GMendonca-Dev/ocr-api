@@ -1,0 +1,13 @@
+[
+    {
+        "id_documento": "523",
+        "pagina": 20,
+        "nome_original": "20.000683O.zip",
+        "arquivo": "24_27_13022020130620_20.000683o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_20.000683o.zip",
+        "erro": "Falha ao processar 24_27_13022020130620_20.000683o.zip: Extensão zip não suportada.",
+        "data_insercao": "2024-10-13 19:43:01"
+    }
+]

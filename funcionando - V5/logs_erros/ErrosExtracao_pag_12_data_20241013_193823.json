@@ -8,7 +8,7 @@
         "pasta": "gseoi",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_20.000042o.zip",
         "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 17:34:56"
+        "data_insercao": "2024-10-13 19:38:23"
     },
     {
         "id_documento": "315",
@@ -19,7 +19,7 @@
         "pasta": "gseoi",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_0000811201.zip",
         "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 17:34:56"
+        "data_insercao": "2024-10-13 19:38:23"
     },
     {
         "id_documento": "316",
@@ -30,7 +30,7 @@
         "pasta": "gseoi",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_anexos.zip",
         "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 17:34:56"
+        "data_insercao": "2024-10-13 19:38:23"
     },
     {
         "id_documento": "320",
@@ -41,6 +41,6 @@
         "pasta": "gseoi",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_anexos.zip",
         "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 17:34:56"
+        "data_insercao": "2024-10-13 19:38:23"
     }
 ]

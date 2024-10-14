@@ -11,6 +11,56 @@
         <button type="submit">Pesquisar</button>
     </form>
 
+    <h2>Resultados da Pesquisa</h2>
+    {% if resultados %}
+        <p>Total de resultados: {{ resultados|length }}</p>
+        <ul>
+            {% for documento in resultados %}
+                <li>
+                    <strong>{{ documento.id_documento }}</strong> - <strong>{{ documento.nome_original }}</strong> - {{ documento.email_usuario }}<br>
+                    Conteúdo: {{ documento.conteudo|truncatechars:200 }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Paginação -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if resultados.has_previous %}
+                    <a href="?q={{ query }}&page=1">Primeira</a>
+                    <a href="?q={{ query }}&page={{ resultados.previous_page_number }}">Anterior</a>
+                {% endif %}
+
+                <span>Página {{ resultados.number }} de {{ resultados.paginator.num_pages }}</span>
+
+                {% if resultados.has_next %}
+                    <a href="?q={{ query }}&page={{ resultados.next_page_number }}">Próxima</a>
+                    <a href="?q={{ query }}&page={{ resultados.paginator.num_pages }}">Última</a>
+                {% endif %}
+            </span>
+        </div>
+
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</body>
+</html>
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisa de Documentos</title>
+</head>
+<body>
+    <h1>Pesquisa de Documentos</h1>
+    <form method="get" action="{% url 'pesquisa' %}">
+        <input type="text" name="q" placeholder="Digite o termo de pesquisa" value="{{ query }}">
+        <button type="submit">Pesquisar</button>
+    </form>
+
     {% if query %}
         <p>Total de resultados encontrados: {{ resultados|length }}</p>
     {% endif %}
@@ -29,4 +79,4 @@
         <p>Nenhum resultado encontrado.</p>
     {% endif %}
 </body>
-</html>
+</html> {% endcomment %}

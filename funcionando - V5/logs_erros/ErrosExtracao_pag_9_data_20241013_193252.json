@@ -8,7 +8,7 @@
         "pasta": null,
         "caminho": null,
         "erro": "Falha ao processar 24_29_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 16:41:29"
+        "data_insercao": "2024-10-13 19:32:52"
     },
     {
         "id_documento": "246",
@@ -19,7 +19,7 @@
         "pasta": "gseoi",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_20.000204o.zip",
         "erro": "Falha ao processar 24_29_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 16:41:29"
+        "data_insercao": "2024-10-13 19:32:52"
     },
     {
         "id_documento": "247",
@@ -30,7 +30,7 @@
         "pasta": "cttim",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_anexosprotocolo105419202013012020211500.zip",
         "erro": "Falha ao processar 24_29_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 16:41:29"
+        "data_insercao": "2024-10-13 19:32:52"
     },
     {
         "id_documento": "248",
@@ -41,6 +41,6 @@
         "pasta": "ctvivo",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_13022020130620_anexos.zip",
         "erro": "Falha ao processar 24_29_13022020130620_anexos.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 16:41:29"
+        "data_insercao": "2024-10-13 19:32:52"
     }
 ]

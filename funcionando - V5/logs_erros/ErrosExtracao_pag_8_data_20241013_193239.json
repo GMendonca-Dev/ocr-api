@@ -8,7 +8,7 @@
         "pasta": "gseoi",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_20.000242o.zip",
         "erro": "Falha ao processar 24_30_13022020130620_anexosprotocolo1046802020100120201830011.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 16:41:16"
+        "data_insercao": "2024-10-13 19:32:39"
     },
     {
         "id_documento": "202",
@@ -19,6 +19,6 @@
         "pasta": "cttim",
         "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_anexosprotocolo1046802020100120201830011.zip",
         "erro": "Falha ao processar 24_30_13022020130620_anexosprotocolo1046802020100120201830011.zip: Extensão zip não suportada.",
-        "data_insercao": "2024-10-09 16:41:16"
+        "data_insercao": "2024-10-13 19:32:39"
     }
 ]

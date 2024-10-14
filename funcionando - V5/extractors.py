@@ -2,7 +2,7 @@ from io import BytesIO
 import requests
 import os
 from extractors_utils import (
-    extract_text_from_pdf,
+    #extract_text_from_pdf,
     extract_text_from_txt,
     extract_text_from_xlsx,
     extract_text_and_images_from_docx,
@@ -16,7 +16,8 @@ from extractors_utils import (
     extract_text_from_ods,
     extract_text_from_odg,
     extract_text_from_xml,
-    extract_text_from_pptx
+    extract_text_from_pptx,
+    extract_text_from_pdf_content
 
 )
 
@@ -29,6 +30,11 @@ def extract_text_by_extension(file_path, id_zip=None):
     """
         Função que determina a extração de conteúdo com base na extensão do arquivo.
     """
+
+    # Variáveis para armazenar o conteúdo e a extensão do arquivo
+    file_content = None
+    extension = None
+
     # Verifica se é uma URL ou um arquivo local
     if is_url(file_path):
         try:
@@ -67,13 +73,19 @@ def extract_text_by_extension(file_path, id_zip=None):
         #             return extract_text_from_pdf(file.read()), True, None
 
         elif extension == 'pdf':
-            if is_url(file_path):
-                return extract_text_from_pdf(file_path), True,  None
-            elif isinstance(file_content, bytes):
-                return extract_text_from_pdf(BytesIO(file_content)),  True,  None
-            else:
-                with open(file_content, 'rb') as file:
-                    return extract_text_from_pdf(file.read()),  True,  None
+            # if is_url(file_path):
+            #     return extract_text_from_pdf(file_path), True,  None
+            # elif isinstance(file_content, bytes):
+            #     return extract_text_from_pdf(BytesIO(file_content)),  True,  None
+            # else:
+            #     with open(file_content, 'rb') as file:
+            #         return extract_text_from_pdf(file.read()),  True,  None
+
+            # Outro teste
+            #  # Chama a função extract_text_from_pdf passando o conteúdo binário
+            # return extract_text_from_pdf(file_content), True, None
+
+            return extract_text_from_pdf_content(file_content), True, None
 
         elif extension in ['jpg', 'jpeg', 'png']:
             if isinstance(file_content, bytes):
@@ -115,3 +127,11 @@ def extract_text_by_extension(file_path, id_zip=None):
         erro_msg = f"Erro ao processar o arquivo com extensão {extension}: {e}"
         #print(erro_msg)
         return "", False, erro_msg
+    
+
+# url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+# resultado, sucesso, erro = extract_text_by_extension(url)
+# if sucesso:
+#     print(resultado)
+# else:
+#     print(f"Erro: {erro}")
