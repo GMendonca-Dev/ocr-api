@@ -61,10 +61,7 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
 
     data_formatada.short_description = "Leitura"  # Nome que aparecerá no cabeçalho da coluna
 
-    # Sobrescreve o método de busca no Django Admin
-    
-    # O campo de busca é o campo 'search_vector' do modelo DocumentosOcr
-    search_fields = ['conteudo']  # O campo onde o texto foi armazenado
+    search_fields = ['conteudo', 'nome_original']  # O campo onde o texto foi armazenado
 
 
 admin.site.register(DocumentosOcr, DocumentosOcrAdmin)

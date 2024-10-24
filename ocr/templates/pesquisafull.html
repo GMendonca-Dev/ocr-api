@@ -5,8 +5,8 @@
     <title>Pesquisa de Documentos</title>
 </head>
 <body>
-    <h1>Pesquisa de Documentos</h1>
-    <form method="get" action="{% url 'pesquisa' %}">
+    <h1>Pesquisa Full de Documentos</h1>
+    <form method="get" action="{% url 'pesquisafull' %}">
         <input type="text" name="q" placeholder="Digite o termo de pesquisa" value="{{ query }}">
         <button type="submit">Pesquisar</button>
     </form>

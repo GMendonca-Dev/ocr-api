@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import FullTextSearchView
+from .views import SearchConteudo, SearchConteudo2
 
 urlpatterns = [
-    path('pesquisa/', FullTextSearchView.as_view(), name='pesquisa'),
+    path('pesquisa/', SearchConteudo.as_view(), name='pesquisa'),
+    path('pesquisafull/', SearchConteudo2.as_view(), name='pesquisafull'),
 ]
