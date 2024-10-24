@@ -50,6 +50,7 @@ from io import BytesIO
 # Configura o caminho para o executável do Tesseract se necessário (no Windows)
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
+
 def extract_text_from_pdf(pdf_path):
     # Abre o arquivo PDF
     doc = fitz.open(pdf_path)
@@ -72,18 +73,24 @@ def extract_text_from_pdf(pdf_path):
             
             # Realiza OCR na imagem
             ocr_text = pytesseract.image_to_string(image)
-            all_text += f"\nTexto extraído da imagem {img_index + 1} na página {page_num + 1}:\n{ocr_text}\n"
+            if ocr_text:
+                # all_text += f"\nTexto extraído da imagem {img_index + 1} na página {page_num + 1}:\n{ocr_text}\n"
+                all_text += f"\nTexto extraído de imagem na página {page_num + 1}:\n{ocr_text}\n"
+            else:
+                all_text += f"\nNenhum texto extraído da imagem {img_index + 1} na página {page_num + 1}.\n"
     
     return all_text
+
 
 def save_text_to_file(text, output_path):
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(text)
 
+
 # Caminho para o arquivo PDF
-pdf_path = r"E:\Git\mapas-se\arquivos\Uploads\testedoc3.pdf"
+pdf_path = r"D:\Repositorios\ocr-api\leitores\24_36_13022020130620_respostanextel.pdf"
 # Caminho para o arquivo de saída .txt
-output_path = 'resultado.txt'
+output_path = r"D:\Repositorios\ocr-api\leitores\resultado.txt"
 
 # Extrai o texto e realiza OCR nas imagens
 extracted_text = extract_text_from_pdf(pdf_path)
