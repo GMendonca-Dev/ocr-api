@@ -3,9 +3,7 @@ from dotenv import load_dotenv
 import warnings
 import pytesseract
 
-# config.py
-start_page = 10
-end_page = 20
+
 
 # Carrega variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -17,7 +15,8 @@ warnings.simplefilter("ignore", UserWarning)
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Caminhos do LibreOffice e Tesseract
-libreoffice_path = r"C:\Program Files\LibreOffice\program"
+# libreoffice_path = r"C:\Program Files\LibreOffice\program"
+libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
 os.environ["PATH"] += os.pathsep + libreoffice_path
 tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 

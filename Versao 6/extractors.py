@@ -16,11 +16,15 @@ from extractors_utils import (
     extract_text_from_odt,
     extract_text_from_ods,
     extract_text_from_odg,
+    extract_text_from_odf,
     extract_text_from_xml,
     extract_text_from_pptx,
     extract_text_from_pdf_content
 
 )
+
+def is_url(file_path):
+    return file_path.startswith('http://') or file_path.startswith('https://')
 
 def extract_text_by_extension(file_path, id_zip=None):
     """
@@ -58,6 +62,7 @@ def extract_text_by_extension(file_path, id_zip=None):
         extension = extension.lower().lstrip('.')
         return process_file_by_extension(file_path, extension)
 
+
 def process_file_by_extension(file_path, extension):
     """
     Processa o arquivo com base em sua extensão.
@@ -75,7 +80,7 @@ def process_file_by_extension(file_path, extension):
             # Converte o .doc para .docx e processa
             docx_path = download_and_convert_doc_to_docx(file_path)
             return extract_text_and_images_from_docx(docx_path), True, None
-        elif extension == 'pdf':
+        elif extension == 'pdf' or extension == '':
             return extract_text_from_pdf_content(file_path), True, None
         elif extension in ['jpg', 'jpeg', 'png']:
             return extract_text_from_image(file_path), True, None

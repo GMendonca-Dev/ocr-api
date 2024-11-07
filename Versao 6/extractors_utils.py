@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
 import json
 import requests
-import subprocess
 from io import BytesIO, StringIO
 import os
 import zipfile
@@ -14,6 +13,11 @@ from pptx import Presentation
 import pandas as pd
 import pdfplumber
 import warnings
+import tempfile
+######### Conversão de arquivos .doc para .docx ########
+# from docx.document import Document as Document_docx
+from win32com.client import Dispatch
+# ######## Fim da Conversão de arquivos .doc para .docx ########
 
 
 # Suprime os avisos do tipo UserWarning, incluindo o aviso do openpyxl
@@ -279,55 +283,114 @@ def extract_text_and_images_from_docx(file_path_or_content):
         return "", False
 
 
-def download_and_convert_doc_to_docx(file_path, temp_dir="temp"):
+
+
+
+
+# def convert_doc_with_libreoffice(doc_path, output_format="docx", temp_dir="temp"):
+#     try:
+#         if not os.path.exists(temp_dir):
+#             os.makedirs(temp_dir)
+
+#         output_file_path = os.path.join(temp_dir, f"arquivo_temp.{output_format}")
+#         command = ['soffice', '--headless', '--convert-to', output_format, doc_path, '--outdir', temp_dir]
+#         subprocess.run(command, check=True)
+
+#         if os.path.exists(output_file_path):
+#             return output_file_path
+#         else:
+#             print(f"Erro ao converter o arquivo {doc_path}")
+#             return None
+#     except Exception as e:
+#         print(f"Erro ao converter arquivo usando LibreOffice: {e}")
+#         return None
+
+
+
+def download_and_convert_doc_to_docx(file_path):
+    output_path = tempfile.mkdtemp()
     try:
-        if not os.path.exists(temp_dir):
-            os.makedirs(temp_dir)
-
-        # Se o arquivo já estiver no sistema de arquivos local, não precisamos baixá-lo
-        if not os.path.exists(file_path):
-            response = requests.get(file_path, verify=False)
-            response.raise_for_status()
-            temp_file_path = os.path.join(temp_dir, "arquivo_temp.doc")
-            with open(temp_file_path, 'wb') as temp_file:
-                temp_file.write(response.content)
-        else:
-            temp_file_path = file_path
-
-        docx_path = convert_doc_with_libreoffice(temp_file_path, "docx")
-
-        if os.path.exists(temp_file_path) and temp_file_path != file_path:
-            os.remove(temp_file_path)
-        if not docx_path:
-            print("Erro na conversão de .doc para .docx.")
-            return "", False
-
-        return docx_path  # Retorna o caminho do arquivo .docx convertido
-
+        word = Dispatch("Word.Application")
+        doc = word.Documents.Open(file_path)
+        doc.SaveAs(os.path.join(output_path, "arquivo_temp.docx"), FileFormat=16)  # 16 = wdFormatDocumentDefault
+        doc.Close()
+        word.Quit()
+        word = None
+        return os.path.join(output_path, "arquivo_temp.docx")
     except Exception as e:
-        print(f"Erro ao processar o arquivo .doc: {e}")
-        return "", False
-
-
-
-def convert_doc_with_libreoffice(doc_path, output_format="docx", temp_dir="temp"):
-    try:
-        if not os.path.exists(temp_dir):
-            os.makedirs(temp_dir)
-
-        output_file_path = os.path.join(temp_dir, f"arquivo_temp.{output_format}")
-        command = ['soffice', '--headless', '--convert-to', output_format, doc_path, '--outdir', temp_dir]
-        subprocess.run(command, check=True)
-
-        if os.path.exists(output_file_path):
-            return output_file_path
-        else:
-            print(f"Erro ao converter o arquivo {doc_path}")
-            return None
-    except Exception as e:
-        print(f"Erro ao converter arquivo usando LibreOffice: {e}")
+        print(f"Erro ao converter o arquivo {file_path}: {e}")
         return None
+    
+# def download_and_convert_doc_to_docx(file_path):
 
+#     output_path = "temp"
+
+#     try:
+#         word = Dispatch("Word.Application")
+#         doc = word.Documents.Open(file_path)
+#         doc.SaveAs(output_path, FileFormat=16)  # 16 = wdFormatDocumentDefault
+#         doc.Close()
+#         word.Quit()
+#         word = None
+#         return output_path
+#     except Exception as e:
+#         print(f"Erro ao converter o arquivo {file_path}: {e}")
+#         return None
+
+
+
+
+    # try:
+    #     if not os.path.exists(temp_dir):
+    #         os.makedirs(temp_dir)
+
+    #     # Se o arquivo já estiver no sistema de arquivos local, não precisamos baixá-lo
+    #     if not os.path.exists(file_path):
+    #         response = requests.get(file_path, verify=False)
+    #         response.raise_for_status()
+    #         temp_file_path = os.path.join(temp_dir, "arquivo_temp.doc")
+    #         with open(temp_file_path, 'wb') as temp_file:
+    #             temp_file.write(response.content)
+    #     else:
+    #         temp_file_path = file_path
+
+    #     docx_path = convert_doc_with_libreoffice(temp_file_path, "docx")
+
+    #     if os.path.exists(temp_file_path) and temp_file_path != file_path:
+    #         os.remove(temp_file_path)
+    #     if not docx_path:
+    #         print("Erro na conversão de .doc para .docx.")
+    #         return "", False
+
+    #     return docx_path  # Retorna o caminho do arquivo .docx convertido
+
+    # except Exception as e:
+    #     print(f"Erro ao processar o arquivo .doc: {e}")
+    #     return "", False
+
+
+# def convert_doc_to_docx(doc_path, output_path):
+#     try:
+#         word = Dispatch("Word.Application")
+#         doc = word.Documents.Open(doc_path)
+#         doc.SaveAs(output_path, FileFormat=16)  # 16 = wdFormatDocumentDefault
+#         doc.Close()
+#         word.Quit()
+#         word = None
+#         return output_path
+#     except Exception as e:
+#         print(f"Erro ao converter o arquivo {doc_path}: {e}")
+#         return None
+    
+    
+# input_file = r"D:\Repositorios\ocr-api\Versao 6\temp\teste.doc"
+# output_file = r"D:\Repositorios\ocr-api\Versao 6\temp\arquivo_convertido.docx"
+# converted_file = convert_doc_to_docx(input_file, output_file)
+
+    if converted_file:
+        print(f"Arquivo convertido com sucesso: {converted_file}")
+    else:
+        print("Falha na conversão do arquivo.")
 
 def extract_text_from_image(image_path):
     try:
