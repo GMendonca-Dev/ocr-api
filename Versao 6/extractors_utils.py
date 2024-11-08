@@ -14,6 +14,7 @@ import pandas as pd
 import pdfplumber
 import warnings
 import tempfile
+from PIL import ImageFilter
 ######### Conversão de arquivos .doc para .docx ########
 # from docx.document import Document as Document_docx
 from win32com.client import Dispatch
@@ -196,8 +197,6 @@ def extract_text_from_txt(file_path_or_content):
         return "", False
 
 
-# extractors_utils.py
-
 def extract_text_from_odf(file_path, extension):
     try:
         if extension == 'odt':
@@ -283,30 +282,6 @@ def extract_text_and_images_from_docx(file_path_or_content):
         return "", False
 
 
-
-
-
-
-# def convert_doc_with_libreoffice(doc_path, output_format="docx", temp_dir="temp"):
-#     try:
-#         if not os.path.exists(temp_dir):
-#             os.makedirs(temp_dir)
-
-#         output_file_path = os.path.join(temp_dir, f"arquivo_temp.{output_format}")
-#         command = ['soffice', '--headless', '--convert-to', output_format, doc_path, '--outdir', temp_dir]
-#         subprocess.run(command, check=True)
-
-#         if os.path.exists(output_file_path):
-#             return output_file_path
-#         else:
-#             print(f"Erro ao converter o arquivo {doc_path}")
-#             return None
-#     except Exception as e:
-#         print(f"Erro ao converter arquivo usando LibreOffice: {e}")
-#         return None
-
-
-
 def download_and_convert_doc_to_docx(file_path):
     output_path = tempfile.mkdtemp()
     try:
@@ -321,76 +296,6 @@ def download_and_convert_doc_to_docx(file_path):
         print(f"Erro ao converter o arquivo {file_path}: {e}")
         return None
     
-# def download_and_convert_doc_to_docx(file_path):
-
-#     output_path = "temp"
-
-#     try:
-#         word = Dispatch("Word.Application")
-#         doc = word.Documents.Open(file_path)
-#         doc.SaveAs(output_path, FileFormat=16)  # 16 = wdFormatDocumentDefault
-#         doc.Close()
-#         word.Quit()
-#         word = None
-#         return output_path
-#     except Exception as e:
-#         print(f"Erro ao converter o arquivo {file_path}: {e}")
-#         return None
-
-
-
-
-    # try:
-    #     if not os.path.exists(temp_dir):
-    #         os.makedirs(temp_dir)
-
-    #     # Se o arquivo já estiver no sistema de arquivos local, não precisamos baixá-lo
-    #     if not os.path.exists(file_path):
-    #         response = requests.get(file_path, verify=False)
-    #         response.raise_for_status()
-    #         temp_file_path = os.path.join(temp_dir, "arquivo_temp.doc")
-    #         with open(temp_file_path, 'wb') as temp_file:
-    #             temp_file.write(response.content)
-    #     else:
-    #         temp_file_path = file_path
-
-    #     docx_path = convert_doc_with_libreoffice(temp_file_path, "docx")
-
-    #     if os.path.exists(temp_file_path) and temp_file_path != file_path:
-    #         os.remove(temp_file_path)
-    #     if not docx_path:
-    #         print("Erro na conversão de .doc para .docx.")
-    #         return "", False
-
-    #     return docx_path  # Retorna o caminho do arquivo .docx convertido
-
-    # except Exception as e:
-    #     print(f"Erro ao processar o arquivo .doc: {e}")
-    #     return "", False
-
-
-# def convert_doc_to_docx(doc_path, output_path):
-#     try:
-#         word = Dispatch("Word.Application")
-#         doc = word.Documents.Open(doc_path)
-#         doc.SaveAs(output_path, FileFormat=16)  # 16 = wdFormatDocumentDefault
-#         doc.Close()
-#         word.Quit()
-#         word = None
-#         return output_path
-#     except Exception as e:
-#         print(f"Erro ao converter o arquivo {doc_path}: {e}")
-#         return None
-    
-    
-# input_file = r"D:\Repositorios\ocr-api\Versao 6\temp\teste.doc"
-# output_file = r"D:\Repositorios\ocr-api\Versao 6\temp\arquivo_convertido.docx"
-# converted_file = convert_doc_to_docx(input_file, output_file)
-
-    if converted_file:
-        print(f"Arquivo convertido com sucesso: {converted_file}")
-    else:
-        print("Falha na conversão do arquivo.")
 
 def extract_text_from_image(image_path):
     try:
@@ -514,50 +419,9 @@ def extract_text_from_pptx(file_path_or_content):
             file_content.close()
 
 
-#  ###############PDF FUNCIONANDO , SALVO IMAGENS E PDF IMAGEM
-# def extract_text_from_pdf(file_path_or_url):
-#     # Verifica se é uma URL ou um arquivo local
-#     if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
-#         # Baixa o arquivo PDF da URL
-#         response = requests.get(file_path_or_url, verify=False)
-#         response.raise_for_status()  # Verifica se houve algum erro na requisição
-#         pdf_content = response.content
-#     else:
-#         # Lê o arquivo PDF do diretório local
-#         with open(file_path_or_url, 'rb') as file:
-#             pdf_content = file.read()
-
-#     try:
-#         doc = fitz.open(stream=pdf_content, filetype="pdf")
-#         all_text = ""
-#         # ocr_status = True
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             text = page.get_text("text")
-#             all_text += text
-
-#             images = page.get_images(full=True)
-#             for img in images:
-#                 xref = img[0]
-#                 base_image = doc.extract_image(xref)
-#                 image_data = base_image["image"]
-#                 image = Image.open(BytesIO(image_data))
-#                 try:
-#                     ocr_text = pytesseract.image_to_string(image)
-#                     all_text += ocr_text
-#                 except Exception as ocr_error:
-#                     print(f"Erro ao realizar OCR na imagem da página {page_num}: {ocr_error}")
-#                     # ocr_status = False
-#         return all_text  # , ocr_status
-    
-#     except Exception as e:
-#         # print(f"Erro ao extrair texto do PDF: {e}")
-#         return ""
-
-
 
 # ###################   FUNCIONOU LOCALMENTE
-from PIL import ImageFilter
+# 
 
 
 # def enhance_image(image):
@@ -699,19 +563,6 @@ from PIL import ImageFilter
 
 # # #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
 
-# 
-
-# def extract_text_from_pdf_url(url):
-#     """Combina o download e a extração de texto do PDF a partir de uma URL."""
-#     pdf_content = download_pdf_from_url(url)  # Baixa o PDF da URL
-#     return extract_text_from_pdf_content(pdf_content)  # Extrai o texto e/ou OCR
-
-# url = "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_oficio02920timop00220.pdf"
-# resultado = extract_text_from_pdf_url(url)
-# print(resultado)
-
-
-
 def enhance_image(image):
     """Melhora a imagem para OCR com nitidez e contraste."""
     image = image.convert("L")  # Converte para escala de cinza
@@ -720,6 +571,7 @@ def enhance_image(image):
     image = enhancer.enhance(2)  # Aumenta o contraste
     image = ImageOps.autocontrast(image)  # Ajusta o brilho e contraste automaticamente
     return image
+
 
 def download_pdf(url):
     """Baixa o PDF da URL e verifica o conteúdo."""
@@ -735,8 +587,6 @@ def download_pdf(url):
         print(f"Erro ao baixar o PDF: {e}")
         return None
 
-
-# extractors_utils.py
 
 def extract_text_from_pdf_content(file_path):
     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
