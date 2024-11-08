@@ -1,0 +1,35 @@
+[
+    {
+        "id_documento": "90415",
+        "pagina": 3571,
+        "nome_original": "CADASTROS CLARO.rar",
+        "arquivo": "OP_261_2024_CAD_TEL__CLARO.rar",
+        "extensao": ".rar",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/OP_261_2024_CAD_TEL__CLARO.rar",
+        "erro": "Falha ao processar OP_261_2024_CAD_TEL__VIVO.rar: Extensão rar não suportada.",
+        "data_insercao": "2024-11-08 11:30:22"
+    },
+    {
+        "id_documento": "90416",
+        "pagina": 3571,
+        "nome_original": "CADASTROS TIM.rar",
+        "arquivo": "OP_261_2024_CAD_TEL__TIM.rar",
+        "extensao": ".rar",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/OP_261_2024_CAD_TEL__TIM.rar",
+        "erro": "Falha ao processar OP_261_2024_CAD_TEL__VIVO.rar: Extensão rar não suportada.",
+        "data_insercao": "2024-11-08 11:30:22"
+    },
+    {
+        "id_documento": "90417",
+        "pagina": 3571,
+        "nome_original": "CADASTROS VIVO.rar",
+        "arquivo": "OP_261_2024_CAD_TEL__VIVO.rar",
+        "extensao": ".rar",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/OP_261_2024_CAD_TEL__VIVO.rar",
+        "erro": "Falha ao processar OP_261_2024_CAD_TEL__VIVO.rar: Extensão rar não suportada.",
+        "data_insercao": "2024-11-08 11:30:22"
+    }
+]

@@ -17,14 +17,15 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
 # Defina as variáveis aqui
-start_page = 1      # Número da página inicial
-end_page = 5         # Número da página final
-document_id = None   # ID do documento a ser processado (coloque o ID ou None)
+start_page = 3571      # Número da página inicial
+end_page = 3571         # Número da página final
+document_id = "90393"   # ID do documento a ser processado (coloque o ID ou None)
 
 # Se quiser processar um documento específico, defina 'document_id' como o ID desejado
 # Se quiser processar um intervalo de páginas, deixe 'document_id' como None e defina 'start_page' e 'end_page'
 
 MAX_PAGES = 50  # Define o número máximo de páginas a serem processadas
+
 
 def save_data_to_db(data, page_number):
     total_registros = len(data)
@@ -61,6 +62,7 @@ def save_data_to_db(data, page_number):
 
     generate_extraction_summary_log(page_number, total_registros, registros_sucesso, total_registros - registros_sucesso)
 
+
 def process_page_range(start_page, end_page, document_id=None):
     found = False
     for page_number in range(start_page, end_page + 1):
@@ -81,6 +83,7 @@ def process_page_range(start_page, end_page, document_id=None):
 
     if document_id and not found:
         print(f"Documento com ID {document_id} não encontrado nas páginas especificadas.")
+
 
 if __name__ == "__main__":
     create_table_if_not_exists()

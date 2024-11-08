@@ -14,6 +14,8 @@ import pandas as pd
 import pdfplumber
 import warnings
 import tempfile
+import rarfile
+import py7zr
 from PIL import ImageFilter
 ######### Conversão de arquivos .doc para .docx ########
 # from docx.document import Document as Document_docx
@@ -633,3 +635,54 @@ def extract_text_from_pdf_content(file_path):
         print(f"Erro ao processar imagens do PDF: {e}")
 
     return all_text, True, None
+
+
+# ######## Arquivos Zipados ############
+
+
+def extrair_arquivos_compactados(arquivo, pasta, id):
+    # Verifica se o arquivo está compactado
+    if arquivo.endswith(('.zip', '.rar', '.7z')):
+        # Descompacta o arquivo em uma pasta
+        if arquivo.endswith('.zip'):
+            with zipfile.ZipFile(arquivo, 'r') as zip_ref:
+                zip_ref.extractall(pasta)
+        elif arquivo.endswith('.rar'):
+            with rarfile.RarFile(arquivo, 'r') as rar_ref:
+                rar_ref.extractall(pasta)
+        elif arquivo.endswith('.7z'):
+            with py7zr.SevenZipFile(arquivo, 'r') as seven_zip_ref:
+                seven_zip_ref.extractall(pasta)
+        
+        # Apaga o arquivo principal
+        os.remove(arquivo)
+        
+        # Salva o nome, caminho e id do arquivo
+        nome_original = arquivo
+        caminho = pasta
+        id_arquivo = id
+        
+        # Percorre o diretório criado para verificar se há mais arquivos compactados
+        for root, dirs, files in os.walk(pasta):
+            for file in files:
+                arquivo_compactado = os.path.join(root, file)
+                extrair_arquivos_compactados(arquivo_compactado, pasta, id_arquivo)
+        
+        # Submete os arquivos extraídos ao processo de OCR
+        for root, dirs, files in os.walk(pasta):
+            for file in files:
+                arquivo_extraido = os.path.join(root, file)
+                # Chama o método de OCR aqui
+                ocr(arquivo_extraido)
+        
+        # Apaga os arquivos extraídos
+        for root, dirs, files in os.walk(pasta):
+            for file in files:
+                arquivo_extraido = os.path.join(root, file)
+                os.remove(arquivo_extraido)
+        
+        # Salva as informações no banco de dados
+        salvar_no_banco(nome_original, caminho, id_arquivo)
+
+
+######### Fim Arquivos Zipados ########
