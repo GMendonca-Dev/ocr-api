@@ -17,17 +17,31 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
 # Defina as variáveis aqui
-start_page = 3571      # Número da página inicial
-end_page = 3571         # Número da página final
-document_id = "90393"   # ID do documento a ser processado (coloque o ID ou None)
+START_PAGE = 3571      # Número da página inicial
+END_PAGE = 3571         # Número da página final
+DOCUMENT_ID = "90393"   # ID do documento a ser processado (coloque o ID ou None)
 
-# Se quiser processar um documento específico, defina 'document_id' como o ID desejado
-# Se quiser processar um intervalo de páginas, deixe 'document_id' como None e defina 'start_page' e 'end_page'
+# Se quiser processar um documento específico, defina 'DOCUMENT_ID' como o ID desejado
+# Se quiser processar um intervalo de páginas, deixe 'DOCUMENT_ID' como None e defina 'START_PAGE' e 'END_PAGE'
 
 MAX_PAGES = 50  # Define o número máximo de páginas a serem processadas
 
 
+class ExtractionError(Exception):
+    """Exceção específica para erros de extração de documentos."""
+ 
+
 def save_data_to_db(data, page_number):
+    """
+    Salva os dados extraídos no banco de dados e gera logs de erros e sumário.
+
+    Args:
+        data (list): Lista de documentos a serem processados
+        page_number (int): Número da página sendo processada
+
+    Returns:
+        None
+    """
     total_registros = len(data)
     registros_sucesso = 0
     erros_extracao = []
@@ -39,7 +53,7 @@ def save_data_to_db(data, page_number):
         try:
             conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
             if not sucesso:
-                raise Exception(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
+                raise ExtractionError(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
 
             insert_data_into_main_table((
                 item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'], extensao, item['pasta'],
@@ -47,7 +61,7 @@ def save_data_to_db(data, page_number):
             ))
             registros_sucesso += 1
 
-        except Exception as e:
+        except (ExtractionError, IOError, OSError) as e:
             erro_msg = str(e)
             nome_original = item.get('nome')
 
@@ -63,40 +77,48 @@ def save_data_to_db(data, page_number):
     generate_extraction_summary_log(page_number, total_registros, registros_sucesso, total_registros - registros_sucesso)
 
 
-def process_page_range(start_page, end_page, document_id=None):
+def process_page_range(page_start, page_end, doc_id=None):
+    """
+    Processa um intervalo de páginas e salva os dados no banco de dados.
+    
+    Args:
+        page_start (int): Número da página inicial
+        page_end (int): Número da página final
+        doc_id (str, optional): ID do documento específico a ser processado
+    """
     found = False
-    for page_number in range(start_page, end_page + 1):
+    for page_number in range(page_start, page_end + 1):
         print(f"Processando página {page_number}...")
         data = fetch_data_from_api(page_number=page_number)
         if data:
-            if document_id:
+            if doc_id:
                 # Filtrar o documento com o id_documento
-                data_filtered = [item for item in data if item['id_operacaodocumentos'] == document_id]
+                data_filtered = [item for item in data if item['id_operacaodocumentos'] == doc_id]
                 if data_filtered:
                     save_data_to_db(data_filtered, page_number)
                     found = True
-                    break  # Interrompe a busca após encontrar o documento
+                    break
             else:
                 save_data_to_db(data, page_number)
         else:
             print(f"Nenhum dado encontrado para a página {page_number}.")
 
-    if document_id and not found:
-        print(f"Documento com ID {document_id} não encontrado nas páginas especificadas.")
+    if doc_id and not found:
+        print(f"Documento com ID {doc_id} não encontrado nas páginas especificadas.")
 
 
 if __name__ == "__main__":
     create_table_if_not_exists()
     create_error_table_if_not_exists()
 
-    if document_id:
-        # Se 'start_page' e 'end_page' não forem definidos, usamos valores padrão
-        if not start_page:
-            start_page = 1
-        if not end_page:
-            end_page = MAX_PAGES
-        process_page_range(start_page, end_page, document_id=document_id)
-    elif start_page and end_page:
-        process_page_range(start_page, end_page)
+    if DOCUMENT_ID:
+        # Se 'START_PAGE' e 'END_PAGE' não forem definidos, usamos valores padrão
+        if not START_PAGE:
+            START_PAGE = 1
+        if not END_PAGE:
+            END_PAGE = MAX_PAGES
+        process_page_range(START_PAGE, END_PAGE, doc_id=DOCUMENT_ID)
+    elif START_PAGE and END_PAGE:
+        process_page_range(START_PAGE, END_PAGE)
     else:
-        print("Por favor, defina 'start_page' e 'end_page', ou um 'document_id'.")
+        print("Por favor, defina 'START_PAGE' e 'END_PAGE', ou um 'DOCUMENT_ID'.")
