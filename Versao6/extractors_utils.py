@@ -16,12 +16,15 @@ import warnings
 import tempfile
 import rarfile
 import py7zr
+import sys
 from PIL import ImageFilter
 ######### Conversão de arquivos .doc para .docx ########
 # from docx.document import Document as Document_docx
 from win32com.client import Dispatch
 # ######## Fim da Conversão de arquivos .doc para .docx ########
 
+
+sys.path.insert(0, './Versao6')
 
 # Suprime os avisos do tipo UserWarning, incluindo o aviso do openpyxl
 warnings.simplefilter("ignore", UserWarning)

@@ -3,7 +3,6 @@ import requests
 import os
 import tempfile
 from extractors_utils import (
-    #extract_text_from_pdf,
     extract_text_from_txt,
     extract_text_from_xlsx,
     extract_text_and_images_from_docx,

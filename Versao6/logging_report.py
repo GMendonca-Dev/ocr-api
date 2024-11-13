@@ -1,6 +1,10 @@
 import json
 import os
 from datetime import datetime
+import sys
+
+
+sys.path.insert(0, './Versao6')
 
 
 def generate_error_log(page_number, data, erro, log_dir="logs_erros"):

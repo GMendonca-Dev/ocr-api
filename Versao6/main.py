@@ -1,5 +1,9 @@
-# main.py
-
+import sys
+import warnings
+import os
+import urllib3
+from logging_report import generate_error_log, generate_extraction_summary_log
+from extractors import extract_text_by_extension
 from api_client import fetch_data_from_api
 from db_operations import (
     insert_data_into_main_table,
@@ -7,19 +11,16 @@ from db_operations import (
     create_table_if_not_exists,
     create_error_table_if_not_exists
 )
-import warnings
-from logging_report import generate_error_log, generate_extraction_summary_log
-from extractors import extract_text_by_extension
-import os
-import urllib3
 
+sys.path.insert(0, './Versao6')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
+
 # Defina as variáveis aqui
-START_PAGE = 3571      # Número da página inicial
-END_PAGE = 3571         # Número da página final
-DOCUMENT_ID = "90393"   # ID do documento a ser processado (coloque o ID ou None)
+START_PAGE = 3701      # Número da página inicial
+END_PAGE = 3701         # Número da página final
+DOCUMENT_ID = "93703" # ID do documento a ser processado (coloque o ID ou None)
 
 # Se quiser processar um documento específico, defina 'DOCUMENT_ID' como o ID desejado
 # Se quiser processar um intervalo de páginas, deixe 'DOCUMENT_ID' como None e defina 'START_PAGE' e 'END_PAGE'
