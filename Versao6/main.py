@@ -18,9 +18,9 @@ warnings.simplefilter("ignore", UserWarning)
 
 
 # Defina as variáveis aqui
-START_PAGE = 3701      # Número da página inicial
-END_PAGE = 3701         # Número da página final
-DOCUMENT_ID = "93703" # ID do documento a ser processado (coloque o ID ou None)
+START_PAGE = 3702      # Número da página inicial
+END_PAGE = 3702         # Número da página final
+DOCUMENT_ID = "93727" # ID do documento a ser processado (coloque o ID ou None)
 
 # Se quiser processar um documento específico, defina 'DOCUMENT_ID' como o ID desejado
 # Se quiser processar um intervalo de páginas, deixe 'DOCUMENT_ID' como None e defina 'START_PAGE' e 'END_PAGE'
