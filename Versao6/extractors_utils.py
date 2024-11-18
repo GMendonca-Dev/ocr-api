@@ -17,6 +17,7 @@ import tempfile
 import rarfile
 import py7zr
 import sys
+import pikepdf
 from PIL import ImageFilter
 ######### Conversão de arquivos .doc para .docx ########
 # from docx.document import Document as Document_docx
@@ -423,11 +424,8 @@ def extract_text_from_pptx(file_path_or_content):
         if isinstance(file_content, BytesIO) is False and not isinstance(file_path_or_content, bytes):
             file_content.close()
 
-
-
 # ###################   FUNCIONOU LOCALMENTE
 # 
-
 
 # def enhance_image(image):
 #     """Melhora a imagem para OCR com nitidez e contraste."""
@@ -505,67 +503,6 @@ def extract_text_from_pptx(file_path_or_content):
 #     print(resultado)
 
 
-# #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
-# def enhance_image(image):
-#     """Melhora a imagem para OCR com nitidez e contraste."""
-#     image = image.convert("L")  # Converte para escala de cinza
-#     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
-#     enhancer = ImageEnhance.Contrast(image)
-#     return enhancer.enhance(2)  # Aumenta o contraste
-
-
-# def extract_text_from_pdf_content(pdf_content):
-#     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, incluindo imagens."""
-#     all_text = ""
-
-#     # Primeira tentativa: extrair texto com pdfplumber
-#     try:
-#         with pdfplumber.open(BytesIO(pdf_content)) as pdf:
-#             for page_num, page in enumerate(pdf.pages):
-#                 try:
-#                     # Extrai texto pesquisável
-#                     page_text = page.extract_text()
-#                     if page_text:
-#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
-#                     else:
-#                         #print(f"Página {page_num + 1} sem texto pesquisável. Aplicando OCR...")
-#                         # Aplica OCR se não houver texto na página
-#                         page_image = page.to_image(resolution=300).original
-#                         enhanced_image = enhance_image(page_image)
-#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-#                         all_text += f"{ocr_text}\n"
-#                 except Exception as e:
-#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
-#     except Exception as e:
-#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
-
-#     # Fallback: Extrair imagens e aplicar OCR com PyMuPDF
-#     try:
-#         doc = fitz.open(stream=BytesIO(pdf_content), filetype="pdf")
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             images = page.get_images(full=True)
-#             if images:
-#                 for img_index, img in enumerate(images):
-#                     xref = img[0]
-#                     base_image = doc.extract_image(xref)
-#                     image_data = base_image["image"]
-#                     image = Image.open(BytesIO(image_data))
-
-#                     # Aplicar OCR na imagem extraída
-#                     try:
-#                         ocr_text = pytesseract.image_to_string(image, lang='por')
-#                         all_text += ocr_text
-#                     except Exception as ocr_error:
-#                         print(f"Erro ao realizar OCR na imagem da página {page_num + 1}, imagem {img_index + 1}: {ocr_error}")
-#             else:
-#                 print(f"Nenhuma imagem encontrada na página {page_num + 1}")
-#     except Exception as e:
-#         print(f"Erro ao processar imagens do PDF: {e}")
-
-#     return all_text
-
-
 # # #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
 
 def enhance_image(image):
@@ -593,99 +530,229 @@ def download_pdf(url):
         return None
 
 
-def extract_text_from_pdf_content(file_path):
-    """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
+# def extract_text_from_pdf_content(file_path):
+
+#     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
+#     all_text = ""
+
+#     # Verifica se o arquivo existe
+#     if not os.path.exists(file_path):
+#         return "", False, f"O arquivo {file_path} não existe."
+
+#     # Primeira tentativa: extrair texto com pdfplumber
+#     try:
+#         with pdfplumber.open(file_path) as pdf:
+#             for page_num, page in enumerate(pdf.pages):
+#                 try:
+#                     page_text = page.extract_text()
+#                     if page_text:
+#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
+#                     else:
+#                         # Se não houver texto, aplica OCR na imagem da página
+#                         page_image = page.to_image(resolution=300).original
+#                         enhanced_image = enhance_image(page_image)
+#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
+#                 except Exception as e:
+#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
+#     except Exception as e:
+#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
+
+#     # Fallback: PyMuPDF para PDFs com imagens embutidas
+#     try:
+#         doc = fitz.open(file_path)
+#         for page_num in range(doc.page_count):
+#             page = doc.load_page(page_num)
+#             pix = page.get_pixmap()
+#             image = Image.open(BytesIO(pix.tobytes()))
+#             enhanced_image = enhance_image(image)
+
+#             try:
+#                 ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                 all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
+#             except Exception as ocr_error:
+#                 print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
+#     except Exception as e:
+#         print(f"Erro ao processar imagens do PDF: {e}")
+
+#     return all_text, True, None
+
+
+def extract_text_from_pdf_content(file_path, passwords=None):
+    """
+    Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR.
+    Tenta abrir PDFs protegidos usando uma lista de senhas.
+    """
+    if passwords is None:
+        passwords = []
+
     all_text = ""
+    pdf_opened = False
 
     # Verifica se o arquivo existe
     if not os.path.exists(file_path):
         return "", False, f"O arquivo {file_path} não existe."
 
-    # Primeira tentativa: extrair texto com pdfplumber
-    try:
-        with pdfplumber.open(file_path) as pdf:
-            for page_num, page in enumerate(pdf.pages):
-                try:
-                    page_text = page.extract_text()
-                    if page_text:
-                        all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
-                    else:
-                        # Se não houver texto, aplica OCR na imagem da página
-                        page_image = page.to_image(resolution=300).original
-                        enhanced_image = enhance_image(page_image)
-                        ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-                        all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
-                except Exception as e:
-                    print(f"Erro ao processar a página {page_num + 1}: {e}")
-    except Exception as e:
-        print(f"Erro ao abrir PDF com pdfplumber: {e}")
+    # Tenta abrir o PDF com cada senha
+    for password in passwords + [None]:  # Tenta com as senhas e sem senha
+        try:
+            with pdfplumber.open(file_path, password=password) as pdf:
+                pdf_opened = True
+                for page_num, page in enumerate(pdf.pages):
+                    try:
+                        page_text = page.extract_text()
+                        if page_text:
+                            all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
+                        else:
+                            # Se não houver texto, aplica OCR na imagem da página
+                            page_image = page.to_image(resolution=300).original
+                            enhanced_image = enhance_image(page_image)
+                            ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                            all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
+                    except Exception as e:
+                        print(f"Erro ao processar a página {page_num + 1}: {e}")
+                break  # Sai do loop de senhas se abrir com sucesso
+        except Exception as e:
+            print(f"Erro ao abrir PDF com senha '{password}': {e}")
+            continue  # Tenta a próxima senha
+
+    if not pdf_opened:
+        return "", False, "Não foi possível abrir o PDF com as senhas fornecidas."
 
     # Fallback: PyMuPDF para PDFs com imagens embutidas
     try:
-        doc = fitz.open(file_path)
-        for page_num in range(doc.page_count):
-            page = doc.load_page(page_num)
-            pix = page.get_pixmap()
-            image = Image.open(BytesIO(pix.tobytes()))
-            enhanced_image = enhance_image(image)
-
+        for password in passwords + [None]:
             try:
-                ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-                all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
-            except Exception as ocr_error:
-                print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
+                doc = fitz.open(file_path, password=password)
+                for page_num in range(doc.page_count):
+                    page = doc.load_page(page_num)
+                    pix = page.get_pixmap()
+                    image = Image.open(BytesIO(pix.tobytes()))
+                    enhanced_image = enhance_image(image)
+
+                    try:
+                        ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                        all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
+                    except Exception as ocr_error:
+                        print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
+                break  # Sai do loop de senhas se abrir com sucesso
+            except Exception as e:
+                print(f"Erro ao abrir PDF com PyMuPDF e senha '{password}': {e}")
+                continue  # Tenta a próxima senha
     except Exception as e:
         print(f"Erro ao processar imagens do PDF: {e}")
 
     return all_text, True, None
 
 
+
 # ######## Arquivos Zipados ############
 
 
-def extrair_arquivos_compactados(arquivo, pasta, id):
-    # Verifica se o arquivo está compactado
-    if arquivo.endswith(('.zip', '.rar', '.7z')):
-        # Descompacta o arquivo em uma pasta
-        if arquivo.endswith('.zip'):
-            with zipfile.ZipFile(arquivo, 'r') as zip_ref:
-                zip_ref.extractall(pasta)
-        elif arquivo.endswith('.rar'):
-            with rarfile.RarFile(arquivo, 'r') as rar_ref:
-                rar_ref.extractall(pasta)
-        elif arquivo.endswith('.7z'):
-            with py7zr.SevenZipFile(arquivo, 'r') as seven_zip_ref:
-                seven_zip_ref.extractall(pasta)
+# def extrair_arquivos_compactados(arquivo, pasta, id):
+#     # Verifica se o arquivo está compactado
+#     if arquivo.endswith(('.zip', '.rar', '.7z')):
+#         # Descompacta o arquivo em uma pasta
+#         if arquivo.endswith('.zip'):
+#             with zipfile.ZipFile(arquivo, 'r') as zip_ref:
+#                 zip_ref.extractall(pasta)
+#         elif arquivo.endswith('.rar'):
+#             with rarfile.RarFile(arquivo, 'r') as rar_ref:
+#                 rar_ref.extractall(pasta)
+#         elif arquivo.endswith('.7z'):
+#             with py7zr.SevenZipFile(arquivo, 'r') as seven_zip_ref:
+#                 seven_zip_ref.extractall(pasta)
         
-        # Apaga o arquivo principal
-        os.remove(arquivo)
+#         # Apaga o arquivo principal
+#         os.remove(arquivo)
         
-        # Salva o nome, caminho e id do arquivo
-        nome_original = arquivo
-        caminho = pasta
-        id_arquivo = id
+#         # Salva o nome, caminho e id do arquivo
+#         nome_original = arquivo
+#         caminho = pasta
+#         id_arquivo = id
         
-        # Percorre o diretório criado para verificar se há mais arquivos compactados
-        for root, dirs, files in os.walk(pasta):
-            for file in files:
-                arquivo_compactado = os.path.join(root, file)
-                extrair_arquivos_compactados(arquivo_compactado, pasta, id_arquivo)
+#         # Percorre o diretório criado para verificar se há mais arquivos compactados
+#         for root, dirs, files in os.walk(pasta):
+#             for file in files:
+#                 arquivo_compactado = os.path.join(root, file)
+#                 extrair_arquivos_compactados(arquivo_compactado, pasta, id_arquivo)
         
-        # Submete os arquivos extraídos ao processo de OCR
-        for root, dirs, files in os.walk(pasta):
-            for file in files:
-                arquivo_extraido = os.path.join(root, file)
-                # Chama o método de OCR aqui
-                ocr(arquivo_extraido)
+#         # Submete os arquivos extraídos ao processo de OCR
+#         for root, dirs, files in os.walk(pasta):
+#             for file in files:
+#                 arquivo_extraido = os.path.join(root, file)
+#                 # Chama o método de OCR aqui
+#                 ocr(arquivo_extraido)
         
-        # Apaga os arquivos extraídos
-        for root, dirs, files in os.walk(pasta):
-            for file in files:
-                arquivo_extraido = os.path.join(root, file)
-                os.remove(arquivo_extraido)
+#         # Apaga os arquivos extraídos
+#         for root, dirs, files in os.walk(pasta):
+#             for file in files:
+#                 arquivo_extraido = os.path.join(root, file)
+#                 os.remove(arquivo_extraido)
         
-        # Salva as informações no banco de dados
-        salvar_no_banco(nome_original, caminho, id_arquivo)
+#         # Salva as informações no banco de dados
+#         salvar_no_banco(nome_original, caminho, id_arquivo)
 
 
 ######### Fim Arquivos Zipados ########
+
+# Chamada do método para extrair arquivos compactados
+
+
+
+
+
+
+########################################  Teste PDF com Senhas  ########################################
+
+
+from pdf2image import convert_from_path
+
+# Caminho para o arquivo de senhas
+arquivo_senhas = r'D:\Repositorios\ocr-api\Versao6\passwords.txt'
+
+# Ler as senhas do arquivo
+with open(arquivo_senhas, 'r', encoding='utf-8') as f:
+    senhas = [linha.strip() for linha in f]
+
+senha_encontrada = False
+
+for senha in senhas:
+    try:
+        with pikepdf.open(pdf_protegido, password=senha) as pdf:
+            print(f'Senha correta encontrada: {senha}')
+            senha_encontrada = True
+            # Salvar uma cópia do PDF sem senha
+            pdf.save('arquivo_sem_senha.pdf')
+            print('Uma cópia do PDF sem senha foi salva como "arquivo_sem_senha.pdf".')
+
+            # Processo de OCR
+            print('Iniciando o processo de OCR...')
+            # Converter o PDF em imagens (uma imagem por página)
+            pages = convert_from_path('arquivo_sem_senha.pdf')
+
+            texto_extraido = ''
+
+            for page_number, page_data in enumerate(pages, start=1):
+                # Converter a página em imagem
+                page_image = page_data.convert('RGB')
+                # Aplicar OCR na imagem
+                texto_pagina = pytesseract.image_to_string(page_image, lang='por')
+                texto_extraido += f'\n--- Página {page_number} ---\n'
+                texto_extraido += texto_pagina
+
+            # Salvar o texto extraído em um arquivo
+            with open('texto_extraido.txt', 'w', encoding='utf-8') as f_texto:
+                f_texto.write(texto_extraido)
+
+            print('Processo de OCR concluído. O texto extraído foi salvo em "texto_extraido.txt".')
+            break
+    except pikepdf._qpdf.PasswordError:
+        print(f'Senha incorreta: {senha}')
+    except Exception as e:
+        print(f'Erro ao tentar abrir o PDF com a senha "{senha}": {e}')
+
+if not senha_encontrada:
+    print('Nenhuma das senhas funcionou.')
+
+# #########################################  Fim Teste PDF com Senhas  ########################################

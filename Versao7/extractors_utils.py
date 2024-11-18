@@ -16,12 +16,15 @@ import warnings
 import tempfile
 import rarfile
 import py7zr
+import sys
 from PIL import ImageFilter
 ######### Conversão de arquivos .doc para .docx ########
 # from docx.document import Document as Document_docx
 from win32com.client import Dispatch
 # ######## Fim da Conversão de arquivos .doc para .docx ########
 
+
+sys.path.insert(0, './Versao6')
 
 # Suprime os avisos do tipo UserWarning, incluindo o aviso do openpyxl
 warnings.simplefilter("ignore", UserWarning)
@@ -502,68 +505,8 @@ def extract_text_from_pptx(file_path_or_content):
 #     print(resultado)
 
 
-# #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
-# def enhance_image(image):
-#     """Melhora a imagem para OCR com nitidez e contraste."""
-#     image = image.convert("L")  # Converte para escala de cinza
-#     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
-#     enhancer = ImageEnhance.Contrast(image)
-#     return enhancer.enhance(2)  # Aumenta o contraste
-
-
-# def extract_text_from_pdf_content(pdf_content):
-#     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, incluindo imagens."""
-#     all_text = ""
-
-#     # Primeira tentativa: extrair texto com pdfplumber
-#     try:
-#         with pdfplumber.open(BytesIO(pdf_content)) as pdf:
-#             for page_num, page in enumerate(pdf.pages):
-#                 try:
-#                     # Extrai texto pesquisável
-#                     page_text = page.extract_text()
-#                     if page_text:
-#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
-#                     else:
-#                         #print(f"Página {page_num + 1} sem texto pesquisável. Aplicando OCR...")
-#                         # Aplica OCR se não houver texto na página
-#                         page_image = page.to_image(resolution=300).original
-#                         enhanced_image = enhance_image(page_image)
-#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-#                         all_text += f"{ocr_text}\n"
-#                 except Exception as e:
-#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
-#     except Exception as e:
-#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
-
-#     # Fallback: Extrair imagens e aplicar OCR com PyMuPDF
-#     try:
-#         doc = fitz.open(stream=BytesIO(pdf_content), filetype="pdf")
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             images = page.get_images(full=True)
-#             if images:
-#                 for img_index, img in enumerate(images):
-#                     xref = img[0]
-#                     base_image = doc.extract_image(xref)
-#                     image_data = base_image["image"]
-#                     image = Image.open(BytesIO(image_data))
-
-#                     # Aplicar OCR na imagem extraída
-#                     try:
-#                         ocr_text = pytesseract.image_to_string(image, lang='por')
-#                         all_text += ocr_text
-#                     except Exception as ocr_error:
-#                         print(f"Erro ao realizar OCR na imagem da página {page_num + 1}, imagem {img_index + 1}: {ocr_error}")
-#             else:
-#                 print(f"Nenhuma imagem encontrada na página {page_num + 1}")
-#     except Exception as e:
-#         print(f"Erro ao processar imagens do PDF: {e}")
-
-#     return all_text
-
-
 # # #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
+
 
 def enhance_image(image):
     """Melhora a imagem para OCR com nitidez e contraste."""
@@ -591,6 +534,7 @@ def download_pdf(url):
 
 
 def extract_text_from_pdf_content(file_path):
+
     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
     all_text = ""
 
@@ -640,49 +584,52 @@ def extract_text_from_pdf_content(file_path):
 # ######## Arquivos Zipados ############
 
 
-def extrair_arquivos_compactados(arquivo, pasta, id):
-    # Verifica se o arquivo está compactado
-    if arquivo.endswith(('.zip', '.rar', '.7z')):
-        # Descompacta o arquivo em uma pasta
-        if arquivo.endswith('.zip'):
-            with zipfile.ZipFile(arquivo, 'r') as zip_ref:
-                zip_ref.extractall(pasta)
-        elif arquivo.endswith('.rar'):
-            with rarfile.RarFile(arquivo, 'r') as rar_ref:
-                rar_ref.extractall(pasta)
-        elif arquivo.endswith('.7z'):
-            with py7zr.SevenZipFile(arquivo, 'r') as seven_zip_ref:
-                seven_zip_ref.extractall(pasta)
+# def extrair_arquivos_compactados(arquivo, pasta, id):
+#     # Verifica se o arquivo está compactado
+#     if arquivo.endswith(('.zip', '.rar', '.7z')):
+#         # Descompacta o arquivo em uma pasta
+#         if arquivo.endswith('.zip'):
+#             with zipfile.ZipFile(arquivo, 'r') as zip_ref:
+#                 zip_ref.extractall(pasta)
+#         elif arquivo.endswith('.rar'):
+#             with rarfile.RarFile(arquivo, 'r') as rar_ref:
+#                 rar_ref.extractall(pasta)
+#         elif arquivo.endswith('.7z'):
+#             with py7zr.SevenZipFile(arquivo, 'r') as seven_zip_ref:
+#                 seven_zip_ref.extractall(pasta)
         
-        # Apaga o arquivo principal
-        os.remove(arquivo)
+#         # Apaga o arquivo principal
+#         os.remove(arquivo)
         
-        # Salva o nome, caminho e id do arquivo
-        nome_original = arquivo
-        caminho = pasta
-        id_arquivo = id
+#         # Salva o nome, caminho e id do arquivo
+#         nome_original = arquivo
+#         caminho = pasta
+#         id_arquivo = id
         
-        # Percorre o diretório criado para verificar se há mais arquivos compactados
-        for root, dirs, files in os.walk(pasta):
-            for file in files:
-                arquivo_compactado = os.path.join(root, file)
-                extrair_arquivos_compactados(arquivo_compactado, pasta, id_arquivo)
+#         # Percorre o diretório criado para verificar se há mais arquivos compactados
+#         for root, dirs, files in os.walk(pasta):
+#             for file in files:
+#                 arquivo_compactado = os.path.join(root, file)
+#                 extrair_arquivos_compactados(arquivo_compactado, pasta, id_arquivo)
         
-        # Submete os arquivos extraídos ao processo de OCR
-        for root, dirs, files in os.walk(pasta):
-            for file in files:
-                arquivo_extraido = os.path.join(root, file)
-                # Chama o método de OCR aqui
-                ocr(arquivo_extraido)
+#         # Submete os arquivos extraídos ao processo de OCR
+#         for root, dirs, files in os.walk(pasta):
+#             for file in files:
+#                 arquivo_extraido = os.path.join(root, file)
+#                 # Chama o método de OCR aqui
+#                 ocr(arquivo_extraido)
         
-        # Apaga os arquivos extraídos
-        for root, dirs, files in os.walk(pasta):
-            for file in files:
-                arquivo_extraido = os.path.join(root, file)
-                os.remove(arquivo_extraido)
+#         # Apaga os arquivos extraídos
+#         for root, dirs, files in os.walk(pasta):
+#             for file in files:
+#                 arquivo_extraido = os.path.join(root, file)
+#                 os.remove(arquivo_extraido)
         
-        # Salva as informações no banco de dados
-        salvar_no_banco(nome_original, caminho, id_arquivo)
+#         # Salva as informações no banco de dados
+#         salvar_no_banco(nome_original, caminho, id_arquivo)
 
 
 ######### Fim Arquivos Zipados ########
+
+# Chamada do método para extrair arquivos compactados
+

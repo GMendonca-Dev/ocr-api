@@ -23,9 +23,9 @@ warnings.simplefilter("ignore", UserWarning)
 load_dotenv()
 
 # Defina as variáveis aqui
-START_PAGE = 1      # Número da página inicial
-END_PAGE = 10         # Número da página final
-DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 3705      # Número da página inicial
+END_PAGE = 3705         # Número da página final
+DOCUMENT_ID = "93727"   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 # Se quiser processar um documento específico, defina 'DOCUMENT_ID' como o ID desejado
 # Se quiser processar um intervalo de páginas, deixe 'DOCUMENT_ID' como None e defina 'START_PAGE' e 'END_PAGE'
