@@ -11,16 +11,21 @@ from db_operations import (
     create_table_if_not_exists,
     create_error_table_if_not_exists
 )
+from dotenv import load_dotenv
+
 
 sys.path.insert(0, './Versao6')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
 
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv()
+
 # Defina as variáveis aqui
-START_PAGE = 3702      # Número da página inicial
-END_PAGE = 3702         # Número da página final
-DOCUMENT_ID = "93727" # ID do documento a ser processado (coloque o ID ou None)
+START_PAGE = 1      # Número da página inicial
+END_PAGE = 10         # Número da página final
+DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 # Se quiser processar um documento específico, defina 'DOCUMENT_ID' como o ID desejado
 # Se quiser processar um intervalo de páginas, deixe 'DOCUMENT_ID' como None e defina 'START_PAGE' e 'END_PAGE'

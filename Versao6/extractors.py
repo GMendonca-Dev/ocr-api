@@ -134,6 +134,11 @@ def extract_text_by_extension(file_path, id_zip=None, original_data=None):
     Função que determina a extração de conteúdo com base na extensão do arquivo.
     """
 
+    if not file_path:
+        erro_msg = "O caminho do arquivo é None."
+        print(erro_msg)
+        return "", False, erro_msg
+
     # Verifica se é uma URL ou um arquivo local
     if is_url(file_path):
         try:
