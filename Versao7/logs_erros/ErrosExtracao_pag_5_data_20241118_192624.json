@@ -1,0 +1,46 @@
+[
+    {
+        "id_documento": "124",
+        "pagina": 5,
+        "nome_original": null,
+        "arquivo": "30__13022020130620_",
+        "extensao": "",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 30__13022020130620_: O caminho do arquivo é None.",
+        "data_insercao": "2024-11-18 19:26:24"
+    },
+    {
+        "id_documento": "125",
+        "pagina": 5,
+        "nome_original": null,
+        "arquivo": "30__13022020130620_",
+        "extensao": "",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 30__13022020130620_: O caminho do arquivo é None.",
+        "data_insercao": "2024-11-18 19:26:24"
+    },
+    {
+        "id_documento": "126",
+        "pagina": 5,
+        "nome_original": null,
+        "arquivo": "30__13022020130620_",
+        "extensao": "",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 30__13022020130620_: O caminho do arquivo é None.",
+        "data_insercao": "2024-11-18 19:26:24"
+    },
+    {
+        "id_documento": "129",
+        "pagina": 5,
+        "nome_original": null,
+        "arquivo": "30__13022020130620_",
+        "extensao": "",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 30__13022020130620_: O caminho do arquivo é None.",
+        "data_insercao": "2024-11-18 19:26:24"
+    }
+]

@@ -24,7 +24,7 @@ load_dotenv()
 
 # Defina as variáveis aqui
 START_PAGE = 1      # Número da página inicial
-END_PAGE = 3         # Número da página final
+END_PAGE = 20         # Número da página final
 DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 # Se quiser processar um documento específico, defina 'DOCUMENT_ID' como o ID desejado
