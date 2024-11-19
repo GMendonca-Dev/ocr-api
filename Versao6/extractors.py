@@ -152,31 +152,6 @@ def extract_compressed_file(file_path, temp_dir, original_data, passwords):
         extract_dir = os.path.join(temp_dir, os.path.splitext(file_name)[0])
         os.makedirs(extract_dir, exist_ok=True)
 
-        # Tenta extrair com cada senha
-        extracted = False
-
-        for password in passwords + [None]:
-            
-            try:
-                if file_path.endswith('.zip'):
-                    with zipfile.ZipFile(file_path) as zf:
-                        zf.extractall(extract_dir, pwd=password.encode() if password else None)
-                elif file_path.endswith('.rar'):
-                    with rarfile.RarFile(file_path) as rf:
-                        rf.extractall(extract_dir, pwd=password)
-                elif file_path.endswith('.7z'):
-                    with py7zr.SevenZipFile(file_path, password=password) as sz:
-                        sz.extractall(extract_dir)
-                extracted = True
-                break  # Sai do loop de senhas se extrair com sucesso
-            except (RuntimeError, zipfile.BadZipFile, rarfile.BadRarFile, py7zr.exceptions.Bad7zFile) as e:
-                print(f"Erro ao extrair arquivo {file_name} com senha '{password}': {e}")
-                continue  # Tenta a próxima senha
-
-        if not extracted:
-            print(f"Não foi possível extrair o arquivo {file_name} com as senhas fornecidas.")
-            raise Exception(f"Não foi possível extrair o arquivo {file_name}")
-
         # Processa todos os arquivos extraídos
         for root, _, files in os.walk(extract_dir):
             for file in files:
@@ -307,7 +282,7 @@ def process_file_by_extension(file_path, extension, original_data=None, password
         # elif extension == 'pdf' or extension == '':
         #     return extract_text_from_pdf_content(file_path), True, None
         elif extension == 'pdf' or extension == '':
-            return extract_text_from_pdf_content(file_path, passwords=passwords)
+            return extract_text_from_pdf_content(file_path)
         elif extension in ['jpg', 'jpeg', 'png']:
             return extract_text_from_image(file_path), True, None
         elif extension in ['html', 'htm']:

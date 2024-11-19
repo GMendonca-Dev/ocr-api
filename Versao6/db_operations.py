@@ -97,6 +97,8 @@ def insert_data_into_main_table(data):
         conn.close()
 
 
+
+
 def insert_error_into_table(error_data):
     conn = get_db_connection()
     cur = conn.cursor()

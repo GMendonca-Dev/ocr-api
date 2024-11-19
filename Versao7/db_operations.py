@@ -25,6 +25,38 @@ def get_db_connection():
     )
 
 
+def clean_string(value):
+    """
+    Remove caracteres não imprimíveis de strings.
+    """
+    if isinstance(value, str):
+        # Remove todos os caracteres não imprimíveis
+        return ''.join(char for char in value if char.isprintable())
+    return value
+
+
+def sanitize_data(data):
+    """
+    Sanitiza todos os valores de uma tupla, removendo caracteres inválidos e convertendo bytes para str.
+    """
+    sanitized_data = []
+    for idx, value in enumerate(data):
+        if isinstance(value, bytes):
+            print(f"Campo na posição {idx} é do tipo bytes. Convertendo para str.")
+            value = value.decode('utf-8', errors='replace')
+        if isinstance(value, str):
+            if '\x00' in value:
+                print(f"Campo na posição {idx} contém NUL antes da sanitização.")
+            # Remove caracteres não imprimíveis
+            cleaned_value = ''.join(c for c in value if c.isprintable())
+            if '\x00' in cleaned_value:
+                print(f"Campo na posição {idx} ainda contém NUL após sanitização.")
+            sanitized_data.append(cleaned_value)
+        else:
+            sanitized_data.append(value)
+    return tuple(sanitized_data)
+
+
 def create_table_if_not_exists():
     try:
         with get_db_connection() as conn:
@@ -78,23 +110,71 @@ def create_error_table_if_not_exists():
         print(f"Erro ao criar a tabela de erros: {e}")
 
 
+# def insert_data_into_main_table(data):
+#     conn = get_db_connection()
+#     cur = conn.cursor()
+
+#     try:
+#         print("chegou aqui")
+#         cur.execute("""
+#             INSERT INTO ocr_documentosocr (id_documento, email_usuario, num_op, ano_op, nome_original, arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina)
+#             VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+#             ON CONFLICT (id_documento, nome_original) DO UPDATE
+#             SET conteudo = EXCLUDED.conteudo, numero_pagina = EXCLUDED.numero_pagina
+#         """, data)
+#         conn.commit()
+#     except Exception as e:
+#         conn.rollback()
+#         raise e
+#     finally:
+#         cur.close()
+#         conn.close()
+
 def insert_data_into_main_table(data):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
+        sanitized_data = sanitize_data(data)
         cur.execute("""
-            INSERT INTO ocr_documentosocr (id_documento, email_usuario, num_op, ano_op, nome_original, arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina)
-            VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO ocr_documentosocr (
+                id_documento, email_usuario, num_op, ano_op, nome_original, arquivo, extensao_arquivo,
+                pasta, caminho, conteudo, numero_pagina
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id_documento, nome_original) DO UPDATE
             SET conteudo = EXCLUDED.conteudo, numero_pagina = EXCLUDED.numero_pagina
-        """, data)
+        """, sanitized_data)
         conn.commit()
     except Exception as e:
         conn.rollback()
+        print(f"Erro ao inserir dados: {e}")
         raise e
     finally:
         cur.close()
         conn.close()
+
+
+# def insert_error_into_table(error_data):
+#     conn = get_db_connection()
+#     cur = conn.cursor()
+
+#     try:
+#         # Sanitiza os dados antes da inserção
+#         sanitized_data = sanitize_data(error_data)
+
+#         cur.execute("""
+#             INSERT INTO ocr_documentosocrerros (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, numero_pagina, erro, ano_op, email_usuario, num_op)
+#             VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+#             ON CONFLICT (id_documento, nome_original) DO NOTHING
+#         """,  sanitized_data)
+#         conn.commit()
+
+#     except Exception as e:
+#         conn.rollback()
+#         raise e
+#     finally:
+#         cur.close()
+#         conn.close()
 
 
 def insert_error_into_table(error_data):
@@ -102,15 +182,19 @@ def insert_error_into_table(error_data):
     cur = conn.cursor()
 
     try:
+        # Sanitiza os dados antes da inserção
+        sanitized_data = sanitize_data(error_data)
+
         cur.execute("""
             INSERT INTO ocr_documentosocrerros (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, numero_pagina, erro, ano_op, email_usuario, num_op)
             VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id_documento, nome_original) DO NOTHING
-        """, error_data)
+        """,  sanitized_data)
         conn.commit()
 
     except Exception as e:
         conn.rollback()
+        print(f"Error inserting error data: {e}")  # Adiciona log para verificar o erro
         raise e
     finally:
         cur.close()

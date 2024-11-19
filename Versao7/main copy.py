@@ -13,25 +13,23 @@ from db_operations import (
 )
 
 
-sys.path.insert(0, './Versao7')
+# sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-
-# Defina as variáveis aqui
-START_PAGE = 6      # Número da página inicial
+START_PAGE = 6       # Número da página inicial
 END_PAGE = 6         # Número da página final
-DOCUMENT_ID = "166"   # ID do documento a ser processado (coloque o ID ou None) "93727"
+DOCUMENT_ID = "166"  # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 # Se quiser processar um documento específico, defina 'DOCUMENT_ID' como o ID desejado
 # Se quiser processar um intervalo de páginas, deixe 'DOCUMENT_ID' como None e defina 'START_PAGE' e 'END_PAGE'
 
-MAX_PAGES = 50  # Define o número máximo de páginas a serem processadas
-
+MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
+ 
 
 class ExtractionError(Exception):
     """Exceção específica para erros de extração de documentos."""
- 
+
 
 def save_data_to_db(data, page_number):
     """
@@ -77,6 +75,7 @@ def save_data_to_db(data, page_number):
         generate_error_log(page_number, erros_extracao, erro_msg)
 
     generate_extraction_summary_log(page_number, total_registros, registros_sucesso, total_registros - registros_sucesso)
+
 
 
 def process_page_range(page_start, page_end, doc_id=None):
