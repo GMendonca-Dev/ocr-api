@@ -324,6 +324,7 @@ def download_and_convert_doc_to_docx(file_path):
     Converte um arquivo DOC para DOCX usando o LibreOffice em modo headless.
     """
     try:
+        print(f"Convertendo arquivo {file_path} para DOCX...")
         temp_dir = tempfile.mkdtemp()
         output_format = 'docx'
         
@@ -332,6 +333,7 @@ def download_and_convert_doc_to_docx(file_path):
         subprocess.run(command, check=True)
 
         if os.path.exists(output_file_path):
+            print(f"Arquivo {file_path} convertido para DOCX.")
             return output_file_path
         return None
         
