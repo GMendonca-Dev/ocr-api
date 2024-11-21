@@ -1,0 +1,46 @@
+[
+    {
+        "id_documento": "314",
+        "pagina": 12,
+        "nome_original": "20.000042O.zip",
+        "arquivo": "24_27_13022020130620_20.000042o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_20.000042o.zip",
+        "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "data_insercao": "2024-11-19 15:27:19"
+    },
+    {
+        "id_documento": "315",
+        "pagina": 12,
+        "nome_original": "000081120_1.zip",
+        "arquivo": "24_27_13022020130620_0000811201.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_0000811201.zip",
+        "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "data_insercao": "2024-11-19 15:27:19"
+    },
+    {
+        "id_documento": "316",
+        "pagina": 12,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_27_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_anexos.zip",
+        "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "data_insercao": "2024-11-19 15:27:19"
+    },
+    {
+        "id_documento": "320",
+        "pagina": 12,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_27_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_anexos.zip",
+        "erro": "Falha ao processar 24_27_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "data_insercao": "2024-11-19 15:27:19"
+    }
+]

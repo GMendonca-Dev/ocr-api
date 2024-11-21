@@ -17,6 +17,7 @@ import tempfile
 import rarfile
 import py7zr
 import sys
+from lxml import etree
 from PIL import ImageFilter
 ######### Conversão de arquivos .doc para .docx ########
 # from docx.document import Document as Document_docx
@@ -75,24 +76,62 @@ def extract_text_from_xml(file_path_or_content):
         print(erro_msg)
         return "", False, erro_msg
 
-
+# ####### NÃO ESTAVA FUNCIONANDO #########
 # Extração de texto de arquivos ODT (LibreOffice Writer)
+# def extract_text_from_odt(file_path_or_content):
+#     try:
+#         # Garante que file_path_or_content seja tratado como um objeto de arquivo
+#         if isinstance(file_path_or_content, str):
+#             with open(file_path_or_content, 'rb') as f:
+#                 zip_file = zipfile.ZipFile(f)
+#         else:
+#             zip_file = zipfile.ZipFile(file_path_or_content)
+
+#         with zip_file.open('content.xml') as f:
+#             tree = ET.parse(f)
+#             root = tree.getroot()
+
+#         text_elements = [elem.text for elem in root.iter() if elem.text is not None]
+#         extracted_text = "\n".join(text_elements)
+#         return extracted_text, True
+#     except Exception as e:
+#         erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
+#         print(erro_msg)  # Exibe o erro no console
+#         return "", False
+# ####### NÃO ESTAVA FUNCIONANDO #########
+
+
 def extract_text_from_odt(file_path_or_content):
     try:
-        # Garante que file_path_or_content seja tratado como um objeto de arquivo
+        # Abre o arquivo ODT a partir de um caminho ou de um objeto de arquivo
         if isinstance(file_path_or_content, str):
-            with open(file_path_or_content, 'rb') as f:
-                zip_file = zipfile.ZipFile(f)
+            # file_path_or_content é um caminho de arquivo
+            zip_file = zipfile.ZipFile(file_path_or_content, 'r')
         else:
+            # file_path_or_content é um objeto de arquivo
             zip_file = zipfile.ZipFile(file_path_or_content)
 
-        with zip_file.open('content.xml') as f:
-            tree = ET.parse(f)
-            root = tree.getroot()
-
-        text_elements = [elem.text for elem in root.iter() if elem.text is not None]
-        extracted_text = "\n".join(text_elements)
-        return extracted_text, True
+        # Verifica se o content.xml existe no arquivo ODT
+        if 'content.xml' in zip_file.namelist():
+            with zip_file.open('content.xml') as f:
+                tree = etree.parse(f)
+                # Define os namespaces utilizados
+                namespaces = {
+                    'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
+                    'office': 'urn:oasis:names:tc:opendocument:xmlns:office:1.0'
+                }
+                # Encontra todos os elementos de parágrafo
+                paragrafos = tree.xpath('//text:p', namespaces=namespaces)
+                extracted_text = ''
+                for paragrafo in paragrafos:
+                    # Extrai o texto do parágrafo, incluindo elementos de texto internos
+                    texto_paragrafo = ''.join(paragrafo.xpath('.//text()', namespaces=namespaces))
+                    extracted_text += texto_paragrafo + '\n'
+            return extracted_text, True
+        else:
+            erro_msg = "O arquivo content.xml não foi encontrado no ODT."
+            print(erro_msg)
+            return "", False
     except Exception as e:
         erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
         print(erro_msg)  # Exibe o erro no console

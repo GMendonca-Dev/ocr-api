@@ -76,28 +76,30 @@ def extract_text_from_xml(file_path_or_content):
         print(erro_msg)
         return "", False, erro_msg
 
+# ####### NÃO ESTAVA FUNCIONANDO #########
+# # Extração de texto de arquivos ODT (LibreOffice Writer)
+# def extract_text_from_odt(file_path_or_content):
+#     try:
+#         # Garante que file_path_or_content seja tratado como um objeto de arquivo
+#         if isinstance(file_path_or_content, str):
+#             with open(file_path_or_content, 'rb') as f:
+#                 zip_file = zipfile.ZipFile(f)
+#         else:
+#             zip_file = zipfile.ZipFile(file_path_or_content)
 
-# Extração de texto de arquivos ODT (LibreOffice Writer)
-def extract_text_from_odt(file_path_or_content):
-    try:
-        # Garante que file_path_or_content seja tratado como um objeto de arquivo
-        if isinstance(file_path_or_content, str):
-            with open(file_path_or_content, 'rb') as f:
-                zip_file = zipfile.ZipFile(f)
-        else:
-            zip_file = zipfile.ZipFile(file_path_or_content)
+#         with zip_file.open('content.xml') as f:
+#             tree = ET.parse(f)
+#             root = tree.getroot()
 
-        with zip_file.open('content.xml') as f:
-            tree = ET.parse(f)
-            root = tree.getroot()
+#         text_elements = [elem.text for elem in root.iter() if elem.text is not None]
+#         extracted_text = "\n".join(text_elements)
+#         return extracted_text, True
+#     except Exception as e:
+#         erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
+#         print(erro_msg)  # Exibe o erro no console
+#         return "", False
+# ####### NÃO ESTAVA FUNCIONANDO #########
 
-        text_elements = [elem.text for elem in root.iter() if elem.text is not None]
-        extracted_text = "\n".join(text_elements)
-        return extracted_text, True
-    except Exception as e:
-        erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
-        print(erro_msg)  # Exibe o erro no console
-        return "", False
 
 
 # Extração de texto de arquivos ODS (LibreOffice Calc)
