@@ -26,7 +26,6 @@ def get_auth_token():
         response = requests.post(auth_url, data=json.dumps(payload), headers=headers, verify=False)
         response.raise_for_status()
         token = response.json().get('token')
-        print("Token obtido com sucesso!")
 
         if token:
             token_info['token'] = token
@@ -64,6 +63,7 @@ def fetch_data_from_api(page_number):
         response = requests.get(f"{api_url}?pagina={page_number}", headers=headers, verify=False)
         response.raise_for_status()
         registros = response.json().get("registros", [])
+        print(f"Número de Registros obtidos da API: {len(registros)}")
         return registros
     except requests.RequestException as e:
         print(f"Erro ao buscar dados da API: {e}")

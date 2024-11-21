@@ -25,7 +25,7 @@ from win32com.client import Dispatch
 # ######## Fim da Conversão de arquivos .doc para .docx ########
 
 
-sys.path.insert(0, './Versao6')
+sys.path.insert(0, './Versao7')
 
 # Suprime os avisos do tipo UserWarning, incluindo o aviso do openpyxl
 warnings.simplefilter("ignore", UserWarning)
@@ -75,30 +75,6 @@ def extract_text_from_xml(file_path_or_content):
         erro_msg = f"Erro ao ler ou processar o arquivo XML: {e}"
         print(erro_msg)
         return "", False, erro_msg
-
-# ####### NÃO ESTAVA FUNCIONANDO #########
-# Extração de texto de arquivos ODT (LibreOffice Writer)
-# def extract_text_from_odt(file_path_or_content):
-#     try:
-#         # Garante que file_path_or_content seja tratado como um objeto de arquivo
-#         if isinstance(file_path_or_content, str):
-#             with open(file_path_or_content, 'rb') as f:
-#                 zip_file = zipfile.ZipFile(f)
-#         else:
-#             zip_file = zipfile.ZipFile(file_path_or_content)
-
-#         with zip_file.open('content.xml') as f:
-#             tree = ET.parse(f)
-#             root = tree.getroot()
-
-#         text_elements = [elem.text for elem in root.iter() if elem.text is not None]
-#         extracted_text = "\n".join(text_elements)
-#         return extracted_text, True
-#     except Exception as e:
-#         erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
-#         print(erro_msg)  # Exibe o erro no console
-#         return "", False
-# ####### NÃO ESTAVA FUNCIONANDO #########
 
 
 def extract_text_from_odt(file_path_or_content):
@@ -327,6 +303,7 @@ def extract_text_and_images_from_docx(file_path_or_content):
 
 
 def download_and_convert_doc_to_docx(file_path):
+    print(f"Convertendo arquivo {file_path} para DOCX...")
     output_path = tempfile.mkdtemp()
     try:
         word = Dispatch("Word.Application")
@@ -335,11 +312,12 @@ def download_and_convert_doc_to_docx(file_path):
         doc.Close()
         word.Quit()
         word = None
+        print(f"Arquivo {file_path} convertido para DOCX.")
         return os.path.join(output_path, "arquivo_temp.docx")
     except Exception as e:
         print(f"Erro ao converter o arquivo {file_path}: {e}")
         return None
-    
+
 
 def extract_text_from_image(image_path):
     try:
@@ -463,10 +441,7 @@ def extract_text_from_pptx(file_path_or_content):
             file_content.close()
 
 
-
 # ###################   FUNCIONOU LOCALMENTE
-# 
-
 
 # def enhance_image(image):
 #     """Melhora a imagem para OCR com nitidez e contraste."""
@@ -543,7 +518,6 @@ def extract_text_from_pptx(file_path_or_content):
 #     resultado = extract_text_from_pdf(pdf_content)
 #     print(resultado)
 
-
 # # #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
 
 
@@ -618,57 +592,4 @@ def extract_text_from_pdf_content(file_path):
         print(f"Erro ao processar imagens do PDF: {e}")
 
     return all_text, True, None
-
-
-# ######## Arquivos Zipados ############
-
-
-# def extrair_arquivos_compactados(arquivo, pasta, id):
-#     # Verifica se o arquivo está compactado
-#     if arquivo.endswith(('.zip', '.rar', '.7z')):
-#         # Descompacta o arquivo em uma pasta
-#         if arquivo.endswith('.zip'):
-#             with zipfile.ZipFile(arquivo, 'r') as zip_ref:
-#                 zip_ref.extractall(pasta)
-#         elif arquivo.endswith('.rar'):
-#             with rarfile.RarFile(arquivo, 'r') as rar_ref:
-#                 rar_ref.extractall(pasta)
-#         elif arquivo.endswith('.7z'):
-#             with py7zr.SevenZipFile(arquivo, 'r') as seven_zip_ref:
-#                 seven_zip_ref.extractall(pasta)
-        
-#         # Apaga o arquivo principal
-#         os.remove(arquivo)
-        
-#         # Salva o nome, caminho e id do arquivo
-#         nome_original = arquivo
-#         caminho = pasta
-#         id_arquivo = id
-        
-#         # Percorre o diretório criado para verificar se há mais arquivos compactados
-#         for root, dirs, files in os.walk(pasta):
-#             for file in files:
-#                 arquivo_compactado = os.path.join(root, file)
-#                 extrair_arquivos_compactados(arquivo_compactado, pasta, id_arquivo)
-        
-#         # Submete os arquivos extraídos ao processo de OCR
-#         for root, dirs, files in os.walk(pasta):
-#             for file in files:
-#                 arquivo_extraido = os.path.join(root, file)
-#                 # Chama o método de OCR aqui
-#                 ocr(arquivo_extraido)
-        
-#         # Apaga os arquivos extraídos
-#         for root, dirs, files in os.walk(pasta):
-#             for file in files:
-#                 arquivo_extraido = os.path.join(root, file)
-#                 os.remove(arquivo_extraido)
-        
-#         # Salva as informações no banco de dados
-#         salvar_no_banco(nome_original, caminho, id_arquivo)
-
-
-######### Fim Arquivos Zipados ########
-
-# Chamada do método para extrair arquivos compactados
 

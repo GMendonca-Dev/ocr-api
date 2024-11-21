@@ -16,9 +16,9 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 31      # Número da página inicial
-END_PAGE = 31         # Número da página final
-DOCUMENT_ID = "781"   # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 22      # Número da página inicial
+END_PAGE = 22         # Número da página final
+DOCUMENT_ID = "571"   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
 
@@ -43,6 +43,7 @@ def save_data_to_db(data, page_number):
     erros_extracao = []
 
     for item in data:
+        print("Em 'save data to db'")
         _, extensao = os.path.splitext(item['arquivo'])
         extensao = extensao.lstrip('.').lower()
 
@@ -55,6 +56,7 @@ def save_data_to_db(data, page_number):
             conteudo_texto = conteudo[0] if isinstance(conteudo, tuple) else conteudo
             conteudo_limpo = conteudo_texto.replace('\x00', '') if conteudo_texto else ''
             
+            print("Inserindo dados no BD")
             insert_data_into_main_table((
                 item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'], extensao, item['pasta'],
                 item['caminho'], conteudo_limpo, page_number
@@ -75,7 +77,6 @@ def save_data_to_db(data, page_number):
         generate_error_log(page_number, erros_extracao, erro_msg)
 
     generate_extraction_summary_log(page_number, total_registros, registros_sucesso, total_registros - registros_sucesso)
-
 
 
 def process_page_range(page_start, page_end, doc_id=None):
