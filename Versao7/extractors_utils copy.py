@@ -319,24 +319,23 @@ def extract_text_and_images_from_docx(file_path_or_content):
 #         print(f"Erro ao converter o arquivo {file_path}: {e}")
 #         return None
 
-def download_and_convert_doc_to_docx(file_path):
-    """
-    Converte um arquivo DOC para DOCX usando o LibreOffice em modo headless.
-    """
+def convert_doc_with_libreoffice(doc_path, output_format="docx", temp_dir="temp"):
     try:
-        temp_dir = tempfile.mkdtemp()
-        output_format = 'docx'
-        
+        if not os.path.exists(temp_dir):
+            os.makedirs(temp_dir)
+
         output_file_path = os.path.join(temp_dir, f"arquivo_temp.{output_format}")
-        command = ['soffice', '--headless', '--convert-to', output_format, file_path, '--outdir', temp_dir]
+        command = ['soffice', '--headless', '--convert-to', output_format, doc_path, '--outdir', temp_dir]
         subprocess.run(command, check=True)
 
         if os.path.exists(output_file_path):
             return output_file_path
-        return None
+        else:
+            print(f"Erro ao converter o arquivo {doc_path}")
+            return None
         
-    except (subprocess.SubprocessError, OSError, FileNotFoundError) as e:
-        print(f"Erro ao converter arquivo: {e}")
+    except Exception as e:
+        print(f"Erro ao converter arquivo usando LibreOffice: {e}")
         return None
 
 
