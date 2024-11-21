@@ -9,6 +9,7 @@ import sys
 from extractors_utils import (
     extract_text_from_txt,
     extract_text_from_xlsx,
+    extract_text_from_xls,
     extract_text_and_images_from_docx,
     extract_text_from_image,
     download_and_convert_doc_to_docx,
@@ -18,7 +19,7 @@ from extractors_utils import (
     extract_text_from_odf,
     extract_text_from_xml,
     extract_text_from_pptx,
-    extract_text_from_pdf_content
+    extract_text_from_pdf_content,
 )
 from db_operations import insert_data_into_main_table, insert_error_into_table
 
@@ -173,8 +174,10 @@ def process_file_by_extension(file_path, extension, original_data=None):
             return extract_text_from_csv(file_path)
         elif extension == 'txt':
             return extract_text_from_txt(file_path), True, None
-        elif extension in ['xlsx', 'xls']:
+        elif extension == 'xlsx':
             return extract_text_from_xlsx(file_path), True, None
+        elif extension == 'xls':
+            return extract_text_from_xls(file_path), True, None
         elif extension == 'docx':
             return extract_text_and_images_from_docx(file_path), True, None
         elif extension == 'doc':
