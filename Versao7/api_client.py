@@ -4,6 +4,13 @@ import requests
 import json
 from datetime import datetime, timedelta
 from config import auth_url, email, senha, api_url
+import warnings
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+# Suprime os avisos do tipo UserWarning, incluindo o aviso do openpyxl
+warnings.simplefilter("ignore", UserWarning)
 
 # Variável global para armazenar o token
 token_info = {
@@ -19,6 +26,7 @@ def get_auth_token():
         response = requests.post(auth_url, data=json.dumps(payload), headers=headers, verify=False)
         response.raise_for_status()
         token = response.json().get('token')
+        print("Token obtido com sucesso!")
 
         if token:
             token_info['token'] = token
@@ -40,6 +48,7 @@ def ensure_valid_token():
     if not is_token_valid():
         return get_auth_token()
     else:
+        print("Token obtido com sucesso!")
         return token_info['token']
 
 
@@ -60,3 +69,5 @@ def fetch_data_from_api(page_number):
         print(f"Erro ao buscar dados da API: {e}")
         return []
 
+
+token = ensure_valid_token()

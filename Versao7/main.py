@@ -16,9 +16,9 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 34      # Número da página inicial
-END_PAGE = 34         # Número da página final
-DOCUMENT_ID = "873"   # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 31      # Número da página inicial
+END_PAGE = 31         # Número da página final
+DOCUMENT_ID = "781"   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
 
@@ -93,6 +93,7 @@ def process_page_range(page_start, page_end, doc_id=None):
         data = fetch_data_from_api(page_number=page_number)
         if data:
             if doc_id:
+                print(f"Processando doc {doc_id} na página {page_number}...")
                 # Filtrar o documento com o id_documento
                 data_filtered = [item for item in data if item['id_operacaodocumentos'] == doc_id]
                 if data_filtered:

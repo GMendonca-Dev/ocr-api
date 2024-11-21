@@ -4,7 +4,7 @@ from datetime import datetime
 import sys
 
 
-sys.path.insert(0, './Versao6')
+sys.path.insert(0, './Versao7')
 
 
 def generate_error_log(page_number, data, erro, log_dir="logs_erros"):
@@ -34,7 +34,6 @@ def generate_error_log(page_number, data, erro, log_dir="logs_erros"):
             json.dump(log_data, log_file, ensure_ascii=False, indent=4)
         print(f"Log de erros gerado: {log_path}")
 
-## Acrescentei a partir daqui
         # Gera o arquivo JSON separado com a página e IDs dos documentos com erro
         error_ids = [item['id_operacaodocumentos'] for item in data]
         error_summary = {
@@ -46,10 +45,6 @@ def generate_error_log(page_number, data, erro, log_dir="logs_erros"):
         with open(error_summary_file, 'w', encoding='utf-8') as summary_file:
             json.dump(error_summary, summary_file, ensure_ascii=False, indent=4)
         print(f"Resumo de erros gerado: {error_summary_file}")
-##Acrescentei até aqui
-
-
-
 
     except Exception as e:
         print(f"Erro ao gerar log de erros: {e}")
