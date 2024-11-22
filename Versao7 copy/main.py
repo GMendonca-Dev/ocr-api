@@ -16,9 +16,9 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 19      # Número da página inicial
-END_PAGE = 19         # Número da página final
-DOCUMENT_ID = "490"   # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 3      # Número da página inicial
+END_PAGE = 3         # Número da página final
+DOCUMENT_ID = "87"   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
 
@@ -46,7 +46,6 @@ def save_data_to_db(data, page_number):
         print("Em 'save data to db'")
         _, extensao = os.path.splitext(item['arquivo'])
         extensao = extensao.lstrip('.').lower()
-        print(f"fileexists: {item['fileexists']} (type: {type(item['fileexists'])})")
 
         try:
             conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
@@ -60,7 +59,7 @@ def save_data_to_db(data, page_number):
             print("Inserindo dados no BD")
             insert_data_into_main_table((
                 item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'], extensao, item['pasta'],
-                item['caminho'], conteudo_limpo, page_number, item['fileexists']
+                item['caminho'], conteudo_limpo, page_number
             ))
             registros_sucesso += 1
 
@@ -71,7 +70,7 @@ def save_data_to_db(data, page_number):
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
                 item['id_operacaodocumentos'], nome_original, item['arquivo'], extensao, item['pasta'],
-                item['caminho'], page_number, erro_msg, item['ano'],  item['email'], item['numero'], item['fileexists']
+                item['caminho'], page_number, erro_msg, item['ano'],  item['email'], item['numero']
             ))
 
     if erros_extracao:

@@ -25,7 +25,6 @@ def generate_error_log(page_number, data, erro, log_dir="logs_erros"):
                 "pasta": item['pasta'],
                 "caminho": item['caminho'],
                 "erro": erro,
-                "arquivo_existe": item['fileexists'],
                 "data_insercao": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             }
             for item in data

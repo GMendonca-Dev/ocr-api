@@ -73,7 +73,6 @@ def create_table_if_not_exists():
                         extensao_arquivo VARCHAR(10),
                         pasta VARCHAR(255),
                         caminho TEXT,
-                        arquivo_existe INT,
                         conteudo TEXT,
                         numero_pagina INT,
                         data_leitura TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -97,7 +96,6 @@ def create_error_table_if_not_exists():
                         extensao_arquivo VARCHAR(10),
                         pasta VARCHAR(255),
                         caminho TEXT,
-                        arquivo_existe INT,
                         numero_pagina INT,
                         erro TEXT,
                         data_insercao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -120,9 +118,9 @@ def insert_data_into_main_table(data):
         cur.execute("""
             INSERT INTO ocr_documentosocr (
                 id_documento, email_usuario, num_op, ano_op, nome_original, arquivo, extensao_arquivo,
-                pasta, caminho, conteudo, numero_pagina, arquivo_existe
+                pasta, caminho, conteudo, numero_pagina
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id_documento, nome_original) DO UPDATE
             SET conteudo = EXCLUDED.conteudo, numero_pagina = EXCLUDED.numero_pagina
         """, sanitized_data)
@@ -145,8 +143,8 @@ def insert_error_into_table(error_data):
         sanitized_data = sanitize_data(error_data)
 
         cur.execute("""
-            INSERT INTO ocr_documentosocrerros (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, numero_pagina, erro, ano_op, email_usuario, num_op, arquivo_existe)
-            VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO ocr_documentosocrerros (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, numero_pagina, erro, ano_op, email_usuario, num_op)
+            VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id_documento, nome_original) DO NOTHING
         """,  sanitized_data)
         conn.commit()
