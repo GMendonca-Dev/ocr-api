@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class DocumentosOcrAdmin(admin.ModelAdmin):
     # Campos pelos quais queremos aplicar os filtros
-    list_filter = ('email_usuario', 'num_op', 'ano_op', 'arquivo', 'numero_pagina', 'data_leitura')
+    #list_filter = ('email_usuario', 'num_op', 'ano_op', 'arquivo', 'numero_pagina', 'data_leitura')
     
     # Campos a serem exibidos na tabela do Django Admin
     list_display = (
@@ -57,14 +57,12 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
         # Formata a data no formato dd/mm/aaaa
         return obj.data_leitura.strftime("%d/%m/%Y") if obj.data_leitura else ''
 
-    data_formatada.short_description = "Leitura"
-
     data_formatada.short_description = "Leitura"  # Nome que aparecerá no cabeçalho da coluna
 
-    search_fields = ['conteudo', 'nome_original']  # O campo onde o texto foi armazenado
+    search_fields = ['conteudo']  # O campo onde o texto foi armazenado  ### 'conteudo', 'nome_original'
 
 
-admin.site.register(DocumentosOcr, DocumentosOcrAdmin)
+admin.site.register(DocumentosOcr, DocumentosOcrAdmin)  # DocumentosOcr,
 
 
 class DocumentosOcrErrosAdmin(admin.ModelAdmin):

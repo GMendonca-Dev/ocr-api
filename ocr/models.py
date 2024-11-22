@@ -29,7 +29,7 @@ class DocumentosOcr(models.Model):
         ]
 
     def __str__(self):
-        return self.nome_original
+        return self.nome_original if self.nome_original else "Documento sem nome"
 
 
 class DocumentosOcrErros(models.Model):

@@ -79,9 +79,11 @@ from django.views import View
 
 from django.shortcuts import render
 from django.views.generic import ListView
-from django.contrib.postgres.search import SearchQuery, SearchRank, TrigramSimilarity
+from django.contrib.postgres.search import SearchQuery, SearchRank, TrigramSimilarity, SearchVector
 from .models import DocumentosOcr
 from django.db.models import Q
+
+
 
 
 class SearchConteudo2(ListView):
@@ -92,20 +94,27 @@ class SearchConteudo2(ListView):
         resultados = []
 
         if query:
-            # Verifica se o termo de pesquisa está entre aspas
+            # Remove espaços extras da query
+            query = query.strip()
+
+            # Verifica se o termo de pesquisa está entre aspas para busca por frase exata
             if query.startswith('"') and query.endswith('"'):
-                # Retira as aspas e cria uma busca por frase exata
+                # Remove as aspas para a busca
                 search_query = SearchQuery(query.strip('"'), search_type='phrase', config='portuguese')
             else:
-                # Busca normal por palavras individuais
+                # Busca por palavras individuais
                 search_query = SearchQuery(query, config='portuguese')
 
-            # Fazer a pesquisa utilizando o campo search_vector e ordenar por rank
+            # Adiciona um vetor de busca incluindo `unaccent` para evitar problemas de acentuação
+            search_vector = SearchVector('conteudo', config='portuguese')  # Use unaccent se necessário no índice
+
+            # Fazer a pesquisa utilizando o campo search_vector e trigram similarity
             resultados = DocumentosOcr.objects.annotate(
-                search_rank=SearchRank('search_vector', search_query),
-                trigram_sim=TrigramSimilarity('conteudo', query)  # Use o campo de texto original
+                searchVector=search_vector,
+                search_rank=SearchRank(search_vector, search_query),
+                trigram_sim=TrigramSimilarity('conteudo', query)
             ).filter(
-                Q(search_vector=search_query) | Q(trigram_sim__gt=0.1)
+                Q(search_vector=search_query) | Q(trigram_sim__gt=0.05)
             ).order_by('-search_rank', '-trigram_sim')
 
         context = {
@@ -113,6 +122,41 @@ class SearchConteudo2(ListView):
             'resultados': resultados
         }
         return render(request, self.template_name, context)
+
+
+
+
+
+
+# class SearchConteudo2(ListView):
+#     template_name = 'pesquisafull.html'
+
+#     def get(self, request):
+#         query = request.GET.get('q', None)  # Recebe o termo de pesquisa do usuário
+#         resultados = []
+
+#         if query:
+#             # Verifica se o termo de pesquisa está entre aspas
+#             if query.startswith('"') and query.endswith('"'):
+#                 # Retira as aspas e cria uma busca por frase exata
+#                 search_query = SearchQuery(query.strip('"'), search_type='phrase', config='portuguese')
+#             else:
+#                 # Busca normal por palavras individuais
+#                 search_query = SearchQuery(query, config='portuguese')
+
+#             # Fazer a pesquisa utilizando o campo search_vector e ordenar por rank
+#             resultados = DocumentosOcr.objects.annotate(
+#                 search_rank=SearchRank('search_vector', search_query),
+#                 trigram_sim=TrigramSimilarity('conteudo', query)  # Use o campo de texto original
+#             ).filter(
+#                 Q(search_vector=search_query) | Q(trigram_sim__gt=0.05)
+#             ).order_by('-search_rank', '-trigram_sim')
+
+#         context = {
+#             'query': query,
+#             'resultados': resultados
+#         }
+#         return render(request, self.template_name, context)
 
 # from django.shortcuts import render
 # from django.views import View
@@ -130,10 +174,10 @@ class SearchConteudo(View):
         if query:
             # Fazer a pesquisa utilizando __icontains para busca insensível a maiúsculas e minúsculas
             resultados = DocumentosOcr.objects.filter(
-                Q(conteudo__icontains=query) |
-                Q(nome_original__icontains=query) 
+                Q(conteudo__icontains=query))  # |
+                #Q(nome_original__icontains=query) 
                 #Q(email_usuario__icontains=query)
-            ).order_by('nome_original')
+        #    ) #.order_by('nome_original')
 
         context = {
             'query': query,
