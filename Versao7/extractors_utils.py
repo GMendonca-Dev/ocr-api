@@ -233,18 +233,80 @@ def extract_text_from_odf(file_path, extension):
         return "", False, erro_msg
 
 
+# def extract_text_from_xlsx(file_path_or_content):
+
+#     try:
+#         if isinstance(file_path_or_content, bytes):
+#             file_content = BytesIO(file_path_or_content)
+#             df = pd.read_excel(file_content, engine='openpyxl')
+#         else:
+#             df = pd.read_excel(file_path_or_content, engine='openpyxl')
+#         return df.to_string(), True
+#     except Exception as e:
+#         print(f"Erro ao ler arquivo xlsx: {e}")
+#         return "", False
+
+
+
+
+
 def extract_text_from_xlsx(file_path_or_content):
+    """
+    Extrai o texto de todas as planilhas de um arquivo .xlsx.
+
+    Parâmetros:
+    - file_path_or_content (str ou bytes): Caminho para o arquivo .xlsx ou conteúdo em bytes.
+
+    Retorna:
+    - texto_extraido (str): O texto extraído de todas as planilhas.
+
+    Lança:
+    - FileNotFoundError: Se o arquivo não existir.
+    - ValueError: Se o arquivo não for um arquivo Excel válido.
+    - TypeError: Se o parâmetro 'file_path_or_content' não for do tipo esperado.
+    - Exception: Para outros erros inesperados.
+    """
+    if isinstance(file_path_or_content, bytes):
+        # Conteúdo em bytes
+        file_content = BytesIO(file_path_or_content)
+        excel_file = file_content
+    elif isinstance(file_path_or_content, str):
+        # Caminho do arquivo
+        if not os.path.exists(file_path_or_content):
+            raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não existe.")
+        excel_file = file_path_or_content
+    else:
+        raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
 
     try:
-        if isinstance(file_path_or_content, bytes):
-            file_content = BytesIO(file_path_or_content)
-            df = pd.read_excel(file_content, engine='openpyxl')
-        else:
-            df = pd.read_excel(file_path_or_content, engine='openpyxl')
-        return df.to_string(), True
+        # Lê todas as planilhas do arquivo Excel
+        df_dict = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
+        texto_extraido = ''
+
+        for nome_planilha, df in df_dict.items():
+            texto_extraido += f"=== Planilha: {nome_planilha} ===\n"
+            texto_extraido += df.to_string(index=False)
+            texto_extraido += '\n\n'
+
+        return texto_extraido
+
+    except FileNotFoundError:
+        # O arquivo não foi encontrado durante a leitura
+        raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
+    except ValueError as ve:
+        # Erro ao ler o arquivo Excel
+        raise ValueError(f"Erro ao ler o arquivo xlsx: {ve}")
     except Exception as e:
-        print(f"Erro ao ler arquivo xlsx: {e}")
-        return "", False
+        # Outros erros inesperados
+        raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
+
+
+
+
+
+
+
+
 
 
 def extract_text_from_xls(file_path):
@@ -504,86 +566,6 @@ def extract_text_from_pptx(file_path_or_content):
     finally:
         if isinstance(file_content, BytesIO) is False and not isinstance(file_path_or_content, bytes):
             file_content.close()
-
-
-# ###################   FUNCIONOU LOCALMENTE
-
-# def enhance_image(image):
-#     """Melhora a imagem para OCR com nitidez e contraste."""
-#     image = image.convert("L")  # Converte para escala de cinza
-#     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
-#     enhancer = ImageEnhance.Contrast(image)
-#     return enhancer.enhance(2)  # Aumenta o contraste
-
-
-# def extract_text_from_pdf(pdf_content):
-#     # Verifica se o conteúdo é do tipo correto (bytes)
-#     if isinstance(pdf_content, str):
-#         raise ValueError("O conteúdo do PDF deve ser do tipo 'bytes' e não 'str'. Verifique a leitura do arquivo.")
-
-#     all_text = ""
-
-#     # Tentativa de extrair texto pesquisável e tabelas com pdfplumber
-#     try:
-#         with pdfplumber.open(BytesIO(pdf_content)) as pdf:
-#             for page_num, page in enumerate(pdf.pages):
-#                 try:
-#                     # Extrai texto pesquisável
-#                     page_text = page.extract_text()
-#                     if page_text:
-#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
-#                     else:
-#                         print(f"Página {page_num + 1} sem texto pesquisável. Aplicando OCR...")
-#                         page_image = page.to_image(resolution=300).original
-#                         enhanced_image = enhance_image(page_image)
-#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-#                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
-
-#                 except Exception as e:
-#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
-
-#     except Exception as e:
-#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
-
-#     # Tentativa de extrair imagens e aplicar OCR com PyMuPDF
-#     try:
-#         doc = fitz.open(stream=BytesIO(pdf_content), filetype="pdf")
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             images = page.get_images(full=True)
-#             if images:
-#                 for img_index, img in enumerate(images):
-#                     xref = img[0]
-#                     base_image = doc.extract_image(xref)
-#                     image_data = base_image["image"]
-#                     image = Image.open(BytesIO(image_data))
-
-#                     # Aplicar OCR na imagem extraída
-#                     try:
-#                         ocr_text = pytesseract.image_to_string(image, lang='por')
-#                         all_text += f"\nImagem na página {page_num + 1}, imagem {img_index + 1}:\n{ocr_text}\n"
-#                     except Exception as ocr_error:
-#                         print(f"Erro ao realizar OCR na imagem da página {page_num + 1}, imagem {img_index + 1}: {ocr_error}")
-#             else:
-#                 print(f"Nenhuma imagem encontrada na página {page_num + 1}")
-
-#     except Exception as e:
-#         print(f"Erro ao processar imagens do PDF: {e}")
-
-#     return all_text
-
-
-# Está funcionando localmente
-# # Teste da função
-# if __name__ == "__main__":
-#     # Exemplo de uso com leitura de arquivo local
-#     pdf_path = r'D:\Repositorios\ocr-api\funcionando - V5\24_22_1300220.pdf'
-#     with open(pdf_path, 'rb') as f:
-#         pdf_content = f.read()  # Lendo como bytes
-#     resultado = extract_text_from_pdf(pdf_content)
-#     print(resultado)
-
-# # #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
 
 
 def enhance_image(image):

@@ -13,16 +13,16 @@ from pptx import Presentation
 import pandas as pd
 import pdfplumber
 import warnings
-import tempfile
-import rarfile
-import py7zr
 import sys
 from lxml import etree
 from PIL import ImageFilter
 import subprocess
-######### Conversão de arquivos .doc para .docx ########
+import xlrd
+
+
+# ######## Conversão de arquivos .doc para .docx ########
 # from docx.document import Document as Document_docx
-from win32com.client import Dispatch
+# from win32com.client import Dispatch
 # ######## Fim da Conversão de arquivos .doc para .docx ########
 
 
@@ -233,17 +233,110 @@ def extract_text_from_odf(file_path, extension):
         return "", False, erro_msg
 
 
+# def extract_text_from_xlsx(file_path_or_content):
+
+#     try:
+#         if isinstance(file_path_or_content, bytes):
+#             file_content = BytesIO(file_path_or_content)
+#             df = pd.read_excel(file_content, engine='openpyxl')
+#         else:
+#             df = pd.read_excel(file_path_or_content, engine='openpyxl')
+#         return df.to_string(), True
+#     except Exception as e:
+#         print(f"Erro ao ler arquivo xlsx: {e}")
+#         return "", False
+
+
 def extract_text_from_xlsx(file_path_or_content):
+    """
+    Extrai o texto de todas as planilhas de um arquivo .xlsx.
+
+    Parâmetros:
+    - file_path_or_content (str ou bytes): Caminho para o arquivo .xlsx ou conteúdo em bytes.
+
+    Retorna:
+    - texto_extraido (str): O texto extraído de todas as planilhas.
+
+    Lança:
+    - FileNotFoundError: Se o arquivo não existir.
+    - ValueError: Se o arquivo não for um arquivo Excel válido.
+    - TypeError: Se o parâmetro 'file_path_or_content' não for do tipo esperado.
+    - Exception: Para outros erros inesperados.
+    """
+    if isinstance(file_path_or_content, bytes):
+        # Conteúdo em bytes
+        file_content = BytesIO(file_path_or_content)
+        excel_file = file_content
+    elif isinstance(file_path_or_content, str):
+        # Caminho do arquivo
+        if not os.path.exists(file_path_or_content):
+            raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não existe.")
+        excel_file = file_path_or_content
+    else:
+        raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
+
     try:
-        if isinstance(file_path_or_content, bytes):
-            file_content = BytesIO(file_path_or_content)
-            df = pd.read_excel(file_content, engine='openpyxl')
-        else:
-            df = pd.read_excel(file_path_or_content, engine='openpyxl')
-        return df.to_string(), True
+        # Lê todas as planilhas do arquivo Excel
+        df_dict = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
+        texto_extraido = ''
+
+        for nome_planilha, df in df_dict.items():
+            texto_extraido += f"=== Planilha: {nome_planilha} ===\n"
+            texto_extraido += df.to_string(index=False)
+            texto_extraido += '\n\n'
+
+        return texto_extraido
+
+    except FileNotFoundError:
+        # O arquivo não foi encontrado durante a leitura
+        raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
+    except ValueError as ve:
+        # Erro ao ler o arquivo Excel
+        raise ValueError(f"Erro ao ler o arquivo xlsx: {ve}")
     except Exception as e:
-        print(f"Erro ao ler arquivo xlsx: {e}")
-        return "", False
+        # Outros erros inesperados
+        raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
+
+
+def extract_text_from_xls(file_path):
+  
+    """
+    Detecta o formato real do arquivo e extrai o texto.
+
+    Parâmetros:
+    caminho_arquivo_xls (str): Caminho para o arquivo de entrada.
+
+    Retorna:
+    str: Texto extraído do documento.
+    """
+    # Verifica o formato real do arquivo
+    with open(file_path, 'rb') as f:
+        inicio = f.read(1024).lower()
+
+    try:
+        if b'<html' in inicio or b'<table' in inicio:
+            # Trata como HTML
+            texto = extract_text_from_html(file_path)
+        elif inicio.startswith(b'pk'):
+            # Trata como XLSX (arquivo zip)
+            texto = extract_text_from_xlsx(file_path)
+        else:
+            try:
+                workbook = xlrd.open_workbook(file_path)
+                texto = ''
+                for sheet in workbook.sheets():
+                    texto += f"=== Planilha: {sheet.name} ===\n"
+                    for row_idx in range(sheet.nrows):
+                        row = sheet.row_values(row_idx)
+                        texto += ', '.join(map(str, row)) + '\n'
+                # return texto
+            except Exception as e:
+                print(f"Erro ao extrair texto do XLS: {e}")
+                raise e
+        return texto
+    except Exception as e:
+        print(f"Erro ao extrair texto: {e}")
+        raise e
 
 
 def extract_text_from_csv(file_path_or_content):
@@ -303,40 +396,43 @@ def extract_text_and_images_from_docx(file_path_or_content):
         return "", False
 
 
-# def download_and_convert_doc_to_docx(file_path):
-#     print(f"Convertendo arquivo {file_path} para DOCX...")
-#     output_path = tempfile.mkdtemp()
-#     try:
-#         word = Dispatch("Word.Application")
-#         doc = word.Documents.Open(file_path)
-#         doc.SaveAs(os.path.join(output_path, "arquivo_temp.docx"), FileFormat=16)  # 16 = wdFormatDocumentDefault
-#         doc.Close()
-#         word.Quit()
-#         word = None
-#         print(f"Arquivo {file_path} convertido para DOCX.")
-#         return os.path.join(output_path, "arquivo_temp.docx")
-#     except Exception as e:
-#         print(f"Erro ao converter o arquivo {file_path}: {e}")
-#         return None
+def download_and_convert_doc_to_docx(file_path, diretorio_saida=None):
+    """
+    Converte um arquivo .doc para .docx usando LibreOffice.
 
-def convert_doc_with_libreoffice(doc_path, output_format="docx", temp_dir="temp"):
+    Parâmetros:
+    caminho_arquivo_doc (str): Caminho para o arquivo .doc de entrada.
+    diretorio_saida (str, opcional): Diretório onde o arquivo convertido será salvo. 
+                                     Se None, usa o diretório do arquivo original.
+
+    Retorna:
+    str: Caminho para o arquivo .docx convertido.
+    """
+    if diretorio_saida is None:
+        diretorio_saida = os.path.dirname(file_path)
+    
     try:
-        if not os.path.exists(temp_dir):
-            os.makedirs(temp_dir)
-
-        output_file_path = os.path.join(temp_dir, f"arquivo_temp.{output_format}")
-        command = ['soffice', '--headless', '--convert-to', output_format, doc_path, '--outdir', temp_dir]
-        subprocess.run(command, check=True)
-
-        if os.path.exists(output_file_path):
-            return output_file_path
-        else:
-            print(f"Erro ao converter o arquivo {doc_path}")
-            return None
+        # Executa o comando de conversão
+        subprocess.run([
+            'soffice',
+            '--headless',
+            '--convert-to', 'docx',
+            file_path,
+            '--outdir', diretorio_saida
+        ], check=True)
         
-    except Exception as e:
-        print(f"Erro ao converter arquivo usando LibreOffice: {e}")
-        return None
+        # Obtém o nome base do arquivo sem extensão
+        nome_base = os.path.splitext(os.path.basename(file_path))[0]
+        caminho_docx = os.path.join(diretorio_saida, f"{nome_base}.docx")
+        
+        if os.path.exists(caminho_docx):
+            return caminho_docx
+        else:
+            raise FileNotFoundError(f"Arquivo convertido {caminho_docx} não encontrado.")
+    
+    except subprocess.CalledProcessError as e:
+        print(f"Erro na conversão do arquivo: {e}")
+        raise e
 
 
 def extract_text_from_image(image_path):
