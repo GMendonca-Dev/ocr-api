@@ -63,6 +63,7 @@ def create_table_if_not_exists():
             with conn.cursor() as cur:
                 cur.execute("""
                     CREATE TABLE IF NOT EXISTS ocr_documentosocr (
+                            
                         id VARCHAR(15) PRIMARY KEY,
                         id_documento VARCHAR(15),
                         email_usuario VARCHAR(50),
@@ -79,7 +80,7 @@ def create_table_if_not_exists():
                         data_leitura TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                     )
                 """)
-        #print("Tabela verificada ou criada com sucesso.")
+        # print("Tabela verificada ou criada com sucesso.")
     except Exception as e:
         print(f"Erro ao criar a tabela: {e}")
 
@@ -90,6 +91,7 @@ def create_error_table_if_not_exists():
             with conn.cursor() as cur:
                 cur.execute("""
                     CREATE TABLE IF NOT EXISTS ocr_documentosocrerros (
+                            
                         id VARCHAR(15) PRIMARY KEY,
                         id_documento VARCHAR(15) ,
                         nome_original VARCHAR(255),
@@ -107,7 +109,7 @@ def create_error_table_if_not_exists():
                         
                     )
                 """)
-        #print("Tabela de erros verificada ou criada com sucesso.")
+        # print("Tabela de erros verificada ou criada com sucesso.")
     except Exception as e:
         print(f"Erro ao criar a tabela de erros: {e}")
 
@@ -117,14 +119,18 @@ def insert_data_into_main_table(data):
     cur = conn.cursor()
     try:
         sanitized_data = sanitize_data(data)
+        print(f"Sanitized data: {sanitized_data[11]}", type(sanitized_data[11]))
         cur.execute("""
             INSERT INTO ocr_documentosocr (
-                id_documento, email_usuario, num_op, ano_op, nome_original, arquivo, extensao_arquivo,
-                pasta, caminho, conteudo, numero_pagina, arquivo_existe
+                id_documento, email_usuario, num_op, ano_op, nome_original,
+                arquivo, extensao_arquivo, pasta, caminho, conteudo,
+                numero_pagina, arquivo_existe
             )
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id_documento, nome_original) DO UPDATE
-            SET conteudo = EXCLUDED.conteudo, numero_pagina = EXCLUDED.numero_pagina
+            SET conteudo = EXCLUDED.conteudo,
+                    numero_pagina = EXCLUDED.numero_pagina,
+                    arquivo_existe = EXCLUDED.arquivo_existe
         """, sanitized_data)
         conn.commit()
     except Exception as e:
@@ -145,7 +151,11 @@ def insert_error_into_table(error_data):
         sanitized_data = sanitize_data(error_data)
 
         cur.execute("""
-            INSERT INTO ocr_documentosocrerros (id_documento, nome_original, arquivo, extensao_arquivo, pasta, caminho, numero_pagina, erro, ano_op, email_usuario, num_op, arquivo_existe)
+            INSERT INTO ocr_documentosocrerros (
+                    id_documento, nome_original, arquivo, extensao_arquivo,
+                    pasta, caminho, numero_pagina, erro, ano_op,
+                    email_usuario, num_op, arquivo_existe
+                    )
             VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id_documento, nome_original) DO NOTHING
         """,  sanitized_data)
