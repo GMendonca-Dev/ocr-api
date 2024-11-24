@@ -1,0 +1,20 @@
+<div id="documentos-content-inner" class="p-4">
+    {% for documento in documentos %}
+        <div class="search-result py-4">
+            <div class="search-result-inner">
+                <div>
+                    <div class="documentos-date">{{ documento.id_documento }}</div>
+                    <div>{{ documento.email_usuario }}</div>
+                    <div>{{ documento.nome_original }}</div>
+                    <div class="documentos-description mt-2">
+                        {{ documento.conteudo|truncatechars:200 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+    <div class="mx-auto text-center py-4">
+        <p>Nenhum documento encontrado.</p>
+    </div>
+    {% endfor %}
+</div>

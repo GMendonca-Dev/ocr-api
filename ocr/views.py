@@ -244,3 +244,31 @@ class SearchConteudo(View):
 #         context['query'] = self.request.GET.get('q') or ''
 #         return context
 
+
+#  Teste HTMX
+
+from django.contrib.postgres.search import SearchQuery, SearchRank
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def search(request):
+    documentos = []
+    q = ""
+
+    if request.method == "POST":
+        q = request.POST.get("q", "").strip()  # Captura o termo de pesquisa
+        if q:
+            # Busca com Full-Text Search usando SearchQuery
+            search_query = SearchQuery(q, search_type="websearch")
+            documentos = DocumentosOcr.objects.annotate(
+                search_rank=SearchRank('search_vector', search_query)
+            ).filter(search_vector=search_query).order_by('-search_rank')
+
+    # Verifica se é uma requisição HTMX
+    if request.headers.get('HX-Request'):
+        return render(request, "partials/_documentos_list.html", {"documentos": documentos})
+
+    # Para requisições normais, renderiza o layout completo
+    return render(request, "pesquisaHTMX.html", {"documentos": documentos, "query": q})
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/htmx.org"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+              rel="stylesheet">
+        <style>
+            /* O estilo original que você forneceu */
+            html, body {
+                height: 100%;
+            }
+            #content {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            #documentos-content {
+                background-color: rgb(246, 247, 248);
+                flex: 1;
+            }
+            #documentos-content-inner {
+                max-width: 600px;
+                width: 100%;
+            }
+            #documentos-search-input {
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+                border: 1px solid rgb(217, 217, 217);
+                border-right: none;
+                max-width: 600px;
+                outline: none;
+            }
+            #search-submit-btn {
+                background-color: rgb(246, 88, 88);
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                border: none;
+                color: #fff;
+                width: 42px;
+            }
+            .search-result {
+                border-bottom: 1px solid #ccc;
+            }
+            .search-result-inner {
+                display: flex;
+                gap: 1rem;
+            }
+            .documentos-thumbnail {
+                border-radius: 8px;
+                width: 160px;
+                height: 100px;
+            }
+            .documentos-description {
+                font-size: 13px;
+            }
+            .documentos-date {
+                color: rgb(124, 111, 80);
+                font-weight: 500;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <form method="post" hx-post="/ocr/search/" hx-target="#documentos-content-inner" hx-swap="outerHTML">
+                {% csrf_token %}
+                <div id="documentos-search" class="d-flex justify-content-center p-3">
+                    <div class="d-flex justify-content-center w-50">
+                        <input id="documentos-search-input"
+                               name="q"
+                               class="w-100 p-2"
+                               type="text"
+                               value="{{ query }}"
+                               placeholder="Search documentos"
+                               hx-trigger="input changed delay:500ms, search" />
+                        <button id="search-submit-btn" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div id="documentos-content" class="d-flex justify-content-center">
+                {% comment %} {% include "partials/_documentos_list.html" %} {% endcomment %}
+                <div id="documentos-content-inner" class="p-4">
+                    {% for documento in documentos %}
+                        <div class="search-result py-4">
+                            <div class="search-result-inner">
+                                <div>
+                                    <div class="documentos-date">{{ documento.id_documento }}</div>
+                                    <div>{{ documento.email_usuario }}</div>
+                                    <div>{{ documento.nome_original }}</div>
+                                    <div class="documentos-description mt-2">
+                                        {{ documento.conteudo|truncatechars:200 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                    <div class="mx-auto text-center py-4">
+                        <p>Nenhum documento encontrado.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
