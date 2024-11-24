@@ -46,7 +46,7 @@ def save_data_to_db(data, page_number):
         print("Em 'save data to db'")
         _, extensao = os.path.splitext(item['arquivo'])
         extensao = extensao.lstrip('.').lower()
-        print(f"fileexists: {item['fileexists']} (type: {type(item['fileexists'])})")
+        # print(f"fileexists: {item['fileexists']} (type: {type(item['fileexists'])})")
 
         try:
             conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
@@ -57,7 +57,7 @@ def save_data_to_db(data, page_number):
             conteudo_texto = conteudo[0] if isinstance(conteudo, tuple) else conteudo
             conteudo_limpo = conteudo_texto.replace('\x00', '') if conteudo_texto else ''
             print("Inserindo dados no BD")
-            print(f"item['fileexists']:{item['fileexists']}")
+            # print(f"item['fileexists']:{item['fileexists']}")
             insert_data_into_main_table((
                 item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'], extensao, item['pasta'],
                 item['caminho'], conteudo_limpo, page_number, item['fileexists']
@@ -125,4 +125,4 @@ if __name__ == "__main__":
     elif START_PAGE and END_PAGE:
         process_page_range(START_PAGE, END_PAGE)
     else:
-        print("Por favor, defina 'a página inicial' e 'END_PAGE', ou um 'DOCUMENT_ID'.")
+        print("Por favor, defina 'a página inicial' e a 'a página final', ou um 'DOCUMENT_ID'.")

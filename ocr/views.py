@@ -84,7 +84,48 @@ from .models import DocumentosOcr
 from django.db.models import Q
 
 
+# class SearchConteudo2(ListView):
+#     template_name = 'pesquisafull.html'
 
+#     def get(self, request):
+#         query = request.GET.get('q', None)  # Recebe o termo de pesquisa do usuário
+#         resultados = []
+
+#         if query:
+#             # Remove espaços extras da query
+#             query = query.strip()
+
+#             # Verifica se o termo de pesquisa está entre aspas para busca por frase exata
+#             if query.startswith('"') and query.endswith('"'):
+#                 # Remove as aspas para a busca
+#                 search_query = SearchQuery(query.strip('"'), search_type='phrase', config='portuguese')
+#             else:
+#                 # Busca por palavras individuais
+#                 search_query = SearchQuery(query, config='portuguese')
+
+#             # Adiciona um vetor de busca incluindo `unaccent` para evitar problemas de acentuação
+#             search_vector = SearchVector('conteudo', config='portuguese')  # Use unaccent se necessário no índice
+
+#             # Fazer a pesquisa utilizando o campo search_vector e trigram similarity
+#             resultados = DocumentosOcr.objects.annotate(
+#                 searchVector=search_vector,
+#                 search_rank=SearchRank(search_vector, search_query),
+#                 trigram_sim=TrigramSimilarity('conteudo', query)
+#             ).filter(
+#                 Q(search_vector=search_query) | Q(trigram_sim__gt=0.05)
+#             ).order_by('-search_rank', '-trigram_sim')
+
+#         context = {
+#             'query': query,
+#             'resultados': resultados
+#         }
+#         return render(request, self.template_name, context)
+
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models import Q
+from django.shortcuts import render
+from django.views.generic import ListView
 
 class SearchConteudo2(ListView):
     template_name = 'pesquisafull.html'
@@ -97,32 +138,25 @@ class SearchConteudo2(ListView):
             # Remove espaços extras da query
             query = query.strip()
 
-            # Verifica se o termo de pesquisa está entre aspas para busca por frase exata
-            if query.startswith('"') and query.endswith('"'):
-                # Remove as aspas para a busca
-                search_query = SearchQuery(query.strip('"'), search_type='phrase', config='portuguese')
-            else:
-                # Busca por palavras individuais
-                search_query = SearchQuery(query, config='portuguese')
+            # Configura a busca FTS sem stemming (config='simple')
+            search_query = SearchQuery(query, config='simple', search_type='plain')
 
-            # Adiciona um vetor de busca incluindo `unaccent` para evitar problemas de acentuação
-            search_vector = SearchVector('conteudo', config='portuguese')  # Use unaccent se necessário no índice
-
-            # Fazer a pesquisa utilizando o campo search_vector e trigram similarity
+            # Anotações para FTS, similaridade trigram e busca simples
             resultados = DocumentosOcr.objects.annotate(
-                searchVector=search_vector,
-                search_rank=SearchRank(search_vector, search_query),
-                trigram_sim=TrigramSimilarity('conteudo', query)
+                search_vector_annotated=SearchVector('conteudo', config='simple'),  # SearchVector sem stemming
+                search_rank=SearchRank('search_vector_annotated', search_query),    # Rankeamento por FTS
+                trigram_sim=TrigramSimilarity('conteudo', query)                   # Similaridade trigram
             ).filter(
-                Q(search_vector=search_query) | Q(trigram_sim__gt=0.05)
-            ).order_by('-search_rank', '-trigram_sim')
+                Q(search_vector_annotated=search_query) |  # Busca FTS
+                Q(conteudo__icontains=query) |            # Busca simples (substring)
+                Q(trigram_sim__gt=0.2)                   # Busca aproximada com trigram
+            ).order_by('-search_rank', '-trigram_sim')      # Ordena por relevância
 
         context = {
             'query': query,
             'resultados': resultados
         }
         return render(request, self.template_name, context)
-
 
 
 

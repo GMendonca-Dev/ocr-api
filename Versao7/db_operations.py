@@ -119,7 +119,7 @@ def insert_data_into_main_table(data):
     cur = conn.cursor()
     try:
         sanitized_data = sanitize_data(data)
-        print(f"Sanitized data: {sanitized_data[11]}", type(sanitized_data[11]))
+        # print(f"Sanitized data: {sanitized_data[11]}", type(sanitized_data[11]))
         cur.execute("""
             INSERT INTO ocr_documentosocr (
                 id_documento, email_usuario, num_op, ano_op, nome_original,

@@ -4,4 +4,5 @@ from .views import SearchConteudo, SearchConteudo2
 urlpatterns = [
     path('pesquisa/', SearchConteudo.as_view(), name='pesquisa'),
     path('pesquisafull/', SearchConteudo2.as_view(), name='pesquisafull'),
+    # path('search/', search_term, name='search_term'),
 ]
