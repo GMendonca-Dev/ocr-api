@@ -165,56 +165,42 @@ def process_file_by_extension(file_path, extension, original_data=None):
     Processa o arquivo com base em sua extensão.
     """
     try:
-        # Obtém o resultado da extração baseado na extensão
         if extension in ['zip', 'rar', '7z']:
             with tempfile.TemporaryDirectory() as temp_dir:
                 extract_compressed_file(
                     file_path, temp_dir, original_data or {})
             return "Arquivo compactado processado com sucesso", True, None
-            
-        result = None
-        if extension == 'csv':
-            result = extract_text_from_csv(file_path)
+        elif extension == 'csv':
+            return extract_text_from_csv(file_path)
         elif extension == 'txt':
-            result = (extract_text_from_txt(file_path)[0], True, None)
+            return extract_text_from_txt(file_path), True, None
         elif extension == 'xlsx':
-            result = (extract_text_from_xlsx(file_path), True, None)
+            return extract_text_from_xlsx(file_path), True, None
         elif extension == 'xls':
-            result = (extract_text_from_xls(file_path), True, None)
+            return extract_text_from_xls(file_path), True, None
         elif extension == 'docx':
-            result = (extract_text_and_images_from_docx(file_path), True, None)
+            return extract_text_and_images_from_docx(file_path), True, None
         elif extension == 'doc':
             # Converte o .doc para .docx e processa
             docx_path = download_and_convert_doc_to_docx(file_path)
-            result = (extract_text_and_images_from_docx(docx_path), True, None)
+            return extract_text_and_images_from_docx(docx_path), True, None
         elif extension == 'pdf' or extension == '':
-            result = (extract_text_from_pdf_content(file_path), True, None)
+            return extract_text_from_pdf_content(file_path), True, None
         elif extension in ['jpg', 'jpeg', 'png']:
-            result = (extract_text_from_image(file_path), True, None)
+            return extract_text_from_image(file_path), True, None
         elif extension in ['html', 'htm']:
-            result = (extract_text_from_html(file_path), True, None)
+            return extract_text_from_html(file_path)
         elif extension == 'json':
-            result = (extract_text_from_json(file_path), True, None)
+            return extract_text_from_json(file_path)
         elif extension == 'xml':
-            result = (extract_text_from_xml(file_path), True, None)
+            return extract_text_from_xml(file_path)
         elif extension in ['odt', 'ods', 'odp', 'odg']:
-            result = (extract_text_from_odf(file_path, extension), True, None)
+            return extract_text_from_odf(file_path, extension)
         elif extension == 'pptx':
-            result = (extract_text_from_pptx(file_path), True, None)
+            return extract_text_from_pptx(file_path), True, None
         else:
             erro_msg = f"Extensão {extension} não suportada."
             return "", False, erro_msg
-
-        # Verifica se o conteúdo extraído está vazio
-        if result and result[0]:
-            content = result[0]
-            if isinstance(content, str) and not content.strip():
-                return "", False, "Arquivo com conteúdo vazio"
-            if isinstance(content, tuple) and not content[0].strip():
-                return "", False, "Arquivo com conteúdo vazio"
-            return result
-        else:
-            return "", False, "Arquivo com conteúdo vazio"
 
     except Exception as e:
         erro_msg = f"Erro ao processar o arquivo com extensão {extension}: {e}"
