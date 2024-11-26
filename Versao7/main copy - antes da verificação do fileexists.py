@@ -17,7 +17,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
 START_PAGE = 1      # Número da página inicial
-END_PAGE = 1         # Número da página final
+END_PAGE = 5         # Número da página final
 DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
@@ -43,19 +43,10 @@ def save_data_to_db(data, page_number):
     erros_extracao = []
 
     for item in data:
-        #print("Em 'save data to db'")
+        print("Em 'save data to db'")
         _, extensao = os.path.splitext(item['arquivo'])
         extensao = extensao.lstrip('.').lower()
-
-        # Verifica se o arquivo existe antes de tentar extrair o conteúdo
-        if not item.get('fileexists', 1):  # Se fileexists for 0 ou não existir
-            erro_msg = "Arquivo inexistente"
-            erros_extracao.append({**item, "erro": erro_msg})
-            insert_error_into_table((
-                item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'],
-                item['caminho'], page_number, erro_msg, item['ano'], item['email'], item['numero'], item['fileexists']
-            ))
-            continue  # Pula para o próximo item sem tentar extrair o conteúdo
+        # print(f"fileexists: {item['fileexists']} (type: {type(item['fileexists'])})")
 
         try:
             conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
