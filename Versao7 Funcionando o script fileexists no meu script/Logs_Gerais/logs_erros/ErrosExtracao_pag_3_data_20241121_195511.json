@@ -1,0 +1,13 @@
+[
+    {
+        "id_documento": "87",
+        "pagina": 3,
+        "nome_original": "Teste2.xlsx",
+        "arquivo": "14_30_13022020130620_teste2.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/14_30_13022020130620_teste2.xlsx",
+        "erro": "Falha ao processar 14_30_13022020130620_teste2.xlsx: Erro ao processar o arquivo com extensão xlsx: O arquivo 'C:\\Users\\GNMEND~1\\AppData\\Local\\Temp\\tmp7rbl72un.xlsx' não é um arquivo Excel válido ou está corrompido.",
+        "data_insercao": "2024-11-21 19:55:11"
+    }
+]

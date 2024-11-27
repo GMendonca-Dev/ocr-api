@@ -1,0 +1,13 @@
+[
+    {
+        "id_documento": "86",
+        "pagina": 3,
+        "nome_original": "Teste1.rtf",
+        "arquivo": "14_28_13022020130620_teste1.rtf",
+        "extensao": ".rtf",
+        "pasta": "idclaro",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/idclaro/14_28_13022020130620_teste1.rtf",
+        "erro": "Falha ao processar 14_28_13022020130620_teste1.rtf: Extensão rtf não suportada.",
+        "data_insercao": "2024-11-19 12:22:12"
+    }
+]

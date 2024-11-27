@@ -1,0 +1,79 @@
+[
+    {
+        "id_documento": "532",
+        "pagina": 21,
+        "nome_original": "20.000544O.zip",
+        "arquivo": "39_0_13022020130620_20.000544o.zip",
+        "extensao": ".zip",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 39_29_13022020130620_20.000696o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000696O4165490113121512213.xlsx' compress_type=deflate file_size=18710 compress_size=17807> is encrypted, password required for extraction",
+        "data_insercao": "2024-11-19 17:05:36"
+    },
+    {
+        "id_documento": "541",
+        "pagina": 21,
+        "nome_original": "anexos_protocolo_113836_2020_24012020212014.zip",
+        "arquivo": "39_30_13022020130620_anexosprotocolo113836202024012020212014.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_13022020130620_anexosprotocolo113836202024012020212014.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_20.000696o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000696O4165490113121512213.xlsx' compress_type=deflate file_size=18710 compress_size=17807> is encrypted, password required for extraction",
+        "data_insercao": "2024-11-19 17:05:36"
+    },
+    {
+        "id_documento": "542",
+        "pagina": 21,
+        "nome_original": "anexos_protocolo_113836_2020_29012020122004.zip",
+        "arquivo": "39_30_13022020130620_anexosprotocolo113836202029012020122004.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_13022020130620_anexosprotocolo113836202029012020122004.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_20.000696o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000696O4165490113121512213.xlsx' compress_type=deflate file_size=18710 compress_size=17807> is encrypted, password required for extraction",
+        "data_insercao": "2024-11-19 17:05:36"
+    },
+    {
+        "id_documento": "543",
+        "pagina": 21,
+        "nome_original": "anexos_protocolo_118022_2020_30012020195500.zip",
+        "arquivo": "39_30_13022020130620_anexosprotocolo118022202030012020195500.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_13022020130620_anexosprotocolo118022202030012020195500.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_20.000696o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000696O4165490113121512213.xlsx' compress_type=deflate file_size=18710 compress_size=17807> is encrypted, password required for extraction",
+        "data_insercao": "2024-11-19 17:05:36"
+    },
+    {
+        "id_documento": "544",
+        "pagina": 21,
+        "nome_original": "anexos_protocolo_118022_2020_30012020231006 (1).zip",
+        "arquivo": "39_30_13022020130620_anexosprotocolo1180222020300120202310061.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_13022020130620_anexosprotocolo1180222020300120202310061.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_20.000696o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000696O4165490113121512213.xlsx' compress_type=deflate file_size=18710 compress_size=17807> is encrypted, password required for extraction",
+        "data_insercao": "2024-11-19 17:05:36"
+    },
+    {
+        "id_documento": "545",
+        "pagina": 21,
+        "nome_original": "anexos_protocolo_118022_2020_30012020231502.zip",
+        "arquivo": "39_30_13022020130620_anexosprotocolo118022202030012020231502.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_13022020130620_anexosprotocolo118022202030012020231502.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_20.000696o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000696O4165490113121512213.xlsx' compress_type=deflate file_size=18710 compress_size=17807> is encrypted, password required for extraction",
+        "data_insercao": "2024-11-19 17:05:36"
+    },
+    {
+        "id_documento": "548",
+        "pagina": 21,
+        "nome_original": "20.000696O.zip",
+        "arquivo": "39_29_13022020130620_20.000696o.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/39_29_13022020130620_20.000696o.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_20.000696o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000696O4165490113121512213.xlsx' compress_type=deflate file_size=18710 compress_size=17807> is encrypted, password required for extraction",
+        "data_insercao": "2024-11-19 17:05:36"
+    }
+]
