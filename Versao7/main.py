@@ -22,9 +22,9 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 5      # Número da página inicial
-END_PAGE = 5         # Número da página final
-DOCUMENT_ID = "121"  # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 6      # Número da página inicial
+END_PAGE = 20         # Número da página final
+DOCUMENT_ID = None  # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
 
@@ -185,7 +185,7 @@ def save_data_to_db(data, page_number):
             # Corrigido para tratar conteudo[0] que é a string do texto
             conteudo_texto = conteudo[0] if isinstance(conteudo, tuple) else conteudo
             conteudo_limpo = conteudo_texto.replace('\x00', '') if conteudo_texto else ''
-            print("Inserindo dados no BD")
+            # print("Inserindo dados no BD")
             # print(f"item['fileexists']:{item['fileexists']}")
             insert_data_into_main_table((
                 item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'], extensao, item['pasta'],

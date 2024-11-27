@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "392",
+        "pagina": 15,
+        "nome_original": "INCLUSÃO DE LINHAS VIVO.JPG",
+        "arquivo": "24_34_13022020130620_inclusaodelinhasvivo.jpg",
+        "extensao": ".jpg",
+        "pasta": "teladeinclusao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/teladeinclusao/24_34_13022020130620_inclusaodelinhasvivo.jpg",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-27 17:42:58"
+    },
+    {
+        "id_documento": "394",
+        "pagina": 15,
+        "nome_original": "INCLUSÃO LINHA OI 79988522069.JPG",
+        "arquivo": "24_34_13022020130620_inclusaolinhaoi79988522069.jpg",
+        "extensao": ".jpg",
+        "pasta": "teladeinclusao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/teladeinclusao/24_34_13022020130620_inclusaolinhaoi79988522069.jpg",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-27 17:42:58"
+    }
+]

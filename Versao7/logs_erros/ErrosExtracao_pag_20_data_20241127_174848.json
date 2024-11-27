@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "523",
+        "pagina": 20,
+        "nome_original": "20.000683O.zip",
+        "arquivo": "24_27_13022020130620_20.000683o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_20.000683o.zip",
+        "erro": "Falha ao processar 24_37_13022020130620_fichadeacompanhamentop1.odt: Erro ao processar o arquivo com extensão odt: 'tuple' object has no attribute 'strip'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-27 17:48:48"
+    },
+    {
+        "id_documento": "528",
+        "pagina": 20,
+        "nome_original": "ficha de Acompanhamento P1.odt",
+        "arquivo": "24_37_13022020130620_fichadeacompanhamentop1.odt",
+        "extensao": ".odt",
+        "pasta": "fichadeacompanhamento",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/fichadeacompanhamento/24_37_13022020130620_fichadeacompanhamentop1.odt",
+        "erro": "Falha ao processar 24_37_13022020130620_fichadeacompanhamentop1.odt: Erro ao processar o arquivo com extensão odt: 'tuple' object has no attribute 'strip'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-27 17:48:48"
+    }
+]

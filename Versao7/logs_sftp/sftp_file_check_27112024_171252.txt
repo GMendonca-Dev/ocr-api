@@ -1,0 +1,120 @@
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinformandosobredocumentosprontos/12_21_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/alvara/14_6_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/alvara/14_6_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/alvara/14_6_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/alvara/14_6_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/14_7_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/14_8_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/14_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/14_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/14_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinterno/14_16_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emaildaoperadora/14_25_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/autocircunstanciado/14_2_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/14_5_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/14_7_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/14_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/14_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/14_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/14_5_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/14_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/24_7_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/24_7_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/24_7_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/24_8_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/24_8_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinformandoiniciodeoperacao/24_20_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinformandoiniciodeoperacao/24_20_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinformandosobredocumentosprontos/24_21_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emaildaoperadora/24_25_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailsolicitandorelatorio/24_19_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_13022020130620_
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/autocircunstanciado/24_2_13022020130620_
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/alvara/12_6_13022020130620_escaladeplantaodaseleicoes2018dti.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/ctvivo/12_29_13022020130620_editalicop2018gerb.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/idclaro/14_28_13022020130620_teste1.rtf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/cttim/14_30_13022020130620_teste2.xlsx
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/14_11_13022020130620_sugestoesxpertis.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/alvara/14_6_13022020130620_teste3.docx
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_representacaoop262.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode27.11.2019op262.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2758.19oiop262.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2759.19vivoop262.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2760.19timop262.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2761.19claroop262.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaoproc080026911.20197qst1.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/30_5_13022020130620_oficio1392019gaecompse.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_representacaodecisaode29.11.19op268.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode29.11.19op268.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2839.19vivoop268.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_representacaoop249.192.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_representacaoop249.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode13.11.2019op249.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode05.12.19op249.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2850.19vivoop249.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2851.19timop249.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2852.19oiop249.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2853.19claroop249.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_representacaodecisaode04.12.19op266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode04.12.19op266.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2828.19vivoop266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2827.19timop266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2826.19oiop266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2825.19claroop266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2847.19vivoop266.19inclusaochips.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2848.19oiop266.19inclusaochips.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2849.19timop266.19inclusaochips.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2855.19vivoop266.19inclusaochips.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2856.19vivoop266.19mudancadebase.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2844vivoop266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2843.19timop266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio2842.19oiop266.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_decisaode21.11.2019op257.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaocomplementarinterceptacaouchoa.pdf'.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_representacaoop270.19.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode06.12.2019op270.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_representacaodecisaode28.08.19op192.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode29.11.19op192.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/30_8_13022020130620_interceptacao.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/30_7_13022020130620_decisaode03.01.2020op002.20.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio012.20oiop002.20.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/30_22_13022020130620_oficio013.20vivoop002.20.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiowhatsapp/30_32_13022020130620_oficio014.20whatsappop002.20.doc
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/decisao/24_7_13022020130620_decisaode29.11.2019op003.2020.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/representacao/24_8_13022020130620_oficio787.2019ip4362.2019tobiasbarreto+anexos.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_oficio007.2020dintextracaodadoscelular.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinterno/24_16_13022020130620_emailinformaesugereretificao.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/alvara/24_6_13022020130620_alvarade19.12.2019extracaoestancia.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_oficio033.20extracaoop004.19.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiodepoldeorigem/24_33_13022020130620_oficio1715.19extracaoestancia+anexos.pdf

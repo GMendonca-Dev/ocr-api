@@ -47,7 +47,7 @@ def ensure_valid_token():
     if not is_token_valid():
         return get_auth_token()
     else:
-        print("Token obtido com sucesso!")
+        # print("Token obtido com sucesso!")
         return token_info['token']
 
 
@@ -63,7 +63,7 @@ def fetch_data_from_api(page_number):
         response = requests.get(f"{api_url}?pagina={page_number}", headers=headers, verify=False)
         response.raise_for_status()
         registros = response.json().get("registros", [])
-        print(f"Número de Registros obtidos da API: {len(registros)}")
+        #print(f"Número de Registros obtidos da API: {len(registros)}")
         return registros
     except requests.RequestException as e:
         print(f"Erro ao buscar dados da API: {e}")
