@@ -13,6 +13,8 @@ from db_operations import (
 )
 from dotenv import load_dotenv
 from sftp_utils import file_exists_on_sftp
+from pathlib import Path
+
 
 load_dotenv()
 
@@ -22,7 +24,7 @@ warnings.simplefilter("ignore", UserWarning)
 
 START_PAGE = 5      # Número da página inicial
 END_PAGE = 5         # Número da página final
-DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
+DOCUMENT_ID = "121"  # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
 
@@ -108,30 +110,36 @@ def save_data_to_db(data, page_number):
     registros_sucesso = 0
     erros_extracao = []
 
-    # Configurações do SFTP (ajuste conforme necessário)
+    # Configurações do SFTP
     sftp_config = {
-        
-        "host": os.getenv("SFTP_HOST"),
-        "port": os.getenv("SFTP_PORT"),
-        "user": os.getenv("SFTP_USER"),
-        "password": os.getenv("SFTP_PASSWORD"),
-        "path_sftp": os.getenv("SFTP_PATH")
+        "host": os.getenv("HOST_SFTP"),
+        "port": int(os.getenv("PORT_SFTP")),  # Converte para inteiro
+        "user": os.getenv("USER_SFTP"),
+        "password": os.getenv("PASSWORD_SFTP"),
+        "path_sftp": os.getenv("PATH_SFTP")
     }
 
     for item in data:
         _, extensao = os.path.splitext(item['arquivo'])
         extensao = extensao.lstrip('.').lower()
 
-        # Verifica se o arquivo existe no servidor SFTP
-        remote_path = item['caminho']
-        arquivo_existe = file_exists_on_sftp(
+        # Valida se os campos necessários estão presentes
+        if not sftp_config['path_sftp'] or not item['pasta'] or not item['arquivo']:
+            erro_msg = "Caminho ou arquivo inválido"
+            erros_extracao.append({**item, "erro": erro_msg})
+            insert_error_into_table((
+                item['id_operacaodocumentos'], item['nome'], item['arquivo'] or '', extensao, item['pasta'] or '',
+                '', page_number, erro_msg, item['ano'], item['email'], item['numero'], 0
+            ))
+            continue  # Pula para o próximo item
 
-            sftp_config['host'],
-            sftp_config['port'],
-            sftp_config['user'],
-            sftp_config['password'],
-            remote_path
-        )
+        # Construir o caminho completo do arquivo no servidor SFTP
+        remote_path = Path(sftp_config['path_sftp']) / item['pasta'] / item['arquivo']
+
+        #print(remote_path)  # Adicione esta linha antes de chamar file_exists_on_sftp
+
+        # Verifica se o arquivo existe no servidor SFTP
+        arquivo_existe = file_exists_on_sftp(sftp_config, str(remote_path))
 
         # Se o arquivo não existir, registra o erro e pula para o próximo item
         if not arquivo_existe:
@@ -139,36 +147,66 @@ def save_data_to_db(data, page_number):
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
                 item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'],
-                item['caminho'], page_number, erro_msg, item['ano'], item['email'], item['numero'], 0
+                str(remote_path), page_number, erro_msg, item['ano'], item['email'], item['numero'], 0
             ))
             continue  # Pula para o próximo item sem tentar extrair o conteúdo
 
         # Tenta extrair o conteúdo do arquivo, caso falhe, registra o erro
-        # e pula para o próximo item
+    #     try:
+    #         conteudo, sucesso, erro_extracao = extract_text_by_extension(str(remote_path))
+    #         if not sucesso:
+    #             raise ExtractionError(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
+
+    #         conteudo_texto = conteudo[0] if isinstance(conteudo, tuple) else conteudo
+    #         conteudo_limpo = conteudo_texto.replace('\x00', '') if conteudo_texto else ''
+            
+    #         insert_data_into_main_table((
+    #             item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'],
+    #             extensao, item['pasta'], str(remote_path), conteudo_limpo, page_number, 1
+    #         ))
+    #         registros_sucesso += 1
+
+    #     except (ExtractionError, IOError, OSError) as e:
+    #         erro_msg = str(e)
+    #         erros_extracao.append({**item, "erro": erro_msg})
+    #         insert_error_into_table((
+    #             item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'],
+    #             str(remote_path), page_number, erro_msg, item['ano'], item['email'], item['numero'], 1
+    #         ))
+
+    # if erros_extracao:
+    #     generate_error_log(page_number, erros_extracao, erro_msg)
+
         try:
             conteudo, sucesso, erro_extracao = extract_text_by_extension(item['caminho'])
             if not sucesso:
                 raise ExtractionError(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
 
+            # Corrigido para tratar conteudo[0] que é a string do texto
             conteudo_texto = conteudo[0] if isinstance(conteudo, tuple) else conteudo
             conteudo_limpo = conteudo_texto.replace('\x00', '') if conteudo_texto else ''
-            
+            print("Inserindo dados no BD")
+            # print(f"item['fileexists']:{item['fileexists']}")
             insert_data_into_main_table((
-                item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'],
-                extensao, item['pasta'], item['caminho'], conteudo_limpo, page_number, 1
+                item['id_operacaodocumentos'], item['email'], item['numero'], item['ano'], item['nome'], item['arquivo'], extensao, item['pasta'],
+                item['caminho'], conteudo_limpo, page_number, item['fileexists']
             ))
             registros_sucesso += 1
 
         except (ExtractionError, IOError, OSError) as e:
             erro_msg = str(e)
+            nome_original = item.get('nome')
+
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
-                item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'],
-                item['caminho'], page_number, erro_msg, item['ano'], item['email'], item['numero'], 1
+                item['id_operacaodocumentos'], nome_original, item['arquivo'], extensao, item['pasta'],
+                item['caminho'], page_number, erro_msg, item['ano'],  item['email'], item['numero'], item['fileexists']
             ))
 
     if erros_extracao:
         generate_error_log(page_number, erros_extracao, erro_msg)
+
+    generate_extraction_summary_log(page_number, total_registros, registros_sucesso, total_registros - registros_sucesso)
 
     generate_extraction_summary_log(
         page_number,
