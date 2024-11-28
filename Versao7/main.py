@@ -22,11 +22,11 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 6      # Número da página inicial
-END_PAGE = 20         # Número da página final
-DOCUMENT_ID = None  # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 21      # Número da página inicial
+END_PAGE = 21         # Número da página final
+DOCUMENT_ID = "529"  # ID do documento a ser processado (coloque o ID ou None) "93727"
 
-MAX_PAGES = 20  # Define o número máximo de páginas a serem processadas
+MAX_PAGES = 40  # Define o número máximo de páginas a serem processadas
 
 
 class ExtractionError(Exception):
@@ -147,7 +147,7 @@ def save_data_to_db(data, page_number):
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
                 item['id_operacaodocumentos'], item['nome'], item['arquivo'], extensao, item['pasta'],
-                str(remote_path), page_number, erro_msg, item['ano'], item['email'], item['numero'], 0
+                item['caminho'], page_number, erro_msg, item['ano'], item['email'], item['numero'], 0
             ))
             continue  # Pula para o próximo item sem tentar extrair o conteúdo
 
@@ -196,7 +196,6 @@ def save_data_to_db(data, page_number):
         except (ExtractionError, IOError, OSError) as e:
             erro_msg = str(e)
             nome_original = item.get('nome')
-
             erros_extracao.append({**item, "erro": erro_msg})
             insert_error_into_table((
                 item['id_operacaodocumentos'], nome_original, item['arquivo'], extensao, item['pasta'],

@@ -221,16 +221,38 @@ def extract_text_from_txt(file_path_or_content):
 def extract_text_from_odf(file_path, extension):
     try:
         if extension == 'odt':
-            return extract_text_from_odt(file_path), True, None
+            # Corrigir aqui - pegar apenas o primeiro elemento da tupla
+            texto, sucesso = extract_text_from_odt(file_path)
+            return texto, sucesso, None
         elif extension == 'ods':
-            return extract_text_from_ods(file_path), True, None
+            texto, sucesso = extract_text_from_ods(file_path)
+            return texto, sucesso, None
         elif extension == 'odp':
-            return extract_text_from_odp(file_path), True, None
+            texto, sucesso = extract_text_from_odp(file_path)
+            return texto, sucesso, None
         elif extension == 'odg':
-            return extract_text_from_odg(file_path), True, None
+            texto, sucesso = extract_text_from_odg(file_path)
+            return texto, sucesso, None
     except Exception as e:
         erro_msg = f"Erro ao processar arquivo ODF ({extension}): {e}"
         return "", False, erro_msg
+
+
+
+# def extract_text_from_odf(file_path, extension):
+#     try:
+#         if extension == 'odt':
+#             return extract_text_from_odt(file_path), True, None
+#         elif extension == 'ods':
+#             return extract_text_from_ods(file_path), True, None
+#         elif extension == 'odp':
+#             return extract_text_from_odp(file_path), True, None
+#         elif extension == 'odg':
+#             return extract_text_from_odg(file_path), True, None
+#     except Exception as e:
+#         erro_msg = f"Erro ao processar arquivo ODF ({extension}): {e}"
+#         return "", False, erro_msg
+
 
 
 # def extract_text_from_xlsx(file_path_or_content):
@@ -299,14 +321,6 @@ def extract_text_from_xlsx(file_path_or_content):
     except Exception as e:
         # Outros erros inesperados
         raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
-
-
-
-
-
-
-
-
 
 
 def extract_text_from_xls(file_path):

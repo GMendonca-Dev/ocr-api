@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "880",
+        "pagina": 35,
+        "nome_original": "20.000641O.zip",
+        "arquivo": "37_27_13022020130620_20.000641o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/37_27_13022020130620_20.000641o.zip",
+        "erro": "Falha ao processar 37_30_13022020130620_anexosprotocolo116661202029012020161007.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='116661_2020/771750/1_resumo_116661_2020_771750_356362084296780_29012020161007326.pdf' compress_type=deflate file_size=5488 compress_size=4864> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 10:24:53"
+    },
+    {
+        "id_documento": "881",
+        "pagina": 35,
+        "nome_original": "20.000055O.zip",
+        "arquivo": "37_27_13022020130620_20.000055o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/37_27_13022020130620_20.000055o.zip",
+        "erro": "Falha ao processar 37_30_13022020130620_anexosprotocolo116661202029012020161007.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='116661_2020/771750/1_resumo_116661_2020_771750_356362084296780_29012020161007326.pdf' compress_type=deflate file_size=5488 compress_size=4864> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 10:24:53"
+    },
+    {
+        "id_documento": "882",
+        "pagina": 35,
+        "nome_original": "anexos_protocolo_116661_2020_29012020161007.zip",
+        "arquivo": "37_30_13022020130620_anexosprotocolo116661202029012020161007.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/37_30_13022020130620_anexosprotocolo116661202029012020161007.zip",
+        "erro": "Falha ao processar 37_30_13022020130620_anexosprotocolo116661202029012020161007.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='116661_2020/771750/1_resumo_116661_2020_771750_356362084296780_29012020161007326.pdf' compress_type=deflate file_size=5488 compress_size=4864> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 10:24:53"
+    }
+]
