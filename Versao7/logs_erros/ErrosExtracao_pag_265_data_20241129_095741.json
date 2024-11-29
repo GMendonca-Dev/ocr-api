@@ -1,0 +1,98 @@
+[
+    {
+        "id_documento": "6687",
+        "pagina": 265,
+        "nome_original": "19.002803O.zip",
+        "arquivo": "37_27_21022020072741_19.002803o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/37_27_21022020072741_19.002803o.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:57:41"
+    },
+    {
+        "id_documento": "6691",
+        "pagina": 265,
+        "nome_original": "anexos_protocolo_429486_2019_21032019162501.zip",
+        "arquivo": "37_30_21022020073027_anexosprotocolo429486201921032019162501.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/37_30_21022020073027_anexosprotocolo429486201921032019162501.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:57:41"
+    },
+    {
+        "id_documento": "6692",
+        "pagina": 265,
+        "nome_original": "anexos_protocolo_429486_2019_23032019232511.zip",
+        "arquivo": "37_30_21022020073108_anexosprotocolo429486201923032019232511.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/37_30_21022020073108_anexosprotocolo429486201923032019232511.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:57:41"
+    },
+    {
+        "id_documento": "6693",
+        "pagina": 265,
+        "nome_original": "1_extrato_voz_522049_2019_391462_5582998241457_DE_15_03_19_A_26_07_19.pdf",
+        "arquivo": "40_13_21022020073146_1extratovoz52204920193914625582998241457de150319a260719.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/40_13_21022020073146_1extratovoz52204920193914625582998241457de150319a260719.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 09:57:41"
+    },
+    {
+        "id_documento": "6694",
+        "pagina": 265,
+        "nome_original": "CADASTRO E HC 79988274949.xlsx",
+        "arquivo": "46_13_21022020073215_cadastroehc79988274949.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/46_13_21022020073215_cadastroehc79988274949.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 09:57:41"
+    },
+    {
+        "id_documento": "6695",
+        "pagina": 265,
+        "nome_original": "1_extrato_voz_607162_2019_645445_5582998241457_15_03 ate 14_11.xlsx",
+        "arquivo": "40_13_21022020073241_1extratovoz607162201964544555829982414571503ate1411.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/40_13_21022020073241_1extratovoz607162201964544555829982414571503ate1411.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 09:57:41"
+    },
+    {
+        "id_documento": "6696",
+        "pagina": 265,
+        "nome_original": "CADASTRO E HC_79988562339.xlsx",
+        "arquivo": "46_13_21022020073301_cadastroehc79988562339.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/46_13_21022020073301_cadastroehc79988562339.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 09:57:41"
+    },
+    {
+        "id_documento": "6698",
+        "pagina": 265,
+        "nome_original": "HC IMEI 357986079371059.xlsx",
+        "arquivo": "46_13_21022020073402_hcimei357986079371059.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/46_13_21022020073402_hcimei357986079371059.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 09:57:41"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "3886",
+        "pagina": 154,
+        "nome_original": "002012020_3 (3).zip",
+        "arquivo": "59_49_17022020071112_00201202033.zip",
+        "extensao": ".zip",
+        "pasta": "extratodeconexao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/extratodeconexao/59_49_17022020071112_00201202033.zip",
+        "erro": "Falha ao processar 59_49_17022020071112_00201202033.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:15:35"
+    }
+]

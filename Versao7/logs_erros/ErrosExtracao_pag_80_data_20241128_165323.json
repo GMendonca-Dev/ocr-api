@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "2018",
+        "pagina": 80,
+        "nome_original": "20.000406O.zip",
+        "arquivo": "37_27_13022020130620_20.000406o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/37_27_13022020130620_20.000406o.zip",
+        "erro": "Falha ao processar 37_27_13022020130620_20.000406o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.000406O2000620305077079329.xlsx' compress_type=deflate file_size=18717 compress_size=17816> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:53:23"
+    }
+]

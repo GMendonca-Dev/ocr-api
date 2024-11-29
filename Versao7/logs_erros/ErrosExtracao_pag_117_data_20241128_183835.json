@@ -1,0 +1,86 @@
+[
+    {
+        "id_documento": "2943",
+        "pagina": 117,
+        "nome_original": "anexos.zip",
+        "arquivo": "38_30_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_13022020130620_anexos.zip",
+        "erro": "Falha ao processar 39_29_13022020132045_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:38:35"
+    },
+    {
+        "id_documento": "2945",
+        "pagina": 117,
+        "nome_original": "OFÍCIO 136.19 - PODER JUDICIÁRIO N. S. DAS DORES - RESPOSTA À REQUISIÇÃO - ENCAMINHA AC.doc",
+        "arquivo": "24_5_13022020130620_oficio136.19poderjudiciarion.s.dasdoresrespostaarequisicaoencaminhaac.doc",
+        "extensao": ".doc",
+        "pasta": "oficiosadministrativos",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_oficio136.19poderjudiciarion.s.dasdoresrespostaarequisicaoencaminhaac.doc",
+        "erro": "Falha ao processar 39_29_13022020132045_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 18:38:35"
+    },
+    {
+        "id_documento": "2948",
+        "pagina": 117,
+        "nome_original": "OFÍCIO 136.19 - PODER JUDICIÁRIO N. S. DAS DORES - RESPOSTA À REQUISIÇÃO + ANEXO.pdf",
+        "arquivo": "24_5_13022020130620_oficio136.19poderjudiciarion.s.dasdoresrespostaarequisicao+anexo.pdf",
+        "extensao": ".pdf",
+        "pasta": "oficiosadministrativos",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_oficio136.19poderjudiciarion.s.dasdoresrespostaarequisicao+anexo.pdf",
+        "erro": "Falha ao processar 39_29_13022020132045_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 18:38:35"
+    },
+    {
+        "id_documento": "2951",
+        "pagina": 117,
+        "nome_original": "OFÍCIO 042.19 - PODER JUDICIÁRIO N. S. DAS DORES - CIENTE DA DECISÃO.pdf",
+        "arquivo": "24_5_13022020130620_oficio042.19poderjudiciarion.s.dasdorescientedadecisao.pdf",
+        "extensao": ".pdf",
+        "pasta": "oficiosadministrativos",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020130620_oficio042.19poderjudiciarion.s.dasdorescientedadecisao.pdf",
+        "erro": "Falha ao processar 39_29_13022020132045_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 18:38:35"
+    },
+    {
+        "id_documento": "2952",
+        "pagina": 117,
+        "nome_original": "20.001093O.zip",
+        "arquivo": "38_27_13022020130620_20.001093o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_13022020130620_20.001093o.zip",
+        "erro": "Falha ao processar 39_29_13022020132045_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:38:35"
+    },
+    {
+        "id_documento": "2957",
+        "pagina": 117,
+        "nome_original": "002179420_2.zip",
+        "arquivo": "38_27_13022020130620_0021794202.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_13022020130620_0021794202.zip",
+        "erro": "Falha ao processar 39_29_13022020132045_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:38:35"
+    },
+    {
+        "id_documento": "2964",
+        "pagina": 117,
+        "nome_original": "anexos.zip",
+        "arquivo": "39_29_13022020132045_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/39_29_13022020132045_anexos.zip",
+        "erro": "Falha ao processar 39_29_13022020132045_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:38:35"
+    }
+]

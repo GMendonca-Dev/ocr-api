@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "2918",
+        "pagina": 116,
+        "nome_original": "21-96449-5823.pdf",
+        "arquivo": "39_13_13022020130620_21964495823.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_13022020130620_21964495823.pdf",
+        "erro": "Falha ao processar 24_30_13022020130620_0098822019asp23012019193839.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='42582_2019_MSISDN_VERI_T_201901231907_24401874.pdf' compress_type=deflate file_size=1278 compress_size=1006> is encrypted, password required for extraction",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 18:36:35"
+    },
+    {
+        "id_documento": "2923",
+        "pagina": 116,
+        "nome_original": "anexos_protocolo_128357_2020_13022020071000.zip",
+        "arquivo": "38_30_13022020130620_anexosprotocolo128357202013022020071000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_13022020130620_anexosprotocolo128357202013022020071000.zip",
+        "erro": "Falha ao processar 24_30_13022020130620_0098822019asp23012019193839.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='42582_2019_MSISDN_VERI_T_201901231907_24401874.pdf' compress_type=deflate file_size=1278 compress_size=1006> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:36:35"
+    },
+    {
+        "id_documento": "2932",
+        "pagina": 116,
+        "nome_original": "20.001078O.zip",
+        "arquivo": "38_27_13022020130620_20.001078o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_13022020130620_20.001078o.zip",
+        "erro": "Falha ao processar 24_30_13022020130620_0098822019asp23012019193839.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='42582_2019_MSISDN_VERI_T_201901231907_24401874.pdf' compress_type=deflate file_size=1278 compress_size=1006> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:36:35"
+    },
+    {
+        "id_documento": "2936",
+        "pagina": 116,
+        "nome_original": "19.000570O.zip",
+        "arquivo": "24_27_13022020130620_19.000570o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_19.000570o.zip",
+        "erro": "Falha ao processar 24_30_13022020130620_0098822019asp23012019193839.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='42582_2019_MSISDN_VERI_T_201901231907_24401874.pdf' compress_type=deflate file_size=1278 compress_size=1006> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:36:35"
+    },
+    {
+        "id_documento": "2938",
+        "pagina": 116,
+        "nome_original": "GSE 0006181 - 24.01.2019.rar",
+        "arquivo": "24_27_13022020130620_gse000618124.01.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_gse000618124.01.2019.rar",
+        "erro": "Falha ao processar 24_30_13022020130620_0098822019asp23012019193839.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='42582_2019_MSISDN_VERI_T_201901231907_24401874.pdf' compress_type=deflate file_size=1278 compress_size=1006> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:36:35"
+    },
+    {
+        "id_documento": "2940",
+        "pagina": 116,
+        "nome_original": "009882-2019ASP_23012019_193839.zip",
+        "arquivo": "24_30_13022020130620_0098822019asp23012019193839.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_0098822019asp23012019193839.zip",
+        "erro": "Falha ao processar 24_30_13022020130620_0098822019asp23012019193839.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='42582_2019_MSISDN_VERI_T_201901231907_24401874.pdf' compress_type=deflate file_size=1278 compress_size=1006> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:36:35"
+    }
+]

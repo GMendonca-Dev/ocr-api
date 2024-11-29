@@ -1,0 +1,86 @@
+[
+    {
+        "id_documento": "3245",
+        "pagina": 129,
+        "nome_original": "645357699262601.zip",
+        "arquivo": "24_43_14022020050313_645357699262601.zip",
+        "extensao": ".zip",
+        "pasta": "respostafacebook",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostafacebook/24_43_14022020050313_645357699262601.zip",
+        "erro": "Falha ao processar 24_30_14022020054253_ct01084525.01.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='59750_2019_MSISDN_VERI_T_201901251907_24411039.pdf' compress_type=deflate file_size=1259 compress_size=986> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:44:26"
+    },
+    {
+        "id_documento": "3260",
+        "pagina": 129,
+        "nome_original": "GSE 0008061 - 28.01.2019.rar",
+        "arquivo": "24_27_14022020053826_gse000806128.01.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_14022020053826_gse000806128.01.2019.rar",
+        "erro": "Falha ao processar 24_30_14022020054253_ct01084525.01.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='59750_2019_MSISDN_VERI_T_201901251907_24411039.pdf' compress_type=deflate file_size=1259 compress_size=986> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:44:26"
+    },
+    {
+        "id_documento": "3261",
+        "pagina": 129,
+        "nome_original": "19.001758O.zip",
+        "arquivo": "24_27_14022020053931_19.001758o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_14022020053931_19.001758o.zip",
+        "erro": "Falha ao processar 24_30_14022020054253_ct01084525.01.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='59750_2019_MSISDN_VERI_T_201901251907_24411039.pdf' compress_type=deflate file_size=1259 compress_size=986> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:44:26"
+    },
+    {
+        "id_documento": "3262",
+        "pagina": 129,
+        "nome_original": "GSE 0051594 - 24.04.2019.rar",
+        "arquivo": "24_27_14022020054020_gse005159424.04.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_14022020054020_gse005159424.04.2019.rar",
+        "erro": "Falha ao processar 24_30_14022020054253_ct01084525.01.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='59750_2019_MSISDN_VERI_T_201901251907_24411039.pdf' compress_type=deflate file_size=1259 compress_size=986> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:44:26"
+    },
+    {
+        "id_documento": "3264",
+        "pagina": 129,
+        "nome_original": "19.004377O.zip",
+        "arquivo": "24_27_14022020054046_19.004377o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_14022020054046_19.004377o.zip",
+        "erro": "Falha ao processar 24_30_14022020054253_ct01084525.01.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='59750_2019_MSISDN_VERI_T_201901251907_24411039.pdf' compress_type=deflate file_size=1259 compress_size=986> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:44:26"
+    },
+    {
+        "id_documento": "3265",
+        "pagina": 129,
+        "nome_original": "19.010176O.zip",
+        "arquivo": "24_27_14022020054107_19.010176o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_14022020054107_19.010176o.zip",
+        "erro": "Falha ao processar 24_30_14022020054253_ct01084525.01.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='59750_2019_MSISDN_VERI_T_201901251907_24411039.pdf' compress_type=deflate file_size=1259 compress_size=986> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:44:26"
+    },
+    {
+        "id_documento": "3268",
+        "pagina": 129,
+        "nome_original": "CT 010845 - 25.01.2019.rar",
+        "arquivo": "24_30_14022020054253_ct01084525.01.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_14022020054253_ct01084525.01.2019.rar",
+        "erro": "Falha ao processar 24_30_14022020054253_ct01084525.01.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='59750_2019_MSISDN_VERI_T_201901251907_24411039.pdf' compress_type=deflate file_size=1259 compress_size=986> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:44:26"
+    }
+]

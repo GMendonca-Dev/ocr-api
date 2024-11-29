@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "2169",
+        "pagina": 86,
+        "nome_original": "APL000001_APPLE_CONFIDENTIAL.xlsx",
+        "arquivo": "24_25_13022020130620_apl000001appleconfidential.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "emaildaoperadora",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/emaildaoperadora/24_25_13022020130620_apl000001appleconfidential.xlsx",
+        "erro": "Falha ao processar 24_25_13022020130620_apl000001appleconfidential.xlsx: Erro ao processar o arquivo com extensão xlsx: Erro inesperado ao processar o arquivo: File is not a zip file",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 17:53:46"
+    }
+]

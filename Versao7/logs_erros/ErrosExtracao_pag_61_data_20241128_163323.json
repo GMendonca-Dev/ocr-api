@@ -1,0 +1,86 @@
+[
+    {
+        "id_documento": "1535",
+        "pagina": 61,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_28_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "idclaro",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/idclaro/24_28_13022020130620_anexos.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:33:23"
+    },
+    {
+        "id_documento": "1536",
+        "pagina": 61,
+        "nome_original": "ID. 328038.pdf",
+        "arquivo": "24_0_13022020130620_id.328038.pdf",
+        "extensao": ".pdf",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:33:23"
+    },
+    {
+        "id_documento": "1539",
+        "pagina": 61,
+        "nome_original": "19.013776O.zip",
+        "arquivo": "24_27_13022020130620_19.013776o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_19.013776o.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:33:23"
+    },
+    {
+        "id_documento": "1540",
+        "pagina": 61,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_27_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_anexos.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:33:23"
+    },
+    {
+        "id_documento": "1543",
+        "pagina": 61,
+        "nome_original": "anexos_protocolo_641445_2019_17122019155501.zip",
+        "arquivo": "24_30_13022020130620_anexosprotocolo641445201917122019155501.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_anexosprotocolo641445201917122019155501.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:33:23"
+    },
+    {
+        "id_documento": "1544",
+        "pagina": 61,
+        "nome_original": "anexos_protocolo_641454_2019_17122019155501.zip",
+        "arquivo": "24_30_13022020130620_anexosprotocolo641454201917122019155501.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_anexosprotocolo641454201917122019155501.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:33:23"
+    },
+    {
+        "id_documento": "1554",
+        "pagina": 61,
+        "nome_original": "",
+        "arquivo": "39_22_13022020130620_",
+        "extensao": "",
+        "pasta": "oficiosoperadoras",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/39_22_13022020130620_",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 16:33:23"
+    }
+]

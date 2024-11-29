@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "7049",
+        "pagina": 279,
+        "nome_original": "consulta_imei_354134077470750_id1049619_563.pdf",
+        "arquivo": "24_13_27022020081329_consultaimei354134077470750id1049619563.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_27022020081329_consultaimei354134077470750id1049619563.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:12:53"
+    },
+    {
+        "id_documento": "7050",
+        "pagina": 279,
+        "nome_original": "consulta_imei_354134077470750_id1049619_563.xlsx",
+        "arquivo": "24_13_27022020081351_consultaimei354134077470750id1049619563.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_27022020081351_consultaimei354134077470750id1049619563.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:12:53"
+    },
+    {
+        "id_documento": "7051",
+        "pagina": 279,
+        "nome_original": "consulta_imei_354134077470760_id1049620_0.pdf",
+        "arquivo": "24_13_27022020081407_consultaimei354134077470760id10496200.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_27022020081407_consultaimei354134077470760id10496200.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:12:53"
+    },
+    {
+        "id_documento": "7052",
+        "pagina": 279,
+        "nome_original": "consulta_imei_354134077470760_id1049620_0.xlsx",
+        "arquivo": "24_13_27022020081421_consultaimei354134077470760id10496200.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_27022020081421_consultaimei354134077470760id10496200.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:12:53"
+    },
+    {
+        "id_documento": "7053",
+        "pagina": 279,
+        "nome_original": "relatorio-evento_19151135_20190531_20190602.pdf",
+        "arquivo": "24_13_27022020081438_relatorioevento191511352019053120190602.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_27022020081438_relatorioevento191511352019053120190602.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:12:53"
+    },
+    {
+        "id_documento": "7054",
+        "pagina": 279,
+        "nome_original": "relatorio-evento_19151135_20190605_20190612.xlsx",
+        "arquivo": "24_13_27022020081450_relatorioevento191511352019060520190612.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_27022020081450_relatorioevento191511352019060520190612.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:12:53"
+    }
+]

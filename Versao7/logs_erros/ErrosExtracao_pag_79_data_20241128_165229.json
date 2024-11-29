@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "1987",
+        "pagina": 79,
+        "nome_original": "009173719_1.zip",
+        "arquivo": "40_27_13022020130620_0091737191.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/40_27_13022020130620_0091737191.zip",
+        "erro": "Falha ao processar 40_27_13022020130620_0091737191.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 16:52:29"
+    }
+]

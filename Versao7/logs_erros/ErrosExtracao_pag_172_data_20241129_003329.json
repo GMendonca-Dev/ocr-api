@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "4340",
+        "pagina": 172,
+        "nome_original": "79981018555_26082019_02102019.zip",
+        "arquivo": "39_28_17022020113051_799810185552608201902102019.zip",
+        "extensao": ".zip",
+        "pasta": "idclaro",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/idclaro/39_28_17022020113051_799810185552608201902102019.zip",
+        "erro": "Falha ao processar 39_27_17022020113148_19.010179o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='19.010179O6731787435249145450.xlsx' compress_type=deflate file_size=18634 compress_size=17728> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:33:29"
+    },
+    {
+        "id_documento": "4345",
+        "pagina": 172,
+        "nome_original": "19.010179O.zip",
+        "arquivo": "39_27_17022020113148_19.010179o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/39_27_17022020113148_19.010179o.zip",
+        "erro": "Falha ao processar 39_27_17022020113148_19.010179o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='19.010179O6731787435249145450.xlsx' compress_type=deflate file_size=18634 compress_size=17728> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:33:29"
+    }
+]

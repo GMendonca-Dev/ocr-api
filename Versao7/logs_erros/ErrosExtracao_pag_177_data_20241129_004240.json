@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "4448",
+        "pagina": 177,
+        "nome_original": "20.001170O.zip",
+        "arquivo": "38_27_17022020130423_20.001170o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_17022020130423_20.001170o.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:42:40"
+    },
+    {
+        "id_documento": "4449",
+        "pagina": 177,
+        "nome_original": "GCC-1170289-J4T5Q1_1_1.zip",
+        "arquivo": "24_48_17022020130833_gcc1170289j4t5q111.zip",
+        "extensao": ".zip",
+        "pasta": "respostamicrosoft",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostamicrosoft/24_48_17022020130833_gcc1170289j4t5q111.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:42:40"
+    },
+    {
+        "id_documento": "4450",
+        "pagina": 177,
+        "nome_original": "",
+        "arquivo": "59_11_17022020131357_",
+        "extensao": "",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/59_11_17022020131357_",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:42:40"
+    }
+]

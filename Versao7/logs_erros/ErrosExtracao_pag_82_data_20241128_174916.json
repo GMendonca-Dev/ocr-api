@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "2073",
+        "pagina": 82,
+        "nome_original": "20.000286O.zip",
+        "arquivo": "39_27_13022020130620_20.000286o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/39_27_13022020130620_20.000286o.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 17:49:16"
+    },
+    {
+        "id_documento": "2074",
+        "pagina": 82,
+        "nome_original": "anexos.zip",
+        "arquivo": "39_29_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/39_29_13022020130620_anexos.zip",
+        "erro": "Falha ao processar 39_29_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 17:49:16"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "4618",
+        "pagina": 182,
+        "nome_original": "19.001283O.zip",
+        "arquivo": "39_27_17022020145621_19.001283o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/39_27_17022020145621_19.001283o.zip",
+        "erro": "Falha ao processar 39_27_17022020145621_19.001283o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='19.001283O7093971165751034515.xlsx' compress_type=deflate file_size=18635 compress_size=17727> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:49:42"
+    }
+]

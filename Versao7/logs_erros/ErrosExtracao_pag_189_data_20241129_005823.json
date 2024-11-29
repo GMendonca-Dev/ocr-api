@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "4782",
+        "pagina": 189,
+        "nome_original": "79701_20190520150101_crm.zip",
+        "arquivo": "39_55_17022020155426_7970120190520150101crm.zip",
+        "extensao": ".zip",
+        "pasta": "anotacoesdoanalista",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/anotacoesdoanalista/39_55_17022020155426_7970120190520150101crm.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:58:23"
+    },
+    {
+        "id_documento": "4785",
+        "pagina": 189,
+        "nome_original": "1_extrato_voz_474698_2019_234498_35535008763267_17052019112503152.pdf",
+        "arquivo": "39_13_17022020155451_1extratovoz47469820192344983553500876326717052019112503152.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155451_1extratovoz47469820192344983553500876326717052019112503152.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:58:23"
+    },
+    {
+        "id_documento": "4787",
+        "pagina": 189,
+        "nome_original": "1_extrato_voz_474698_2019_234498_35535008763267_17052019112503170.xlsx",
+        "arquivo": "39_13_17022020155507_1extratovoz47469820192344983553500876326717052019112503170.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155507_1extratovoz47469820192344983553500876326717052019112503170.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:58:23"
+    },
+    {
+        "id_documento": "4790",
+        "pagina": 189,
+        "nome_original": "1_extrato_voz_474698_2019_234499_35569407974331_17052019112503195.pdf",
+        "arquivo": "39_13_17022020155526_1extratovoz47469820192344993556940797433117052019112503195.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155526_1extratovoz47469820192344993556940797433117052019112503195.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:58:23"
+    },
+    {
+        "id_documento": "4792",
+        "pagina": 189,
+        "nome_original": "1_extrato_voz_474698_2019_234499_35569407974331_17052019112503201.xlsx",
+        "arquivo": "39_13_17022020155554_1extratovoz47469820192344993556940797433117052019112503201.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155554_1extratovoz47469820192344993556940797433117052019112503201.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:58:23"
+    },
+    {
+        "id_documento": "4794",
+        "pagina": 189,
+        "nome_original": "consulta_67999025822_id980794.zip",
+        "arquivo": "39_13_17022020155644_consulta67999025822id980794.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155644_consulta67999025822id980794.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:58:23"
+    }
+]

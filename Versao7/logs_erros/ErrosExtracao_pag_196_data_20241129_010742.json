@@ -1,0 +1,62 @@
+[
+    {
+        "id_documento": "4956",
+        "pagina": 196,
+        "nome_original": "GSE 0021380 - 21.02.2019.rar",
+        "arquivo": "24_27_18022020065135_gse002138021.02.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_18022020065135_gse002138021.02.2019.rar",
+        "erro": "Falha ao processar 24_30_18022020065356_anexosprotocolo425426201916032019071000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='425426_2019/92126/1_resumo_425426_2019_92126_356953088136630_16032019071000179.xlsx' compress_type=deflate file_size=9725 compress_size=8410> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:07:42"
+    },
+    {
+        "id_documento": "4958",
+        "pagina": 196,
+        "nome_original": "GSE 0032187 - 16.03.2019.rar",
+        "arquivo": "24_27_18022020065213_gse003218716.03.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_18022020065213_gse003218716.03.2019.rar",
+        "erro": "Falha ao processar 24_30_18022020065356_anexosprotocolo425426201916032019071000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='425426_2019/92126/1_resumo_425426_2019_92126_356953088136630_16032019071000179.xlsx' compress_type=deflate file_size=9725 compress_size=8410> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:07:42"
+    },
+    {
+        "id_documento": "4959",
+        "pagina": 196,
+        "nome_original": "anexos_protocolo_412634_2019_21022019195000.zip",
+        "arquivo": "24_30_18022020065247_anexosprotocolo412634201921022019195000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_18022020065247_anexosprotocolo412634201921022019195000.zip",
+        "erro": "Falha ao processar 24_30_18022020065356_anexosprotocolo425426201916032019071000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='425426_2019/92126/1_resumo_425426_2019_92126_356953088136630_16032019071000179.xlsx' compress_type=deflate file_size=9725 compress_size=8410> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:07:42"
+    },
+    {
+        "id_documento": "4962",
+        "pagina": 196,
+        "nome_original": "anexos_protocolo_418675_2019_02032019055500.zip",
+        "arquivo": "24_30_18022020065331_anexosprotocolo418675201902032019055500.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_18022020065331_anexosprotocolo418675201902032019055500.zip",
+        "erro": "Falha ao processar 24_30_18022020065356_anexosprotocolo425426201916032019071000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='425426_2019/92126/1_resumo_425426_2019_92126_356953088136630_16032019071000179.xlsx' compress_type=deflate file_size=9725 compress_size=8410> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:07:42"
+    },
+    {
+        "id_documento": "4965",
+        "pagina": 196,
+        "nome_original": "anexos_protocolo_425426_2019_16032019071000.zip",
+        "arquivo": "24_30_18022020065356_anexosprotocolo425426201916032019071000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_18022020065356_anexosprotocolo425426201916032019071000.zip",
+        "erro": "Falha ao processar 24_30_18022020065356_anexosprotocolo425426201916032019071000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='425426_2019/92126/1_resumo_425426_2019_92126_356953088136630_16032019071000179.xlsx' compress_type=deflate file_size=9725 compress_size=8410> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:07:42"
+    }
+]

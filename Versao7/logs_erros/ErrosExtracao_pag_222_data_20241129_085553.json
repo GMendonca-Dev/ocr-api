@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "5599",
+        "pagina": 222,
+        "nome_original": "anexos.zip",
+        "arquivo": "38_40_18022020131400_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "inqueritopolicial",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/inqueritopolicial/38_40_18022020131400_anexos.zip",
+        "erro": "Falha ao processar 38_40_18022020131400_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 08:55:53"
+    }
+]

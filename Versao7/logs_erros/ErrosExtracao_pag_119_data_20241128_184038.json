@@ -1,0 +1,50 @@
+[
+    {
+        "id_documento": "3012",
+        "pagina": 119,
+        "nome_original": "44134_2019_ANAG_201901240920_24403665.zip",
+        "arquivo": "24_30_13022020144506_441342019anag20190124092024403665.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020144506_441342019anag20190124092024403665.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:40:38"
+    },
+    {
+        "id_documento": "3013",
+        "pagina": 119,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_13022020144522_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_13022020144522_anexos.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:40:38"
+    },
+    {
+        "id_documento": "3015",
+        "pagina": 119,
+        "nome_original": "OFÍCIO 130.19 - PODER JUDICIÁRIO N. S. DAS DORES - RESPOSTA À REQUISIÇÃO - ENCAMINHA RT.doc",
+        "arquivo": "24_5_13022020144702_oficio130.19poderjudiciarion.s.dasdoresrespostaarequisicaoencaminhart.doc",
+        "extensao": ".doc",
+        "pasta": "oficiosadministrativos",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020144702_oficio130.19poderjudiciarion.s.dasdoresrespostaarequisicaoencaminhart.doc",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 18:40:38"
+    },
+    {
+        "id_documento": "3016",
+        "pagina": 119,
+        "nome_original": "OFÍCIO 130.19 - PODER JUDICIÁRIO N. S. DAS DORES - RESPOSTA À REQUISIÇÃO - ENCAMINHA RT.pdf",
+        "arquivo": "24_5_13022020144720_oficio130.19poderjudiciarion.s.dasdoresrespostaarequisicaoencaminhart.pdf",
+        "extensao": ".pdf",
+        "pasta": "oficiosadministrativos",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020144720_oficio130.19poderjudiciarion.s.dasdoresrespostaarequisicaoencaminhart.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 18:40:38"
+    }
+]

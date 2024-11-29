@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "5132",
+        "pagina": 203,
+        "nome_original": "Ref. Of. 299.19 - 22.02.2019.rar",
+        "arquivo": "24_28_18022020082354_ref.of.299.1922.02.2019.rar",
+        "extensao": ".rar",
+        "pasta": "idclaro",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/idclaro/24_28_18022020082354_ref.of.299.1922.02.2019.rar",
+        "erro": "Falha ao processar 24_29_18022020082715_anexos.zip: Erro ao processar o arquivo com extensão zip: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:17:35"
+    },
+    {
+        "id_documento": "5135",
+        "pagina": 203,
+        "nome_original": "GSE 0022098 - 22.02.2019.rar",
+        "arquivo": "24_27_18022020082522_gse002209822.02.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_18022020082522_gse002209822.02.2019.rar",
+        "erro": "Falha ao processar 24_29_18022020082715_anexos.zip: Erro ao processar o arquivo com extensão zip: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:17:35"
+    },
+    {
+        "id_documento": "5136",
+        "pagina": 203,
+        "nome_original": "GSE 0037683 - 28.03.2019.rar",
+        "arquivo": "24_27_18022020082548_gse003768328.03.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_18022020082548_gse003768328.03.2019.rar",
+        "erro": "Falha ao processar 24_29_18022020082715_anexos.zip: Erro ao processar o arquivo com extensão zip: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:17:35"
+    },
+    {
+        "id_documento": "5137",
+        "pagina": 203,
+        "nome_original": "anexos_protocolo_413939_2019_22022019232000.zip",
+        "arquivo": "24_30_18022020082612_anexosprotocolo413939201922022019232000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_18022020082612_anexosprotocolo413939201922022019232000.zip",
+        "erro": "Falha ao processar 24_29_18022020082715_anexos.zip: Erro ao processar o arquivo com extensão zip: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:17:35"
+    },
+    {
+        "id_documento": "5138",
+        "pagina": 203,
+        "nome_original": "CT 435056 - 27.03.2019.rar",
+        "arquivo": "24_30_18022020082650_ct43505627.03.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_18022020082650_ct43505627.03.2019.rar",
+        "erro": "Falha ao processar 24_29_18022020082715_anexos.zip: Erro ao processar o arquivo com extensão zip: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:17:35"
+    },
+    {
+        "id_documento": "5139",
+        "pagina": 203,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_18022020082715_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_18022020082715_anexos.zip",
+        "erro": "Falha ao processar 24_29_18022020082715_anexos.zip: Erro ao processar o arquivo com extensão zip: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:17:35"
+    }
+]

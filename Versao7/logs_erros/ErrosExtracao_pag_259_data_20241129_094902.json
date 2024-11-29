@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "6523",
+        "pagina": 259,
+        "nome_original": "486983045414368.zip",
+        "arquivo": "38_44_20022020081627_486983045414368.zip",
+        "extensao": ".zip",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/38_44_20022020081627_486983045414368.zip",
+        "erro": "Falha ao processar 38_44_20022020082104_388909531683738.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:49:02"
+    },
+    {
+        "id_documento": "6526",
+        "pagina": 259,
+        "nome_original": "509962749736027.zip",
+        "arquivo": "38_44_20022020081721_509962749736027.zip",
+        "extensao": ".zip",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/38_44_20022020081721_509962749736027.zip",
+        "erro": "Falha ao processar 38_44_20022020082104_388909531683738.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:49:02"
+    },
+    {
+        "id_documento": "6529",
+        "pagina": 259,
+        "nome_original": "514853075955076.zip",
+        "arquivo": "38_44_20022020081811_514853075955076.zip",
+        "extensao": ".zip",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/38_44_20022020081811_514853075955076.zip",
+        "erro": "Falha ao processar 38_44_20022020082104_388909531683738.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:49:02"
+    },
+    {
+        "id_documento": "6534",
+        "pagina": 259,
+        "nome_original": "1297853417056617.zip",
+        "arquivo": "38_44_20022020081900_1297853417056617.zip",
+        "extensao": ".zip",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/38_44_20022020081900_1297853417056617.zip",
+        "erro": "Falha ao processar 38_44_20022020082104_388909531683738.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:49:02"
+    },
+    {
+        "id_documento": "6540",
+        "pagina": 259,
+        "nome_original": "ID_CDS 1736385 - 19.03.2019.rar",
+        "arquivo": "24_28_20022020082044_idcds173638519.03.2019.rar",
+        "extensao": ".rar",
+        "pasta": "idclaro",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/idclaro/24_28_20022020082044_idcds173638519.03.2019.rar",
+        "erro": "Falha ao processar 38_44_20022020082104_388909531683738.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:49:02"
+    },
+    {
+        "id_documento": "6541",
+        "pagina": 259,
+        "nome_original": "388909531683738.zip",
+        "arquivo": "38_44_20022020082104_388909531683738.zip",
+        "extensao": ".zip",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/38_44_20022020082104_388909531683738.zip",
+        "erro": "Falha ao processar 38_44_20022020082104_388909531683738.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:49:02"
+    }
+]

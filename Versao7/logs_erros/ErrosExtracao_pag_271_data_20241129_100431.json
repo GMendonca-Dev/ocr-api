@@ -1,0 +1,86 @@
+[
+    {
+        "id_documento": "6830",
+        "pagina": 271,
+        "nome_original": "consulta_imei_356707096232620_id786616_39.xlsx",
+        "arquivo": "56_13_21022020132513_consultaimei356707096232620id78661639.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/56_13_21022020132513_consultaimei356707096232620id78661639.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:04:31"
+    },
+    {
+        "id_documento": "6831",
+        "pagina": 271,
+        "nome_original": "consulta_imei_354105077255450_id782503_110.xlsx",
+        "arquivo": "56_13_21022020132550_consultaimei354105077255450id782503110.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/56_13_21022020132550_consultaimei354105077255450id782503110.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:04:31"
+    },
+    {
+        "id_documento": "6832",
+        "pagina": 271,
+        "nome_original": "consulta_imei_357870094033530_id782504_25.xlsx",
+        "arquivo": "56_13_21022020132649_consultaimei357870094033530id78250425.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/56_13_21022020132649_consultaimei357870094033530id78250425.xlsx",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:04:31"
+    },
+    {
+        "id_documento": "6834",
+        "pagina": 271,
+        "nome_original": "000865819_6_74988153969_1.xls",
+        "arquivo": "56_13_21022020132741_0008658196749881539691.xls",
+        "extensao": ".xls",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/56_13_21022020132741_0008658196749881539691.xls",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:04:31"
+    },
+    {
+        "id_documento": "6835",
+        "pagina": 271,
+        "nome_original": "000865819_7_74988153969_2.xls",
+        "arquivo": "56_13_21022020132825_0008658197749881539692.xls",
+        "extensao": ".xls",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/56_13_21022020132825_0008658197749881539692.xls",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:04:31"
+    },
+    {
+        "id_documento": "6838",
+        "pagina": 271,
+        "nome_original": "000865819_7_74988624285_1.xls",
+        "arquivo": "56_13_21022020132902_0008658197749886242851.xls",
+        "extensao": ".xls",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/56_13_21022020132902_0008658197749886242851.xls",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:04:31"
+    },
+    {
+        "id_documento": "6848",
+        "pagina": 271,
+        "nome_original": "Ofício 1470.19 - VIVO- OP 038.19-PROTOCOLO.pdf",
+        "arquivo": "39_23_21022020144406_oficio1470.19vivoop038.19protocolo.pdf",
+        "extensao": ".pdf",
+        "pasta": "protocolooperadora",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/protocolooperadora/39_23_21022020144406_oficio1470.19vivoop038.19protocolo.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 10:04:31"
+    }
+]

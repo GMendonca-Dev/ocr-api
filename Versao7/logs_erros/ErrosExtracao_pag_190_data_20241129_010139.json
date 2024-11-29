@@ -1,0 +1,98 @@
+[
+    {
+        "id_documento": "4797",
+        "pagina": 190,
+        "nome_original": "consulta_79999548811_id980795.zip",
+        "arquivo": "39_13_17022020155700_consulta79999548811id980795.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155700_consulta79999548811id980795.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 01:01:39"
+    },
+    {
+        "id_documento": "4799",
+        "pagina": 190,
+        "nome_original": "consulta_imei_355350087632670_id981799.zip",
+        "arquivo": "39_13_17022020155715_consultaimei355350087632670id981799.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155715_consultaimei355350087632670id981799.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 01:01:39"
+    },
+    {
+        "id_documento": "4801",
+        "pagina": 190,
+        "nome_original": "consulta_imei_355694079743310_id981800.zip",
+        "arquivo": "39_13_17022020155733_consultaimei355694079743310id981800.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_17022020155733_consultaimei355694079743310id981800.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 01:01:39"
+    },
+    {
+        "id_documento": "4815",
+        "pagina": 190,
+        "nome_original": "Terminal_002012020_06_CADASTRO_LINHA_TENISOM_OI.zip",
+        "arquivo": "59_11_18022020052827_terminal00201202006cadastrolinhatenisomoi.zip",
+        "extensao": ".zip",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/59_11_18022020052827_terminal00201202006cadastrolinhatenisomoi.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:01:39"
+    },
+    {
+        "id_documento": "4816",
+        "pagina": 190,
+        "nome_original": "002012020_5_EXTRATO_LINHA_TENISOM_OI.zip",
+        "arquivo": "59_49_18022020053133_0020120205extratolinhatenisomoi.zip",
+        "extensao": ".zip",
+        "pasta": "extratodeconexao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/extratodeconexao/59_49_18022020053133_0020120205extratolinhatenisomoi.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:01:39"
+    },
+    {
+        "id_documento": "4817",
+        "pagina": 190,
+        "nome_original": "consulta_75999920024_id323338_230.pdf",
+        "arquivo": "37_13_18022020055511_consulta75999920024id323338230.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/37_13_18022020055511_consulta75999920024id323338230.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 01:01:39"
+    },
+    {
+        "id_documento": "4818",
+        "pagina": 190,
+        "nome_original": "consulta_75998464119_id332864_935.pdf",
+        "arquivo": "37_13_18022020060246_consulta75998464119id332864935.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/37_13_18022020060246_consulta75998464119id332864935.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 01:01:39"
+    },
+    {
+        "id_documento": "4819",
+        "pagina": 190,
+        "nome_original": "consulta_75998464119_id343360_453.pdf",
+        "arquivo": "37_13_18022020060343_consulta75998464119id343360453.pdf",
+        "extensao": ".pdf",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/37_13_18022020060343_consulta75998464119id343360453.pdf",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 01:01:39"
+    }
+]

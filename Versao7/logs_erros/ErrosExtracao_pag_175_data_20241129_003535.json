@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "4396",
+        "pagina": 175,
+        "nome_original": "anexos_protocolo_408653_2019_15022019221727.zip",
+        "arquivo": "24_30_17022020114946_anexosprotocolo408653201915022019221727.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_17022020114946_anexosprotocolo408653201915022019221727.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:35:35"
+    },
+    {
+        "id_documento": "4401",
+        "pagina": 175,
+        "nome_original": "HC DE IMEIS.zip",
+        "arquivo": "24_13_17022020115046_hcdeimeis.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020115046_hcdeimeis.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:35:35"
+    },
+    {
+        "id_documento": "4410",
+        "pagina": 175,
+        "nome_original": "25901-2019-TBRA - VIVO SP_786239_359571083570892_68732.zip",
+        "arquivo": "24_13_17022020115219_259012019tbravivosp78623935957108357089268732.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020115219_259012019tbravivosp78623935957108357089268732.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:35:35"
+    },
+    {
+        "id_documento": "4412",
+        "pagina": 175,
+        "nome_original": "25901-2019-TBRA - VIVO SP_786240_359571083570900_68733.zip",
+        "arquivo": "24_13_17022020115232_259012019tbravivosp78624035957108357090068733.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020115232_259012019tbravivosp78624035957108357090068733.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:35:35"
+    },
+    {
+        "id_documento": "4413",
+        "pagina": 175,
+        "nome_original": "001838919_1_359571083570892_1.xls",
+        "arquivo": "24_13_17022020115247_00183891913595710835708921.xls",
+        "extensao": ".xls",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020115247_00183891913595710835708921.xls",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:35:35"
+    },
+    {
+        "id_documento": "4415",
+        "pagina": 175,
+        "nome_original": "001838919_1_359571083570900_2.xls",
+        "arquivo": "24_13_17022020115259_00183891913595710835709002.xls",
+        "extensao": ".xls",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020115259_00183891913595710835709002.xls",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:35:35"
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "id_documento": "3714",
+        "pagina": 147,
+        "nome_original": "76594_20190226113055_crm.zip",
+        "arquivo": "24_28_17022020054325_7659420190226113055crm.zip",
+        "extensao": ".zip",
+        "pasta": "idclaro",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/idclaro/24_28_17022020054325_7659420190226113055crm.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:07:27"
+    },
+    {
+        "id_documento": "3715",
+        "pagina": 147,
+        "nome_original": "76594_20190226113055_crm.rar",
+        "arquivo": "24_28_17022020054355_7659420190226113055crm.rar",
+        "extensao": ".rar",
+        "pasta": "idclaro",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/idclaro/24_28_17022020054355_7659420190226113055crm.rar",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:07:27"
+    },
+    {
+        "id_documento": "3716",
+        "pagina": 147,
+        "nome_original": "ID 086600.pdf",
+        "arquivo": "24_0_17022020054417_id086600.pdf",
+        "extensao": ".pdf",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:07:27"
+    },
+    {
+        "id_documento": "3717",
+        "pagina": 147,
+        "nome_original": "001659319_2_79988390203_1.xls",
+        "arquivo": "24_13_17022020054541_0016593192799883902031.xls",
+        "extensao": ".xls",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020054541_0016593192799883902031.xls",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:07:27"
+    },
+    {
+        "id_documento": "3718",
+        "pagina": 147,
+        "nome_original": "001659319_3_356506070683350_1.xls",
+        "arquivo": "24_13_17022020054601_00165931933565060706833501.xls",
+        "extensao": ".xls",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020054601_00165931933565060706833501.xls",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:07:27"
+    }
+]

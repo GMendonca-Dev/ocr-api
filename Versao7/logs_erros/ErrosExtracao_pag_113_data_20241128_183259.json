@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "2841",
+        "pagina": 113,
+        "nome_original": "19.012008O.zip",
+        "arquivo": "39_27_13022020130620_19.012008o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/39_27_13022020130620_19.012008o.zip",
+        "erro": "Falha ao processar 39_30_13022020130620_anexosprotocolo606295201929102019224503.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='606295_2019/609740/1_resumo_606295_2019_609740_353103070504340_29102019224503308.pdf' compress_type=deflate file_size=4210 compress_size=3799> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:32:59"
+    },
+    {
+        "id_documento": "2842",
+        "pagina": 113,
+        "nome_original": "anexos_protocolo_128357_2020_13022020071000.zip",
+        "arquivo": "39_30_13022020130620_anexosprotocolo128357202013022020071000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_13022020130620_anexosprotocolo128357202013022020071000.zip",
+        "erro": "Falha ao processar 39_30_13022020130620_anexosprotocolo606295201929102019224503.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='606295_2019/609740/1_resumo_606295_2019_609740_353103070504340_29102019224503308.pdf' compress_type=deflate file_size=4210 compress_size=3799> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:32:59"
+    },
+    {
+        "id_documento": "2843",
+        "pagina": 113,
+        "nome_original": "anexos_protocolo_606295_2019_29102019224503.zip",
+        "arquivo": "39_30_13022020130620_anexosprotocolo606295201929102019224503.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_13022020130620_anexosprotocolo606295201929102019224503.zip",
+        "erro": "Falha ao processar 39_30_13022020130620_anexosprotocolo606295201929102019224503.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='606295_2019/609740/1_resumo_606295_2019_609740_353103070504340_29102019224503308.pdf' compress_type=deflate file_size=4210 compress_size=3799> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:32:59"
+    }
+]

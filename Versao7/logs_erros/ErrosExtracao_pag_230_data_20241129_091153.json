@@ -1,0 +1,50 @@
+[
+    {
+        "id_documento": "5804",
+        "pagina": 230,
+        "nome_original": "2019_060667_402409_2019_20190416052001224.zip",
+        "arquivo": "38_11_18022020145105_2019060667402409201920190416052001224.zip",
+        "extensao": ".zip",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/38_11_18022020145105_2019060667402409201920190416052001224.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:11:53"
+    },
+    {
+        "id_documento": "5805",
+        "pagina": 230,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_18022020145119_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_18022020145119_anexos.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:11:53"
+    },
+    {
+        "id_documento": "5808",
+        "pagina": 230,
+        "nome_original": "consulta_imei_860309031459020_id904600.zip",
+        "arquivo": "38_11_18022020145158_consultaimei860309031459020id904600.zip",
+        "extensao": ".zip",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/38_11_18022020145158_consultaimei860309031459020id904600.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:11:53"
+    },
+    {
+        "id_documento": "5819",
+        "pagina": 230,
+        "nome_original": "",
+        "arquivo": "38_11_18022020145557_",
+        "extensao": "",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/38_11_18022020145557_",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 09:11:53"
+    }
+]

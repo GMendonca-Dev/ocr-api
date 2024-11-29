@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "3911",
+        "pagina": 155,
+        "nome_original": "2020_025728_124484_2020_20200217101001844.zip",
+        "arquivo": "59_49_17022020071553_2020025728124484202020200217101001844.zip",
+        "extensao": ".zip",
+        "pasta": "extratodeconexao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/extratodeconexao/59_49_17022020071553_2020025728124484202020200217101001844.zip",
+        "erro": "Falha ao processar 59_49_17022020071553_2020025728124484202020200217101001844.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:18:08"
+    }
+]

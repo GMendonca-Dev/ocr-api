@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "3720",
+        "pagina": 148,
+        "nome_original": "CT 406812 - 13.02.2019.rar",
+        "arquivo": "24_30_17022020054719_ct40681213.02.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_17022020054719_ct40681213.02.2019.rar",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:10:01"
+    },
+    {
+        "id_documento": "3721",
+        "pagina": 148,
+        "nome_original": "2019_022887_406812_2019_20190215183517884.zip",
+        "arquivo": "24_11_17022020054812_2019022887406812201920190215183517884.zip",
+        "extensao": ".zip",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/24_11_17022020054812_2019022887406812201920190215183517884.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:10:01"
+    },
+    {
+        "id_documento": "3722",
+        "pagina": 148,
+        "nome_original": "2019_022890_406812_2019_20190215183518394.zip",
+        "arquivo": "24_11_17022020054825_2019022890406812201920190215183518394.zip",
+        "extensao": ".zip",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/24_11_17022020054825_2019022890406812201920190215183518394.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:10:01"
+    },
+    {
+        "id_documento": "3723",
+        "pagina": 148,
+        "nome_original": "2019_022893_406812_2019_20190215202501689.zip",
+        "arquivo": "24_13_17022020054847_2019022893406812201920190215202501689.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020054847_2019022893406812201920190215202501689.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:10:01"
+    },
+    {
+        "id_documento": "3724",
+        "pagina": 148,
+        "nome_original": "2019_028696_406812_2019_20190226015501927.zip",
+        "arquivo": "24_13_17022020054908_2019028696406812201920190226015501927.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020054908_2019028696406812201920190226015501927.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:10:01"
+    },
+    {
+        "id_documento": "3725",
+        "pagina": 148,
+        "nome_original": "consulta_imei_356506070683350_id806866.zip",
+        "arquivo": "24_13_17022020055005_consultaimei356506070683350id806866.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_17022020055005_consultaimei356506070683350id806866.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 00:10:01"
+    }
+]

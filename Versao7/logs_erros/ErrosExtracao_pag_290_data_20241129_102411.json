@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "7313",
+        "pagina": 290,
+        "nome_original": "anexos_protocolo_439727_2019_01042019161001.zip",
+        "arquivo": "24_30_27022020114208_anexosprotocolo439727201901042019161001.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_27022020114208_anexosprotocolo439727201901042019161001.zip",
+        "erro": "Falha ao processar 24_30_27022020114208_anexosprotocolo439727201901042019161001.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='439727_2019/131419/1_cadastro_439727_2019_131419_02408862520_0104201916100175.pdf' compress_type=deflate file_size=3952 compress_size=3532> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 10:24:11"
+    }
+]

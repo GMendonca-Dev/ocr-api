@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "3506",
+        "pagina": 139,
+        "nome_original": "OP  018.19 - REPRESENTAÇÃO. ALVARÁ DIA 12.02.19 + ANEXOS.rar",
+        "arquivo": "24_8_14022020120803_op018.19representacao.alvaradia12.02.19+anexos.rar",
+        "extensao": ".rar",
+        "pasta": "representacao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/representacao/24_8_14022020120803_op018.19representacao.alvaradia12.02.19+anexos.rar",
+        "erro": "Falha ao processar 24_8_14022020120803_op018.19representacao.alvaradia12.02.19+anexos.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:56:18"
+    }
+]

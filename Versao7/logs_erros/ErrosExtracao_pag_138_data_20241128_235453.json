@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "3469",
+        "pagina": 138,
+        "nome_original": "INC CHIP 79998025230.xlsx",
+        "arquivo": "24_13_14022020113958_incchip79998025230.xlsx",
+        "extensao": ".xlsx",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/24_13_14022020113958_incchip79998025230.xlsx",
+        "erro": "Falha ao processar 24_11_14022020114325_cadastrosp1.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 23:54:53"
+    },
+    {
+        "id_documento": "3474",
+        "pagina": 138,
+        "nome_original": "CADASTROS P1.zip",
+        "arquivo": "24_11_14022020114325_cadastrosp1.zip",
+        "extensao": ".zip",
+        "pasta": "cadastrotelefonico",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/24_11_14022020114325_cadastrosp1.zip",
+        "erro": "Falha ao processar 24_11_14022020114325_cadastrosp1.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:54:53"
+    }
+]

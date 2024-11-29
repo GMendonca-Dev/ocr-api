@@ -1,0 +1,62 @@
+[
+    {
+        "id_documento": "6272",
+        "pagina": 249,
+        "nome_original": "19.002508O.zip",
+        "arquivo": "24_27_19022020144906_19.002508o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_19022020144906_19.002508o.zip",
+        "erro": "Falha ao processar 24_29_19022020145150_ct4214920.03.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:34:09"
+    },
+    {
+        "id_documento": "6273",
+        "pagina": 249,
+        "nome_original": "GSE 0032149 - 15.03.2019.rar",
+        "arquivo": "24_27_19022020144947_gse003214915.03.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_19022020144947_gse003214915.03.2019.rar",
+        "erro": "Falha ao processar 24_29_19022020145150_ct4214920.03.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:34:09"
+    },
+    {
+        "id_documento": "6275",
+        "pagina": 249,
+        "nome_original": "CT 425751 - 16.03.2019.rar",
+        "arquivo": "24_30_19022020145044_ct42575116.03.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_19022020145044_ct42575116.03.2019.rar",
+        "erro": "Falha ao processar 24_29_19022020145150_ct4214920.03.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:34:09"
+    },
+    {
+        "id_documento": "6277",
+        "pagina": 249,
+        "nome_original": "anexos_protocolo_430098_2019_23032019082500.zip",
+        "arquivo": "24_30_19022020145119_anexosprotocolo430098201923032019082500.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_19022020145119_anexosprotocolo430098201923032019082500.zip",
+        "erro": "Falha ao processar 24_29_19022020145150_ct4214920.03.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:34:09"
+    },
+    {
+        "id_documento": "6278",
+        "pagina": 249,
+        "nome_original": "CT 42149 - 20.03.2019.rar",
+        "arquivo": "24_29_19022020145150_ct4214920.03.2019.rar",
+        "extensao": ".rar",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_19022020145150_ct4214920.03.2019.rar",
+        "erro": "Falha ao processar 24_29_19022020145150_ct4214920.03.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 09:34:09"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "3096",
+        "pagina": 123,
+        "nome_original": "Oficio 150.2019. DIPOL.GAB - OP 014.2019.pdf",
+        "arquivo": "24_5_13022020153356_oficio150.2019.dipol.gabop014.2019.pdf",
+        "extensao": ".pdf",
+        "pasta": "oficiosadministrativos",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/24_5_13022020153356_oficio150.2019.dipol.gabop014.2019.pdf",
+        "erro": "Falha ao processar 24_41_13022020154205_apple.rar: Erro ao processar o arquivo com extensão rar: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-28 23:36:29"
+    },
+    {
+        "id_documento": "3110",
+        "pagina": 123,
+        "nome_original": "APPLE.rar",
+        "arquivo": "24_41_13022020154205_apple.rar",
+        "extensao": ".rar",
+        "pasta": "respostaapple",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostaapple/24_41_13022020154205_apple.rar",
+        "erro": "Falha ao processar 24_41_13022020154205_apple.rar: Erro ao processar o arquivo com extensão rar: cannot access local variable 'modified_data' where it is not associated with a value",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 23:36:29"
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "4349",
+        "pagina": 173,
+        "nome_original": "anexos_protocolo_567752_2019_12092019011006.zip",
+        "arquivo": "39_30_17022020113217_anexosprotocolo567752201912092019011006.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_17022020113217_anexosprotocolo567752201912092019011006.zip",
+        "erro": "Falha ao processar 24_29_17022020113655_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:34:00"
+    },
+    {
+        "id_documento": "4358",
+        "pagina": 173,
+        "nome_original": "20190215113731_001714819_1 (1).zip",
+        "arquivo": "24_27_17022020113529_2019021511373100171481911.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_17022020113529_2019021511373100171481911.zip",
+        "erro": "Falha ao processar 24_29_17022020113655_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:34:00"
+    },
+    {
+        "id_documento": "4363",
+        "pagina": 173,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_17022020113655_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_17022020113655_anexos.zip",
+        "erro": "Falha ao processar 24_29_17022020113655_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 00:34:00"
+    }
+]

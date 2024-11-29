@@ -1,0 +1,110 @@
+[
+    {
+        "id_documento": "2722",
+        "pagina": 108,
+        "nome_original": "GSE 0002973 - 15.01.2019.rar",
+        "arquivo": "24_0_13022020130620_gse000297315.01.2019.rar",
+        "extensao": ".rar",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2723",
+        "pagina": 108,
+        "nome_original": "Ref. Of. 083.19.pdf",
+        "arquivo": "24_0_13022020130620_ref.of.083.19.pdf",
+        "extensao": ".pdf",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2724",
+        "pagina": 108,
+        "nome_original": "GSE 0003543 - 16.01.2019.rar",
+        "arquivo": "24_27_13022020130620_gse000354316.01.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_gse000354316.01.2019.rar",
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2725",
+        "pagina": 108,
+        "nome_original": "GSE 0005261 - 18.01.2019.rar",
+        "arquivo": "24_27_13022020130620_gse000526118.01.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_gse000526118.01.2019.rar",
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2726",
+        "pagina": 108,
+        "nome_original": "19.000602O.zip",
+        "arquivo": "24_27_13022020130620_19.000602o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_19.000602o.zip",
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2727",
+        "pagina": 108,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_30_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_anexos.zip",
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2728",
+        "pagina": 108,
+        "nome_original": "007948-2019ASP_18012019_133122 (1).zip",
+        "arquivo": "24_30_13022020130620_0079482019asp180120191331221.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_0079482019asp180120191331221.zip",
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2729",
+        "pagina": 108,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_13022020130620_anexos.zip",
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    },
+    {
+        "id_documento": "2730",
+        "pagina": 108,
+        "nome_original": "CT 8496 - 16.01.2019.rar",
+        "arquivo": "24_29_13022020130620_ct849616.01.2019.rar",
+        "extensao": ".rar",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_13022020130620_ct849616.01.2019.rar",
+        "erro": "Falha ao processar 24_29_13022020130620_ct849616.01.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:22:39"
+    }
+]

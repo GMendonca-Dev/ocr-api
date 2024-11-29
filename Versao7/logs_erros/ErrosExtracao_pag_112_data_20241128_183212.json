@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "2839",
+        "pagina": 112,
+        "nome_original": "20.001078O.zip",
+        "arquivo": "39_27_13022020130620_20.001078o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/39_27_13022020130620_20.001078o.zip",
+        "erro": "Falha ao processar 39_27_13022020130620_19.009175o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='19.009175O3081534593917342602.xlsx' compress_type=deflate file_size=18635 compress_size=17726> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:32:12"
+    },
+    {
+        "id_documento": "2840",
+        "pagina": 112,
+        "nome_original": "19.009175O.zip",
+        "arquivo": "39_27_13022020130620_19.009175o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/39_27_13022020130620_19.009175o.zip",
+        "erro": "Falha ao processar 39_27_13022020130620_19.009175o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='19.009175O3081534593917342602.xlsx' compress_type=deflate file_size=18635 compress_size=17726> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:32:12"
+    }
+]

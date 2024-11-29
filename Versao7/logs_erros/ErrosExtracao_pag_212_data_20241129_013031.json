@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "5346",
+        "pagina": 212,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_18022020111319_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_18022020111319_anexos.zip",
+        "erro": "Falha ao processar 24_44_18022020111436_whatsapp.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:30:31"
+    },
+    {
+        "id_documento": "5349",
+        "pagina": 212,
+        "nome_original": "WHATSAPP.rar",
+        "arquivo": "24_44_18022020111436_whatsapp.rar",
+        "extensao": ".rar",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/24_44_18022020111436_whatsapp.rar",
+        "erro": "Falha ao processar 24_44_18022020111436_whatsapp.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 01:30:31"
+    }
+]

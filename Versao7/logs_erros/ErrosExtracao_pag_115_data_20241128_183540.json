@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "2900",
+        "pagina": 115,
+        "nome_original": "GSE 0053579 - 26.04.2019.rar",
+        "arquivo": "24_27_13022020130620_gse005357926.04.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_13022020130620_gse005357926.04.2019.rar",
+        "erro": "Falha ao processar 38_29_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:35:40"
+    },
+    {
+        "id_documento": "2901",
+        "pagina": 115,
+        "nome_original": "anexos_protocolo_460905_2019_26042019110500.zip",
+        "arquivo": "24_30_13022020130620_anexosprotocolo460905201926042019110500.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_13022020130620_anexosprotocolo460905201926042019110500.zip",
+        "erro": "Falha ao processar 38_29_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:35:40"
+    },
+    {
+        "id_documento": "2913",
+        "pagina": 115,
+        "nome_original": "anexos.zip",
+        "arquivo": "38_29_13022020130620_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/38_29_13022020130620_anexos.zip",
+        "erro": "Falha ao processar 38_29_13022020130620_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-28 18:35:40"
+    }
+]
