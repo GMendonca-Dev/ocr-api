@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "9877",
+        "pagina": 392,
+        "nome_original": "19.006337O.zip",
+        "arquivo": "40_27_02032020150450_19.006337o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/40_27_02032020150450_19.006337o.zip",
+        "erro": "Falha ao processar 40_44_02032020150550_1230352883813358.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:51:02"
+    },
+    {
+        "id_documento": "9878",
+        "pagina": 392,
+        "nome_original": "424093728229319.zip",
+        "arquivo": "40_44_02032020150533_424093728229319.zip",
+        "extensao": ".zip",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/40_44_02032020150533_424093728229319.zip",
+        "erro": "Falha ao processar 40_44_02032020150550_1230352883813358.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:51:02"
+    },
+    {
+        "id_documento": "9879",
+        "pagina": 392,
+        "nome_original": "1230352883813358.zip",
+        "arquivo": "40_44_02032020150550_1230352883813358.zip",
+        "extensao": ".zip",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/40_44_02032020150550_1230352883813358.zip",
+        "erro": "Falha ao processar 40_44_02032020150550_1230352883813358.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:51:02"
+    }
+]

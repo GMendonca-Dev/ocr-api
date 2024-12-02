@@ -1,0 +1,86 @@
+[
+    {
+        "id_documento": "8613",
+        "pagina": 342,
+        "nome_original": "anexos_protocolo_136278_2020_21022020210003.zip",
+        "arquivo": "38_30_28022020141647_anexosprotocolo136278202021022020210003.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_28022020141647_anexosprotocolo136278202021022020210003.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:03:02"
+    },
+    {
+        "id_documento": "8614",
+        "pagina": 342,
+        "nome_original": "20.001170O.zip",
+        "arquivo": "38_27_28022020142025_20.001170o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_28022020142025_20.001170o.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:03:02"
+    },
+    {
+        "id_documento": "8615",
+        "pagina": 342,
+        "nome_original": "002369620_1.zip",
+        "arquivo": "38_27_28022020142140_0023696201.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_28022020142140_0023696201.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:03:02"
+    },
+    {
+        "id_documento": "8622",
+        "pagina": 342,
+        "nome_original": "consulta_imei_359232095338190_id913054.zip",
+        "arquivo": "39_13_28022020142816_consultaimei359232095338190id913054.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_28022020142816_consultaimei359232095338190id913054.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 13:03:02"
+    },
+    {
+        "id_documento": "8623",
+        "pagina": 342,
+        "nome_original": "consulta_imei_359233095338190_id913055.zip",
+        "arquivo": "39_13_28022020143409_consultaimei359233095338190id913055.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_28022020143409_consultaimei359233095338190id913055.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 13:03:02"
+    },
+    {
+        "id_documento": "8624",
+        "pagina": 342,
+        "nome_original": "consulta_79999104216_id913051.zip",
+        "arquivo": "39_13_28022020143442_consulta79999104216id913051.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/39_13_28022020143442_consulta79999104216id913051.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 13:03:02"
+    },
+    {
+        "id_documento": "8626",
+        "pagina": 342,
+        "nome_original": "19.005697.zip",
+        "arquivo": "39_57_28022020143627_19.005697.zip",
+        "extensao": ".zip",
+        "pasta": "operacaoesenhavigias",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/operacaoesenhavigias/39_57_28022020143627_19.005697.zip",
+        "erro": "Arquivo inexistente",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 13:03:02"
+    }
+]

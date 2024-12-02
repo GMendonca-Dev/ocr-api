@@ -1,0 +1,50 @@
+[
+    {
+        "id_documento": "9776",
+        "pagina": 388,
+        "nome_original": "anexos_protocolo_485287_2019_30052019173001.zip",
+        "arquivo": "38_30_02032020140535_anexosprotocolo485287201930052019173001.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_02032020140535_anexosprotocolo485287201930052019173001.zip",
+        "erro": "Falha ao processar 38_27_02032020140839_0056116193.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:45:36"
+    },
+    {
+        "id_documento": "9777",
+        "pagina": 388,
+        "nome_original": "anexos_protocolo_485287_2019_30052019174002 (1).zip",
+        "arquivo": "38_30_02032020140611_anexosprotocolo4852872019300520191740021.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_02032020140611_anexosprotocolo4852872019300520191740021.zip",
+        "erro": "Falha ao processar 38_27_02032020140839_0056116193.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:45:36"
+    },
+    {
+        "id_documento": "9778",
+        "pagina": 388,
+        "nome_original": "19.004419O.zip",
+        "arquivo": "38_27_02032020140723_19.004419o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_02032020140723_19.004419o.zip",
+        "erro": "Falha ao processar 38_27_02032020140839_0056116193.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:45:36"
+    },
+    {
+        "id_documento": "9779",
+        "pagina": 388,
+        "nome_original": "005611619_3.zip",
+        "arquivo": "38_27_02032020140839_0056116193.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_02032020140839_0056116193.zip",
+        "erro": "Falha ao processar 38_27_02032020140839_0056116193.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:45:36"
+    }
+]

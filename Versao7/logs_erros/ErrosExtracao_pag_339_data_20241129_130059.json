@@ -1,0 +1,50 @@
+[
+    {
+        "id_documento": "8534",
+        "pagina": 339,
+        "nome_original": "GSE 0066084 - 21.05.2019.rar",
+        "arquivo": "24_27_28022020135502_gse006608421.05.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_28022020135502_gse006608421.05.2019.rar",
+        "erro": "Falha ao processar 24_44_28022020135903_alvarade06.06.19.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:00:59"
+    },
+    {
+        "id_documento": "8536",
+        "pagina": 339,
+        "nome_original": "anexos_protocolo_477300_2019_240779_21052019110537991.zip",
+        "arquivo": "24_30_28022020135521_anexosprotocolo477300201924077921052019110537991.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_28022020135521_anexosprotocolo477300201924077921052019110537991.zip",
+        "erro": "Falha ao processar 24_44_28022020135903_alvarade06.06.19.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:00:59"
+    },
+    {
+        "id_documento": "8538",
+        "pagina": 339,
+        "nome_original": "anexos_protocolo_477300_2019_24052019130535 (1).zip",
+        "arquivo": "24_30_28022020135538_anexosprotocolo4773002019240520191305351.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_28022020135538_anexosprotocolo4773002019240520191305351.zip",
+        "erro": "Falha ao processar 24_44_28022020135903_alvarade06.06.19.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:00:59"
+    },
+    {
+        "id_documento": "8548",
+        "pagina": 339,
+        "nome_original": "Alvará de 06.06.19.rar",
+        "arquivo": "24_44_28022020135903_alvarade06.06.19.rar",
+        "extensao": ".rar",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/24_44_28022020135903_alvarade06.06.19.rar",
+        "erro": "Falha ao processar 24_44_28022020135903_alvarade06.06.19.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:00:59"
+    }
+]

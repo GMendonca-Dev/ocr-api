@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "8184",
+        "pagina": 325,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_27_28022020083838_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_28022020083838_anexos.zip",
+        "erro": "Falha ao processar 39_52_28022020113606_ikaromoises.docx: Arquivo com conteúdo vazio",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 12:45:35"
+    },
+    {
+        "id_documento": "8185",
+        "pagina": 325,
+        "nome_original": "19.003459O.zip",
+        "arquivo": "24_27_28022020083900_19.003459o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_28022020083900_19.003459o.zip",
+        "erro": "Falha ao processar 39_52_28022020113606_ikaromoises.docx: Arquivo com conteúdo vazio",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 12:45:35"
+    },
+    {
+        "id_documento": "8193",
+        "pagina": 325,
+        "nome_original": "ikaro moises.docx",
+        "arquivo": "39_52_28022020113606_ikaromoises.docx",
+        "extensao": ".docx",
+        "pasta": "qualificacaodealvo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/qualificacaodealvo/39_52_28022020113606_ikaromoises.docx",
+        "erro": "Falha ao processar 39_52_28022020113606_ikaromoises.docx: Arquivo com conteúdo vazio",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 12:45:35"
+    }
+]

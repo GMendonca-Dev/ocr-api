@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "8955",
+        "pagina": 355,
+        "nome_original": "GSE 0052352 - 25.04.2019.rar",
+        "arquivo": "24_27_02032020082114_gse005235225.04.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_02032020082114_gse005235225.04.2019.rar",
+        "erro": "Caminho ou arquivo inválido",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:18:51"
+    },
+    {
+        "id_documento": "8956",
+        "pagina": 355,
+        "nome_original": "GSE 0061016 - 13.05.2019.rar",
+        "arquivo": "24_27_02032020082149_gse006101613.05.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_02032020082149_gse006101613.05.2019.rar",
+        "erro": "Caminho ou arquivo inválido",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:18:51"
+    },
+    {
+        "id_documento": "8957",
+        "pagina": 355,
+        "nome_original": "anexos_protocolo_471055_2019_11052019090000.zip",
+        "arquivo": "24_0_02032020082206_anexosprotocolo471055201911052019090000.zip",
+        "extensao": ".zip",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Caminho ou arquivo inválido",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 13:18:51"
+    }
+]

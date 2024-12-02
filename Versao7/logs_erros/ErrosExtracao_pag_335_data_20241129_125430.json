@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "8437",
+        "pagina": 335,
+        "nome_original": "anexos.zip",
+        "arquivo": "39_27_28022020133048_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/39_27_28022020133048_anexos.zip",
+        "erro": "Falha ao processar 39_30_28022020133617_anexosprotocolo418011201928022019124500.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='418011_2019/66074/1_cadastro_418011_2019_66074_86368204567_28022019124500515.pdf' compress_type=deflate file_size=3957 compress_size=3537> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 12:54:30"
+    },
+    {
+        "id_documento": "8450",
+        "pagina": 335,
+        "nome_original": "Ofício 1194.19 - TIM - OP 077.19+Decisão de 16.05.19 - OP 077.19.pdf",
+        "arquivo": "24_22_28022020133348_oficio1194.19timop077.19+decisaode16.05.19op077.19.pdf",
+        "extensao": ".pdf",
+        "pasta": "oficiosoperadoras",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/24_22_28022020133348_oficio1194.19timop077.19+decisaode16.05.19op077.19.pdf",
+        "erro": "Falha ao processar 39_30_28022020133617_anexosprotocolo418011201928022019124500.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='418011_2019/66074/1_cadastro_418011_2019_66074_86368204567_28022019124500515.pdf' compress_type=deflate file_size=3957 compress_size=3537> is encrypted, password required for extraction",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-11-29 12:54:30"
+    },
+    {
+        "id_documento": "8452",
+        "pagina": 335,
+        "nome_original": "anexos_protocolo_418011_2019_28022019124500.zip",
+        "arquivo": "39_30_28022020133617_anexosprotocolo418011201928022019124500.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/39_30_28022020133617_anexosprotocolo418011201928022019124500.zip",
+        "erro": "Falha ao processar 39_30_28022020133617_anexosprotocolo418011201928022019124500.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='418011_2019/66074/1_cadastro_418011_2019_66074_86368204567_28022019124500515.pdf' compress_type=deflate file_size=3957 compress_size=3537> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-11-29 12:54:30"
+    }
+]
