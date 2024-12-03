@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "10904",
+        "pagina": 433,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_04032020121636_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_04032020121636_anexos.zip",
+        "erro": "Falha ao processar 24_44_04032020121738_alvarade30.07.19.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:31:31"
+    },
+    {
+        "id_documento": "10906",
+        "pagina": 433,
+        "nome_original": "ALVARÁ DE 23.05.19.rar",
+        "arquivo": "24_44_04032020121701_alvarade23.05.19.rar",
+        "extensao": ".rar",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/24_44_04032020121701_alvarade23.05.19.rar",
+        "erro": "Falha ao processar 24_44_04032020121738_alvarade30.07.19.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:31:31"
+    },
+    {
+        "id_documento": "10909",
+        "pagina": 433,
+        "nome_original": "ALVARÁ DE 30.07.19.rar",
+        "arquivo": "24_44_04032020121738_alvarade30.07.19.rar",
+        "extensao": ".rar",
+        "pasta": "respostawhatsapp",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostawhatsapp/24_44_04032020121738_alvarade30.07.19.rar",
+        "erro": "Falha ao processar 24_44_04032020121738_alvarade30.07.19.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:31:31"
+    }
+]

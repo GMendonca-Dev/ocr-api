@@ -1,0 +1,38 @@
+[
+    {
+        "id_documento": "10555",
+        "pagina": 419,
+        "nome_original": "anexos_protocolo_478127_2019_22052019113000.zip",
+        "arquivo": "24_30_04032020080906_anexosprotocolo478127201922052019113000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020080906_anexosprotocolo478127201922052019113000.zip",
+        "erro": "Falha ao processar 24_30_04032020080951_anexosprotocolo532524201926072019214741.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='532524_2019/392374/1_resumo_532524_2019_392374_5579996576928_26072019214741486.xlsx' compress_type=deflate file_size=10071 compress_size=8769> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:10:30"
+    },
+    {
+        "id_documento": "10556",
+        "pagina": 419,
+        "nome_original": "anexos_protocolo_494154_2019_12062019024500.zip",
+        "arquivo": "24_30_04032020080929_anexosprotocolo494154201912062019024500.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020080929_anexosprotocolo494154201912062019024500.zip",
+        "erro": "Falha ao processar 24_30_04032020080951_anexosprotocolo532524201926072019214741.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='532524_2019/392374/1_resumo_532524_2019_392374_5579996576928_26072019214741486.xlsx' compress_type=deflate file_size=10071 compress_size=8769> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:10:30"
+    },
+    {
+        "id_documento": "10557",
+        "pagina": 419,
+        "nome_original": "anexos_protocolo_532524_2019_26072019214741.zip",
+        "arquivo": "24_30_04032020080951_anexosprotocolo532524201926072019214741.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020080951_anexosprotocolo532524201926072019214741.zip",
+        "erro": "Falha ao processar 24_30_04032020080951_anexosprotocolo532524201926072019214741.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='532524_2019/392374/1_resumo_532524_2019_392374_5579996576928_26072019214741486.xlsx' compress_type=deflate file_size=10071 compress_size=8769> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:10:30"
+    }
+]

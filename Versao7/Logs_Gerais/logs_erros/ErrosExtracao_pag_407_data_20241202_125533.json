@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "10258",
+        "pagina": 407,
+        "nome_original": "19.005099O.zip",
+        "arquivo": "24_27_03032020144422_19.005099o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_03032020144422_19.005099o.zip",
+        "erro": "Falha ao processar 24_30_03032020144605_anexosprotocolo474034201917052019001501.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='474034_2019/230740/1_resumo_474034_2019_230740_5579991197111_17052019001501156.pdf' compress_type=deflate file_size=4323 compress_size=3908> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 12:55:33"
+    },
+    {
+        "id_documento": "10259",
+        "pagina": 407,
+        "nome_original": "anexos_protocolo_474034_2019_17052019001501.zip",
+        "arquivo": "24_30_03032020144605_anexosprotocolo474034201917052019001501.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_03032020144605_anexosprotocolo474034201917052019001501.zip",
+        "erro": "Falha ao processar 24_30_03032020144605_anexosprotocolo474034201917052019001501.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='474034_2019/230740/1_resumo_474034_2019_230740_5579991197111_17052019001501156.pdf' compress_type=deflate file_size=4323 compress_size=3908> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 12:55:33"
+    }
+]

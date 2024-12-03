@@ -1,0 +1,62 @@
+[
+    {
+        "id_documento": "10670",
+        "pagina": 424,
+        "nome_original": "GSE 0099723 - 11.07.2019.rar",
+        "arquivo": "24_0_04032020105412_gse009972311.07.2019.rar",
+        "extensao": ".rar",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 24_30_04032020105654_ct54526913.08.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='545269_2019/431883/1_cadastro_545269_2019_431883_86200162530_1308201920300347.xlsx' compress_type=deflate file_size=9616 compress_size=7948> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:16:37"
+    },
+    {
+        "id_documento": "10671",
+        "pagina": 424,
+        "nome_original": "GSE 0119829 - 14.08.2019.rar",
+        "arquivo": "24_27_04032020105442_gse011982914.08.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020105442_gse011982914.08.2019.rar",
+        "erro": "Falha ao processar 24_30_04032020105654_ct54526913.08.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='545269_2019/431883/1_cadastro_545269_2019_431883_86200162530_1308201920300347.xlsx' compress_type=deflate file_size=9616 compress_size=7948> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:16:37"
+    },
+    {
+        "id_documento": "10672",
+        "pagina": 424,
+        "nome_original": "CT 479058 - 23.05.2019.rar",
+        "arquivo": "24_30_04032020105553_ct47905823.05.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020105553_ct47905823.05.2019.rar",
+        "erro": "Falha ao processar 24_30_04032020105654_ct54526913.08.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='545269_2019/431883/1_cadastro_545269_2019_431883_86200162530_1308201920300347.xlsx' compress_type=deflate file_size=9616 compress_size=7948> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:16:37"
+    },
+    {
+        "id_documento": "10673",
+        "pagina": 424,
+        "nome_original": "anexos_protocolo_519316_2019_11072019093000.zip",
+        "arquivo": "24_30_04032020105627_anexosprotocolo519316201911072019093000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020105627_anexosprotocolo519316201911072019093000.zip",
+        "erro": "Falha ao processar 24_30_04032020105654_ct54526913.08.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='545269_2019/431883/1_cadastro_545269_2019_431883_86200162530_1308201920300347.xlsx' compress_type=deflate file_size=9616 compress_size=7948> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:16:37"
+    },
+    {
+        "id_documento": "10674",
+        "pagina": 424,
+        "nome_original": "CT 545269 - 13.08.2019.rar",
+        "arquivo": "24_30_04032020105654_ct54526913.08.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020105654_ct54526913.08.2019.rar",
+        "erro": "Falha ao processar 24_30_04032020105654_ct54526913.08.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='545269_2019/431883/1_cadastro_545269_2019_431883_86200162530_1308201920300347.xlsx' compress_type=deflate file_size=9616 compress_size=7948> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:16:37"
+    }
+]

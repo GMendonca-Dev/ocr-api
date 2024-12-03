@@ -1,0 +1,122 @@
+[
+    {
+        "id_documento": "11727",
+        "pagina": 465,
+        "nome_original": "",
+        "arquivo": "37_0_09032020085455_",
+        "extensao": "",
+        "pasta": null,
+        "caminho": null,
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11728",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005502_79996766819_47872.zip",
+        "arquivo": "37_29_09032020085933_815092018tbravivosp30055027999676681947872.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020085933_815092018tbravivosp30055027999676681947872.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11729",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005502_79996766819_47872.zip",
+        "arquivo": "37_29_09032020085935_815092018tbravivosp30055027999676681947872.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020085935_815092018tbravivosp30055027999676681947872.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11730",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005503_79996922207_47873.zip",
+        "arquivo": "37_29_09032020085958_815092018tbravivosp30055037999692220747873.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020085958_815092018tbravivosp30055037999692220747873.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11731",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005504_79996703149_47874.zip",
+        "arquivo": "37_29_09032020090018_815092018tbravivosp30055047999670314947874.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020090018_815092018tbravivosp30055047999670314947874.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11732",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005505_79998696066_47875.zip",
+        "arquivo": "37_29_09032020090047_815092018tbravivosp30055057999869606647875.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020090047_815092018tbravivosp30055057999869606647875.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11733",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005509_79998121940_47859.zip",
+        "arquivo": "37_29_09032020090115_815092018tbravivosp30055097999812194047859.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020090115_815092018tbravivosp30055097999812194047859.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11734",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005509_79998121940_47859.zip",
+        "arquivo": "37_29_09032020090118_815092018tbravivosp30055097999812194047859.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020090118_815092018tbravivosp30055097999812194047859.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11735",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005510_79996632688_47860.zip",
+        "arquivo": "37_29_09032020090138_815092018tbravivosp30055107999663268847860.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020090138_815092018tbravivosp30055107999663268847860.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    },
+    {
+        "id_documento": "11736",
+        "pagina": 465,
+        "nome_original": "81509-2018-TBRA - VIVO SP_3005511_79999473412_47876.zip",
+        "arquivo": "37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip",
+        "erro": "Falha ao processar 37_29_09032020090228_815092018tbravivosp30055117999947341247876.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:40:42"
+    }
+]

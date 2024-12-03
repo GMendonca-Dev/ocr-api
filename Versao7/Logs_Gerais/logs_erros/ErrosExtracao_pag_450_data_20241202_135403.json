@@ -1,0 +1,62 @@
+[
+    {
+        "id_documento": "11363",
+        "pagina": 450,
+        "nome_original": "anexos_protocolo_142099_2020_04032020143000.zip",
+        "arquivo": "38_30_05032020142926_anexosprotocolo142099202004032020143000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_05032020142926_anexosprotocolo142099202004032020143000.zip",
+        "erro": "Falha ao processar 38_30_05032020144155_anexosprotocolo141692202004032020074000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='141692_2020/843604/1_resumo_141692_2020_843604_354174100151460_04032020074000348.pdf' compress_type=deflate file_size=5598 compress_size=4975> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:54:03"
+    },
+    {
+        "id_documento": "11370",
+        "pagina": 450,
+        "nome_original": "20.001724O.zip",
+        "arquivo": "38_27_05032020143727_20.001724o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_05032020143727_20.001724o.zip",
+        "erro": "Falha ao processar 38_30_05032020144155_anexosprotocolo141692202004032020074000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='141692_2020/843604/1_resumo_141692_2020_843604_354174100151460_04032020074000348.pdf' compress_type=deflate file_size=5598 compress_size=4975> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:54:03"
+    },
+    {
+        "id_documento": "11372",
+        "pagina": 450,
+        "nome_original": "anexos_protocolo_141336_2020_03032020195000.zip",
+        "arquivo": "38_30_05032020143954_anexosprotocolo141336202003032020195000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_05032020143954_anexosprotocolo141336202003032020195000.zip",
+        "erro": "Falha ao processar 38_30_05032020144155_anexosprotocolo141692202004032020074000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='141692_2020/843604/1_resumo_141692_2020_843604_354174100151460_04032020074000348.pdf' compress_type=deflate file_size=5598 compress_size=4975> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:54:03"
+    },
+    {
+        "id_documento": "11373",
+        "pagina": 450,
+        "nome_original": "anexos_protocolo_141692_2020_03032020232001.zip",
+        "arquivo": "38_30_05032020144130_anexosprotocolo141692202003032020232001.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_05032020144130_anexosprotocolo141692202003032020232001.zip",
+        "erro": "Falha ao processar 38_30_05032020144155_anexosprotocolo141692202004032020074000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='141692_2020/843604/1_resumo_141692_2020_843604_354174100151460_04032020074000348.pdf' compress_type=deflate file_size=5598 compress_size=4975> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:54:03"
+    },
+    {
+        "id_documento": "11374",
+        "pagina": 450,
+        "nome_original": "anexos_protocolo_141692_2020_04032020074000.zip",
+        "arquivo": "38_30_05032020144155_anexosprotocolo141692202004032020074000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_05032020144155_anexosprotocolo141692202004032020074000.zip",
+        "erro": "Falha ao processar 38_30_05032020144155_anexosprotocolo141692202004032020074000.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='141692_2020/843604/1_resumo_141692_2020_843604_354174100151460_04032020074000348.pdf' compress_type=deflate file_size=5598 compress_size=4975> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:54:03"
+    }
+]

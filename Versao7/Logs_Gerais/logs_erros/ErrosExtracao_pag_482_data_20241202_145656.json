@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "12155",
+        "pagina": 482,
+        "nome_original": "19.008884O.zip",
+        "arquivo": "38_27_09032020140421_19.008884o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_09032020140421_19.008884o.zip",
+        "erro": "Falha ao processar 38_27_09032020140445_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:56:56"
+    },
+    {
+        "id_documento": "12156",
+        "pagina": 482,
+        "nome_original": "anexos.zip",
+        "arquivo": "38_27_09032020140445_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_09032020140445_anexos.zip",
+        "erro": "Falha ao processar 38_27_09032020140445_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:56:56"
+    }
+]

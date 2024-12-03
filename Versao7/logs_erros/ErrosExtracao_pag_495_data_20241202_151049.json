@@ -1,0 +1,74 @@
+[
+    {
+        "id_documento": "12498",
+        "pagina": 495,
+        "nome_original": "GSE 0089456 - 28.06.2019.rar",
+        "arquivo": "24_27_10032020144818_gse008945628.06.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_10032020144818_gse008945628.06.2019.rar",
+        "erro": "Falha ao processar 24_30_10032020145042_anexosprotocolo529976201924072019222502.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='529976_2019/386600/1_resumo_529976_2019_386600_5579991183271_24072019222502549.pdf' compress_type=deflate file_size=4259 compress_size=3845> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 15:10:49"
+    },
+    {
+        "id_documento": "12499",
+        "pagina": 495,
+        "nome_original": "GSE 0109991 - 27.07.2019.rar",
+        "arquivo": "24_27_10032020144849_gse010999127.07.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_10032020144849_gse010999127.07.2019.rar",
+        "erro": "Falha ao processar 24_30_10032020145042_anexosprotocolo529976201924072019222502.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='529976_2019/386600/1_resumo_529976_2019_386600_5579991183271_24072019222502549.pdf' compress_type=deflate file_size=4259 compress_size=3845> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 15:10:49"
+    },
+    {
+        "id_documento": "12500",
+        "pagina": 495,
+        "nome_original": "GSE 0121562 - 16.08.2019.rar",
+        "arquivo": "24_27_10032020144916_gse012156216.08.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_10032020144916_gse012156216.08.2019.rar",
+        "erro": "Falha ao processar 24_30_10032020145042_anexosprotocolo529976201924072019222502.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='529976_2019/386600/1_resumo_529976_2019_386600_5579991183271_24072019222502549.pdf' compress_type=deflate file_size=4259 compress_size=3845> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 15:10:49"
+    },
+    {
+        "id_documento": "12501",
+        "pagina": 495,
+        "nome_original": "anexos_protocolo_506697_2019_27062019182000.zip",
+        "arquivo": "24_30_10032020144940_anexosprotocolo506697201927062019182000.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_10032020144940_anexosprotocolo506697201927062019182000.zip",
+        "erro": "Falha ao processar 24_30_10032020145042_anexosprotocolo529976201924072019222502.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='529976_2019/386600/1_resumo_529976_2019_386600_5579991183271_24072019222502549.pdf' compress_type=deflate file_size=4259 compress_size=3845> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 15:10:49"
+    },
+    {
+        "id_documento": "12502",
+        "pagina": 495,
+        "nome_original": "CT 519223 - 10.07.2019.rar",
+        "arquivo": "24_30_10032020145015_ct51922310.07.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_10032020145015_ct51922310.07.2019.rar",
+        "erro": "Falha ao processar 24_30_10032020145042_anexosprotocolo529976201924072019222502.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='529976_2019/386600/1_resumo_529976_2019_386600_5579991183271_24072019222502549.pdf' compress_type=deflate file_size=4259 compress_size=3845> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 15:10:49"
+    },
+    {
+        "id_documento": "12503",
+        "pagina": 495,
+        "nome_original": "anexos_protocolo_529976_2019_24072019222502.zip",
+        "arquivo": "24_30_10032020145042_anexosprotocolo529976201924072019222502.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_10032020145042_anexosprotocolo529976201924072019222502.zip",
+        "erro": "Falha ao processar 24_30_10032020145042_anexosprotocolo529976201924072019222502.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='529976_2019/386600/1_resumo_529976_2019_386600_5579991183271_24072019222502549.pdf' compress_type=deflate file_size=4259 compress_size=3845> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 15:10:49"
+    }
+]

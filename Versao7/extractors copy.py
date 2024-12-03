@@ -10,7 +10,6 @@ from extractors_utils import (
     extract_text_from_txt,
     extract_text_from_xlsx,
     extract_text_from_xls,
-    extract_text_from_xltx,
     extract_text_and_images_from_docx,
     extract_text_from_image,
     download_and_convert_doc_to_docx,
@@ -181,8 +180,6 @@ def process_file_by_extension(file_path, extension, original_data=None):
             result = (extract_text_from_xlsx(file_path), True, None)
         elif extension == 'xls':
             result = (extract_text_from_xls(file_path), True, None)
-        elif extension == 'xltx':
-            result = (extract_text_from_xltx(file_path), True, None)
         elif extension == 'docx':
             result = (extract_text_and_images_from_docx(file_path), True, None)
         elif extension == 'doc':

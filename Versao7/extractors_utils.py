@@ -206,6 +206,13 @@ def extract_text_from_odg(file_path_or_content):
 
 
 def extract_text_from_txt(file_path_or_content):
+    """
+    Extrai o texto de um arquivo de texto (formato .txt).
+
+    O arquivo pode ser lido como um objeto de bytes ou como um caminho de arquivo no sistema de arquivos.
+    O encoding padr o  'latin1'.
+    """
+  
     try:
         if isinstance(file_path_or_content, bytes):
             resultado = file_path_or_content.decode('latin1')
@@ -219,6 +226,27 @@ def extract_text_from_txt(file_path_or_content):
 
 
 def extract_text_from_odf(file_path, extension):
+    """
+    Extrai o texto de um arquivo ODF (OpenDocument Format).
+
+    Parameters
+    ----------
+    file_path : str
+        Caminho do arquivo ODF.
+    extension : str
+        Extens o do arquivo ODF. Pode ser 'odt', 'ods', 'odp' ou 'odg'.
+
+    Returns
+    -------
+    tuple
+        Tupla contendo o texto extra do, um booleano indicando se a extra o foi bem-sucedida e
+        uma mensagem de erro (caso a extra o tenha falhado).
+
+    Raises
+    ------
+    Exception
+        Caso ocorra um erro durante a extra o de texto do arquivo ODF.
+    """
     try:
         if extension == 'odt':
             # Corrigir aqui - pegar apenas o primeiro elemento da tupla
@@ -238,7 +266,6 @@ def extract_text_from_odf(file_path, extension):
         return "", False, erro_msg
 
 
-
 # def extract_text_from_odf(file_path, extension):
 #     try:
 #         if extension == 'odt':
@@ -254,7 +281,6 @@ def extract_text_from_odf(file_path, extension):
 #         return "", False, erro_msg
 
 
-
 # def extract_text_from_xlsx(file_path_or_content):
 
 #     try:
@@ -267,9 +293,6 @@ def extract_text_from_odf(file_path, extension):
 #     except Exception as e:
 #         print(f"Erro ao ler arquivo xlsx: {e}")
 #         return "", False
-
-
-
 
 
 def extract_text_from_xlsx(file_path_or_content):
@@ -364,7 +387,66 @@ def extract_text_from_xls(file_path):
         raise e
 
 
+def extract_text_from_xltx(file_path_or_content):
+    """
+    Extrai o texto de todas as planilhas de um arquivo .xltx.
+
+    Args:
+    - file_path_or_content (str ou bytes): Caminho para o arquivo .xltx ou conteúdo em bytes.
+
+    Retorna:
+    - texto_extraido (str): O texto extraído de todas as planilhas.
+    """
+    if isinstance(file_path_or_content, bytes):
+        # Conteúdo em bytes
+        file_content = BytesIO(file_path_or_content)
+        excel_file = file_content
+    elif isinstance(file_path_or_content, str):
+        # Caminho do arquivo
+        if not os.path.exists(file_path_or_content):
+            raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não existe.")
+        excel_file = file_path_or_content
+    else:
+        raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
+
+    try:
+        # Lê todas as planilhas do arquivo Excel
+        df_dict = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
+        texto_extraido = ''
+
+        for nome_planilha, df in df_dict.items():
+            # Substitui os valores NaN por strings vazias
+            df = df.fillna('')
+            texto_extraido += f"=== Planilha: {nome_planilha} ===\n"
+            texto_extraido += df.to_string(index=False)
+            texto_extraido += '\n\n'
+
+        return texto_extraido
+
+    except FileNotFoundError:
+        raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
+    except ValueError as ve:
+        raise ValueError(f"Erro ao ler o arquivo xltx: {ve}")
+    except Exception as e:
+        raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
+
+
+
 def extract_text_from_csv(file_path_or_content):
+    """
+    Extrai o texto de um arquivo CSV.
+
+    Parâmetros:
+    - file_path_or_content (str ou bytes): Caminho para o arquivo CSV ou conteúdo em bytes.
+
+    Retorna:
+    - texto_extraido (str): O texto extraído do arquivo CSV.
+    - sucesso (bool): Indica se a extração foi bem-sucedida.
+    - erro_msg (str): Mensagem de erro, se houver.
+
+    Exceções:
+    - Gera e imprime uma mensagem de erro se ocorrer qualquer exceção durante a leitura do arquivo CSV.
+    """
     try:
         # Verifica se o conteúdo é binário (baixado de uma URL e não de um arquivo local)
         if isinstance(file_path_or_content, bytes):

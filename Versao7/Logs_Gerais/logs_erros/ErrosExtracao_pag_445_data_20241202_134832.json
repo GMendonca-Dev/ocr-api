@@ -1,0 +1,26 @@
+[
+    {
+        "id_documento": "11240",
+        "pagina": 445,
+        "nome_original": "GSE 0108446 - 25.07.2019.rar",
+        "arquivo": "24_27_04032020145807_gse010844625.07.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020145807_gse010844625.07.2019.rar",
+        "erro": "Falha ao processar 38_30_04032020150226_anexosprotocolo4809892019250520190855001.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='480989_2019/253082/1_cadastro_480989_2019_253082_00389432555_25052019085500790.pdf' compress_type=deflate file_size=3952 compress_size=3527> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:48:32"
+    },
+    {
+        "id_documento": "11249",
+        "pagina": 445,
+        "nome_original": "anexos_protocolo_480989_2019_25052019085500 (1).zip",
+        "arquivo": "38_30_04032020150226_anexosprotocolo4809892019250520190855001.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_04032020150226_anexosprotocolo4809892019250520190855001.zip",
+        "erro": "Falha ao processar 38_30_04032020150226_anexosprotocolo4809892019250520190855001.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='480989_2019/253082/1_cadastro_480989_2019_253082_00389432555_25052019085500790.pdf' compress_type=deflate file_size=3952 compress_size=3527> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:48:32"
+    }
+]

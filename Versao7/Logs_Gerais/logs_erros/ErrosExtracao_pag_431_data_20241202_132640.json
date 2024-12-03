@@ -1,0 +1,86 @@
+[
+    {
+        "id_documento": "10845",
+        "pagina": 431,
+        "nome_original": "Ofício 2398.19 - VIVO- OP 109.19 - PROTOCOLO.pdf",
+        "arquivo": "24_23_04032020114737_oficio2398.19vivoop109.19protocolo.pdf",
+        "extensao": ".pdf",
+        "pasta": "protocolooperadora",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/protocolooperadora/24_23_04032020114737_oficio2398.19vivoop109.19protocolo.pdf",
+        "erro": "Falha ao processar 24_27_04032020115641_gse015664411.10.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='19.011364O1053203558916794416.xlsx' compress_type=deflate file_size=18685 compress_size=17780> is encrypted, password required for extraction",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-12-02 13:26:40"
+    },
+    {
+        "id_documento": "10851",
+        "pagina": 431,
+        "nome_original": "Representação - Partes de 1 a 4 - Decisão de 10.10.19 - OP 109.19.rar",
+        "arquivo": "24_8_04032020115007_representacaopartesde1a4decisaode10.10.19op109.19.rar",
+        "extensao": ".rar",
+        "pasta": "representacao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/representacao/24_8_04032020115007_representacaopartesde1a4decisaode10.10.19op109.19.rar",
+        "erro": "Falha ao processar 24_27_04032020115641_gse015664411.10.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='19.011364O1053203558916794416.xlsx' compress_type=deflate file_size=18685 compress_size=17780> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:26:40"
+    },
+    {
+        "id_documento": "10859",
+        "pagina": 431,
+        "nome_original": "Ref. Of. 1765.19 - 31.07.2019.rar",
+        "arquivo": "24_36_04032020115445_ref.of.1765.1931.07.2019.rar",
+        "extensao": ".rar",
+        "pasta": "respostanextel",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/respostanextel/24_36_04032020115445_ref.of.1765.1931.07.2019.rar",
+        "erro": "Falha ao processar 24_27_04032020115641_gse015664411.10.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='19.011364O1053203558916794416.xlsx' compress_type=deflate file_size=18685 compress_size=17780> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:26:40"
+    },
+    {
+        "id_documento": "10860",
+        "pagina": 431,
+        "nome_original": "GSE 0068765 - 25.05.2019.rar",
+        "arquivo": "24_27_04032020115516_gse006876525.05.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020115516_gse006876525.05.2019.rar",
+        "erro": "Falha ao processar 24_27_04032020115641_gse015664411.10.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='19.011364O1053203558916794416.xlsx' compress_type=deflate file_size=18685 compress_size=17780> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:26:40"
+    },
+    {
+        "id_documento": "10861",
+        "pagina": 431,
+        "nome_original": "GSE 0111430 - 31.07.2019.rar",
+        "arquivo": "24_27_04032020115545_gse011143031.07.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020115545_gse011143031.07.2019.rar",
+        "erro": "Falha ao processar 24_27_04032020115641_gse015664411.10.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='19.011364O1053203558916794416.xlsx' compress_type=deflate file_size=18685 compress_size=17780> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:26:40"
+    },
+    {
+        "id_documento": "10862",
+        "pagina": 431,
+        "nome_original": "GSE 0133532 - 05.09.2019.rar",
+        "arquivo": "24_27_04032020115611_gse013353205.09.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020115611_gse013353205.09.2019.rar",
+        "erro": "Falha ao processar 24_27_04032020115641_gse015664411.10.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='19.011364O1053203558916794416.xlsx' compress_type=deflate file_size=18685 compress_size=17780> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:26:40"
+    },
+    {
+        "id_documento": "10864",
+        "pagina": 431,
+        "nome_original": "GSE 0156644 - 11.10.2019.rar",
+        "arquivo": "24_27_04032020115641_gse015664411.10.2019.rar",
+        "extensao": ".rar",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020115641_gse015664411.10.2019.rar",
+        "erro": "Falha ao processar 24_27_04032020115641_gse015664411.10.2019.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='19.011364O1053203558916794416.xlsx' compress_type=deflate file_size=18685 compress_size=17780> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:26:40"
+    }
+]

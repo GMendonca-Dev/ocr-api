@@ -1,0 +1,50 @@
+[
+    {
+        "id_documento": "10444",
+        "pagina": 415,
+        "nome_original": "19.005299O.zip",
+        "arquivo": "24_27_04032020063430_19.005299o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020063430_19.005299o.zip",
+        "erro": "Falha ao processar 24_29_04032020063812_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:04:13"
+    },
+    {
+        "id_documento": "10448",
+        "pagina": 415,
+        "nome_original": "19.005986O.zip",
+        "arquivo": "24_27_04032020063657_19.005986o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/24_27_04032020063657_19.005986o.zip",
+        "erro": "Falha ao processar 24_29_04032020063812_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:04:13"
+    },
+    {
+        "id_documento": "10450",
+        "pagina": 415,
+        "nome_original": "CT 484287 - 29.05.2019.rar",
+        "arquivo": "24_30_04032020063731_ct48428729.05.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020063731_ct48428729.05.2019.rar",
+        "erro": "Falha ao processar 24_29_04032020063812_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:04:13"
+    },
+    {
+        "id_documento": "10451",
+        "pagina": 415,
+        "nome_original": "anexos.zip",
+        "arquivo": "24_29_04032020063812_anexos.zip",
+        "extensao": ".zip",
+        "pasta": "ctvivo",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/ctvivo/24_29_04032020063812_anexos.zip",
+        "erro": "Falha ao processar 24_29_04032020063812_anexos.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:04:13"
+    }
+]

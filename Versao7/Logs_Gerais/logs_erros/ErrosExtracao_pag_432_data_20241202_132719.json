@@ -1,0 +1,50 @@
+[
+    {
+        "id_documento": "10866",
+        "pagina": 432,
+        "nome_original": "CT 480632 - 24.05.2019.rar",
+        "arquivo": "24_30_04032020115709_ct48063224.05.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020115709_ct48063224.05.2019.rar",
+        "erro": "Falha ao processar 24_30_04032020115817_ct59154911.10.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:27:19"
+    },
+    {
+        "id_documento": "10867",
+        "pagina": 432,
+        "nome_original": "CT 534782 - 31.07.2019.rar",
+        "arquivo": "24_30_04032020115734_ct53478231.07.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020115734_ct53478231.07.2019.rar",
+        "erro": "Falha ao processar 24_30_04032020115817_ct59154911.10.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:27:19"
+    },
+    {
+        "id_documento": "10869",
+        "pagina": 432,
+        "nome_original": "anexos_protocolo_561677_2019_05092019012002.zip",
+        "arquivo": "24_30_04032020115754_anexosprotocolo561677201905092019012002.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020115754_anexosprotocolo561677201905092019012002.zip",
+        "erro": "Falha ao processar 24_30_04032020115817_ct59154911.10.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:27:19"
+    },
+    {
+        "id_documento": "10870",
+        "pagina": 432,
+        "nome_original": "CT 591549 - 11.10.2019.rar",
+        "arquivo": "24_30_04032020115817_ct59154911.10.2019.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/24_30_04032020115817_ct59154911.10.2019.rar",
+        "erro": "Falha ao processar 24_30_04032020115817_ct59154911.10.2019.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 13:27:19"
+    }
+]

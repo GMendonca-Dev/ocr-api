@@ -221,16 +221,38 @@ def extract_text_from_txt(file_path_or_content):
 def extract_text_from_odf(file_path, extension):
     try:
         if extension == 'odt':
-            return extract_text_from_odt(file_path), True, None
+            # Corrigir aqui - pegar apenas o primeiro elemento da tupla
+            texto, sucesso = extract_text_from_odt(file_path)
+            return texto, sucesso, None
         elif extension == 'ods':
-            return extract_text_from_ods(file_path), True, None
+            texto, sucesso = extract_text_from_ods(file_path)
+            return texto, sucesso, None
         elif extension == 'odp':
-            return extract_text_from_odp(file_path), True, None
+            texto, sucesso = extract_text_from_odp(file_path)
+            return texto, sucesso, None
         elif extension == 'odg':
-            return extract_text_from_odg(file_path), True, None
+            texto, sucesso = extract_text_from_odg(file_path)
+            return texto, sucesso, None
     except Exception as e:
         erro_msg = f"Erro ao processar arquivo ODF ({extension}): {e}"
         return "", False, erro_msg
+
+
+
+# def extract_text_from_odf(file_path, extension):
+#     try:
+#         if extension == 'odt':
+#             return extract_text_from_odt(file_path), True, None
+#         elif extension == 'ods':
+#             return extract_text_from_ods(file_path), True, None
+#         elif extension == 'odp':
+#             return extract_text_from_odp(file_path), True, None
+#         elif extension == 'odg':
+#             return extract_text_from_odg(file_path), True, None
+#     except Exception as e:
+#         erro_msg = f"Erro ao processar arquivo ODF ({extension}): {e}"
+#         return "", False, erro_msg
+
 
 
 # def extract_text_from_xlsx(file_path_or_content):
@@ -245,6 +267,9 @@ def extract_text_from_odf(file_path, extension):
 #     except Exception as e:
 #         print(f"Erro ao ler arquivo xlsx: {e}")
 #         return "", False
+
+
+
 
 
 def extract_text_from_xlsx(file_path_or_content):
@@ -555,86 +580,6 @@ def extract_text_from_pptx(file_path_or_content):
     finally:
         if isinstance(file_content, BytesIO) is False and not isinstance(file_path_or_content, bytes):
             file_content.close()
-
-
-# ###################   FUNCIONOU LOCALMENTE
-
-# def enhance_image(image):
-#     """Melhora a imagem para OCR com nitidez e contraste."""
-#     image = image.convert("L")  # Converte para escala de cinza
-#     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
-#     enhancer = ImageEnhance.Contrast(image)
-#     return enhancer.enhance(2)  # Aumenta o contraste
-
-
-# def extract_text_from_pdf(pdf_content):
-#     # Verifica se o conteúdo é do tipo correto (bytes)
-#     if isinstance(pdf_content, str):
-#         raise ValueError("O conteúdo do PDF deve ser do tipo 'bytes' e não 'str'. Verifique a leitura do arquivo.")
-
-#     all_text = ""
-
-#     # Tentativa de extrair texto pesquisável e tabelas com pdfplumber
-#     try:
-#         with pdfplumber.open(BytesIO(pdf_content)) as pdf:
-#             for page_num, page in enumerate(pdf.pages):
-#                 try:
-#                     # Extrai texto pesquisável
-#                     page_text = page.extract_text()
-#                     if page_text:
-#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
-#                     else:
-#                         print(f"Página {page_num + 1} sem texto pesquisável. Aplicando OCR...")
-#                         page_image = page.to_image(resolution=300).original
-#                         enhanced_image = enhance_image(page_image)
-#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-#                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
-
-#                 except Exception as e:
-#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
-
-#     except Exception as e:
-#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
-
-#     # Tentativa de extrair imagens e aplicar OCR com PyMuPDF
-#     try:
-#         doc = fitz.open(stream=BytesIO(pdf_content), filetype="pdf")
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             images = page.get_images(full=True)
-#             if images:
-#                 for img_index, img in enumerate(images):
-#                     xref = img[0]
-#                     base_image = doc.extract_image(xref)
-#                     image_data = base_image["image"]
-#                     image = Image.open(BytesIO(image_data))
-
-#                     # Aplicar OCR na imagem extraída
-#                     try:
-#                         ocr_text = pytesseract.image_to_string(image, lang='por')
-#                         all_text += f"\nImagem na página {page_num + 1}, imagem {img_index + 1}:\n{ocr_text}\n"
-#                     except Exception as ocr_error:
-#                         print(f"Erro ao realizar OCR na imagem da página {page_num + 1}, imagem {img_index + 1}: {ocr_error}")
-#             else:
-#                 print(f"Nenhuma imagem encontrada na página {page_num + 1}")
-
-#     except Exception as e:
-#         print(f"Erro ao processar imagens do PDF: {e}")
-
-#     return all_text
-
-
-# Está funcionando localmente
-# # Teste da função
-# if __name__ == "__main__":
-#     # Exemplo de uso com leitura de arquivo local
-#     pdf_path = r'D:\Repositorios\ocr-api\funcionando - V5\24_22_1300220.pdf'
-#     with open(pdf_path, 'rb') as f:
-#         pdf_content = f.read()  # Lendo como bytes
-#     resultado = extract_text_from_pdf(pdf_content)
-#     print(resultado)
-
-# # #########################################   FUNCIONANDO MASSA FALTA APENAS IMAGEM DE PDF  ################################################
 
 
 def enhance_image(image):

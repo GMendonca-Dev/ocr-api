@@ -1,0 +1,50 @@
+[
+    {
+        "id_documento": "12269",
+        "pagina": 486,
+        "nome_original": "anexos_protocolo_145975_2020_09032020205004.zip",
+        "arquivo": "38_30_10032020124019_anexosprotocolo145975202009032020205004.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_10032020124019_anexosprotocolo145975202009032020205004.zip",
+        "erro": "Falha ao processar 38_27_10032020124353_20.001873o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.001873O5896682473447272497.xlsx' compress_type=deflate file_size=18709 compress_size=17804> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:59:53"
+    },
+    {
+        "id_documento": "12270",
+        "pagina": 486,
+        "nome_original": "20.001866O.zip",
+        "arquivo": "38_27_10032020124129_20.001866o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_10032020124129_20.001866o.zip",
+        "erro": "Falha ao processar 38_27_10032020124353_20.001873o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.001873O5896682473447272497.xlsx' compress_type=deflate file_size=18709 compress_size=17804> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:59:53"
+    },
+    {
+        "id_documento": "12271",
+        "pagina": 486,
+        "nome_original": "anexos_protocolo_145946_2020_09032020205003.zip",
+        "arquivo": "38_30_10032020124246_anexosprotocolo145946202009032020205003.zip",
+        "extensao": ".zip",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/38_30_10032020124246_anexosprotocolo145946202009032020205003.zip",
+        "erro": "Falha ao processar 38_27_10032020124353_20.001873o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.001873O5896682473447272497.xlsx' compress_type=deflate file_size=18709 compress_size=17804> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:59:53"
+    },
+    {
+        "id_documento": "12274",
+        "pagina": 486,
+        "nome_original": "20.001873O.zip",
+        "arquivo": "38_27_10032020124353_20.001873o.zip",
+        "extensao": ".zip",
+        "pasta": "gseoi",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/gseoi/38_27_10032020124353_20.001873o.zip",
+        "erro": "Falha ao processar 38_27_10032020124353_20.001873o.zip: Erro ao processar o arquivo com extensão zip: File <ZipInfo filename='20.001873O5896682473447272497.xlsx' compress_type=deflate file_size=18709 compress_size=17804> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 14:59:53"
+    }
+]

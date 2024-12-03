@@ -1,0 +1,14 @@
+[
+    {
+        "id_documento": "12577",
+        "pagina": 498,
+        "nome_original": "FOTO ERIK FELIX ANDRADE_PPE.jpeg",
+        "arquivo": "46_58_11032020061935_fotoerikfelixandradeppe.jpeg",
+        "extensao": ".jpeg",
+        "pasta": "imagem",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/imagem/46_58_11032020061935_fotoerikfelixandradeppe.jpeg",
+        "erro": "Falha ao processar 46_58_11032020061935_fotoerikfelixandradeppe.jpeg: Arquivo com conteúdo vazio",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-02 15:13:07"
+    }
+]
