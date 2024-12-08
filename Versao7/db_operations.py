@@ -130,7 +130,8 @@ def insert_data_into_main_table(data):
             ON CONFLICT (id_documento, nome_original) DO UPDATE
             SET conteudo = EXCLUDED.conteudo,
                     numero_pagina = EXCLUDED.numero_pagina,
-                    arquivo_existe = EXCLUDED.arquivo_existe
+                    arquivo_existe = EXCLUDED.arquivo_existe,
+                    data_leitura = EXCLUDED.data_leitura
         """, sanitized_data)
         conn.commit()
     except Exception as e:

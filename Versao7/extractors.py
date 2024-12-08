@@ -164,6 +164,7 @@ def process_file_by_extension(file_path, extension, original_data=None):
     """
     Processa o arquivo com base em sua extensão.
     """
+
     try:
         # Obtém o resultado da extração baseado na extensão
         if extension in ['zip', 'rar', '7z']:
@@ -173,8 +174,10 @@ def process_file_by_extension(file_path, extension, original_data=None):
             return "Arquivo compactado processado com sucesso", True, None
             
         result = None
+        # if extension == 'csv':
+        #     result = extract_text_from_csv(file_path)
         if extension == 'csv':
-            result = extract_text_from_csv(file_path)
+            result = (extract_text_from_csv(file_path), True, None)
         elif extension == 'txt':
             result = (extract_text_from_txt(file_path)[0], True, None)
         elif extension == 'xlsx':

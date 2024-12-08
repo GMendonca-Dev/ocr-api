@@ -1,0 +1,3 @@
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/operacaoesenhavigias/55_57_25012021081519_senhaoi.xlsx
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/operacaoesenhavigias/55_57_25012021081550_senhasclaro.xlsx
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/44_13_25012021105925_relatorioeventoimei356.342.090.802.970inclusao79996645935.xlsx

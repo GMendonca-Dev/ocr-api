@@ -1,0 +1,25 @@
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020070643_oficio2613.20timop248.20protocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020070717_oficionº2611.2020dipolsergipeclaroprotocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020070739_oficionº2612.2020dipolsergipeoiconfirmacao.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020070808_oficionº2612.2020dipolsergipeoiprotocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/40_22_10112020070904_oficio2901.20claroop248.20.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/40_22_10112020070922_oficio2902.20oiop248.20.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020070937_oficio290320timop24820protocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/40_22_10112020071001_oficio2903.20timop248.20.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020071021_oficio2904.20vivoop248.20protocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/40_22_10112020071035_oficio2904.20vivoop248.20.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020071050_oficionº2901.2020dipolsergipeclaroprotocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020071103_oficionº2902.2020dipolsergipeoiconfirmacao.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020071119_oficionº2902.2020dipolsergipeoiprotocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinformandorenovacaodeoperacao/40_31_10112020071139_op248.20renovacaoimplementada.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/emailinformandoiniciodeoperacao/40_20_10112020071254_op248.20documentosdisponiveisnadipol.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/oficiosoperadoras/40_22_10112020071322_oficio2596.20vivoop248.20.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/protocolooperadora/40_23_10112020071336_oficio2596.20vivoop248.20protocolo.pdf
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/respostaaoficiodipol/56_64_11112020073652_ifood2651748oficionº28112019dipolcartoriodadosnaolocalizados.pdf
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/operacaoesenhavigias/56_57_11112020073800_20.0165942803067906269692889.xlsx
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/operacaoesenhavigias/56_57_11112020073827_20.0165948758379418474513508erb.xlsx
+Arquivo não encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/operacaoesenhavigias/56_57_11112020073900_20.0165948686897508761135647.xlsx
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/51_11_11112020075002_cadastro79988667431.xlsx
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/36_11_11112020083637_55275292.txt
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/36_11_11112020084400_7998638264.txt
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/cadastrotelefonico/36_11_11112020084456_79988744389.jpg

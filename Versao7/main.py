@@ -22,9 +22,11 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 401      # Número da página inicial
-END_PAGE = 500         # Número da página final
-DOCUMENT_ID = None  # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 1001      # Número da página inicial
+END_PAGE = 1100         # Número da página final
+DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
+
+#  ###REVER OS CSVs
 
 MAX_PAGES = 100  # Define o número máximo de páginas a serem processadas
 
@@ -205,7 +207,7 @@ def save_data_to_db(data, page_number):
     if erros_extracao:
         generate_error_log(page_number, erros_extracao, erro_msg)
 
-    generate_extraction_summary_log(page_number, total_registros, registros_sucesso, total_registros - registros_sucesso)
+    # generate_extraction_summary_log(page_number, total_registros, registros_sucesso, total_registros - registros_sucesso)
 
     generate_extraction_summary_log(
         page_number,

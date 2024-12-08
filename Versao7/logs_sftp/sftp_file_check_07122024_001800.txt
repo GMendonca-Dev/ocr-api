@@ -1,0 +1,3 @@
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/imagem/48_58_08022021110714_img20201116173819.jpg
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/imagem/48_58_08022021110714_oticapinaruacapela204centro2.jpg
+Arquivo encontrado : /var/www/html/xpertis/App/Lib/arquivos/documentos/imagem/48_58_08022021110714_oticapinaruacapela204centro.jpg

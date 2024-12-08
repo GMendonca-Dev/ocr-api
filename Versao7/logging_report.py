@@ -24,6 +24,8 @@ def generate_error_log(page_number, data, erro, log_dir="logs_erros"):
                 "extensao": os.path.splitext(item['arquivo'])[1],
                 "pasta": item['pasta'],
                 "caminho": item['caminho'],
+                "Op": item['numero'],
+                "Ano": item['ano'],
                 "erro": erro,
                 "arquivo_existe": item['fileexists'],
                 "data_insercao": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
