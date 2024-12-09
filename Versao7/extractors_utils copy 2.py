@@ -1238,110 +1238,49 @@ def download_pdf(url):
 
 
 def extract_text_from_pdf_content(file_path):
-    """
-    Extrai texto de PDFs usando múltiplas abordagens para maior robustez.
-    Lida com PDFs pesquisáveis, imagens, tabelas e PDFs não imprimíveis.
-    """
+
+    """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
+    all_text = ""
+
+    # Verifica se o arquivo existe
+    if not os.path.exists(file_path):
+        return "", False, f"O arquivo {file_path} não existe."
+
+    # Primeira tentativa: extrair texto com pdfplumber
     try:
-        all_text = []
-        
-        # 1. Primeira tentativa: pdfplumber para texto pesquisável e tabelas
-        try:
-            with pdfplumber.open(file_path) as pdf:
-                for page_num, page in enumerate(pdf.pages, 1):
-                    # Extrai texto normal
-                    text = page.extract_text() or ""
-                    
-                    # Extrai tabelas
-                    tables = page.extract_tables()
-                    tables_text = ""
-                    if tables:
-                        tables_text = "\n=== TABELAS ENCONTRADAS ===\n"
-                        for table in tables:
-                            tables_text += "\n".join([" | ".join([str(cell or "") for cell in row]) for row in table])
-                            tables_text += "\n---\n"
-                    
-                    # Combina texto e tabelas
-                    page_text = f"\n=== PÁGINA {page_num} ===\n{text}\n{tables_text}"
-                    all_text.append(page_text)
-        except Exception as e:
-            print(f"pdfplumber falhou: {e}")
-
-        # 2. Segunda tentativa: PyMuPDF (fitz) para elementos não detectados
-        try:
-            doc = fitz.open(file_path)
-            for page_num, page in enumerate(doc, 1):
-                # Se a página anterior está vazia, tenta extrair com PyMuPDF
-                if not all_text or not all_text[page_num-1].strip():
-                    # Extrai texto
-                    text = page.get_text("text")
-                    
-                    # Extrai imagens e aplica OCR
-                    image_list = page.get_images(full=True)
-                    images_text = ""
-                    if image_list:
-                        images_text = "\n=== TEXTO EXTRAÍDO DE IMAGENS ===\n"
-                        for img_index, img in enumerate(image_list, 1):
-                            xref = img[0]
-                            base_image = doc.extract_image(xref)
-                            image_bytes = base_image["image"]
-                            
-                            # Converte bytes da imagem para formato PIL
-                            image = Image.open(BytesIO(image_bytes))
-                            
-                            # Pré-processamento da imagem
-                            image = enhance_image(image)
-                            
-                            # OCR na imagem
-                            try:
-                                ocr_text = pytesseract.image_to_string(image, lang='por')
-                                if ocr_text.strip():
-                                    images_text += f"\nImagem {img_index}:\n{ocr_text}\n"
-                            except Exception as e:
-                                print(f"Erro no OCR da imagem {img_index}: {e}")
-                    
-                    page_text = f"\n=== PÁGINA {page_num} ===\n{text}\n{images_text}"
-                    if page_num <= len(all_text):
-                        all_text[page_num-1] = page_text
+        with pdfplumber.open(file_path) as pdf:
+            for page_num, page in enumerate(pdf.pages):
+                try:
+                    page_text = page.extract_text()
+                    if page_text:
+                        all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
                     else:
-                        all_text.append(page_text)
-            doc.close()
-        except Exception as e:
-            print(f"PyMuPDF falhou: {e}")
-
-        # 3. Terceira tentativa: Renderização completa da página para OCR
-        if not any(text.strip() for text in all_text):
-            try:
-                doc = fitz.open(file_path)
-                for page_num, page in enumerate(doc, 1):
-                    # Renderiza a página inteira como imagem
-                    pix = page.get_pixmap(matrix=fitz.Matrix(300/72, 300/72))
-                    image = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-                    
-                    # Pré-processamento da imagem
-                    image = enhance_image(image)
-                    
-                    # OCR na página inteira
-                    ocr_text = pytesseract.image_to_string(image, lang='por', config='--psm 6')
-                    page_text = f"\n=== PÁGINA {page_num} (OCR Completo) ===\n{ocr_text}"
-                    
-                    if page_num <= len(all_text):
-                        all_text[page_num-1] = page_text
-                    else:
-                        all_text.append(page_text)
-                doc.close()
-            except Exception as e:
-                print(f"OCR completo falhou: {e}")
-
-        # Combina todo o texto extraído
-        final_text = "\n".join(all_text).strip()
-        
-        if not final_text:
-            return "Nenhum texto extraído do PDF", False, "PDF sem conteúdo extraível"
-            
-        return final_text, True, None
-
+                        # Se não houver texto, aplica OCR na imagem da página
+                        page_image = page.to_image(resolution=300).original
+                        enhanced_image = enhance_image(page_image)
+                        ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                        all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
+                except Exception as e:
+                    print(f"Erro ao processar a página {page_num + 1}: {e}")
     except Exception as e:
-        erro_msg = f"Erro ao processar PDF: {str(e)}"
-        return "", False, erro_msg
+        print(f"Erro ao abrir PDF com pdfplumber: {e}")
+
+    # Fallback: PyMuPDF para PDFs com imagens embutidas
+    try:
+        doc = fitz.open(file_path)
+        for page_num in range(doc.page_count):
+            page = doc.load_page(page_num)
+            pix = page.get_pixmap()
+            image = Image.open(BytesIO(pix.tobytes()))
+            enhanced_image = enhance_image(image)
+
+            try:
+                ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
+            except Exception as ocr_error:
+                print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
+    except Exception as e:
+        print(f"Erro ao processar imagens do PDF: {e}")
+
+    return all_text, True, None
 
