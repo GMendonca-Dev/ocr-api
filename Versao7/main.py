@@ -22,9 +22,9 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 1001      # Número da página inicial
-END_PAGE = 1100         # Número da página final
-DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 40      # Número da página inicial
+END_PAGE = 40         # Número da página final # Parei na 1100
+DOCUMENT_ID = '1005'   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 #  ###REVER OS CSVs
 

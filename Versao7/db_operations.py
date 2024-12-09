@@ -158,7 +158,10 @@ def insert_error_into_table(error_data):
                     email_usuario, num_op, arquivo_existe
                     )
             VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (id_documento, nome_original) DO NOTHING
+            ON CONFLICT (id_documento, nome_original) DO UPDATE
+            SET erro = EXCLUDED.erro,
+                    arquivo_existe = EXCLUDED.arquivo_existe,
+                    data_insercao = EXCLUDED.data_insercao
         """,  sanitized_data)
         conn.commit()
 

@@ -14,7 +14,7 @@ import pandas as pd
 import pdfplumber
 import warnings
 import sys
-from lxml import etree
+# from lxml import etree
 from PIL import ImageFilter
 import subprocess
 import xlrd
@@ -22,6 +22,10 @@ import csv
 import cv2
 import numpy as np
 import chardet
+import tempfile
+from pdfplumber import PDF
+from tempfile import NamedTemporaryFile
+
 
 
 # ######## Conversão de arquivos .doc para .docx ########
@@ -82,41 +86,97 @@ def extract_text_from_xml(file_path_or_content):
         return "", False, erro_msg
 
 
-def extract_text_from_odt(file_path_or_content):
-    try:
-        # Abre o arquivo ODT a partir de um caminho ou de um objeto de arquivo
-        if isinstance(file_path_or_content, str):
-            # file_path_or_content é um caminho de arquivo
-            zip_file = zipfile.ZipFile(file_path_or_content, 'r')
-        else:
-            # file_path_or_content é um objeto de arquivo
-            zip_file = zipfile.ZipFile(file_path_or_content)
+# def extract_text_from_odt(file_path_or_content):
+#     try:
+#         # Abre o arquivo ODT a partir de um caminho ou de um objeto de arquivo
+#         if isinstance(file_path_or_content, str):
+#             # file_path_or_content é um caminho de arquivo
+#             zip_file = zipfile.ZipFile(file_path_or_content, 'r')
+#         else:
+#             # file_path_or_content é um objeto de arquivo
+#             zip_file = zipfile.ZipFile(file_path_or_content)
 
-        # Verifica se o content.xml existe no arquivo ODT
-        if 'content.xml' in zip_file.namelist():
-            with zip_file.open('content.xml') as f:
-                tree = etree.parse(f)
-                # Define os namespaces utilizados
-                namespaces = {
-                    'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
-                    'office': 'urn:oasis:names:tc:opendocument:xmlns:office:1.0'
-                }
-                # Encontra todos os elementos de parágrafo
-                paragrafos = tree.xpath('//text:p', namespaces=namespaces)
-                extracted_text = ''
-                for paragrafo in paragrafos:
-                    # Extrai o texto do parágrafo, incluindo elementos de texto internos
-                    texto_paragrafo = ''.join(paragrafo.xpath('.//text()', namespaces=namespaces))
-                    extracted_text += texto_paragrafo + '\n'
-            return extracted_text, True
-        else:
-            erro_msg = "O arquivo content.xml não foi encontrado no ODT."
-            print(erro_msg)
-            return "", False
+#         # Verifica se o content.xml existe no arquivo ODT
+#         if 'content.xml' in zip_file.namelist():
+#             with zip_file.open('content.xml') as f:
+#                 tree = etree.parse(f)
+#                 # Define os namespaces utilizados
+#                 namespaces = {
+#                     'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
+#                     'office': 'urn:oasis:names:tc:opendocument:xmlns:office:1.0'
+#                 }
+#                 # Encontra todos os elementos de parágrafo
+#                 paragrafos = tree.xpath('//text:p', namespaces=namespaces)
+#                 extracted_text = ''
+#                 for paragrafo in paragrafos:
+#                     # Extrai o texto do parágrafo, incluindo elementos de texto internos
+#                     texto_paragrafo = ''.join(paragrafo.xpath('.//text()', namespaces=namespaces))
+#                     extracted_text += texto_paragrafo + '\n'
+#             return extracted_text, True
+#         else:
+#             erro_msg = "O arquivo content.xml não foi encontrado no ODT."
+#             print(erro_msg)
+#             return "", False
+#     except Exception as e:
+#         erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
+#         print(erro_msg)  # Exibe o erro no console
+#         return "", False
+
+
+def extract_text_from_odt(file_path_or_content):
+    """
+    Extrai texto de um arquivo ODT. Se o ODT contiver texto diretamente, ele será extraído.
+    Caso contrário, o ODT será convertido para PDF e o texto será extraído do PDF.
+
+    Args:
+        file_path_or_content (str): Caminho para o arquivo ODT.
+
+    Returns:
+        tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+    """
+    try:
+        # Verifica se o arquivo ODT existe
+        if not os.path.exists(file_path_or_content):
+            return "", False, "O arquivo ODT não foi encontrado."
+
+        # Diretório temporário para saída da conversão
+        temp_dir = tempfile.gettempdir()
+        pdf_file_path = os.path.join(temp_dir, os.path.basename(file_path_or_content).replace(".odt", ".pdf"))
+
+        # Converte ODT para PDF usando LibreOffice
+        try:
+            subprocess.run(
+                ["libreoffice", "--headless", "--convert-to", "pdf", "--outdir", temp_dir, file_path_or_content],
+                check=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+        except subprocess.CalledProcessError as e:
+            return "", False, f"Erro durante a conversão de ODT para PDF: {e}"
+
+        # Verifica se o arquivo PDF foi gerado
+        if not os.path.exists(pdf_file_path):
+            return "", False, "Falha ao converter o arquivo ODT para PDF."
+
+        # Extrai texto do PDF
+        try:
+            with PDF.open(pdf_file_path) as pdf:
+                text = ""
+                for page in pdf.pages:
+                    text += page.extract_text() + "\n"
+        except Exception as e:
+            return "", False, f"Erro ao extrair texto do PDF: {e}"
+
+        # Remove o arquivo PDF temporário
+        os.remove(pdf_file_path)
+
+        # Retorna o texto extraído
+        if not text.strip():
+            return "", False, "Nenhum texto foi encontrado no arquivo."
+        return text.strip(), True, ""
+
     except Exception as e:
-        erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
-        print(erro_msg)  # Exibe o erro no console
-        return "", False
+        return "", False, f"Erro ao processar o arquivo ODT: {e}"
 
 
 # Extração de texto de arquivos ODS (LibreOffice Calc)
@@ -1162,33 +1222,110 @@ def enhance_image(image):
     return image
 
 
+# def download_pdf(url):
+#     """Baixa o PDF da URL e verifica o conteúdo."""
+#     try:
+#         response = requests.get(url, stream=True, verify=False)
+#         response.raise_for_status()
+
+#         # Assegura que todo o conteúdo foi baixado
+#         pdf_content = BytesIO(response.content)
+#         pdf_content.seek(0)  # Garante que o ponteiro está no início
+#         return pdf_content
+#     except Exception as e:
+#         print(f"Erro ao baixar o PDF: {e}")
+#         return None
+
+
+# def extract_text_from_pdf_content(file_path):
+
+#     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
+#     all_text = ""
+
+#     # Verifica se o arquivo existe
+#     if not os.path.exists(file_path):
+#         return "", False, f"O arquivo {file_path} não existe."
+
+#     # Primeira tentativa: extrair texto com pdfplumber
+#     try:
+#         with pdfplumber.open(file_path) as pdf:
+#             for page_num, page in enumerate(pdf.pages):
+#                 try:
+#                     page_text = page.extract_text()
+#                     if page_text:
+#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
+#                     else:
+#                         # Se não houver texto, aplica OCR na imagem da página
+#                         page_image = page.to_image(resolution=300).original
+#                         enhanced_image = enhance_image(page_image)
+#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
+#                 except Exception as e:
+#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
+#     except Exception as e:
+#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
+
+#     # Fallback: PyMuPDF para PDFs com imagens embutidas
+#     try:
+#         doc = fitz.open(file_path)
+#         for page_num in range(doc.page_count):
+#             page = doc.load_page(page_num)
+#             pix = page.get_pixmap()
+#             image = Image.open(BytesIO(pix.tobytes()))
+#             enhanced_image = enhance_image(image)
+
+#             try:
+#                 ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+#                 all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
+#             except Exception as ocr_error:
+#                 print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
+#     except Exception as e:
+#         print(f"Erro ao processar imagens do PDF: {e}")
+
+#     return all_text, True, None
+
+
 def download_pdf(url):
-    """Baixa o PDF da URL e verifica o conteúdo."""
+    """Baixa o PDF da URL e retorna o conteúdo em bytes."""
     try:
         response = requests.get(url, stream=True, verify=False)
         response.raise_for_status()
 
-        # Assegura que todo o conteúdo foi baixado
+        # Garante que o conteúdo foi baixado corretamente
         pdf_content = BytesIO(response.content)
-        pdf_content.seek(0)  # Garante que o ponteiro está no início
+        pdf_content.seek(0)
         return pdf_content
     except Exception as e:
         print(f"Erro ao baixar o PDF: {e}")
         return None
 
 
-def extract_text_from_pdf_content(file_path):
+def extract_text_from_pdf_content(pdf_input):
+    """
+    Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR.
 
-    """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
+    Args:
+        pdf_input (str ou BytesIO): Caminho para o arquivo PDF ou conteúdo em bytes.
+
+    Returns:
+        tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+    """
     all_text = ""
 
-    # Verifica se o arquivo existe
-    if not os.path.exists(file_path):
-        return "", False, f"O arquivo {file_path} não existe."
+    # Verifica se é um caminho de arquivo ou conteúdo em bytes
+    if isinstance(pdf_input, str):
+        temp_pdf_path = pdf_input  # Caminho do arquivo local
+    elif isinstance(pdf_input, BytesIO):
+        # Salva o conteúdo em bytes em um arquivo temporário
+        with NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+            temp_file.write(pdf_input.read())
+            temp_pdf_path = temp_file.name
+    else:
+        return "", False, "Entrada inválida. Forneça um caminho ou conteúdo em bytes."
 
-    # Primeira tentativa: extrair texto com pdfplumber
     try:
-        with pdfplumber.open(file_path) as pdf:
+        # Primeira tentativa: extrair texto com pdfplumber
+        with pdfplumber.open(temp_pdf_path) as pdf:
             for page_num, page in enumerate(pdf.pages):
                 try:
                     page_text = page.extract_text()
@@ -1197,30 +1334,32 @@ def extract_text_from_pdf_content(file_path):
                     else:
                         # Se não houver texto, aplica OCR na imagem da página
                         page_image = page.to_image(resolution=300).original
-                        enhanced_image = enhance_image(page_image)
-                        ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                        ocr_text = pytesseract.image_to_string(page_image, lang='por')
                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
                 except Exception as e:
                     print(f"Erro ao processar a página {page_num + 1}: {e}")
-    except Exception as e:
-        print(f"Erro ao abrir PDF com pdfplumber: {e}")
 
-    # Fallback: PyMuPDF para PDFs com imagens embutidas
-    try:
-        doc = fitz.open(file_path)
+        # Fallback: PyMuPDF para PDFs com imagens embutidas
+        doc = fitz.open(temp_pdf_path)
         for page_num in range(doc.page_count):
             page = doc.load_page(page_num)
             pix = page.get_pixmap()
             image = Image.open(BytesIO(pix.tobytes()))
-            enhanced_image = enhance_image(image)
 
             try:
-                ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
+                ocr_text = pytesseract.image_to_string(image, lang='por')
                 all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
             except Exception as ocr_error:
                 print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
+
+        doc.close()
+
     except Exception as e:
-        print(f"Erro ao processar imagens do PDF: {e}")
+        return "", False, f"Erro ao processar PDF: {e}"
+
+    finally:
+        # Garante que o arquivo temporário seja excluído, se criado
+        if not isinstance(pdf_input, str) and os.path.exists(temp_pdf_path):
+            os.remove(temp_pdf_path)
 
     return all_text, True, None
-
