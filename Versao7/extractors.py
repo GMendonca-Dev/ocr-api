@@ -192,7 +192,7 @@ def process_file_by_extension(file_path, extension, original_data=None):
             # Converte o .doc para .docx e processa
             docx_path = download_and_convert_doc_to_docx(file_path)
             result = (extract_text_and_images_from_docx(docx_path), True, None)
-        elif extension == 'pdf' or extension == '':
+        elif extension == 'pdf' or extension == '' or extension == "pdf'":
             result = (extract_text_from_pdf_content(file_path), True, None)
         elif extension in ['jpg', 'jpeg', 'png']:
             result = (extract_text_from_image(file_path), True, None)
