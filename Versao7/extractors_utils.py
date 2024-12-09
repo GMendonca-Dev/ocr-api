@@ -125,8 +125,8 @@ def extract_text_from_xml(file_path_or_content):
 
 def extract_text_from_odt(file_path_or_content):
     """
-    Extrai texto de um arquivo ODT. Se o ODT contiver texto diretamente, ele será extraído.
-    Caso contrário, o ODT será convertido para PDF e o texto será extraído do PDF.
+    Extrai texto de um arquivo ODT usando uma abordagem híbrida.
+    Primeiro tenta extrair diretamente do XML, se falhar usa conversão para PDF.
 
     Args:
         file_path_or_content (str): Caminho para o arquivo ODT.
@@ -135,45 +135,93 @@ def extract_text_from_odt(file_path_or_content):
         tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
     """
     try:
-        # Verifica se o arquivo ODT existe
-        if not os.path.exists(file_path_or_content):
-            return "", False, "O arquivo ODT não foi encontrado."
+        # Primeira tentativa: extrair diretamente do XML
+        if isinstance(file_path_or_content, str):
+            zip_file = zipfile.ZipFile(file_path_or_content, 'r')
+        else:
+            zip_file = zipfile.ZipFile(BytesIO(file_path_or_content))
 
-        # Diretório temporário para saída da conversão
+        if 'content.xml' in zip_file.namelist():
+            with zip_file.open('content.xml') as f:
+                tree = ET.parse(f)
+                root = tree.getroot()
+                
+                # Define os namespaces utilizados
+                namespaces = {
+                    'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
+                    'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0'
+                }
+                
+                # Extrai todo o texto, incluindo tabelas
+                extracted_text = []
+                
+                # Procura por todos os elementos que podem conter texto
+                for elem in root.findall('.//text:p', namespaces):
+                    if elem.text and elem.text.strip():
+                        extracted_text.append(elem.text.strip())
+                    if elem.tail and elem.tail.strip():
+                        extracted_text.append(elem.tail.strip())
+
+                for table in root.findall('.//table:table', namespaces):
+                    for row in table.findall('.//table:table-row', namespaces):
+                        for cell in row.findall('.//table:table-cell', namespaces):
+                            cell_text = []
+                            for p in cell.findall('.//text:p', namespaces):
+                                if p.text and p.text.strip():
+                                    cell_text.append(p.text.strip())
+                            if cell_text:
+                                extracted_text.append(" ".join(cell_text))
+
+                text = '\n'.join(extracted_text).strip()  # Remove espaços extras
+
+                # Verifica se o texto extraído não está vazio
+                if not text:
+                    return "", False, "Arquivo ODT está vazio ou não contém texto legível."
+
+                return text, True, ""
+
+        # Se não encontrou texto, tenta converter para PDF e extrair
         temp_dir = tempfile.gettempdir()
         pdf_file_path = os.path.join(temp_dir, os.path.basename(file_path_or_content).replace(".odt", ".pdf"))
 
-        # Converte ODT para PDF usando LibreOffice
         try:
+            # Converte ODT para PDF usando LibreOffice
             subprocess.run(
                 ["libreoffice", "--headless", "--convert-to", "pdf", "--outdir", temp_dir, file_path_or_content],
                 check=True,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                timeout=30  # Adiciona timeout de 30 segundos
             )
+
+            if not os.path.exists(pdf_file_path):
+                return "", False, "Falha ao converter o arquivo ODT para PDF."
+
+            # Extrai texto do PDF usando a função existente
+            texto, sucesso, erro = extract_text_from_pdf_content(pdf_file_path)
+            
+            # Verifica se o texto extraído do PDF está vazio
+            if not texto.strip():
+                return "", False, "Arquivo convertido para PDF, mas o conteúdo está vazio."
+
+            # Remove o arquivo PDF temporário
+            if os.path.exists(pdf_file_path):
+                os.remove(pdf_file_path)
+
+            return texto, sucesso, erro
+
+        except subprocess.TimeoutExpired:
+            return "", False, "Timeout durante a conversão do arquivo ODT para PDF."
         except subprocess.CalledProcessError as e:
             return "", False, f"Erro durante a conversão de ODT para PDF: {e}"
-
-        # Verifica se o arquivo PDF foi gerado
-        if not os.path.exists(pdf_file_path):
-            return "", False, "Falha ao converter o arquivo ODT para PDF."
-
-        # Extrai texto do PDF
-        try:
-            with PDF.open(pdf_file_path) as pdf:
-                text = ""
-                for page in pdf.pages:
-                    text += page.extract_text() + "\n"
-        except Exception as e:
-            return "", False, f"Erro ao extrair texto do PDF: {e}"
-
-        # Remove o arquivo PDF temporário
-        os.remove(pdf_file_path)
-
-        # Retorna o texto extraído
-        if not text.strip():
-            return "", False, "Nenhum texto foi encontrado no arquivo."
-        return text.strip(), True, ""
+        except OSError as e:  # Captura erros específicos de sistema operacional
+            return "", False, f"Erro ao processar o arquivo ODT: {e}"
+        except Exception as e:  # Captura erros inesperados
+            return "", False, f"Erro inesperado ao processar o arquivo ODT: {e}"
+        finally:
+            # Garante que o arquivo temporário seja removido
+            if os.path.exists(pdf_file_path):
+                os.remove(pdf_file_path)
 
     except Exception as e:
         return "", False, f"Erro ao processar o arquivo ODT: {e}"
@@ -1131,6 +1179,18 @@ def extract_text_from_html(file_path_or_content):
 
 
 def extract_text_from_json(file_path_or_content):
+    """
+    Extrai texto de um arquivo JSON ou conteúdo JSON em bytes.
+
+    Args:
+        file_path_or_content (str ou bytes): Caminho para o arquivo JSON ou conteúdo em bytes.
+
+    Returns:
+        tuple: (texto_extraido, sucesso, mensagem_erro)
+            - texto_extraido (str): Texto extraído do JSON
+            - sucesso (bool): Indica se a extração foi bem-sucedida
+            - mensagem_erro (str): Mensagem de erro, se houver
+    """
     try:
         if isinstance(file_path_or_content, bytes):
             file_content = json.loads(file_path_or_content.decode('utf-8'))
@@ -1158,12 +1218,22 @@ def extract_text_from_json(file_path_or_content):
 
 
 def extract_text_from_pptx(file_path_or_content):
+    """
+    Extrai texto de um arquivo PowerPoint (.pptx).
 
+    Args:
+        file_path_or_content (str, bytes, BytesIO): Caminho do arquivo, conteúdo em bytes ou objeto BytesIO.
+
+    Returns:
+        tuple: (texto_extraido, sucesso)
+            - texto_extraido (str): Texto extraído do arquivo
+            - sucesso (bool): Indica se a extração foi bem-sucedida
+    """
     try:
         if isinstance(file_path_or_content, (bytes, BytesIO)):
             file_content = BytesIO(file_path_or_content) if isinstance(file_path_or_content, bytes) else file_path_or_content
         elif isinstance(file_path_or_content, str) and (file_path_or_content.startswith("http://") or file_path_or_content.startswith("https://")):
-            response = requests.get(file_path_or_content)
+            response = requests.get(file_path_or_content, timeout=30)  # Adiciona timeout de 30 segundos
             response.raise_for_status()
             file_content = BytesIO(response.content)
         else:
@@ -1172,7 +1242,7 @@ def extract_text_from_pptx(file_path_or_content):
         prs = Presentation(file_content)
         all_text = []
 
-        # Itera sobre os slides para garantir a extração de texto de todos os slides
+        # Itera sobre os slides para garantir a extraç��o de texto de todos os slides
         for slide_num, slide in enumerate(prs.slides, start=1):
             slide_text = f"\n--- Slide {slide_num} ---\n"
             
@@ -1239,107 +1309,81 @@ def download_pdf(url):
 
 def extract_text_from_pdf_content(file_path):
     """
-    Extrai texto de PDFs usando múltiplas abordagens para maior robustez.
-    Lida com PDFs pesquisáveis, imagens, tabelas e PDFs não imprimíveis.
+    Extrai texto de PDFs combinando extração direta e OCR quando necessário.
+    Prioriza texto pesquisável e usa OCR apenas quando necessário.
     """
     try:
         all_text = []
+        doc = fitz.open(file_path)
         
-        # 1. Primeira tentativa: pdfplumber para texto pesquisável e tabelas
-        try:
-            with pdfplumber.open(file_path) as pdf:
-                for page_num, page in enumerate(pdf.pages, 1):
-                    # Extrai texto normal
-                    text = page.extract_text() or ""
-                    
-                    # Extrai tabelas
-                    tables = page.extract_tables()
-                    tables_text = ""
-                    if tables:
-                        tables_text = "\n=== TABELAS ENCONTRADAS ===\n"
-                        for table in tables:
-                            tables_text += "\n".join([" | ".join([str(cell or "") for cell in row]) for row in table])
-                            tables_text += "\n---\n"
-                    
-                    # Combina texto e tabelas
-                    page_text = f"\n=== PÁGINA {page_num} ===\n{text}\n{tables_text}"
-                    all_text.append(page_text)
-        except Exception as e:
-            print(f"pdfplumber falhou: {e}")
+        for page_num in range(doc.page_count):
+            page = doc.load_page(page_num)
+            page_text = []
 
-        # 2. Segunda tentativa: PyMuPDF (fitz) para elementos não detectados
-        try:
-            doc = fitz.open(file_path)
-            for page_num, page in enumerate(doc, 1):
-                # Se a página anterior está vazia, tenta extrair com PyMuPDF
-                if not all_text or not all_text[page_num-1].strip():
-                    # Extrai texto
-                    text = page.get_text("text")
-                    
-                    # Extrai imagens e aplica OCR
-                    image_list = page.get_images(full=True)
-                    images_text = ""
-                    if image_list:
-                        images_text = "\n=== TEXTO EXTRAÍDO DE IMAGENS ===\n"
-                        for img_index, img in enumerate(image_list, 1):
-                            xref = img[0]
-                            base_image = doc.extract_image(xref)
-                            image_bytes = base_image["image"]
-                            
-                            # Converte bytes da imagem para formato PIL
-                            image = Image.open(BytesIO(image_bytes))
-                            
-                            # Pré-processamento da imagem
-                            image = enhance_image(image)
-                            
-                            # OCR na imagem
-                            try:
-                                ocr_text = pytesseract.image_to_string(image, lang='por')
-                                if ocr_text.strip():
-                                    images_text += f"\nImagem {img_index}:\n{ocr_text}\n"
-                            except Exception as e:
-                                print(f"Erro no OCR da imagem {img_index}: {e}")
-                    
-                    page_text = f"\n=== PÁGINA {page_num} ===\n{text}\n{images_text}"
-                    if page_num <= len(all_text):
-                        all_text[page_num-1] = page_text
-                    else:
-                        all_text.append(page_text)
-            doc.close()
-        except Exception as e:
-            print(f"PyMuPDF falhou: {e}")
+            # 1. Primeiro tenta extrair texto pesquisável
+            searchable_text = page.get_text("text").strip()
+            if searchable_text:
+                page_text.append(searchable_text)
+                all_text.append(f"\n=== PÁGINA {page_num + 1} ===\n{searchable_text}")
+                continue  # Se encontrou texto pesquisável, vai para próxima página
 
-        # 3. Terceira tentativa: Renderização completa da página para OCR
-        if not any(text.strip() for text in all_text):
-            try:
-                doc = fitz.open(file_path)
-                for page_num, page in enumerate(doc, 1):
-                    # Renderiza a página inteira como imagem
-                    pix = page.get_pixmap(matrix=fitz.Matrix(300/72, 300/72))
-                    image = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-                    
-                    # Pré-processamento da imagem
-                    image = enhance_image(image)
-                    
-                    # OCR na página inteira
-                    ocr_text = pytesseract.image_to_string(image, lang='por', config='--psm 6')
-                    page_text = f"\n=== PÁGINA {page_num} (OCR Completo) ===\n{ocr_text}"
-                    
-                    if page_num <= len(all_text):
-                        all_text[page_num-1] = page_text
-                    else:
-                        all_text.append(page_text)
-                doc.close()
-            except Exception as e:
-                print(f"OCR completo falhou: {e}")
+            # 2. Se não encontrou texto pesquisável, aplica OCR
+            # Detecta orientação e normaliza
+            rotation = page.rotation
+            if rotation != 0:
+                page.set_rotation(0)
 
-        # Combina todo o texto extraído
+            # Renderiza em alta resolução
+            pix = page.get_pixmap(matrix=fitz.Matrix(400/72, 400/72))
+            
+            # Pré-processamento
+            img_gray = img.convert("L")
+            img_gray = ImageOps.autocontrast(img_gray, cutoff=2)
+            img_gray = img_gray.filter(ImageFilter.UnsharpMask(radius=2, percent=150))
+            
+            # OCR para texto
+            text_config = '--psm 6 --oem 3 -c preserve_interword_spaces=1'
+            page_content = pytesseract.image_to_string(img_gray, lang='por', config=text_config)
+            
+            if page_content.strip():
+                page_text.append(page_content)
+
+            # 3. Processa tabelas apenas se não encontrou texto pesquisável
+            img_cv = cv2.cvtColor(np.array(img_gray), cv2.COLOR_GRAY2BGR)
+            
+            for thickness in [1, 2, 3]:
+                horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (50, thickness))
+                vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (thickness, 50))
+                
+                horizontal = cv2.erode(img_cv, horizontal_kernel, iterations=1)
+                vertical = cv2.erode(img_cv, vertical_kernel, iterations=1)
+                
+                mask = cv2.add(horizontal, vertical)
+                contours, _ = cv2.findContours(cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY), 
+                                             cv2.RETR_EXTERNAL, 
+                                             cv2.CHAIN_APPROX_SIMPLE)
+                
+                for contour in contours:
+                    if cv2.contourArea(contour) > 3000:
+                        x, y, w, h = cv2.boundingRect(contour)
+                        table_region = img_gray.crop((x, y, x+w, y+h))
+                        
+                        table_config = '--psm 6 --oem 3 -c preserve_interword_spaces=1'
+                        table_text = pytesseract.image_to_string(table_region, lang='por', config=table_config)
+                        
+                        if table_text.strip():
+                            page_text.append(f"\n=== TABELA DETECTADA ===\n{table_text}\n")
+
+            # Adiciona o texto da página se encontrou algo via OCR
+            if page_text and not searchable_text:
+                all_text.append(f"\n=== PÁGINA {page_num + 1} ===\n" + "\n".join(page_text))
+            elif not page_text and not searchable_text:
+                all_text.append(f"\n=== PÁGINA {page_num + 1} === [PÁGINA VAZIA]\n")
+
+        doc.close()
         final_text = "\n".join(all_text).strip()
         
-        if not final_text:
-            return "Nenhum texto extraído do PDF", False, "PDF sem conteúdo extraível"
-            
-        return final_text, True, None
+        return final_text if final_text else "Documento sem conteúdo extraível", True, None
 
     except Exception as e:
         erro_msg = f"Erro ao processar PDF: {str(e)}"
