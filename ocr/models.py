@@ -62,3 +62,14 @@ class DocumentosOcrErros(models.Model):
     def get_absolute_url(self):
         return reverse("_detail", kwargs={"pk": self.pk})
 
+
+class LogExclusoes(models.Model):
+
+    # id = models.BigAutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')
+    id_documento = models.CharField(max_length=18, null=True, blank=True, verbose_name="Id")
+    numero_pagina = models.IntegerField(null=True, blank=True, default="N/A", verbose_name="Número da página")
+    data_exclusao = models.DateTimeField(auto_now_add=True, verbose_name="Data da exclusão")
+
+    class Meta:
+        verbose_name = "Log Exclusões"
+        verbose_name_plural = "Log Exclusões"

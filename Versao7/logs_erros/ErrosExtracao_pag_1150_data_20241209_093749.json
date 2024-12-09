@@ -1,0 +1,58 @@
+[
+    {
+        "id_documento": "29098",
+        "pagina": 1150,
+        "nome_original": "OP_60_2021_HC_VIVO_79999837504.zip",
+        "arquivo": "OP_60_2021_HC_VIVO_79999837504.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/OP_60_2021_HC_VIVO_79999837504.zip",
+        "Op": "60",
+        "Ano": "2021",
+        "erro": "Falha ao processar OP_67_2021_HC_VIVO_IMEI_354922088588360.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-09 09:37:49"
+    },
+    {
+        "id_documento": "29106",
+        "pagina": 1150,
+        "nome_original": "OP_67_2021_HC_VIVO_79996929779.zip",
+        "arquivo": "OP_67_2021_HC_VIVO_79996929779.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/OP_67_2021_HC_VIVO_79996929779.zip",
+        "Op": "67",
+        "Ano": "2021",
+        "erro": "Falha ao processar OP_67_2021_HC_VIVO_IMEI_354922088588360.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-09 09:37:49"
+    },
+    {
+        "id_documento": "29107",
+        "pagina": 1150,
+        "nome_original": "OP_67_2021_HC_VIVO_IMEI_354921088588360.zip",
+        "arquivo": "OP_67_2021_HC_VIVO_IMEI_354921088588360.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/OP_67_2021_HC_VIVO_IMEI_354921088588360.zip",
+        "Op": "67",
+        "Ano": "2021",
+        "erro": "Falha ao processar OP_67_2021_HC_VIVO_IMEI_354922088588360.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-09 09:37:49"
+    },
+    {
+        "id_documento": "29108",
+        "pagina": 1150,
+        "nome_original": "OP_67_2021_HC_VIVO_IMEI_354922088588360.zip",
+        "arquivo": "OP_67_2021_HC_VIVO_IMEI_354922088588360.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/OP_67_2021_HC_VIVO_IMEI_354922088588360.zip",
+        "Op": "67",
+        "Ano": "2021",
+        "erro": "Falha ao processar OP_67_2021_HC_VIVO_IMEI_354922088588360.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-09 09:37:49"
+    }
+]

@@ -39,8 +39,8 @@ from extractors_utils import extract_text_from_odt, extract_text_from_pdf_conten
 
 
 
-# Caminho ou conteúdo do arquivo ODT
-# file_path = r"D:\Repositorios\ocr-api\Versao7\csvs\3_representacaoinicial.odt"
+# #Caminho ou conteúdo do arquivo ODT
+# file_path = r"D:\Repositorios\ocr-api\Versao7\csvs\39_8_13022020130620_representacaoinicialop019.2020 (1).odt"
 
 # # Extrai texto do arquivo
 # texto, sucesso, erro_msg = extract_text_from_odt(file_path)
@@ -106,7 +106,7 @@ from extractors_utils import extract_text_from_odt, extract_text_from_pdf_conten
 
 
 # Caminho para o arquivo PDF
-pdf_path = r"D:\Repositorios\ocr-api\Versao7\csvs\24_22_13022020130620_oficio087.2020vivo+alvarade10.01.2020op167.19.pdf"
+pdf_path = r"D:\Repositorios\ocr-api\Versao7\csvs\OP_138_2021_GSE_OI__GSE 2118615-21.pdf"
 
 # Extrai texto e imagens do arquivo DOCX
 texto, sucesso, erro_msg = extract_text_from_pdf_content(pdf_path)
