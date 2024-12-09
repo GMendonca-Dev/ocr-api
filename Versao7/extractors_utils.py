@@ -1222,110 +1222,33 @@ def enhance_image(image):
     return image
 
 
-# def download_pdf(url):
-#     """Baixa o PDF da URL e verifica o conteúdo."""
-#     try:
-#         response = requests.get(url, stream=True, verify=False)
-#         response.raise_for_status()
-
-#         # Assegura que todo o conteúdo foi baixado
-#         pdf_content = BytesIO(response.content)
-#         pdf_content.seek(0)  # Garante que o ponteiro está no início
-#         return pdf_content
-#     except Exception as e:
-#         print(f"Erro ao baixar o PDF: {e}")
-#         return None
-
-
-# def extract_text_from_pdf_content(file_path):
-
-#     """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
-#     all_text = ""
-
-#     # Verifica se o arquivo existe
-#     if not os.path.exists(file_path):
-#         return "", False, f"O arquivo {file_path} não existe."
-
-#     # Primeira tentativa: extrair texto com pdfplumber
-#     try:
-#         with pdfplumber.open(file_path) as pdf:
-#             for page_num, page in enumerate(pdf.pages):
-#                 try:
-#                     page_text = page.extract_text()
-#                     if page_text:
-#                         all_text += f"\nPágina {page_num + 1}:\n{page_text}\n"
-#                     else:
-#                         # Se não houver texto, aplica OCR na imagem da página
-#                         page_image = page.to_image(resolution=300).original
-#                         enhanced_image = enhance_image(page_image)
-#                         ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-#                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
-#                 except Exception as e:
-#                     print(f"Erro ao processar a página {page_num + 1}: {e}")
-#     except Exception as e:
-#         print(f"Erro ao abrir PDF com pdfplumber: {e}")
-
-#     # Fallback: PyMuPDF para PDFs com imagens embutidas
-#     try:
-#         doc = fitz.open(file_path)
-#         for page_num in range(doc.page_count):
-#             page = doc.load_page(page_num)
-#             pix = page.get_pixmap()
-#             image = Image.open(BytesIO(pix.tobytes()))
-#             enhanced_image = enhance_image(image)
-
-#             try:
-#                 ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
-#                 all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
-#             except Exception as ocr_error:
-#                 print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
-#     except Exception as e:
-#         print(f"Erro ao processar imagens do PDF: {e}")
-
-#     return all_text, True, None
-
-
 def download_pdf(url):
-    """Baixa o PDF da URL e retorna o conteúdo em bytes."""
+    """Baixa o PDF da URL e verifica o conteúdo."""
     try:
         response = requests.get(url, stream=True, verify=False)
         response.raise_for_status()
 
-        # Garante que o conteúdo foi baixado corretamente
+        # Assegura que todo o conteúdo foi baixado
         pdf_content = BytesIO(response.content)
-        pdf_content.seek(0)
+        pdf_content.seek(0)  # Garante que o ponteiro está no início
         return pdf_content
     except Exception as e:
         print(f"Erro ao baixar o PDF: {e}")
         return None
 
 
-def extract_text_from_pdf_content(pdf_input):
-    """
-    Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR.
+def extract_text_from_pdf_content(file_path):
 
-    Args:
-        pdf_input (str ou BytesIO): Caminho para o arquivo PDF ou conteúdo em bytes.
-
-    Returns:
-        tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
-    """
+    """Extrai texto de PDFs pesquisáveis e não pesquisáveis, aplicando OCR."""
     all_text = ""
 
-    # Verifica se é um caminho de arquivo ou conteúdo em bytes
-    if isinstance(pdf_input, str):
-        temp_pdf_path = pdf_input  # Caminho do arquivo local
-    elif isinstance(pdf_input, BytesIO):
-        # Salva o conteúdo em bytes em um arquivo temporário
-        with NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
-            temp_file.write(pdf_input.read())
-            temp_pdf_path = temp_file.name
-    else:
-        return "", False, "Entrada inválida. Forneça um caminho ou conteúdo em bytes."
+    # Verifica se o arquivo existe
+    if not os.path.exists(file_path):
+        return "", False, f"O arquivo {file_path} não existe."
 
+    # Primeira tentativa: extrair texto com pdfplumber
     try:
-        # Primeira tentativa: extrair texto com pdfplumber
-        with pdfplumber.open(temp_pdf_path) as pdf:
+        with pdfplumber.open(file_path) as pdf:
             for page_num, page in enumerate(pdf.pages):
                 try:
                     page_text = page.extract_text()
@@ -1334,32 +1257,30 @@ def extract_text_from_pdf_content(pdf_input):
                     else:
                         # Se não houver texto, aplica OCR na imagem da página
                         page_image = page.to_image(resolution=300).original
-                        ocr_text = pytesseract.image_to_string(page_image, lang='por')
+                        enhanced_image = enhance_image(page_image)
+                        ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
                         all_text += f"\nPágina {page_num + 1} (OCR):\n{ocr_text}\n"
                 except Exception as e:
                     print(f"Erro ao processar a página {page_num + 1}: {e}")
+    except Exception as e:
+        print(f"Erro ao abrir PDF com pdfplumber: {e}")
 
-        # Fallback: PyMuPDF para PDFs com imagens embutidas
-        doc = fitz.open(temp_pdf_path)
+    # Fallback: PyMuPDF para PDFs com imagens embutidas
+    try:
+        doc = fitz.open(file_path)
         for page_num in range(doc.page_count):
             page = doc.load_page(page_num)
             pix = page.get_pixmap()
             image = Image.open(BytesIO(pix.tobytes()))
+            enhanced_image = enhance_image(image)
 
             try:
-                ocr_text = pytesseract.image_to_string(image, lang='por')
+                ocr_text = pytesseract.image_to_string(enhanced_image, lang='por')
                 all_text += f"\nImagem na página {page_num + 1}:\n{ocr_text}\n"
             except Exception as ocr_error:
                 print(f"Erro ao realizar OCR na página {page_num + 1}: {ocr_error}")
-
-        doc.close()
-
     except Exception as e:
-        return "", False, f"Erro ao processar PDF: {e}"
-
-    finally:
-        # Garante que o arquivo temporário seja excluído, se criado
-        if not isinstance(pdf_input, str) and os.path.exists(temp_pdf_path):
-            os.remove(temp_pdf_path)
+        print(f"Erro ao processar imagens do PDF: {e}")
 
     return all_text, True, None
+
