@@ -230,119 +230,208 @@ def extract_text_from_xml(file_path_or_content):
 #         return "", False, f"Erro ao processar o arquivo ODT: {e}"
 
 
-def extract_text_from_odt(file_path_or_content):
-    """
-    Extrai texto de um arquivo ODT usando uma abordagem híbrida.
-    Primeiro tenta extrair diretamente do XML, se falhar usa conversão para PDF.
+# def extract_text_from_odt(file_path):
+#     """
+#     Extrai texto de um arquivo ODT. Se o arquivo contiver imagens, aplica OCR nelas.
 
-    Args:
-        file_path_or_content (str): Caminho para o arquivo ODT.
+#     Args:
+#         file_path (str): Caminho para o arquivo ODT.
 
-    Returns:
-        tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
-    """
-    try:
-        if not file_path_or_content:
-            return "", False, "Caminho para o arquivo ODT não foi informado."
+#     Returns:
+#         tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+#     """
+#     try:
+#         # Verifica se o arquivo existe
+#         if not file_path or not zipfile.is_zipfile(file_path):
+#             return "", False, "O arquivo fornecido não é válido ou não existe."
 
-        # Primeira tentativa: extrair diretamente do XML
-        if isinstance(file_path_or_content, str):
-            if not os.path.exists(file_path_or_content):
-                return "", False, "O arquivo ODT não foi encontrado."
-            zip_file = zipfile.ZipFile(file_path_or_content, 'r')
-        else:
-            if not isinstance(file_path_or_content, bytes):
-                return "", False, "O conteúdo fornecido não é um arquivo ODT válido."
-            zip_file = zipfile.ZipFile(BytesIO(file_path_or_content))
+#         # Abre o arquivo ODT como um arquivo ZIP
+#         with zipfile.ZipFile(file_path, 'r') as odt_file:
+#             # Verifica se o content.xml está presente no ODT
+#             if 'content.xml' not in odt_file.namelist():
+#                 return "", False, "O arquivo content.xml não foi encontrado no ODT."
 
-        if 'content.xml' not in zip_file.namelist():
-            return "", False, "O arquivo content.xml não foi encontrado no ODT."
-        with zip_file.open('content.xml') as f:
-            tree = ET.parse(f)
-            root = tree.getroot()
-            
-            # Define os namespaces utilizados
-            namespaces = {
-                'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
-                'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0'
-            }
-            
-            # Extrai todo o texto, incluindo tabelas
-            extracted_text = []
-            
-            # Procura por todos os elementos que podem conter texto
-            for elem in root.findall('.//text:p', namespaces):
-                # Adiciona o texto do parágrafo, mesmo que esteja vazio
-                paragraph_text = elem.text.strip() if elem.text else ""
-                extracted_text.append(paragraph_text)
+#         # ############# Extração aqui ##############
+#         def extract_text_pure(element, collected_text=None):
+#             """
+#             Extrai apenas o texto puro de um arquivo XML.
 
-                # Adiciona o texto que vem após o parágrafo
-                if elem.tail and elem.tail.strip():
-                    extracted_text.append(elem.tail.strip())
+#             Args:
+#                 element (Element): Elemento XML raiz ou filho.
+#                 collected_text (list): Lista para armazenar o texto extraído.
 
-            for table in root.findall('.//table:table', namespaces):
-                for row in table.findall('.//table:table-row', namespaces):
-                    for cell in row.findall('.//table:table-cell', namespaces):
-                        cell_text = []
-                        for p in cell.findall('.//text:p', namespaces):
-                            if p.text and p.text.strip():
-                                cell_text.append(p.text.strip())
-                        if cell_text:
-                            extracted_text.append(" ".join(cell_text))
+#             Returns:
+#                 str: Todo o texto puro extraído concatenado.
+#             """
+#             if collected_text is None:
+#                 collected_text = []
 
-            # Junta todos os textos extraídos
-            text = '\n'.join(extracted_text).strip()  # Remove espaços extras
+#             # Adiciona o texto do elemento, se existir
+#             if element.text and element.text.strip():
+#                 collected_text.append(element.text.strip())
 
-            # Imprime o texto extraído para depuração
-            # print("Texto extraído do ODT:", text)
+#             # Processa os filhos do elemento
+#             for child in element:
+#                 extract_text_pure(child, collected_text)
 
-            # Verifica se o texto extraído não está vazio
-            if not text:
-                return "", False, "Arquivo ODT está vazio ou não contém texto legível."
+#             # Adiciona o texto de tail, se existir (texto entre tags)
+#             if element.tail and element.tail.strip():
+#                 collected_text.append(element.tail.strip())
 
-            return text, True, ""
+#             return " ".join(collected_text)
 
-        # Se não encontrou texto, tenta converter para PDF e extrair
-        temp_dir = tempfile.gettempdir()
-        pdf_file_path = os.path.join(temp_dir, os.path.basename(file_path_or_content).replace(".odt", ".pdf"))
+#         def read_xml_pure(file_path):
+#             """
+#             Lê um arquivo XML e retorna apenas o texto puro concatenado.
 
+#             Args:
+#                 file_path (str): Caminho para o arquivo XML.
+
+#             Returns:
+#                 str: Texto puro extraído do XML.
+#             """
+#             tree = ET.parse(file_path)
+#             root = tree.getroot()
+
+#             # Extrai todo o texto puro
+#             return extract_text_pure(root)
+
+#             # ############# Fim da Extração aqui ##############
+
+#         # Processa imagens embutidas
+#         image_texts = []
+#         for item in odt_file.namelist():
+#             if item.startswith('Pictures/') and item.lower().endswith(('.png', '.jpg', '.jpeg')):
+#                 # Extrai imagem
+#                 with odt_file.open(item) as img_file:
+#                     image = Image.open(BytesIO(img_file.read()))
+#                     # Aplica OCR na imagem
+#                     text_from_image = pytesseract.image_to_string(image, lang='por', config='--psm 6')
+#                     if text_from_image.strip():
+#                         image_texts.append(f"\n--- Texto extraído de {item} ---\n{text_from_image.strip()}")
+
+#         # Combina o texto do XML e o texto das imagens
+#         if image_texts:
+#             extracted_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(image_texts)
+
+#         # Verifica se o texto final está vazio
+#         if not extracted_text.strip():
+#             return "", False, "O arquivo ODT não contém texto ou imagens legíveis."
+
+#         return extracted_text, True, ""
+
+#     except Exception as e:
+#         erro_msg = f"Erro ao processar o arquivo ODT: {e}"
+#         return "", False, erro_msg
+
+
+class ODTExtractor:
+    def __init__(self, file_path):
+        """
+        Inicializa o extrator com o caminho do arquivo ODT.
+
+        Args:
+            file_path (str): Caminho para o arquivo ODT.
+        """
+        self.file_path = file_path
+        self.extracted_text = ""
+
+    def extract_text_pure(self, element, collected_text=None):
+        """
+        Extrai apenas o texto puro de um arquivo XML.
+
+        Args:
+            element (Element): Elemento XML raiz ou filho.
+            collected_text (list): Lista para armazenar o texto extraído.
+
+        Returns:
+            str: Todo o texto puro extraído concatenado.
+        """
+        if collected_text is None:
+            collected_text = []
+
+        # Adiciona o texto do elemento, se existir
+        if element.text and element.text.strip():
+            collected_text.append(element.text.strip())
+
+        # Processa os filhos do elemento
+        for child in element:
+            self.extract_text_pure(child, collected_text)
+
+        # Adiciona o texto de tail, se existir (texto entre tags)
+        if element.tail and element.tail.strip():
+            collected_text.append(element.tail.strip())
+
+        return " ".join(collected_text)
+
+    def extract_text_from_xml(self, xml_content):
+        """
+        Extrai o texto puro de um conteúdo XML.
+
+        Args:
+            xml_content (bytes): Conteúdo do XML como bytes.
+
+        Returns:
+            str: Texto puro extraído do XML.
+        """
+        root = ET.fromstring(xml_content)
+        return self.extract_text_pure(root)
+
+    def extract_text_from_images(self, odt_file):
+        """
+        Extrai texto de imagens embutidas no arquivo ODT.
+
+        Args:
+            odt_file (ZipFile): Objeto ZipFile representando o ODT.
+
+        Returns:
+            list: Lista de textos extraídos das imagens.
+        """
+        image_texts = []
+        for item in odt_file.namelist():
+            if item.startswith('Pictures/') and item.lower().endswith(('.png', '.jpg', '.jpeg')):
+                with odt_file.open(item) as img_file:
+                    image = Image.open(BytesIO(img_file.read()))
+                    text_from_image = pytesseract.image_to_string(image, lang='por', config='--psm 6')
+                    if text_from_image.strip():
+                        image_texts.append(f"\n--- Texto extraído de {item} ---\n{text_from_image.strip()}")
+        return image_texts
+
+    def process(self):
+        """
+        Processa o arquivo ODT para extrair texto e imagens.
+
+        Returns:
+            tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+        """
         try:
-            # Converte ODT para PDF usando LibreOffice
-            subprocess.run(
-                ["libreoffice", "--headless", "--convert-to", "pdf", "--outdir", temp_dir, file_path_or_content],
-                check=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                timeout=45  # Adiciona timeout de 45 segundos
-            )
+            # Verifica se o arquivo é válido
+            if not self.file_path or not zipfile.is_zipfile(self.file_path):
+                return "", False, "O arquivo fornecido não é válido ou não existe."
 
-            if not os.path.exists(pdf_file_path):
-                return "", False, "Falha ao converter o arquivo ODT para PDF."
+            with zipfile.ZipFile(self.file_path, 'r') as odt_file:
+                # Verifica se o content.xml está presente
+                if 'content.xml' not in odt_file.namelist():
+                    return "", False, "O arquivo content.xml não foi encontrado no ODT."
 
-            # Extrai texto do PDF usando a função existente
-            texto, sucesso, erro = extract_text_from_pdf_content(pdf_file_path)
-            
-            # Verifica se o texto extraído do PDF está vazio
-            if not texto.strip():
-                return "", False, "Arquivo convertido para PDF, mas o conteúdo está vazio."
+                # Extrai o texto do content.xml
+                with odt_file.open('content.xml') as xml_file:
+                    xml_content = xml_file.read()
+                    self.extracted_text = self.extract_text_from_xml(xml_content)
 
-            # Remove o arquivo PDF temporário
-            if os.path.exists(pdf_file_path):
-                os.remove(pdf_file_path)
+                # Extrai texto das imagens
+                image_texts = self.extract_text_from_images(odt_file)
+                if image_texts:
+                    self.extracted_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(image_texts)
 
-            return texto, sucesso, erro
+            # Verifica se algum texto foi extraído
+            if not self.extracted_text.strip():
+                return "", False, "O arquivo ODT não contém texto ou imagens legíveis."
 
-        except subprocess.TimeoutExpired:
-            return "", False, "Timeout durante a conversão do arquivo ODT para PDF."
-        except subprocess.CalledProcessError as e:
-            return "", False, f"Erro durante a conversão de ODT para PDF: {e}"
-        except OSError as e:  # Captura erros específicos de sistema operacional
+            return self.extracted_text, True, ""
+
+        except Exception as e:
             return "", False, f"Erro ao processar o arquivo ODT: {e}"
-        except Exception as e:  # Captura erros inesperados
-            return "", False, f"Erro inesperado ao processar o arquivo ODT: {e}"
-
-    except Exception as e:
-        return "", False, f"Erro ao processar o arquivo ODT: {e}"
 
 
 # Extração de texto de arquivos ODS (LibreOffice Calc)
@@ -541,10 +630,17 @@ def extract_text_from_odf(file_path, extension):
         Caso ocorra um erro durante a extra o de texto do arquivo ODF.
     """
     try:
+        # if extension == 'odt':
+        #     # Corrigir aqui - pegar apenas o primeiro elemento da tupla
+        #     texto, sucesso = extract_text_from_odt(file_path)
+        #     return texto, sucesso, None
         if extension == 'odt':
-            # Corrigir aqui - pegar apenas o primeiro elemento da tupla
-            texto, sucesso = extract_text_from_odt(file_path)
-            return texto, sucesso, None
+            extractor = ODTExtractor(file_path)
+            extracted_text, success, error = extractor.process()
+            if success:
+                return extracted_text, True, None
+            else:
+                return "", False, error
         elif extension == 'ods':
             texto, sucesso = extract_text_from_ods(file_path)
             return texto, sucesso, None

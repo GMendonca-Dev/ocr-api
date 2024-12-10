@@ -1,43 +1,77 @@
-import pandas as pd
 import xml.etree.ElementTree as ET
 
 
-def read_xml(file_path):
-    # Parse o arquivo XML
+def extract_text_pure(element, collected_text=None):
+    """
+    Extrai apenas o texto puro de um arquivo XML.
+
+    Args:
+        element (Element): Elemento XML raiz ou filho.
+        collected_text (list): Lista para armazenar o texto extraído.
+
+    Returns:
+        str: Todo o texto puro extraído concatenado.
+    """
+    if collected_text is None:
+        collected_text = []
+
+    # Adiciona o texto do elemento, se existir
+    if element.text and element.text.strip():
+        collected_text.append(element.text.strip())
+
+    # Processa os filhos do elemento
+    for child in element:
+        extract_text_pure(child, collected_text)
+
+    # Adiciona o texto de tail, se existir (texto entre tags)
+    if element.tail and element.tail.strip():
+        collected_text.append(element.tail.strip())
+
+    return " ".join(collected_text)
+
+
+def read_xml_pure(file_path):
+    """
+    Lê um arquivo XML e retorna apenas o texto puro concatenado.
+
+    Args:
+        file_path (str): Caminho para o arquivo XML.
+
+    Returns:
+        str: Texto puro extraído do XML.
+    """
     tree = ET.parse(file_path)
     root = tree.getroot()
-    
-    # Assumindo que os dados estão em uma lista de elementos
-    data = []
-    columns = set()
-    
-    # Itera sobre os elementos e coleta os dados
-    for elem in root:
-        row_data = {}
-        for child in elem:
-            columns.add(child.tag)
-            row_data[child.tag] = child.text
-        data.append(row_data)
-    
-    # Cria um DataFrame a partir dos dados coletados
-    df = pd.DataFrame(data, columns=sorted(columns))
-    return df
+
+    # Extrai todo o texto puro
+    return extract_text_pure(root)
 
 
-def save_text_to_file(df, output_path):
-    # Converte o DataFrame para uma string no formato CSV
-    text = df.to_csv(index=False, sep='\t')  # Usando tabulação como delimitador
+def save_text_to_file(text, output_path):
+    """
+    Salva o texto em um arquivo de texto.
+
+    Args:
+        text (str): Texto a ser salvo.
+        output_path (str): Caminho para o arquivo de saída.
+    """
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(text)
 
 
-# Caminho para o arquivo XML
-xml_path = 'seu_arquivo.xml'
-# Caminho para o arquivo de saída .txt
-output_path = 'resultadoXML.txt'
+def xml():
+    # Caminho para o arquivo XML
+    xml_path = r"D:\Repositorios\ocr-api\Versao7\csvs\content.xml"
+    # Caminho para o arquivo de saída .txt
+    output_path = r"D:\Repositorios\ocr-api\Versao7\csvs\resultadoXML.txt"
 
-# Lê o arquivo XML e salva o conteúdo em um arquivo .txt
-df_xml = read_xml(xml_path)
-save_text_to_file(df_xml, output_path)
+    # Lê o texto puro do XML
+    texto_puro = read_xml_pure(xml_path)
 
-print(f"O conteúdo foi salvo em {output_path}")
+    # Salva o texto puro em um arquivo de saída
+    save_text_to_file(texto_puro, output_path)
+
+    print(f"O texto puro foi salvo em {output_path}")
+
+
+xml()
