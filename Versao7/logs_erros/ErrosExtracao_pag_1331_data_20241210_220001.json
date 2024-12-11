@@ -1,0 +1,16 @@
+[
+    {
+        "id_documento": "33676",
+        "pagina": 1331,
+        "nome_original": "OP_47_2022_HC__DOCUMENTOS QS.rar",
+        "arquivo": "OP_47_2022_HC__DOCUMENTOS QS.rar",
+        "extensao": ".rar",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/OP_47_2022_HC__DOCUMENTOS QS.rar",
+        "Op": "47",
+        "Ano": "2022",
+        "erro": "Falha ao processar OP_47_2022_HC__DOCUMENTOS QS.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-10 22:00:01"
+    }
+]

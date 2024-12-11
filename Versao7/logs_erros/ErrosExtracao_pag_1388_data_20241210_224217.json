@@ -1,0 +1,30 @@
+[
+    {
+        "id_documento": "35115",
+        "pagina": 1388,
+        "nome_original": "OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb",
+        "arquivo": "OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb",
+        "extensao": ".xlsb",
+        "pasta": "extratodeconexao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/extratodeconexao/OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb",
+        "Op": "11",
+        "Ano": "2022",
+        "erro": "Falha ao processar OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb: Extensão xlsb não suportada.",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-10 22:42:17"
+    },
+    {
+        "id_documento": "35116",
+        "pagina": 1388,
+        "nome_original": "OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb",
+        "arquivo": "OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb",
+        "extensao": ".xlsb",
+        "pasta": "extratodeconexao",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/extratodeconexao/OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb",
+        "Op": "11",
+        "Ano": "2022",
+        "erro": "Falha ao processar OP_11_2022_EXT_CON__DADOS CONEXÃO.xlsb: Extensão xlsb não suportada.",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-10 22:42:17"
+    }
+]

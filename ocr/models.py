@@ -25,8 +25,12 @@ class DocumentosOcr(models.Model):
     class Meta:
         verbose_name = "OCR Documentos"
         verbose_name_plural = "OCR Documentos"
+        # constraints = [
+        #     models.UniqueConstraint(fields=['id_documento', 'nome_original'], name='unique_id_documento_nome')
+        # ]
         constraints = [
-            models.UniqueConstraint(fields=['id_documento', 'nome_original'], name='unique_id_documento_nome')
+            models.UniqueConstraint(fields=['id_documento', 'data_leitura'],
+                                    name='unique_id_documento_data_leitura')
         ]
 
     def __str__(self):
