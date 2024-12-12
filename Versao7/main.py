@@ -22,11 +22,18 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 1413      # Número da página inicial
-END_PAGE = 1500        # Número da página final 
-DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
+START_PAGE = 1419      # Número da página inicial
+END_PAGE = 1419        # Número da página final # parei na 1500
+DOCUMENT_ID = '35885'   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
-# Parou na 1411 - Refazer
+# Refazer o id 36415, 36420, 36421, 36422, 36424, 36425, 36426, 36427 36428 id_documento pag 1440
+# Refazer o id 35691, 35683, 35684, 35687, 35679, 35680, 35681, 35682, 35685, 35686, 35688, 35689, 35690 id_documento pag 1411
+# Refazer o id 35727 id_documento pag 1412
+# Refazer o id 35759, 35760, 35766, 35769, 35770 id_documento pag 1414
+# Refazer o id 35845 id_documento pag 1417
+# Refazer o id 35862, 35864 id_standard pag 1418
+# Refazer o id 35963, 35965, 35966 id_documento pag 1422
+
 
 
 MAX_PAGES = 100  # Define o número máximo de páginas a serem processadas

@@ -276,9 +276,76 @@ def create_error_table_if_not_exists():
 #         connection.close()
 
 
+# def insert_data_into_main_table(data):
+#     """
+#     Insere dados na tabela principal. Caso o conteúdo exceda o limite do tsvector, divide em múltiplas partes.
+
+#     Args:
+#         data (tuple): Dados a serem inseridos na tabela principal.
+
+#     Returns:
+#         None
+#     """
+#     connection = get_db_connection()
+#     cursor = connection.cursor()
+
+#     try:
+#         # Dados recebidos
+#         id_documento, email, num, ano, nome_original, arquivo, extensao, pasta, caminho, conteudo, page_number = data
+
+#         # Tamanho máximo para tsvector no PostgreSQL
+#         max_tsvector_size = 1048575  # 1 MB em bytes
+
+#         # Verifica se o conteúdo precisa ser dividido
+#         if isinstance(conteudo, str) and len(conteudo.encode('utf-8')) > max_tsvector_size:
+#             # Divide o conteúdo em partes menores
+#             chunk_size = max_tsvector_size // 2  # Divisão conservadora
+#             chunks = [conteudo[i:i + chunk_size] for i in range(0, len(conteudo), chunk_size)]
+
+#             # Adiciona frações de milissegundos para diferenciar timestamps
+#             base_time = datetime.now()
+#             for idx, chunk in enumerate(chunks):
+#                 fractional_time = base_time + timedelta(milliseconds=idx)
+#                 cursor.execute(
+#                     """
+#                     INSERT INTO ocr_documentosocr (
+#                         id_documento, email_usuario, num_op, ano_op, nome_original,
+#                         arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+#                     )
+#                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+#                     """,
+#                     (
+#                         id_documento, email, num, ano, nome_original, arquivo, extensao,
+#                         pasta, caminho, chunk, page_number, fractional_time
+#                     )
+                    
+#                 )
+#         else:
+#             # Conteúdo não excede o limite, salva diretamente
+#             cursor.execute(
+#                 """
+#                 INSERT INTO ocr_documentosocr (
+#                     id_documento, email_usuario, num_op, ano_op, nome_original,
+#                     arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+#                 )
+#                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+#                 """,
+#                 data + (datetime.now(),)  # Adiciona o timestamp atual
+#             )
+
+#         connection.commit()
+#     except Exception as e:
+#         connection.rollback()
+#         print(f"Erro ao inserir dados no banco: {e}")
+#         raise
+#     finally:
+#         cursor.close()
+#         connection.close()
+
+
 def insert_data_into_main_table(data):
     """
-    Insere dados na tabela principal. Caso o conteúdo exceda o limite do tsvector, divide em múltiplas partes.
+    Insere ou atualiza dados na tabela principal. Caso o conteúdo exceda o limite do tsvector, divide em múltiplas partes.
 
     Args:
         data (tuple): Dados a serem inseridos na tabela principal.
@@ -302,21 +369,31 @@ def insert_data_into_main_table(data):
             chunk_size = max_tsvector_size // 2  # Divisão conservadora
             chunks = [conteudo[i:i + chunk_size] for i in range(0, len(conteudo), chunk_size)]
 
-            # Adiciona frações de milissegundos para diferenciar timestamps
-            base_time = datetime.now()
             for idx, chunk in enumerate(chunks):
-                fractional_time = base_time + timedelta(milliseconds=idx)
+                # Adiciona um sufixo ao nome_original para identificar as partes
+                nome_original_chunk = f"{nome_original}_parte{idx + 1}"
+
+                # Insere ou atualiza o chunk
                 cursor.execute(
                     """
                     INSERT INTO ocr_documentosocr (
                         id_documento, email_usuario, num_op, ano_op, nome_original,
                         arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
                     )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+                    ON CONFLICT (id_documento, nome_original) DO UPDATE
+                    SET conteudo = CASE
+                        WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
+                        ELSE ocr_documentosocr.conteudo
+                    END,
+                    data_leitura = CASE
+                        WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
+                        ELSE ocr_documentosocr.data_leitura
+                    END
                     """,
                     (
-                        id_documento, email, num, ano, nome_original, arquivo, extensao,
-                        pasta, caminho, chunk, page_number, fractional_time
+                        id_documento, email, num, ano, nome_original_chunk, arquivo, extensao,
+                        pasta, caminho, chunk, page_number
                     )
                 )
         else:
@@ -327,9 +404,18 @@ def insert_data_into_main_table(data):
                     id_documento, email_usuario, num_op, ano_op, nome_original,
                     arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+                ON CONFLICT (id_documento, nome_original) DO UPDATE
+                SET conteudo = CASE
+                    WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
+                    ELSE ocr_documentosocr.conteudo
+                END,
+                data_leitura = CASE
+                    WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
+                    ELSE ocr_documentosocr.data_leitura
+                END
                 """,
-                data + (datetime.now(),)  # Adiciona o timestamp atual
+                data
             )
 
         connection.commit()
