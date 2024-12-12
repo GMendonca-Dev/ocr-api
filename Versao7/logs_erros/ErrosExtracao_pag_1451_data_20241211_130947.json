@@ -1,0 +1,30 @@
+[
+    {
+        "id_documento": "36687",
+        "pagina": 1451,
+        "nome_original": "Ofício 010.21 - OP 008.2021.pdf",
+        "arquivo": "OP_8_2021_OF_ADM__ENTREGA DE RELATÓRIO TECNICO.pdf",
+        "extensao": ".pdf",
+        "pasta": "oficiosadministrativos",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/oficiosadministrativos/OP_8_2021_OF_ADM__ENTREGA DE RELATÓRIO TECNICO.pdf",
+        "Op": "8",
+        "Ano": "2021",
+        "erro": "Falha ao processar OP_8_2021_RELINT__DADOS RELATORIO DE ANALISE.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 0,
+        "data_insercao": "2024-12-11 13:09:47"
+    },
+    {
+        "id_documento": "36689",
+        "pagina": 1451,
+        "nome_original": "DADOS RELATORIO DE ANALISE.rar",
+        "arquivo": "OP_8_2021_RELINT__DADOS RELATORIO DE ANALISE.rar",
+        "extensao": ".rar",
+        "pasta": "relintproducaodeconhecimento",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/relintproducaodeconhecimento/OP_8_2021_RELINT__DADOS RELATORIO DE ANALISE.rar",
+        "Op": "8",
+        "Ano": "2021",
+        "erro": "Falha ao processar OP_8_2021_RELINT__DADOS RELATORIO DE ANALISE.rar: Erro ao processar o arquivo com extensão rar: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-11 13:09:47"
+    }
+]

@@ -11,7 +11,7 @@ import os
 import zipfile
 from pptx import Presentation
 import pandas as pd
-import pdfplumber
+# import pdfplumber
 import warnings
 import sys
 # from lxml import etree
@@ -23,8 +23,9 @@ import cv2
 import numpy as np
 import chardet
 import tempfile
-from pdfplumber import PDF
-from tempfile import NamedTemporaryFile
+# from pdfplumber import PDF
+# from tempfile import NamedTemporaryFile
+import openpyxl
 
 
 
@@ -734,30 +735,80 @@ def extract_text_from_xlsx(file_path_or_content):
         # Outros erros inesperados
         raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
 
+# Está funcionando - Deu erro em apenas alguns arquivos específicos (pag 1420 - id 35913 )
+# def extract_text_from_xls(file_path):
+  
+#     """
+#     Detecta o formato real do arquivo e extrai o texto.
+
+#     Parâmetros:
+#     caminho_arquivo_xls (str): Caminho para o arquivo de entrada.
+
+#     Retorna:
+#     str: Texto extraído do documento.
+#     """
+
+    # # Verifica o formato real do arquivo
+    # with open(file_path, 'rb') as f:
+    #     inicio = f.read(1024).lower()
+
+    # try:
+    #     if b'<html' in inicio or b'<table' in inicio:
+    #         # Trata como HTML
+    #         texto = extract_text_from_html(file_path)
+    #     elif inicio.startswith(b'pk'):
+    #         # Trata como XLSX (arquivo xlsx
+    #         texto = extract_text_from_xlsx(file_path)
+    #     else:
+    #         try:
+    #             workbook = xlrd.open_workbook(file_path)
+    #             texto = ''
+    #             for sheet in workbook.sheets():
+    #                 texto += f"=== Planilha: {sheet.name} ===\n"
+    #                 for row_idx in range(sheet.nrows):
+    #                     row = sheet.row_values(row_idx)
+    #                     texto += ', '.join(map(str, row)) + '\n'
+    #             # return texto
+    #         except Exception as e:
+    #             print(f"Erro ao extrair texto do XLS: {e}")
+    #             raise e
+    #     return texto
+    # except Exception as e:
+    #     print(f"Erro ao extrair texto: {e}")
+    #     raise e
+
+
+# Função ajustada a partir do id_documento 35913
 
 def extract_text_from_xls(file_path):
-  
     """
-    Detecta o formato real do arquivo e extrai o texto.
+    Função mestre que tenta ler um arquivo como planilha ou similar,
+    delegando para funções específicas conforme necessário.
 
-    Parâmetros:
-    caminho_arquivo_xls (str): Caminho para o arquivo de entrada.
+    Args:
+        file_path (str): Caminho para o arquivo XLS.
 
-    Retorna:
-    str: Texto extraído do documento.
+    Returns:
+        str: Texto extraído do arquivo.
     """
-    # Verifica o formato real do arquivo
-    with open(file_path, 'rb') as f:
-        inicio = f.read(1024).lower()
-
     try:
+        # Verifica o formato real do arquivo
+        with open(file_path, 'rb') as f:
+            inicio = f.read(1024).lower()
+
+        # Trata como HTML
         if b'<html' in inicio or b'<table' in inicio:
-            # Trata como HTML
-            texto = extract_text_from_html(file_path)
+            print("Detectado formato HTML.")
+            return extract_text_from_html(file_path)
+
+        # Trata como XLSX (arquivo ZIP)
         elif inicio.startswith(b'pk'):
-            # Trata como XLSX (arquivo zip)
-            texto = extract_text_from_xlsx(file_path)
-        else:
+            print("Detectado formato XLSX.")
+            return extract_text_from_xlsx(file_path)
+
+        # Trata como XLS (formato binário legado)
+        elif b'workbook' in inicio or b'excel' in inicio:
+            print("Detectado formato XLS.")
             try:
                 workbook = xlrd.open_workbook(file_path)
                 texto = ''
@@ -766,16 +817,48 @@ def extract_text_from_xls(file_path):
                     for row_idx in range(sheet.nrows):
                         row = sheet.row_values(row_idx)
                         texto += ', '.join(map(str, row)) + '\n'
-                # return texto
+                return texto.strip()
             except Exception as e:
                 print(f"Erro ao extrair texto do XLS: {e}")
                 raise e
-        return texto
+
+        # Tenta detectar encoding e processar como texto
+        else:
+            with open(file_path, 'rb') as f:
+                raw_data = f.read()
+                encoding_result = chardet.detect(raw_data)
+                encoding = encoding_result['encoding']
+                texto = raw_data.decode(encoding, errors='replace')
+
+            # Verifica se é HTML
+            if texto.lower().startswith("<!doctype html") or "<html" in texto.lower() or "<table" in texto.lower():
+                print("Detectado conteúdo HTML.")
+                soup = BeautifulSoup(texto, "html.parser")
+                return soup.get_text(separator='\n').strip()
+
+            # Verifica se é CSV
+            elif ("," in texto or ";" in texto) and len(texto.splitlines()) > 1:
+                print("Detectado formato CSV.")
+                try:
+                    delimitador = "," if "," in texto else ";"  # Detecta delimitador
+                    leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)
+                    linhas_csv = list(leitor_csv)
+                    return "\n".join([", ".join(linha) for linha in linhas_csv]).strip()
+                except csv.Error as e:
+                    print(f"Erro ao processar CSV: {e}")
+                    raise e
+
+            # Trata como texto puro
+            #print("Detectado texto puro.")
+            return texto.strip()
+
+    except FileNotFoundError:
+        return f"Arquivo não encontrado: {file_path}"
     except Exception as e:
-        print(f"Erro ao extrair texto: {e}")
-        raise e
+        return f"Erro ao processar arquivo: {e}"
 
 
+# def extract_text_from_xltx(file_path_or_content): 
 def extract_text_from_xltx(file_path_or_content):
     """
     Extrai o texto de todas as planilhas de um arquivo .xltx.

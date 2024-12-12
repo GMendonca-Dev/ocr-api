@@ -1,0 +1,16 @@
+[
+    {
+        "id_documento": "36529",
+        "pagina": 1444,
+        "nome_original": "OP_25_2022_HC-LINHA__consulta_79981137789.zip",
+        "arquivo": "OP_25_2022_HC-LINHA__consulta_79981137789.zip",
+        "extensao": ".zip",
+        "pasta": "hchistoricodechamadaslinha",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/hchistoricodechamadaslinha/OP_25_2022_HC-LINHA__consulta_79981137789.zip",
+        "Op": "25",
+        "Ano": "2022",
+        "erro": "Falha ao processar OP_25_2022_HC-LINHA__consulta_79981137789.zip: Erro ao processar o arquivo com extensão zip: 'id_operacaodocumentos'",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-11 13:06:57"
+    }
+]

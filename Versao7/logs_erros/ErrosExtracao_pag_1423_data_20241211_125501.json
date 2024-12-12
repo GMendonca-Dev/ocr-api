@@ -1,0 +1,16 @@
+[
+    {
+        "id_documento": "35999",
+        "pagina": 1423,
+        "nome_original": "OP_78_2022_RIF__2.anb",
+        "arquivo": "OP_78_2022_RIF__2.anb",
+        "extensao": ".anb",
+        "pasta": "relatoriodeinformacoesfinanceiras",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/relatoriodeinformacoesfinanceiras/OP_78_2022_RIF__2.anb",
+        "Op": "78",
+        "Ano": "2022",
+        "erro": "Falha ao processar OP_78_2022_RIF__2.anb: Extensão anb não suportada.",
+        "arquivo_existe": 1,
+        "data_insercao": "2024-12-11 12:55:01"
+    }
+]
