@@ -1,4 +1,4 @@
-from extractors_utils import extract_text_from_odt, extract_text_from_pdf_content
+from extractors_utils import ODSExtractor
 # file_path = r"D:\Repositorios\ocr-api\Versao7\csvs\teste3_csv.csv"
 
 # texto, sucesso, erro_msg = extract_text_from_csv(file_path)
@@ -106,13 +106,25 @@ from extractors_utils import extract_text_from_odt, extract_text_from_pdf_conten
 
 
 # Caminho para o arquivo PDF
-pdf_path = r"D:\Repositorios\ocr-api\Versao7\csvs\OP_138_2021_GSE_OI__GSE 2118615-21.pdf"
+# pdf_path = r"D:\Repositorios\ocr-api\Versao7\csvs\OP_138_2021_GSE_OI__GSE 2118615-21.pdf"
 
-# Extrai texto e imagens do arquivo DOCX
-texto, sucesso, erro_msg = extract_text_from_pdf_content(pdf_path)
+# # Extrai texto e imagens do arquivo DOCX
+# texto, sucesso, erro_msg = extract_text_from_pdf_content(pdf_path)
 
-if sucesso:
-    print("Texto completo extraído com sucesso:")
-    print(texto)
+# if sucesso:
+#     print("Texto completo extraído com sucesso:")
+#     print(texto)
+# else:
+#     print(f"Erro durante a extração: {erro_msg}")
+
+
+ods_path = r"D:\Repositorios\ocr-api\Versao7\csvs\OP_96_20222_OP_SENHA_VG__TIM2.ods"
+
+ods_extractor = ODSExtractor(ods_path)
+extracted_text, success, error = ods_extractor.process()
+
+if success:
+    print(extracted_text)
 else:
-    print(f"Erro durante a extração: {erro_msg}")
+    print(f"Erro: {error}")
+

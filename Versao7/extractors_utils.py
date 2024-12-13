@@ -500,94 +500,131 @@ class ODTExtractor:
 #         return "", False
 
 
-def extract_text_from_ods(file_path_or_content):
-    """
-    Extrai texto de tabelas e aplica OCR em imagens de um arquivo ODS.
+class ODSExtractor:
+    def __init__(self, file_path):
+        """
+        Inicializa o extrator com o caminho do arquivo ODS.
 
-    Args:
-        file_path_or_content (str ou bytes): Caminho para o arquivo ODS ou conteúdo em bytes.
+        Args:
+            file_path (str): Caminho para o arquivo ODS.
+        """
+        self.file_path = file_path
+        self.extracted_text = ""
 
-    Returns:
-        tuple: Texto extraído (str), sucesso (bool).
-    """
-    try:
-        # Abre o arquivo ODS como um arquivo ZIP
-        if isinstance(file_path_or_content, str):
-            zip_file = zipfile.ZipFile(file_path_or_content, 'r')
-        else:
-            zip_file = zipfile.ZipFile(BytesIO(file_path_or_content))
+    def extract_text_from_cell(self, cell, namespaces):
+        """
+        Extrai o texto de uma célula, incluindo spans e elementos aninhados.
 
-        # Verifica se o arquivo content.xml está presente
-        if 'content.xml' not in zip_file.namelist():
-            return "", False, "Arquivo content.xml não encontrado no ODS."
+        Args:
+            cell (Element): Elemento XML da célula.
+            namespaces (dict): Dicionário de namespaces.
 
-        # Abre o arquivo 'content.xml' dentro do ODS
-        with zip_file.open('content.xml') as f:
-            tree = ET.parse(f)
-            root = tree.getroot()
+        Returns:
+            str: Texto extraído da célula.
+        """
+        cell_text = []
+        # Busca por elementos <text:p> e spans <text:span>
+        for paragraph in cell.findall('.//text:p', namespaces):
+            paragraph_text = []
+            for span in paragraph.findall('.//text:span', namespaces):
+                if span.text:
+                    paragraph_text.append(span.text.strip())
+            # Inclui texto direto dentro de <text:p>
+            if paragraph.text:
+                paragraph_text.insert(0, paragraph.text.strip())
+            if paragraph_text:
+                cell_text.append(" ".join(paragraph_text))
+        return " ".join(cell_text)
 
-        # Define os namespaces usados no arquivo ODS
-        namespaces = {
-            'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0',
-            'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
-            'draw': 'urn:oasis:names:tc:opendocument:xmlns:drawing:1.0',
-            'xlink': 'http://www.w3.org/1999/xlink'
-        }
+    def extract_text_from_table(self, root, namespaces):
+        """
+        Extrai o texto das tabelas do arquivo XML.
 
-        # Inicializa uma lista para armazenar o conteúdo extraído
+        Args:
+            root (Element): Elemento raiz do XML.
+            namespaces (dict): Dicionário de namespaces.
+
+        Returns:
+            str: Texto extraído das tabelas.
+        """
         extracted_data = []
 
-        # Itera pelas linhas da tabela
-        for row in root.findall('.//table:table-row', namespaces):
-            row_text = []
-            for cell in row.findall('.//table:table-cell', namespaces):
-                # Extrai o texto da célula
-                cell_text = []
-                for text_element in cell.findall('.//text:p', namespaces):
-                    if text_element.text:
-                        cell_text.append(text_element.text.strip())
-                
-                # Adiciona o texto da célula (ou vazio) à linha
-                row_text.append(" ".join(cell_text) if cell_text else "[Célula Vazia]")
+        for table in root.findall('.//table:table', namespaces):
+            table_text = []
+            for row in table.findall('.//table:table-row', namespaces):
+                row_text = []
+                for cell in row.findall('.//table:table-cell', namespaces):
+                    # Extrai o texto das células
+                    cell_content = self.extract_text_from_cell(cell, namespaces)
+                    if cell_content:  # Ignora células vazias
+                        row_text.append(cell_content)
+                if row_text:
+                    table_text.append("\t".join(row_text))
+            if table_text:
+                extracted_data.append("\n".join(table_text))
 
-            # Junta as células da linha com tabulação
-            extracted_data.append("\t".join(row_text))
+        return "\n\n".join(extracted_data)
 
-        # Itera pelas imagens (caso existam)
+    def extract_text_from_images(self, ods_file):
+        """
+        Extrai texto de imagens embutidas no arquivo ODS.
+
+        Args:
+            ods_file (ZipFile): Objeto ZipFile representando o ODS.
+
+        Returns:
+            list: Lista de textos extraídos das imagens.
+        """
         image_texts = []
-        for frame in root.findall('.//draw:frame', namespaces):
-            for image in frame.findall('.//draw:image', namespaces):
-                image_href = image.attrib.get('{http://www.w3.org/1999/xlink}href', None)
-                if image_href:
-                    # Processa a imagem
-                    try:
-                        with zip_file.open(image_href) as img_file:
-                            image = Image.open(BytesIO(img_file.read()))
-                            # Aplica OCR na imagem
-                            ocr_text = pytesseract.image_to_string(image, lang='por', config='--psm 6')
-                            if ocr_text.strip():
-                                image_texts.append(f"Texto extraído da imagem ({image_href}):\n{ocr_text.strip()}")
-                    except Exception as e:
-                        image_texts.append(f"Erro ao processar a imagem {image_href}: {e}")
+        for item in ods_file.namelist():
+            if item.startswith('Pictures/') and item.lower().endswith(('.png', '.jpg', '.jpeg')):
+                with ods_file.open(item) as img_file:
+                    image = Image.open(BytesIO(img_file.read()))
+                    text_from_image = pytesseract.image_to_string(image, lang='por', config='--psm 6')
+                    if text_from_image.strip():
+                        image_texts.append(text_from_image.strip())
+        return image_texts
 
-        # Junta o conteúdo de todas as células e imagens em uma única string
-        extracted_text = "\n".join(extracted_data)
-        if image_texts:
-            extracted_text += "\n\n--- Texto das Imagens ---\n" + "\n\n".join(image_texts)
+    def process(self):
+        """
+        Processa o arquivo ODS para extrair texto e imagens.
 
-        # Fecha o arquivo ZIP
-        zip_file.close()
+        Returns:
+            tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+        """
+        try:
+            # Verifica se o arquivo é válido
+            if not self.file_path or not zipfile.is_zipfile(self.file_path):
+                return "", False, "O arquivo fornecido não é válido ou não existe."
 
-        # Verifica se algum texto foi extraído
-        if not extracted_text.strip():
-            return "", False, "Arquivo com conteúdo vazio ou não processável."
+            with zipfile.ZipFile(self.file_path, 'r') as ods_file:
+                # Verifica se o content.xml está presente
+                if 'content.xml' not in ods_file.namelist():
+                    return "", False, "O arquivo content.xml não foi encontrado no ODS."
 
-        return extracted_text, True
+                # Extrai o texto do content.xml
+                with ods_file.open('content.xml') as xml_file:
+                    xml_content = xml_file.read()
+                    root = ET.fromstring(xml_content)
+                    namespaces = {
+                        'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0',
+                        'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0'
+                    }
+                    table_text = self.extract_text_from_table(root, namespaces)
 
-    except Exception as e:
-        erro_msg = f"Erro ao processar o arquivo ODS: {e}"
-        print(erro_msg)
-        return "", False, erro_msg
+                # Extrai texto das imagens
+                image_texts = self.extract_text_from_images(ods_file)
+                if image_texts:
+                    table_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(image_texts)
+
+            # Verifica se algum texto foi extraído
+            if not table_text.strip():
+                return "", False, "O arquivo ODS não contém texto ou imagens legíveis."
+
+            return table_text, True, ""
+
+        except Exception as e:
+            return "", False, f"Erro ao processar o arquivo ODS: {e}"
 
 
 # Extração de texto de arquivos ODP (LibreOffice Impress)
@@ -733,8 +770,14 @@ def extract_text_from_odf(file_path, extension):
             else:
                 return "", False, error
         elif extension == 'ods':
-            texto, sucesso = extract_text_from_ods(file_path)
-            return texto, sucesso, None
+            # texto, sucesso = extract_text_from_ods(file_path)
+            # return texto, sucesso, None
+            extractor = ODSExtractor(file_path)
+            extracted_text, success, error = extractor.process()
+            if success:
+                return extracted_text, True, None
+            else:
+                return "", False, error
         elif extension == 'odp':
             texto, sucesso = extract_text_from_odp(file_path)
             return texto, sucesso, None
