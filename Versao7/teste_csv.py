@@ -99,7 +99,7 @@ def clear_temp_files(extensions_to_delete=None):
     return deleted_count, failed_count
 
 
-extensions = ['.doc', '.pdf', '.doc', '.odt', '.ods', '.csv', '.jpg', '.jpeg', '.png', '.zip', '.rar', '.7z', '.txt', '.xlsx', '.xls', '.xltx']  # Alterar para as extensões desejadas ou None para todos
+extensions = ['.doc', '.pdf', '.doc', '.odt', '.ods', '.csv', '.jpg', '.jpeg', '.png', '.zip', '.rar', '.7z', '.xlsx', '.xls', '.xltx', '.txt', '.anb']  # Alterar para as extensões desejadas ou None para todos
 deleted, failed = clear_temp_files(extensions)
 print(f"Arquivos excluídos: {deleted}")
 print(f"Falhas: {failed}")
