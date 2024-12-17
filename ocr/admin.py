@@ -4,13 +4,74 @@ from django.contrib.postgres.search import SearchQuery, SearchRank
 import logging
 from django.db.models import F, Q
 
+# logger = logging.getLogger(__name__)
+
+
+# class DocumentosOcrAdmin(admin.ModelAdmin):
+#     # Campos pelos quais queremos aplicar os filtros
+#     #list_filter = ('email_usuario', 'num_op', 'ano_op', 'arquivo', 'numero_pagina', 'data_leitura')
+    
+#     # Campos a serem exibidos na tabela do Django Admin
+#     list_display = (
+#         'id_documento',
+#         'email_usuario',
+#         'num_op',
+#         'ano_op',
+#         'arquivo',
+#         'numero_pagina',
+#         'conteudo_resumido',
+#         'data_formatada'
+#     )
+#     search_fields = (
+        
+#         # "email_usuario",
+#         # "num_op",
+#         # "ano_op",
+#         # "nome_original",
+#         #"arquivo",
+#         "conteudo",
+#     )
+#     ordering = ['-id_documento', '-data_leitura']
+
+#     # Todos os campos como leitura
+#     readonly_fields = [field.name for field in DocumentosOcr._meta.fields]
+
+#     # Definir paginação para 20 itens por página (ajuste conforme necessário)
+#     list_per_page = 12
+
+#     def conteudo_resumido(self, obj):
+#         return obj.conteudo[:30] + ('...' if len(obj.conteudo) > 50 else '')
+
+#     conteudo_resumido.short_description = 'Conteúdo'
+
+#     # # Exemplo de Personalização dos campos com cabeçalhos amigáveis
+#     # def id_documento_custom(self, obj):
+#     #     return obj.id_documento
+#     # id_documento_custom.short_description = 'Id '  # Nome personalizado
+
+#     # def data_formatada(self, obj):
+#     #     # Formata a data no formato dd/mm/aaaa às hh:mm
+#     #     # return obj.data_insercao.strftime("%d/%m/%Y às %H:%M")
+#     #     return obj.data_leitura.strftime("%d/%m/%Y")
+    
+#     def data_formatada(self, obj):
+#         # Formata a data no formato dd/mm/aaaa
+#         return obj.data_leitura.strftime("%d/%m/%Y") if obj.data_leitura else ''
+
+#     data_formatada.short_description = "Leitura"  # Nome que aparecerá no cabeçalho da coluna
+
+#     search_fields = ['conteudo']  # O campo onde o texto foi armazenado  ### 'conteudo', 'nome_original'
+
+
+# admin.site.register(DocumentosOcr, DocumentosOcrAdmin)  # DocumentosOcr,
+
+
 logger = logging.getLogger(__name__)
 
 
 class DocumentosOcrAdmin(admin.ModelAdmin):
-    # Campos pelos quais queremos aplicar os filtros
-    #list_filter = ('email_usuario', 'num_op', 'ano_op', 'arquivo', 'numero_pagina', 'data_leitura')
-    
+
+    #list_filter = ('id_documento',)
     # Campos a serem exibidos na tabela do Django Admin
     list_display = (
         'id_documento',
@@ -22,47 +83,32 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
         'conteudo_resumido',
         'data_formatada'
     )
-    # search_fields = (
-        
-    #     "email_usuario",
-    #     "num_op",
-    #     "ano_op",
-    #     "nome_original",
-    #     "arquivo",
-    #     "conteudo",
-    # )
+    
+    # Campos de pesquisa
+    search_fields = ['conteudo', 'id_documento']  # O campo onde o texto foi armazenado
+
+    # Ordenação padrão
+    #ordering = ['-id_documento', '-data_leitura']
 
     # Todos os campos como leitura
     readonly_fields = [field.name for field in DocumentosOcr._meta.fields]
 
-    # Definir paginação para 20 itens por página (ajuste conforme necessário)
-    list_per_page = 10
+    # Definir paginação para 12 itens por página (ajuste conforme necessário)
+    list_per_page = 12
 
     def conteudo_resumido(self, obj):
-        return obj.conteudo[:50] + ('...' if len(obj.conteudo) > 50 else '')
+        return obj.conteudo[:30] + ('...' if len(obj.conteudo) > 50 else '')
 
     conteudo_resumido.short_description = 'Conteúdo'
 
-    # # Exemplo de Personalização dos campos com cabeçalhos amigáveis
-    # def id_documento_custom(self, obj):
-    #     return obj.id_documento
-    # id_documento_custom.short_description = 'Id '  # Nome personalizado
-
-    # def data_formatada(self, obj):
-    #     # Formata a data no formato dd/mm/aaaa às hh:mm
-    #     # return obj.data_insercao.strftime("%d/%m/%Y às %H:%M")
-    #     return obj.data_leitura.strftime("%d/%m/%Y")
-    
     def data_formatada(self, obj):
         # Formata a data no formato dd/mm/aaaa
         return obj.data_leitura.strftime("%d/%m/%Y") if obj.data_leitura else ''
 
     data_formatada.short_description = "Leitura"  # Nome que aparecerá no cabeçalho da coluna
 
-    search_fields = ['conteudo']  # O campo onde o texto foi armazenado  ### 'conteudo', 'nome_original'
-
-
-admin.site.register(DocumentosOcr, DocumentosOcrAdmin)  # DocumentosOcr,
+   
+admin.site.register(DocumentosOcr, DocumentosOcrAdmin)
 
 
 class DocumentosOcrErrosAdmin(admin.ModelAdmin):

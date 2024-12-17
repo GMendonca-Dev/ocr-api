@@ -7,9 +7,14 @@
 </head>
 <body>
     <h1>Pesquisa Full de Documentos</h1>
-    
-    <!-- Formulário de Pesquisa -->
-    <form method="get" action="">
+
+    <nav>
+        <a href="{% url 'pesquisa_conteudo' %}">Pesquisa no Conteúdo</a> |
+        <a href="{% url 'pesquisa_search_vector' %}">Pesquisa no Vetor</a> |
+        <a href="{% url 'pesquisa_combined' %}">Pesquisa Combinada</a>
+    </nav>
+    <br>
+    <form method="get" action="{% url 'pesquisa_search_vector' %}">
         <label for="q">Pesquisar:</label>
         <input 
             type="text" 
@@ -17,17 +22,28 @@
             name="q" 
             placeholder="Digite sua pesquisa..." 
             aria-label="Campo de pesquisa"
-            {% if query %} value="{{ query }}" {% endif %}>
+            value="{{ query }}">
+        
+        <label>
+            <input type="radio" name="tipo" value="simples" {% if tipo == 'simples' %}checked{% endif %}>
+            Palavra Simples
+        </label>
+        <label>
+            <input type="radio" name="tipo" value="composto" {% if tipo == 'composto' %}checked{% endif %}>
+            Palavras Compostas
+        </label>
+        
         <button type="submit">Pesquisar</button>
+        <button type="button" onclick="window.location.href='{% url 'pesquisa_search_vector' %}'">Limpar Resultados</button>
     </form>
 
-    {% if query %}
+    {% if resultados %}
+        <p>Termo pesquisado: "{{ termo_pesquisado }}"</p>
+        <p>Duração da pesquisa: {{ duration|floatformat:3 }} segundos</p>
         <p>Total de resultados encontrados: {{ resultados|length }}</p>
     {% endif %}
 
     <h2>Resultados da Pesquisa</h2>
-    
-    <!-- Resultados -->
     {% if resultados %}
         <ul>
             {% for documento in resultados %}
@@ -44,3 +60,130 @@
     {% endif %}
 </body>
 </html>
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Full de Documentos</title>
+</head>
+<body>
+    <h1>Pesquisa Full de Documentos</h1>
+
+    <nav>
+        <a href="{% url 'pesquisa_conteudo' %}">Pesquisa no Conteúdo</a> |
+        <a href="{% url 'pesquisa_search_vector' %}">Pesquisa no Vetor</a> |
+        <a href="{% url 'pesquisa_combined' %}">Pesquisa Combinada</a>
+    </nav>
+    
+    <form method="get" action="{% url 'pesquisa_search_vector' %}">
+        <label for="q">Pesquisar:</label>
+        <input 
+            type="text" 
+            id="q" 
+            name="q" 
+            placeholder="Digite sua pesquisa..." 
+            aria-label="Campo de pesquisa"
+            {% if query %} value="{{ query }}" {% endif %}>
+        
+        <label>
+            <input type="radio" name="tipo" value="simples" {% if tipo == 'simples' %}checked{% endif %}>
+            Palavra Simples
+        </label>
+        <label>
+            <input type="radio" name="tipo" value="composto" {% if tipo == 'composto' %}checked{% endif %}>
+            Palavras Compostas
+        </label>
+        
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    {% if resultados %}
+        <p>Termo pesquisado: "{{ termo_pesquisado }}"</p>
+        <p>Duração da pesquisa: {{ duration|floatformat:2 }} segundos</p>
+        <p>Total de resultados encontrados: {{ resultados|length }}</p>
+    {% endif %}
+
+    <h2>Resultados da Pesquisa</h2>
+    
+    {% if resultados %}
+        <ul>
+            {% for documento in resultados %}
+                <li>
+                    <strong>ID:</strong> {{ documento.id_documento }}<br>
+                    <strong>Nome Original:</strong> {{ documento.nome_original }}<br>
+                    <strong>Email:</strong> {{ documento.email_usuario }}<br>
+                    <strong>Conteúdo:</strong> {{ documento.conteudo|truncatechars:200 }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Full de Documentos</title>
+</head>
+<body>
+    <h1>Pesquisa Full de Documentos</h1>
+
+    <nav>
+        <a href="{% url 'pesquisa_conteudo' %}">Pesquisa no Conteúdo</a> |
+        <a href="{% url 'pesquisa_search_vector' %}">Pesquisa no Vetor</a> |
+        <a href="{% url 'pesquisa_combined' %}">Pesquisa Combinada</a>
+    </nav>
+    
+    <form method="get" action="{% url 'pesquisa_search_vector' %}">
+        <label for="q">Pesquisar:</label>
+        <input 
+            type="text" 
+            id="q" 
+            name="q" 
+            placeholder="Digite sua pesquisa..." 
+            aria-label="Campo de pesquisa"
+            {% if query %} value="{{ query }}" {% endif %}>
+        
+        <label>
+            <input type="radio" name="tipo" value="simples" {% if tipo == 'simples' %}checked{% endif %}>
+            Palavra Simples
+        </label>
+        <label>
+            <input type="radio" name="tipo" value="composto" {% if tipo == 'composto' %}checked{% endif %}>
+            Palavras Compostas
+        </label>
+        
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    {% if query %}
+        <p>Total de resultados encontrados: {{ resultados|length }}</p>
+    {% endif %}
+
+    <h2>Resultados da Pesquisa</h2>
+    
+    {% if resultados %}
+        <ul>
+            {% for documento in resultados %}
+                <li>
+                    <strong>ID:</strong> {{ documento.id_documento }}<br>
+                    <strong>Nome Original:</strong> {{ documento.nome_original }}<br>
+                    <strong>Email:</strong> {{ documento.email_usuario }}<br>
+                    <strong>Conteúdo:</strong> {{ documento.conteudo|truncatechars:200 }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisa Combinada de Documentos</title>
+</head>
+<body>
+    <h1>Pesquisa Combinada de Documentos</h1>
+
+    <nav>
+        <a href="{% url 'pesquisa_conteudo' %}">Pesquisa no Conteúdo</a> |
+        <a href="{% url 'pesquisa_search_vector' %}">Pesquisa no Vetor</a> |
+        <a href="{% url 'pesquisa_combined' %}">Pesquisa Combinada</a>
+    </nav>
+    <br>
+    <form method="get" action="{% url 'pesquisa_combined' %}">
+        <label for="q">Pesquisar:</label>
+        <input 
+            type="text" 
+            id="q" 
+            name="q" 
+            placeholder="Digite sua pesquisa..." 
+            aria-label="Campo de pesquisa"
+            value="{{ query }}">
+        
+        <label>
+            <input type="radio" name="tipo" value="simples" {% if tipo == 'simples' %}checked{% endif %}>
+            Palavra Simples
+        </label>
+        <label>
+            <input type="radio" name="tipo" value="frase" {% if tipo == 'frase' %}checked{% endif %}>
+            Frase
+        </label>
+        
+        <button type="submit">Pesquisar</button>
+        <button type="button" onclick="window.location.href='{% url 'pesquisa_combined' %}'">Limpar Resultados</button>
+    </form>
+
+    {% if resultados %}
+        <p>Termo pesquisado: "{{ termo_pesquisado }}"</p>
+        <p>Duração da pesquisa: {{ duration|floatformat:3 }} segundos</p>
+        <p>Total de resultados encontrados: {{ resultados|length }}</p>
+    {% endif %}
+
+    <h2>Resultados da Pesquisa</h2>
+    {% if resultados %}
+        <ul>
+            {% for documento in resultados %}
+                <li>
+                    <strong>{{ documento.id_documento }}</strong> - <strong>{{ documento.nome_original }}</strong> - {{ documento.email_usuario }}<br>
+                    Conteúdo: {{ documento.conteudo|truncatechars:200 }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</body>
+</html>

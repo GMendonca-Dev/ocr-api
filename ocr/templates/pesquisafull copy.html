@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Full de Documentos</title>
+</head>
+<body>
+    <h1>Pesquisa Full de Documentos</h1>
+    
+    <!-- Formulário de Pesquisa -->
+    <form method="get" action="">
+        <label for="q">Pesquisar:</label>
+        <input 
+            type="text" 
+            id="q" 
+            name="q" 
+            placeholder="Digite sua pesquisa..." 
+            aria-label="Campo de pesquisa"
+            {% if query %} value="{{ query }}" {% endif %}>
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    {% if query %}
+        <p>Total de resultados encontrados: {{ resultados|length }}</p>
+    {% endif %}
+
+    <h2>Resultados da Pesquisa</h2>
+    
+    <!-- Resultados -->
+    {% if resultados %}
+        <ul>
+            {% for documento in resultados %}
+                <li>
+                    <strong>ID:</strong> {{ documento.id_documento }}<br>
+                    <strong>Nome Original:</strong> {{ documento.nome_original }}<br>
+                    <strong>Email:</strong> {{ documento.email_usuario }}<br>
+                    <strong>Conteúdo:</strong> {{ documento.conteudo|truncatechars:200 }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</body>
+</html>
