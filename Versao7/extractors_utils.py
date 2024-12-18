@@ -971,7 +971,7 @@ def extract_text_from_xls(file_path):
 
             # Verifica se é CSV
             elif ("," in texto or ";" in texto) and len(texto.splitlines()) > 1:
-                print("Detectado formato CSV.")
+                #print("Detectado formato CSV.")
                 try:
                     delimitador = "," if "," in texto else ";"  # Detecta delimitador
                     leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)

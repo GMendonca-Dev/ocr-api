@@ -22,8 +22,8 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 1651      # Número da página inicial
-END_PAGE = 1700        # Número da página final # parei na 1500
+START_PAGE = 917      # Número da página inicial
+END_PAGE = 918        # Número da página final # parei na 1700
 DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 
