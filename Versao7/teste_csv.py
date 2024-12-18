@@ -128,3 +128,9 @@ print(f"Falhas: {failed}")
 # else:
 #     print(f"Erro: {error}")
 
+from docling.document_converter import DocumentConverter
+
+source = "caminho_ou_URL_do_documento"
+converter = DocumentConverter()
+result = converter.convert(source)
+print(result.document.export_to_markdown())
