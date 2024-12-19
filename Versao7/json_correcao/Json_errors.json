@@ -1,9 +1,442 @@
 [
-    
     {
-        "pagina": 1506,
-        "ids_com_erro": [
-            "38065"
-        ]
+        "pagina": 4,
+        "ids_com_erro": ["97"]
+    },
+    {
+        "pagina": 5,
+        "ids_com_erro": ["144", "147"]
+    },
+    {
+        "pagina": 13,
+        "ids_com_erro": ["325", "326", "330"]
+    },
+    {
+        "pagina": 39,
+        "ids_com_erro": ["996"]
+    },
+    {
+        "pagina": 103,
+        "ids_com_erro": ["2601"]
+    },
+    {
+        "pagina": 111,
+        "ids_com_erro": ["2797", "2798"]
+    },
+    {
+        "pagina": 117,
+        "ids_com_erro": ["2945", "2948", "2951"]
+    },
+    {
+        "pagina": 119,
+        "ids_com_erro": ["3015", "3016"]
+    },
+    {
+        "pagina": 120,
+        "ids_com_erro": ["3019", "3017", "3022"]
+    },
+    {
+        "pagina": 123,
+        "ids_com_erro": ["3096"]
+    },
+    {
+        "pagina": 136,
+        "ids_com_erro": ["3421"]
+    },
+    {
+        "pagina": 237,
+        "ids_com_erro": ["5979"]
+    },
+    {
+        "pagina": 243,
+        "ids_com_erro": ["6136", "6137", "6138"]
+    },
+    {
+        "pagina": 251,
+        "ids_com_erro": ["6322"]
+    },
+    {
+        "pagina": 295,
+        "ids_com_erro": ["7444"]
+    },
+    {
+        "pagina": 361,
+        "ids_com_erro": ["9101"]
+    },
+    {
+        "pagina": 362,
+        "ids_com_erro": ["9115"]
+    },
+    {
+        "pagina": 368,
+        "ids_com_erro": ["9278", "9283"]
+    },
+    {
+        "pagina": 381,
+        "ids_com_erro": ["9586", "9587"]
+    },
+    {
+        "pagina": 394,
+        "ids_com_erro": ["9935"]
+    },
+    {
+        "pagina": 395,
+        "ids_com_erro": ["9938", "9940"]
+    },
+    {
+        "pagina": 427,
+        "ids_com_erro": ["10741"]
+    },
+    {
+        "pagina": 428,
+        "ids_com_erro": ["10783"]
+    },
+    {
+        "pagina": 467,
+        "ids_com_erro": ["11787", "11799"]
+    },
+    {
+        "pagina": 473,
+        "ids_com_erro": ["11940"]
+    },
+    {
+        "pagina": 474,
+        "ids_com_erro": ["11963", "11969"]
+    },
+    {
+        "pagina": 479,
+        "ids_com_erro": ["12081"]
+    },
+    {
+        "pagina": 491,
+        "ids_com_erro": ["12384", "12385"]
+    },
+    {
+        "pagina": 506,
+        "ids_com_erro": ["12778"]
+    },
+    {
+        "pagina": 509,
+        "ids_com_erro": ["12850", "12851"]
+    },
+    {
+        "pagina": 510,
+        "ids_com_erro": ["12867", "12869", "12870", "12871", "12872"]
+    },
+    {
+        "pagina": 519,
+        "ids_com_erro": ["13087", "13089", "13090"]
+    },
+    {
+        "pagina": 528,
+        "ids_com_erro": ["13323", "13324", "13325", "13331"]
+    },
+    {
+        "pagina": 529,
+        "ids_com_erro": ["13333"]
+    },
+    {
+        "pagina": 586,
+        "ids_com_erro": ["14797", "14798"]
+    },
+    {
+        "pagina": 611,
+        "ids_com_erro": ["15416", "15418"]
+    },
+    {
+        "pagina": 686,
+        "ids_com_erro": ["17308", "17309", "17310", "17313", "17314"]
+    },
+    {
+        "pagina": 708,
+        "ids_com_erro": ["17862", "17863"]
+    },
+    {
+        "pagina": 739,
+        "ids_com_erro": ["18633"]
+    },
+    {
+        "pagina": 751,
+        "ids_com_erro": ["18950", "18951"]
+    },
+    {
+        "pagina": 753,
+        "ids_com_erro": ["19008"]
+    },
+    {
+        "pagina": 756,
+        "ids_com_erro": ["19061", "19064"]
+    },
+    {
+        "pagina": 913,
+        "ids_com_erro": ["23039", "23050", "23055", "23056"]
+    },
+    {
+        "pagina": 914,
+        "ids_com_erro": ["23062"]
+    },
+    {
+        "pagina": 969,
+        "ids_com_erro": ["24514"]
+    },
+    {
+        "pagina": 1029,
+        "ids_com_erro": ["26070"]
+    },
+    {
+        "pagina": 1044,
+        "ids_com_erro": ["26449"]
+    },
+    {
+        "pagina": 1108,
+        "ids_com_erro": ["28041"]
+    },
+    {
+        "pagina": 1187,
+        "ids_com_erro": ["30046"]
+    },
+    {
+        "pagina": 1212,
+        "ids_com_erro": ["30659", "30661"]
+    },
+    {
+        "pagina": 1221,
+        "ids_com_erro": ["30892", "30893", "30898"]
+    },
+    {
+        "pagina": 1223,
+        "ids_com_erro": ["30943"]
+    },
+    {
+        "pagina": 1227,
+        "ids_com_erro": ["31045"]
+    },
+    {
+        "pagina": 1233,
+        "ids_com_erro": ["31203", "31204", "31205"]
+    },
+    {
+        "pagina": 1237,
+        "ids_com_erro": ["31299"]
+    },
+    {
+        "pagina": 1243,
+        "ids_com_erro": ["31449"]
+    },
+    {
+        "pagina": 1252,
+        "ids_com_erro": ["31663", "31666"]
+    },
+    {
+        "pagina": 1264,
+        "ids_com_erro": ["31971", "31974"]
+    },
+    {
+        "pagina": 1265,
+        "ids_com_erro": ["32000"]
+    },
+    {
+        "pagina": 1267,
+        "ids_com_erro": ["32040"]
+    },
+    {
+        "pagina": 1287,
+        "ids_com_erro": ["32569"]
+    },
+    {
+        "pagina": 1296,
+        "ids_com_erro": ["32779"]
+    },
+    {
+        "pagina": 1299,
+        "ids_com_erro": ["32863", "32871"]
+    },
+    {
+        "pagina": 1334,
+        "ids_com_erro": ["33763"]
+    },
+    {
+        "pagina": 1335,
+        "ids_com_erro": ["33764"]
+    },
+    {
+        "pagina": 1342,
+        "ids_com_erro": ["33951"]
+    },
+    {
+        "pagina": 1345,
+        "ids_com_erro": ["34041"]
+    },
+    {
+        "pagina": 1358,
+        "ids_com_erro": ["34354"]
+    },
+    {
+        "pagina": 1368,
+        "ids_com_erro": ["34601"]
+    },
+    {
+        "pagina": 1369,
+        "ids_com_erro": ["34643"]
+    },
+    {
+        "pagina": 1378,
+        "ids_com_erro": ["34855"]
+    },
+    {
+        "pagina": 1391,
+        "ids_com_erro": ["35182", "35175", "35176", "35179"]
+    },
+    {
+        "pagina": 1412,
+        "ids_com_erro": ["35705"]
+    },
+    {
+        "pagina": 1435,
+        "ids_com_erro": ["36293", "36294"]
+    },
+    {
+        "pagina": 1441,
+        "ids_com_erro": ["36447"]
+    },
+    {
+        "pagina": 1448,
+        "ids_com_erro": ["36614"]
+    },
+    {
+        "pagina": 1451,
+        "ids_com_erro": ["36687"]
+    },
+    {
+        "pagina": 1472,
+        "ids_com_erro": ["37230"]
+    },
+    {
+        "pagina": 1494,
+        "ids_com_erro": ["37769"]
+    },
+    {
+        "pagina": 1496,
+        "ids_com_erro": ["37811"]
+    },
+    {
+        "pagina": 1497,
+        "ids_com_erro": ["37836", "37839", "37843"]
+    },
+    {
+        "pagina": 1499,
+        "ids_com_erro": ["37904", "37905", "37906"]
+    },
+    {
+        "pagina": 1500,
+        "ids_com_erro": ["37923"]
+    },
+    {
+        "pagina": 1513,
+        "ids_com_erro": ["38265"]
+    },
+    {
+        "pagina": 1521,
+        "ids_com_erro": ["38452", "38453", "38450"]
+    },
+    {
+        "pagina": 1525,
+        "ids_com_erro": ["38557", "38558", "38559"]
+    },
+    {
+        "pagina": 1531,
+        "ids_com_erro": ["38749", "38750"]
+    },
+    {
+        "pagina": 1536,
+        "ids_com_erro": ["38877"]
+    },
+    {
+        "pagina": 1544,
+        "ids_com_erro": ["39073", "39074", "39075"]
+    },
+    {
+        "pagina": 1561,
+        "ids_com_erro": ["39502"]
+    },
+    {
+        "pagina": 1566,
+        "ids_com_erro": ["39635"]
+    },
+    {
+        "pagina": 1609,
+        "ids_com_erro": ["40702"]
+    },
+    {
+        "pagina": 1615,
+        "ids_com_erro": ["40871"]
+    },
+    {
+        "pagina": 1645,
+        "ids_com_erro": ["41612", "41613", "41614", "41615"]
+    },
+    {
+        "pagina": 1654,
+        "ids_com_erro": ["41843", "41844", "41845", "41846", "41848"]
+    },
+    {
+        "pagina": 1672,
+        "ids_com_erro": ["42289", "42291", "42293"]
+    },
+    {
+        "pagina": 1691,
+        "ids_com_erro": ["42790", "42791"]
+    },
+    {
+        "pagina": 1697,
+        "ids_com_erro": ["42943"]
+    },
+    {
+        "pagina": 1704,
+        "ids_com_erro": ["43106", "43107", "43108"]
+    },
+    {
+        "pagina": 1721,
+        "ids_com_erro": ["43529", "43531", "43534"]
+    },
+    {
+        "pagina": 1741,
+        "ids_com_erro": ["44032", "44049"]
+    },
+    {
+        "pagina": 1742,
+        "ids_com_erro": ["44076"]
+    },
+    {
+        "pagina": 1744,
+        "ids_com_erro": ["44128"]
+    },
+    {
+        "pagina": 1746,
+        "ids_com_erro": ["44163", "44164"]
+    },
+    {
+        "pagina": 1756,
+        "ids_com_erro": ["44404", "44405", "44406"]
+    },
+    {
+        "pagina": 1776,
+        "ids_com_erro": ["44928"]
+    },
+    {
+        "pagina": 1777,
+        "ids_com_erro": ["44937", "44938", "44939", "44940", "44941", "44942", "44944", "44945", "44946", "44947", "44948", "44949"]
+    },
+    {
+        "pagina": 1778,
+        "ids_com_erro": ["44970", "44973", "44974", "44975", "44978", "44979"]
+    },
+    {
+        "pagina": 1781,
+        "ids_com_erro": ["45048"]
+    },
+    {
+        "pagina": 1782,
+        "ids_com_erro": ["45079", "45080"]
     }
 ]

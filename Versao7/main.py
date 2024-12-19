@@ -22,10 +22,11 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 917      # Número da página inicial
-END_PAGE = 918        # Número da página final # parei na 1700
+START_PAGE = 1831      # Número da página inicial
+END_PAGE = 1900        # Número da página final # parei na 1900
 DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
+# Pasta 'oficiosadministrativos' já resolvido - Transferi o conteúdo da pasta oficiosadministrativos_old para oficiosadministrativos
 
 MAX_PAGES = 100  # Define o número máximo de páginas a serem processadas
 
