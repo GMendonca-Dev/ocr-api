@@ -25,8 +25,8 @@ import chardet
 # import tempfile
 # from pdfplumber import PDF
 # from tempfile import NamedTemporaryFile
-from openpyxl import load_workbook
-import mimetypes
+#from openpyxl import load_workbook
+from openpyxl import Workbook
 
 
 
@@ -912,103 +912,150 @@ def extract_text_from_xlsx(file_path_or_content):
     #     raise e
 
 
-# Função ajustada a partir do id_documento 35913
-
 def extract_text_from_xls(file_path):
     """
-    Função mestre que tenta ler um arquivo como planilha ou similar,
-    delegando para funções específicas conforme necessário.
+    Converte um arquivo .xls para .xlsx e extrai o texto do arquivo convertido.
 
     Args:
-        file_path (str): Caminho para o arquivo XLS.
+        file_path (str): Caminho para o arquivo .xls.
 
     Returns:
         str: Texto extraído do arquivo.
     """
     try:
-        # Verifica o formato real do arquivo
-        with open(file_path, 'rb') as f:
-            inicio = f.read(1024).lower()
+        # Caminho temporário para o arquivo convertido
+        xlsx_file = file_path.replace(".xls", ".xlsx")
+        
+        # Converte o arquivo .xls para .xlsx
+        workbook_xls = xlrd.open_workbook(file_path)
+        workbook_xlsx = Workbook()
 
-        # Trata como HTML
-        if b'<html' in inicio or b'<table' in inicio:
-            print("Detectado formato HTML.")
-            return extract_text_from_html(file_path)
+        for sheet_index in range(workbook_xls.nsheets):
+            sheet_xls = workbook_xls.sheet_by_index(sheet_index)
+            sheet_name = sheet_xls.name
+            
+            # Cria uma aba correspondente no .xlsx
+            sheet_xlsx = workbook_xlsx.create_sheet(title=sheet_name) if sheet_index > 0 else workbook_xlsx.active
+            sheet_xlsx.title = sheet_name
+            
+            # Copia os dados da aba
+            for row in range(sheet_xls.nrows):
+                for col in range(sheet_xls.ncols):
+                    sheet_xlsx.cell(row=row + 1, column=col + 1, value=sheet_xls.cell_value(row, col))
 
-        # Trata como XLSX (arquivo ZIP)
-        elif inicio.startswith(b'pk'):
-            print("Detectado formato XLSX.")
-            return extract_text_from_xlsx(file_path)
+        # Remove a aba padrão criada automaticamente
+        if "Sheet" in workbook_xlsx.sheetnames:
+            del workbook_xlsx["Sheet"]
 
-        # Trata como XLS (formato binário legado)
-        elif b'workbook' in inicio or b'excel' in inicio:
-            print("Detectado formato XLS.")
-            try:
-                workbook = xlrd.open_workbook(file_path)
-                texto = ''
-                for sheet in workbook.sheets():
-                    texto += f"=== Planilha: {sheet.name} ===\n"
-                    for row_idx in range(sheet.nrows):
-                        row = sheet.row_values(row_idx)
-                        texto += ', '.join(map(str, row)) + '\n'
-                return texto.strip()
-            except Exception as e:
-                print(f"Erro ao extrair texto do XLS: {e}")
-                raise e
+        # Salva o arquivo convertido
+        workbook_xlsx.save(xlsx_file)
 
-        # Tenta detectar encoding e processar como texto
-        else:
-            with open(file_path, 'rb') as f:
-                raw_data = f.read()
-                encoding_result = chardet.detect(raw_data)
-                encoding = encoding_result.get('encoding', 'utf-8')  # Define um padrão caso seja None
-                if not encoding:  # Caso continue indefinido, usa 'utf-8'
-                    print("Encoding não detectado. Usando 'utf-8' como padrão.")
-                    encoding = 'utf-8'
+        # Encaminha para extração de texto do .xlsx
+        return extract_text_from_xlsx(xlsx_file)
 
-            try:
-                texto = raw_data.decode(encoding, errors='replace')
-            except Exception as e:
-                print(f"Erro ao decodificar o arquivo com encoding '{encoding}': {e}")
-                raise e
-
-            # Verifica se é HTML
-            if texto.lower().startswith("<!doctype html") or "<html" in texto.lower() or "<table" in texto.lower():
-                print("Detectado conteúdo HTML.")
-                soup = BeautifulSoup(texto, "html.parser")
-                return soup.get_text(separator='\n').strip()
-
-            # Verifica se é CSV
-            elif ("," in texto or ";" in texto) and len(texto.splitlines()) > 1:
-                print("Detectado formato CSV.")
-                # try:
-                #     delimitador = "," if "," in texto else ";"  # Detecta delimitador
-                #     leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)
-                #     linhas_csv = list(leitor_csv)
-                #     return "\n".join([", ".join(linha) for linha in linhas_csv]).strip()
-                # except csv.Error as e:
-                #     print(f"Erro ao processar CSV: {e}")
-                #     raise e
-
-                try:
-                    # Detecta delimitador automaticamente
-                    delimitador = csv.Sniffer().sniff(texto[:1024]).delimiter
-                    print(f"Delimitador detectado: '{delimitador}'")
-                    leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)
-                    linhas_csv = list(leitor_csv)
-                    return "\n".join([", ".join(linha) for linha in linhas_csv]).strip()
-                except csv.Error as e:
-                    print(f"Erro ao processar CSV: {e}")
-                    raise e
-
-            # Trata como texto puro
-            # print("Detectado texto puro.")
-            return texto.strip()
-
-    except FileNotFoundError:
-        return f"Arquivo não encontrado: {file_path}"
     except Exception as e:
-        return f"Erro ao processar arquivo: {e}"
+        print(f"Erro ao processar arquivo .xls: {e}")
+        return "", False, f"Erro ao processar arquivo .xls: {e}"
+
+
+
+# # Função ajustada a partir do id_documento 35913 - Atual
+
+# def extract_text_from_xls(file_path):
+#     """
+#     Função mestre que tenta ler um arquivo como planilha ou similar,
+#     delegando para funções específicas conforme necessário.
+
+#     Args:
+#         file_path (str): Caminho para o arquivo XLS.
+
+#     Returns:
+#         str: Texto extraído do arquivo.
+#     """
+#     try:
+#         # Verifica o formato real do arquivo
+#         with open(file_path, 'rb') as f:
+#             inicio = f.read(1024).lower()
+
+#         # Trata como HTML
+#         if b'<html' in inicio or b'<table' in inicio:
+#             print("Detectado formato HTML.")
+#             return extract_text_from_html(file_path)
+
+#         # Trata como XLSX (arquivo ZIP)
+#         elif inicio.startswith(b'pk'):
+#             print("Detectado formato XLSX.")
+#             return extract_text_from_xlsx(file_path)
+
+#         # Trata como XLS (formato binário legado)
+#         elif b'workbook' in inicio or b'excel' in inicio:
+#             print("Detectado formato XLS.")
+#             try:
+#                 workbook = xlrd.open_workbook(file_path)
+#                 texto = ''
+#                 for sheet in workbook.sheets():
+#                     texto += f"=== Planilha: {sheet.name} ===\n"
+#                     for row_idx in range(sheet.nrows):
+#                         row = sheet.row_values(row_idx)
+#                         texto += ', '.join(map(str, row)) + '\n'
+#                 return texto.strip()
+#             except Exception as e:
+#                 print(f"Erro ao extrair texto do XLS: {e}")
+#                 raise e
+
+#         # Tenta detectar encoding e processar como texto
+#         else:
+#             with open(file_path, 'rb') as f:
+#                 raw_data = f.read()
+#                 encoding_result = chardet.detect(raw_data)
+#                 encoding = encoding_result.get('encoding', 'utf-8')  # Define um padrão caso seja None
+#                 if not encoding:  # Caso continue indefinido, usa 'utf-8'
+#                     print("Encoding não detectado. Usando 'utf-8' como padrão.")
+#                     encoding = 'utf-8'
+
+#             try:
+#                 texto = raw_data.decode(encoding, errors='replace')
+#             except Exception as e:
+#                 print(f"Erro ao decodificar o arquivo com encoding '{encoding}': {e}")
+#                 raise e
+
+#             # Verifica se é HTML
+#             if texto.lower().startswith("<!doctype html") or "<html" in texto.lower() or "<table" in texto.lower():
+#                 print("Detectado conteúdo HTML.")
+#                 soup = BeautifulSoup(texto, "html.parser")
+#                 return soup.get_text(separator='\n').strip()
+
+#             # Verifica se é CSV
+#             elif ("," in texto or ";" in texto) and len(texto.splitlines()) > 1:
+#                 print("Detectado formato CSV.")
+#                 # try:
+#                 #     delimitador = "," if "," in texto else ";"  # Detecta delimitador
+#                 #     leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)
+#                 #     linhas_csv = list(leitor_csv)
+#                 #     return "\n".join([", ".join(linha) for linha in linhas_csv]).strip()
+#                 # except csv.Error as e:
+#                 #     print(f"Erro ao processar CSV: {e}")
+#                 #     raise e
+
+#                 try:
+#                     # Detecta delimitador automaticamente
+#                     delimitador = csv.Sniffer().sniff(texto[:1024]).delimiter
+#                     print(f"Delimitador detectado: '{delimitador}'")
+#                     leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)
+#                     linhas_csv = list(leitor_csv)
+#                     return "\n".join([", ".join(linha) for linha in linhas_csv]).strip()
+#                 except csv.Error as e:
+#                     print(f"Erro ao processar CSV: {e}")
+#                     raise e
+
+#             # Trata como texto puro
+#             # print("Detectado texto puro.")
+#             return texto.strip()
+
+#     except FileNotFoundError:
+#         return f"Arquivo não encontrado: {file_path}"
+#     except Exception as e:
+#         return f"Erro ao processar arquivo: {e}"
 
 
 # def process_excel_file(file_path):
@@ -1079,9 +1126,8 @@ def extract_text_from_xls(file_path):
 #     except Exception as e:
 #         return f"Erro ao processar arquivo: {e}"
 
-
-
 # def extract_text_from_xltx(file_path_or_content): 
+
 def extract_text_from_xltx(file_path_or_content):
     """
     Extrai o texto de todas as planilhas de um arquivo .xltx.
