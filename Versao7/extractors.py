@@ -200,7 +200,7 @@ def process_file_by_extension(file_path, extension, original_data=None):
             result = (extract_text_and_images_from_docx(docx_path), True, None)
         elif extension == 'pdf' or extension == '' or extension == "pdf'":
             result = (extract_text_from_pdf_content(file_path), True, None)
-        elif extension in ['jpg', 'jpeg', 'png']:
+        elif extension in ['jpg', 'jpeg', 'png', 'tif', 'tiff', 'bmp', 'gif']:
             result = (extract_text_from_image(file_path), True, None)
         elif extension in ['html', 'htm']:
             result = (extract_text_from_html(file_path), True, None)

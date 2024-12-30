@@ -17,7 +17,7 @@ def transformar_dados(dados):
 
 
 # Carrega os dados de um arquivo JSON
-arquivo_entrada = r"D:\Repositorios\ocr-api\Versao7\json_correcao\_SELECT_numero_pagina_AS_pagina_ARRAY_AGG_id_documento_AS_ids_co_202412231505.json"
+arquivo_entrada = r"D:\Repositorios\ocr-api\Versao7\json_correcao\_SELECT_numero_pagina_AS_pagina_ARRAY_AGG_id_documento_AS_ids_co_202412261155.json"
 arquivo_saida = r"D:\Repositorios\ocr-api\Versao7\json_correcao\Json_errors.json"
 
 with open(arquivo_entrada, "r") as f:

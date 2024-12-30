@@ -474,64 +474,9 @@ def extract_text_from_odf(file_path, extension):
         return "", False, erro_msg
 
 
-# def extract_text_from_xlsx(file_path_or_content):
-#     """
-#     Extrai o texto de todas as planilhas de um arquivo .xlsx.
-
-#     Parâmetros:
-#     - file_path_or_content (str ou bytes): Caminho para o arquivo .xlsx ou conteúdo em bytes.
-
-#     Retorna:
-#     - texto_extraido (str): O texto extraído de todas as planilhas.
-
-#     Lança:
-#     - FileNotFoundError: Se o arquivo não existir.
-#     - ValueError: Se o arquivo não for um arquivo Excel válido.
-#     - TypeError: Se o parâmetro 'file_path_or_content' não for do tipo esperado.
-#     - Exception: Para outros erros inesperados.
-#     """
-#     if isinstance(file_path_or_content, bytes):
-#         # Conteúdo em bytes
-#         file_content = BytesIO(file_path_or_content)
-#         excel_file = file_content
-#     elif isinstance(file_path_or_content, str):
-#         # Caminho do arquivo
-#         if not os.path.exists(file_path_or_content):
-#             raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não existe.")
-#         excel_file = file_path_or_content
-#     else:
-#         raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
-
-#     try:
-#         # Lê todas as planilhas do arquivo Excel
-#         df_dict = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
-#         texto_extraido = ''
-
-#         for nome_planilha, df in df_dict.items():
-#             texto_extraido += f"=== Planilha: {nome_planilha} ===\n"
-#             texto_extraido += df.to_string(index=False)
-#             texto_extraido += '\n\n'
-
-#         return texto_extraido
-
-#     except FileNotFoundError:
-#         raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
-#     except ValueError as ve:
-#         raise ValueError(f"Erro ao ler o arquivo xlsx: {ve}")
-#     except KeyError as ke:
-#         if "xl/sharedStrings.xml" in str(ke):
-#             # Tratamento específico para a ausência de sharedStrings.xml
-#             return "O arquivo não contém strings compartilhadas ou está vazio."
-#         raise Exception(f"Erro inesperado ao processar o arquivo: {ke}")
-#     except Exception as e:
-#         raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
-
-
 def extract_text_from_xlsx(file_path_or_content):
     """
     Extrai o texto de todas as planilhas de um arquivo .xlsx.
-
-    Caso o arquivo não possua "xl/sharedStrings.xml", utiliza a função "extrair_texto_xlsx".
 
     Parâmetros:
     - file_path_or_content (str ou bytes): Caminho para o arquivo .xlsx ou conteúdo em bytes.
@@ -552,104 +497,103 @@ def extract_text_from_xlsx(file_path_or_content):
     elif isinstance(file_path_or_content, str):
         # Caminho do arquivo
         if not os.path.exists(file_path_or_content):
-            raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não existe.")
+            raise FileNotFoundError(
+                f"O arquivo '{file_path_or_content}' não existe.")
         excel_file = file_path_or_content
     else:
-        raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
+        raise TypeError(
+            "O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
 
     try:
-        # Tenta ler todas as planilhas do arquivo Excel
+        # Tenta ler o arquivo usando pandas
         df_dict = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
         texto_extraido = ''
 
-        for nome_planilha, df in df_dict.items():
-            texto_extraido += f"=== Planilha: {nome_planilha} ===\n"
-            texto_extraido += df.to_string(index=False)
-            texto_extraido += '\n\n'
+        if not df_dict:
+            return "O arquivo não contém dados legíveis."
 
-        return texto_extraido
+        for nome_planilha, df in df_dict.items():
+            print(f"Processando a planilha: {nome_planilha}")  # Log
+            texto_extraido += f"=== Planilha: {nome_planilha} ===\n"
+            if df.empty:
+                texto_extraido += "A planilha está vazia.\n"
+                continue
+
+            for row in df.itertuples(index=False):
+                row_data = "\t".join(map(str, row))
+                if row_data.strip():
+                    texto_extraido += row_data + "\n"
+
+        return texto_extraido.strip() if texto_extraido else "O arquivo não contém dados legíveis."
 
     except KeyError as ke:
-        if "xl/sharedStrings.xml" in str(ke):
-            # Tratamento específico para a ausência de sharedStrings.xml
-            return extrair_texto_xlsx(file_path_or_content)
-        raise Exception(f"Erro inesperado ao processar o arquivo: {ke}")
+        # Se ocorrer um KeyError, tenta ler o arquivo como XML
+        print(f"KeyError encontrado: {ke}. Tentando ler como XML.")
+        return read_xlsx_as_xml(excel_file)
+
+    except FileNotFoundError:
+        raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
     except Exception as e:
         raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
 
-
-def extrair_texto_xlsx(caminho_arquivo):
+def read_xlsx_as_xml(excel_file):
     """
-    Extrai texto de um arquivo .xlsx, lidando com a ausência de xl/sharedStrings.xml.
-    A função explora arquivos sheetN.xml na pasta xl/worksheets e insere espaços entre os textos das colunas.
-
-    Args:
-        caminho_arquivo (str): Caminho para o arquivo .xlsx.
-
-    Returns:
-        str: Texto extraído de todas as planilhas, concatenado.
-    """
-    def extrair_texto_com_espacos(elemento):
-        """
-        Extrai texto de um elemento XML com espaços entre colunas.
-        """
-        texto = []
-        for filho in elemento:
-            if filho.text:
-                texto.append(filho.text.strip())
-            if filho.tail:
-                texto.append(filho.tail.strip())
-            texto.extend(extrair_texto_com_espacos(filho))
-        return texto
-
-    resultados = []
-
-    try:
-        with zipfile.ZipFile(caminho_arquivo, 'r') as arquivo_zip:
-            # Lista arquivos no ZIP
-            arquivos = arquivo_zip.namelist()
-            sheets = [arq for arq in arquivos if arq.startswith('xl/worksheets/sheet') and arq.endswith('.xml')]
-
-            if not sheets:
-                return "Nenhuma planilha encontrada no arquivo .xlsx"
-
-            for sheet in sheets:
-                try:
-                    with arquivo_zip.open(sheet) as arquivo_xml:
-                        arvore = ET.parse(arquivo_xml)
-                        raiz = arvore.getroot()
-
-                        # Extrai texto com espaços entre as colunas
-                        texto_extraido = " ".join(extrair_texto_com_espacos(raiz)).strip()
-                        if texto_extraido:
-                            resultados.append(texto_extraido)
-                except Exception as e:
-                    resultados.append(f"Erro ao processar {sheet}: {e}")
-
-    except FileNotFoundError:
-        return f"Arquivo não encontrado: {caminho_arquivo}"
-    except zipfile.BadZipFile:
-        return "O arquivo fornecido não é um arquivo ZIP válido."
-    except Exception as e:
-        return f"Erro inesperado: {e}"
-
-    return "\n\n".join(resultados)
-
-
-def extract_text_from_xls(xls_file_path):
-    """
-    Extrai texto de um arquivo .xls, tentando primeiro converter para .xlsx e, se falhar, tenta ler como CSV ou HTML.
+    Lê o arquivo XLSX como um arquivo XML e extrai o texto.
 
     Parâmetros:
-    - xls_file_path (str): Caminho para o arquivo .xls.
+    - excel_file: Caminho para o arquivo XLSX ou conteúdo em bytes.
 
     Retorna:
-    - str: Texto extraído do arquivo.
+    - texto_extraido (str): O texto extraído de todas as planilhas.
     """
     try:
-        # Tenta abrir o arquivo .xls
-        workbook_xls = xlrd.open_workbook(xls_file_path)
-        xlsx_file_path = xls_file_path.replace('.xls', '.xlsx')
+        # Abre o arquivo XLSX como um ZIP
+        with zipfile.ZipFile(excel_file, 'r') as z:
+            # Verifica se o arquivo contém a planilha
+            sheet_names = [name for name in z.namelist() if 'sheet' in name and name.endswith('.xml')]
+            if not sheet_names:
+                return "O arquivo não contém planilhas válidas."
+
+            texto_extraido = ''
+            for sheet_name in sheet_names:
+                with z.open(sheet_name) as f:
+                    # Lê o conteúdo XML da planilha
+                    tree = ET.parse(f)
+                    root = tree.getroot()
+
+                    # Extrai o texto de cada célula
+                    for row in root.iter('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}row'):
+                        row_data = []
+                        for cell in row.iter('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}c'):
+                            # Obtém o valor da célula
+                            cell_value = cell.find('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}v')
+                            if cell_value is not None:
+                                row_data.append(cell_value.text)
+                        if row_data:
+                            texto_extraido += "\t".join(row_data) + "\n"
+
+            return texto_extraido.strip() if texto_extraido else "O arquivo não contém dados legíveis."
+
+    except Exception as e:
+        raise Exception(f"Erro ao ler o arquivo como XML: {e}")
+
+
+def extract_text_from_xls(file_path):
+    """
+    Converte um arquivo .xls para .xlsx e extrai o texto do arquivo convertido.
+
+    Args:
+        file_path (str): Caminho para o arquivo .xls.
+
+    Returns:
+        str: Texto extraído do arquivo.
+    """
+    try:
+        # Caminho temporário para o arquivo convertido
+        xlsx_file = file_path.replace(".xls", ".xlsx")
+
+        # Converte o arquivo .xls para .xlsx
+        workbook_xls = xlrd.open_workbook(file_path)
         workbook_xlsx = Workbook()
 
         for sheet_index in range(workbook_xls.nsheets):
@@ -657,55 +601,29 @@ def extract_text_from_xls(xls_file_path):
             sheet_name = sheet_xls.name
 
             # Cria uma aba correspondente no .xlsx
-            sheet_xlsx = workbook_xlsx.create_sheet(title=sheet_name) if sheet_index > 0 else workbook_xlsx.active
+            sheet_xlsx = workbook_xlsx.create_sheet(
+                title=sheet_name) if sheet_index > 0 else workbook_xlsx.active
             sheet_xlsx.title = sheet_name
 
             # Copia os dados da aba
             for row in range(sheet_xls.nrows):
                 for col in range(sheet_xls.ncols):
-                    sheet_xlsx.cell(row=row + 1, column=col + 1, value=sheet_xls.cell_value(row, col))
+                    sheet_xlsx.cell(row=row + 1, column=col + 1,
+                                    value=sheet_xls.cell_value(row, col))
 
         # Remove a aba padrão criada automaticamente
         if "Sheet" in workbook_xlsx.sheetnames:
             del workbook_xlsx["Sheet"]
 
         # Salva o arquivo convertido
-        workbook_xlsx.save(xlsx_file_path)
+        workbook_xlsx.save(xlsx_file)
 
-        # Agora, extrai o texto do arquivo .xlsx convertido
-        return extract_text_from_xlsx(xlsx_file_path)
-
-    except (ValueError, xlrd.XLRDError) as e:
-        print(f"Erro ao abrir o arquivo .xls: {e}. Tentando ler como CSV ou HTML.")  # Log
-        resultados = read_file_as_csv_or_html(xls_file_path)
-        return resultados
-
-
-def read_file_as_csv_or_html(file_path):
-    """
-    Tenta ler o arquivo como CSV ou HTML e extrair texto.
-
-    Parâmetros:
-    - file_path (str): Caminho para o arquivo.
-
-    Retorna:
-    - str: Texto extraído do arquivo.
-    """
-    try:
-        # Tenta ler como CSV
-        df = pd.read_csv(file_path)
-        return df.to_string(index=False)
+        # Encaminha para extração de texto do .xlsx
+        return extract_text_from_xlsx(xlsx_file)
 
     except Exception as e:
-        print(f"Erro ao ler como CSV: {e}. Tentando ler como HTML.")  # Log
-        try:
-            # Tenta ler como HTML
-            df = pd.read_html(file_path)
-            return "\n".join([df.to_string(index=False) for df in df])
-
-        except Exception as e:
-            print(f"Erro ao ler como HTML: {e}")  # Log
-            return "Não foi possível extrair texto do arquivo"
+        print(f"Erro ao processar arquivo .xls: {e}")
+        return "", False, f"Erro ao processar arquivo .xls: {e}"
 
 
 # def extract_text_from_xltx(file_path_or_content):
