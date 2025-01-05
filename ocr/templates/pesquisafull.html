@@ -23,6 +23,17 @@
             placeholder="Digite sua pesquisa..." 
             aria-label="Campo de pesquisa"
             value="{{ query }}">
+
+        <label for="pasta">Pasta:</label>
+        <select id="pasta" name="pasta">
+            <option value="">-- Selecione uma pasta --</option>
+            {% for opcao in opcoes_pasta %}
+                <option value="{{ opcao }}" {% if pasta == opcao %}selected{% endif %}>
+                    {{ opcao }}
+                </option>
+            {% endfor %}
+        </select>
+        
         
         <label>
             <input type="radio" name="tipo" value="simples" {% if tipo == 'simples' %}checked{% endif %}>
@@ -48,7 +59,8 @@
         <ul>
             {% for documento in resultados %}
                 <li>
-                    <strong>ID:</strong> {{ documento.id_documento }}<br>
+                    <strong>ID:</strong> {{ documento.id }}<br>
+                    <strong>ID_Documento:</strong> {{ documento.id_documento }}<br>
                     <strong>Nome Original:</strong> {{ documento.nome_original }}<br>
                     <strong>Email:</strong> {{ documento.email_usuario }}<br>
                     <strong>Conteúdo:</strong> {{ documento.conteudo|truncatechars:200 }}

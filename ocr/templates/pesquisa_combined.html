@@ -1,4 +1,39 @@
-<!DOCTYPE html>
+
+<form method="get" action="{% url 'pesquisa_combined' %}">
+    <label for="q">Pesquisar:</label>
+    <input 
+        type="text" 
+        id="q" 
+        name="q" 
+        placeholder="Digite sua pesquisa..." 
+        aria-label="Campo de pesquisa"
+        value="{{ query }}">
+    
+    <label for="pasta">Pasta:</label>
+    <input 
+        type="text" 
+        id="pasta" 
+        name="pasta" 
+        placeholder="Digite a pasta..." 
+        aria-label="Campo de pasta"
+        value="{{ pasta }}">
+    
+    <label>
+        <input type="radio" name="tipo" value="simples" {% if tipo == 'simples' %}checked{% endif %}>
+        Palavra Simples
+    </label>
+    <label>
+        <input type="radio" name="tipo" value="frase" {% if tipo == 'frase' %}checked{% endif %}>
+        Frase
+    </label>
+    
+    <button type="submit">Pesquisar</button>
+    <button type="button" onclick="window.location.href='{% url 'pesquisa_combined' %}'">Limpar Resultados</button>
+</form>
+
+
+
+{% comment %} <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -56,4 +91,4 @@
         <p>Nenhum resultado encontrado.</p>
     {% endif %}
 </body>
-</html>
+</html> {% endcomment %}

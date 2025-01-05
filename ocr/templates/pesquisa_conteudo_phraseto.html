@@ -14,6 +14,16 @@
     </nav>
     <br>
     <form method="get" action="{% url 'pesquisa_conteudo_phraseto' %}">
+
+        <label for="pasta">Pasta:</label>
+        <input 
+            type="text" 
+            id="pasta" 
+            name="pasta" 
+            placeholder="Digite a pasta..." 
+            aria-label="Campo de pasta"
+            value="{{ pasta }}">
+
         <label for="q">Pesquisar:</label>
         <input 
             type="text" 

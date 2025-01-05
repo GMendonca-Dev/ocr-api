@@ -71,14 +71,15 @@ logger = logging.getLogger(__name__)
 
 class DocumentosOcrAdmin(admin.ModelAdmin):
 
-    #list_filter = ('id_documento',)
+    list_filter = ('email_usuario', 'num_op', 'ano_op', 'pasta')
     # Campos a serem exibidos na tabela do Django Admin
     list_display = (
+        'id',
         'id_documento',
-        'email_usuario',
+        #'email_usuario',
         'num_op',
         'ano_op',
-        'arquivo',
+        #'arquivo',
         'numero_pagina',
         'conteudo_resumido',
         'data_formatada'
@@ -88,16 +89,16 @@ class DocumentosOcrAdmin(admin.ModelAdmin):
     search_fields = ['conteudo', 'id_documento']  # O campo onde o texto foi armazenado
 
     # Ordenação padrão
-    #ordering = ['-id_documento', '-data_leitura']
+    #ordering = ['-id_documento']
 
     # Todos os campos como leitura
     readonly_fields = [field.name for field in DocumentosOcr._meta.fields]
 
     # Definir paginação para 12 itens por página (ajuste conforme necessário)
-    list_per_page = 12
+    list_per_page = 15
 
     def conteudo_resumido(self, obj):
-        return obj.conteudo[:30] + ('...' if len(obj.conteudo) > 50 else '')
+        return obj.conteudo[:40] + ('...' if len(obj.conteudo) > 50 else '')
 
     conteudo_resumido.short_description = 'Conteúdo'
 
