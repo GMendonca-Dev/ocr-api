@@ -1,0 +1,16 @@
+[
+    {
+        "id_documento": "96886",
+        "pagina": 3826,
+        "nome_original": "CT 9898-2025 - TIM.rar",
+        "arquivo": "OP_8_2025_CT_TIM__CT9898-2025-TIM.rar",
+        "extensao": ".rar",
+        "pasta": "cttim",
+        "caminho": "https://10.100.77.20/xpertis/App/Lib/arquivos/documentos/cttim/OP_8_2025_CT_TIM__CT9898-2025-TIM.rar",
+        "Op": "8",
+        "Ano": "2025",
+        "erro": "Falha ao processar OP_8_2025_CT_TIM__CT9898-2025-TIM.rar: Erro ao processar o arquivo com extensão rar: File <ZipInfo filename='9898_2025/5976153/1_resumo_conexoes_9898_2025_5976153_355015101128402_13012025233000201.pdf' compress_type=deflate file_size=5812 compress_size=5068> is encrypted, password required for extraction",
+        "arquivo_existe": 1,
+        "data_insercao": "2025-01-20 11:24:14"
+    }
+]
