@@ -28,7 +28,7 @@ def conversao():
     )
 
     # Caminho para o documento de entrada
-    input_doc_path = Path(r"D:\Repositorios\ocr-api\Versao7\arquivosGerais\csvs\OP_213_2023_OP_SENHA_VG.xlsx")
+    input_doc_path = Path(r"D:\Repositorios\ocr-api\Versao7\arquivosGerais\pdfs\OP_84_2024_IP__7741.2023.pdf")
 
     # Inicialização do conversor de documentos
     doc_converter = DocumentConverter(
@@ -52,22 +52,24 @@ def conversao():
             # InputFormat.XLSX: ExcelFormatOption(pipeline_options=pipeline_options_xlsx)
         }
     )
-
+    print('Convertendo')
     # Conversão do documento
     start_time = time.time()
     conv_result = doc_converter.convert(input_doc_path)
     end_time = time.time() - start_time
+    print('Convertido')
 
     logging.info(f"Documento convertido em {end_time:.2f} segundos.")
 
     # Exportação dos resultados
-    output_dir = Path(r"D:\Repositorios\ocr-api\Versao7\arquivosGerais\csvs\csvsConvertidos")
+    output_dir = Path(r"D:\Repositorios\ocr-api\Versao7\arquivosGerais\pdfs\PdfsConvertidos5")
     output_dir.mkdir(parents=True, exist_ok=True)
     doc_filename = conv_result.input.file.stem
 
     # Exporta no formato Texto
     with (output_dir / f"{doc_filename}.txt").open("w", encoding="utf-8") as fp:
         fp.write(conv_result.document.export_to_text())
+        print(f"Arquivo TXT exportado para: {fp.name}")
 
 
 conversao()

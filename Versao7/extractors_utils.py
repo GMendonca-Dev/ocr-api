@@ -11,10 +11,8 @@ import os
 import zipfile
 from pptx import Presentation
 import pandas as pd
-# import pdfplumber
 import warnings
 import sys
-# from lxml import etree
 from PIL import ImageFilter
 import subprocess
 import xlrd
@@ -24,16 +22,7 @@ import numpy as np
 import chardet
 import uuid
 import tempfile
-# from pdfplumber import PDF
-# from tempfile import NamedTemporaryFile
-# from openpyxl import load_workbook
 from openpyxl import Workbook
-
-
-# ######## Conversão de arquivos .doc para .docx ########
-# from docx.document import Document as Document_docx
-# from win32com.client import Dispatch
-# ######## Fim da Conversão de arquivos .doc para .docx ########
 
 
 sys.path.insert(0, './Versao7')
