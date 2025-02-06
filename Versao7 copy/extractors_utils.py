@@ -11,10 +11,8 @@ import os
 import zipfile
 from pptx import Presentation
 import pandas as pd
-# import pdfplumber
 import warnings
 import sys
-# from lxml import etree
 from PIL import ImageFilter
 import subprocess
 import xlrd
@@ -22,18 +20,9 @@ import csv
 import cv2
 import numpy as np
 import chardet
-# import tempfile
-# from pdfplumber import PDF
-# from tempfile import NamedTemporaryFile
-from openpyxl import load_workbook
-import mimetypes
-
-
-
-# ######## Conversão de arquivos .doc para .docx ########
-# from docx.document import Document as Document_docx
-# from win32com.client import Dispatch
-# ######## Fim da Conversão de arquivos .doc para .docx ########
+import uuid
+import tempfile
+from openpyxl import Workbook
 
 
 sys.path.insert(0, './Versao7')
@@ -62,7 +51,7 @@ def extract_text_from_xml(file_path_or_content):
             # Lê o arquivo diretamente do caminho fornecido
             with open(file_path_or_content, 'r', encoding='utf-8') as file:
                 file_content = file.read()
-        
+
         # Analisa o conteúdo XML
         root = ET.fromstring(file_content)
 
@@ -72,10 +61,10 @@ def extract_text_from_xml(file_path_or_content):
             for child in element:
                 text += "\n" + extract_text(child)
             return text
-        
+
         # Extrai o texto do XML
         extracted_text = extract_text(root)
-        
+
         return extracted_text, True, ""  # Retorna o texto extraído e sucesso
 
     except ET.ParseError as parse_error:
@@ -86,245 +75,6 @@ def extract_text_from_xml(file_path_or_content):
         erro_msg = f"Erro ao ler ou processar o arquivo XML: {e}"
         print(erro_msg)
         return "", False, erro_msg
-
-
-# def extract_text_from_odt(file_path_or_content):
-#     try:
-#         # Abre o arquivo ODT a partir de um caminho ou de um objeto de arquivo
-#         if isinstance(file_path_or_content, str):
-#             # file_path_or_content é um caminho de arquivo
-#             zip_file = zipfile.ZipFile(file_path_or_content, 'r')
-#         else:
-#             # file_path_or_content é um objeto de arquivo
-#             zip_file = zipfile.ZipFile(file_path_or_content)
-
-#         # Verifica se o content.xml existe no arquivo ODT
-#         if 'content.xml' in zip_file.namelist():
-#             with zip_file.open('content.xml') as f:
-#                 tree = etree.parse(f)
-#                 # Define os namespaces utilizados
-#                 namespaces = {
-#                     'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
-#                     'office': 'urn:oasis:names:tc:opendocument:xmlns:office:1.0'
-#                 }
-#                 # Encontra todos os elementos de parágrafo
-#                 paragrafos = tree.xpath('//text:p', namespaces=namespaces)
-#                 extracted_text = ''
-#                 for paragrafo in paragrafos:
-#                     # Extrai o texto do parágrafo, incluindo elementos de texto internos
-#                     texto_paragrafo = ''.join(paragrafo.xpath('.//text()', namespaces=namespaces))
-#                     extracted_text += texto_paragrafo + '\n'
-#             return extracted_text, True
-#         else:
-#             erro_msg = "O arquivo content.xml não foi encontrado no ODT."
-#             print(erro_msg)
-#             return "", False
-#     except Exception as e:
-#         erro_msg = f"Erro ao ler ou processar o arquivo ODT: {e}"
-#         print(erro_msg)  # Exibe o erro no console
-#         return "", False
-
-
-# def extract_text_from_odt(file_path_or_content):
-#     """
-#     Extrai texto de um arquivo ODT usando uma abordagem híbrida.
-#     Primeiro tenta extrair diretamente do XML, se falhar usa conversão para PDF.
-
-#     Args:
-#         file_path_or_content (str): Caminho para o arquivo ODT.
-
-#     Returns:
-#         tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
-#     """
-#     try:
-#         # Primeira tentativa: extrair diretamente do XML
-#         if isinstance(file_path_or_content, str):
-#             zip_file = zipfile.ZipFile(file_path_or_content, 'r')
-#         else:
-#             zip_file = zipfile.ZipFile(BytesIO(file_path_or_content))
-
-#         if 'content.xml' in zip_file.namelist():
-#             with zip_file.open('content.xml') as f:
-#                 tree = ET.parse(f)
-#                 root = tree.getroot()
-                
-#                 # Define os namespaces utilizados
-#                 namespaces = {
-#                     'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
-#                     'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0'
-#                 }
-                
-#                 # Extrai todo o texto, incluindo tabelas
-#                 extracted_text = []
-                
-#                 # Procura por todos os elementos que podem conter texto
-#                 for elem in root.findall('.//text:p', namespaces):
-#                     # Adiciona o texto do parágrafo, mesmo que esteja vazio
-#                     paragraph_text = elem.text.strip() if elem.text else ""
-#                     extracted_text.append(paragraph_text)
-
-#                     # Adiciona o texto que vem após o parágrafo
-#                     if elem.tail and elem.tail.strip():
-#                         extracted_text.append(elem.tail.strip())
-
-#                 for table in root.findall('.//table:table', namespaces):
-#                     for row in table.findall('.//table:table-row', namespaces):
-#                         for cell in row.findall('.//table:table-cell', namespaces):
-#                             cell_text = []
-#                             for p in cell.findall('.//text:p', namespaces):
-#                                 if p.text and p.text.strip():
-#                                     cell_text.append(p.text.strip())
-#                             if cell_text:
-#                                 extracted_text.append(" ".join(cell_text))
-
-#                 # Junta todos os textos extraídos
-#                 text = '\n'.join(extracted_text).strip()  # Remove espaços extras
-
-#                 # Imprime o texto extraído para depuração
-#                 # print("Texto extraído do ODT:", text)
-
-#                 # Verifica se o texto extraído não está vazio
-#                 if not text:
-#                     return "", False, "Arquivo ODT está vazio ou não contém texto legível."
-
-#                 return text, True, ""
-
-#         # Se não encontrou texto, tenta converter para PDF e extrair
-#         temp_dir = tempfile.gettempdir()
-#         pdf_file_path = os.path.join(temp_dir, os.path.basename(file_path_or_content).replace(".odt", ".pdf"))
-
-#         try:
-#             # Converte ODT para PDF usando LibreOffice
-#             subprocess.run(
-#                 ["libreoffice", "--headless", "--convert-to", "pdf", "--outdir", temp_dir, file_path_or_content],
-#                 check=True,
-#                 stdout=subprocess.PIPE,
-#                 stderr=subprocess.PIPE,
-#                 timeout=45  # Adiciona timeout de 45 segundos
-#             )
-
-#             if not os.path.exists(pdf_file_path):
-#                 return "", False, "Falha ao converter o arquivo ODT para PDF."
-
-#             # Extrai texto do PDF usando a função existente
-#             texto, sucesso, erro = extract_text_from_pdf_content(pdf_file_path)
-            
-#             # Verifica se o texto extraído do PDF está vazio
-#             if not texto.strip():
-#                 return "", False, "Arquivo convertido para PDF, mas o conteúdo está vazio."
-
-#             # Remove o arquivo PDF temporário
-#             if os.path.exists(pdf_file_path):
-#                 os.remove(pdf_file_path)
-
-#             return texto, sucesso, erro
-
-#         except subprocess.TimeoutExpired:
-#             return "", False, "Timeout durante a conversão do arquivo ODT para PDF."
-#         except subprocess.CalledProcessError as e:
-#             return "", False, f"Erro durante a conversão de ODT para PDF: {e}"
-#         except OSError as e:  # Captura erros específicos de sistema operacional
-#             return "", False, f"Erro ao processar o arquivo ODT: {e}"
-#         except Exception as e:  # Captura erros inesperados
-#             return "", False, f"Erro inesperado ao processar o arquivo ODT: {e}"
-
-#     except Exception as e:
-#         return "", False, f"Erro ao processar o arquivo ODT: {e}"
-
-
-# def extract_text_from_odt(file_path):
-#     """
-#     Extrai texto de um arquivo ODT. Se o arquivo contiver imagens, aplica OCR nelas.
-
-#     Args:
-#         file_path (str): Caminho para o arquivo ODT.
-
-#     Returns:
-#         tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
-#     """
-#     try:
-#         # Verifica se o arquivo existe
-#         if not file_path or not zipfile.is_zipfile(file_path):
-#             return "", False, "O arquivo fornecido não é válido ou não existe."
-
-#         # Abre o arquivo ODT como um arquivo ZIP
-#         with zipfile.ZipFile(file_path, 'r') as odt_file:
-#             # Verifica se o content.xml está presente no ODT
-#             if 'content.xml' not in odt_file.namelist():
-#                 return "", False, "O arquivo content.xml não foi encontrado no ODT."
-
-#         # ############# Extração aqui ##############
-#         def extract_text_pure(element, collected_text=None):
-#             """
-#             Extrai apenas o texto puro de um arquivo XML.
-
-#             Args:
-#                 element (Element): Elemento XML raiz ou filho.
-#                 collected_text (list): Lista para armazenar o texto extraído.
-
-#             Returns:
-#                 str: Todo o texto puro extraído concatenado.
-#             """
-#             if collected_text is None:
-#                 collected_text = []
-
-#             # Adiciona o texto do elemento, se existir
-#             if element.text and element.text.strip():
-#                 collected_text.append(element.text.strip())
-
-#             # Processa os filhos do elemento
-#             for child in element:
-#                 extract_text_pure(child, collected_text)
-
-#             # Adiciona o texto de tail, se existir (texto entre tags)
-#             if element.tail and element.tail.strip():
-#                 collected_text.append(element.tail.strip())
-
-#             return " ".join(collected_text)
-
-#         def read_xml_pure(file_path):
-#             """
-#             Lê um arquivo XML e retorna apenas o texto puro concatenado.
-
-#             Args:
-#                 file_path (str): Caminho para o arquivo XML.
-
-#             Returns:
-#                 str: Texto puro extraído do XML.
-#             """
-#             tree = ET.parse(file_path)
-#             root = tree.getroot()
-
-#             # Extrai todo o texto puro
-#             return extract_text_pure(root)
-
-#             # ############# Fim da Extração aqui ##############
-
-#         # Processa imagens embutidas
-#         image_texts = []
-#         for item in odt_file.namelist():
-#             if item.startswith('Pictures/') and item.lower().endswith(('.png', '.jpg', '.jpeg')):
-#                 # Extrai imagem
-#                 with odt_file.open(item) as img_file:
-#                     image = Image.open(BytesIO(img_file.read()))
-#                     # Aplica OCR na imagem
-#                     text_from_image = pytesseract.image_to_string(image, lang='por', config='--psm 6')
-#                     if text_from_image.strip():
-#                         image_texts.append(f"\n--- Texto extraído de {item} ---\n{text_from_image.strip()}")
-
-#         # Combina o texto do XML e o texto das imagens
-#         if image_texts:
-#             extracted_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(image_texts)
-
-#         # Verifica se o texto final está vazio
-#         if not extracted_text.strip():
-#             return "", False, "O arquivo ODT não contém texto ou imagens legíveis."
-
-#         return extracted_text, True, ""
-
-#     except Exception as e:
-#         erro_msg = f"Erro ao processar o arquivo ODT: {e}"
-#         return "", False, erro_msg
 
 
 class ODTExtractor:
@@ -394,9 +144,11 @@ class ODTExtractor:
             if item.startswith('Pictures/') and item.lower().endswith(('.png', '.jpg', '.jpeg')):
                 with odt_file.open(item) as img_file:
                     image = Image.open(BytesIO(img_file.read()))
-                    text_from_image = pytesseract.image_to_string(image, lang='por', config='--psm 6')
+                    text_from_image = pytesseract.image_to_string(
+                        image, lang='por', config='--psm 6')
                     if text_from_image.strip():
-                        image_texts.append(f"\n--- Texto extraído de {item} ---\n{text_from_image.strip()}")
+                        image_texts.append(
+                            f"\n--- Texto extraído de {item} ---\n{text_from_image.strip()}")
         return image_texts
 
     def process(self):
@@ -419,12 +171,14 @@ class ODTExtractor:
                 # Extrai o texto do content.xml
                 with odt_file.open('content.xml') as xml_file:
                     xml_content = xml_file.read()
-                    self.extracted_text = self.extract_text_from_xml(xml_content)
+                    self.extracted_text = self.extract_text_from_xml(
+                        xml_content)
 
                 # Extrai texto das imagens
                 image_texts = self.extract_text_from_images(odt_file)
                 if image_texts:
-                    self.extracted_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(image_texts)
+                    self.extracted_text += "\n\n--- Texto das Imagens ---\n" + \
+                        "\n".join(image_texts)
 
             # Verifica se algum texto foi extraído
             if not self.extracted_text.strip():
@@ -434,71 +188,6 @@ class ODTExtractor:
 
         except Exception as e:
             return "", False, f"Erro ao processar o arquivo ODT: {e}"
-
-
-# Extração de texto de arquivos ODS (LibreOffice Calc)
-
-# def extract_text_from_ods(file_path_or_content):
-#     """
-#     Extrai texto de um arquivo ODS.
-
-#     Args:
-#         file_path_or_content (str ou bytes): Caminho para o arquivo ODS ou conteúdo em bytes.
-
-#     Returns:
-#         tuple: Texto extraído (str), sucesso (bool).
-#     """
-#     try:
-#         # Abre o arquivo ODS como um arquivo ZIP
-#         if isinstance(file_path_or_content, str):
-#             # Caminho para o arquivo
-#             zip_file = zipfile.ZipFile(file_path_or_content, 'r')
-#         else:
-#             # Conteúdo em bytes
-#             zip_file = zipfile.ZipFile(BytesIO(file_path_or_content))
-
-#         # Abre o arquivo 'content.xml' dentro do ODS
-#         with zip_file.open('content.xml') as f:
-#             tree = ET.parse(f)
-#             root = tree.getroot()
-
-#         # Define os namespaces usados no arquivo ODS
-#         namespaces = {
-#             'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0',
-#             'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0'
-#         }
-
-#         # Inicializa uma lista para armazenar o conteúdo extraído
-#         extracted_data = []
-
-#         # Itera pelas células da tabela
-#         for cell in root.findall('.//table:table-cell', namespaces):
-#             # Verifica o conteúdo do texto dentro da célula
-#             cell_text = []
-#             for text_element in cell.findall('.//text:p', namespaces):
-#                 if text_element.text:
-#                     cell_text.append(text_element.text.strip())
-            
-#             # Adiciona o conteúdo da célula à lista, se não estiver vazio
-#             if cell_text:
-#                 extracted_data.append(" ".join(cell_text))
-
-#         # Junta o conteúdo de todas as células em uma única string
-#         extracted_text = "\n".join(extracted_data)
-
-#         # Fecha o arquivo ZIP
-#         zip_file.close()
-
-#         # Verifica se algum texto foi extraído
-#         if not extracted_text.strip():
-#             return "", False
-
-#         return extracted_text, True
-
-#     except Exception as e:
-#         erro_msg = f"Erro ao processar o arquivo ODS: {e}"
-#         print(erro_msg)
-#         return "", False
 
 
 class ODSExtractor:
@@ -556,7 +245,8 @@ class ODSExtractor:
                 row_text = []
                 for cell in row.findall('.//table:table-cell', namespaces):
                     # Extrai o texto das células
-                    cell_content = self.extract_text_from_cell(cell, namespaces)
+                    cell_content = self.extract_text_from_cell(
+                        cell, namespaces)
                     if cell_content:  # Ignora células vazias
                         row_text.append(cell_content)
                 if row_text:
@@ -581,7 +271,8 @@ class ODSExtractor:
             if item.startswith('Pictures/') and item.lower().endswith(('.png', '.jpg', '.jpeg')):
                 with ods_file.open(item) as img_file:
                     image = Image.open(BytesIO(img_file.read()))
-                    text_from_image = pytesseract.image_to_string(image, lang='por', config='--psm 6')
+                    text_from_image = pytesseract.image_to_string(
+                        image, lang='por', config='--psm 6')
                     if text_from_image.strip():
                         image_texts.append(text_from_image.strip())
         return image_texts
@@ -616,7 +307,8 @@ class ODSExtractor:
                 # Extrai texto das imagens
                 image_texts = self.extract_text_from_images(ods_file)
                 if image_texts:
-                    table_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(image_texts)
+                    table_text += "\n\n--- Texto das Imagens ---\n" + \
+                        "\n".join(image_texts)
 
             # Verifica se algum texto foi extraído
             if not table_text.strip():
@@ -642,7 +334,8 @@ def extract_text_from_odp(file_path_or_content):
             tree = ET.parse(f)
             root = tree.getroot()
 
-        text_elements = [elem.text for elem in root.iter() if elem.text is not None]
+        text_elements = [elem.text for elem in root.iter()
+                         if elem.text is not None]
         extracted_text = "\n".join(text_elements)
         return extracted_text, True
     except Exception as e:
@@ -660,7 +353,7 @@ def extract_text_from_odg(file_path_or_content):
                 zip_file = zipfile.ZipFile(f)
         else:
             zip_file = zipfile.ZipFile(file_path_or_content)
-        
+
         # Abre o arquivo 'content.xml' dentro do ODG
         with zip_file.open('content.xml') as f:
             tree = ET.parse(f)
@@ -683,26 +376,6 @@ def extract_text_from_odg(file_path_or_content):
     except Exception as e:
         print(f"Erro ao ler ou processar o arquivo ODG: {e}")
         return "", False
-
-
-# def extract_text_from_txt(file_path_or_content):
-#     """
-#     Extrai o texto de um arquivo de texto (formato .txt).
-
-#     O arquivo pode ser lido como um objeto de bytes ou como um caminho de arquivo no sistema de arquivos.
-#     O encoding padr o  'latin1'.
-#     """
-  
-#     try:
-#         if isinstance(file_path_or_content, bytes):
-#             resultado = file_path_or_content.decode('latin1')
-#         else:
-#             with open(file_path_or_content, 'r', encoding='latin1') as file:
-#                 resultado = file.read()
-#         return resultado, True
-#     except Exception as e:
-#         print(f"Erro ao ler arquivo txt: {e}")
-#         return "", False
 
 
 def extract_text_from_txt(file_path):
@@ -790,38 +463,64 @@ def extract_text_from_odf(file_path, extension):
         return "", False, erro_msg
 
 
-# def extract_text_from_odf(file_path, extension):
-#     try:
-#         if extension == 'odt':
-#             return extract_text_from_odt(file_path), True, None
-#         elif extension == 'ods':
-#             return extract_text_from_ods(file_path), True, None
-#         elif extension == 'odp':
-#             return extract_text_from_odp(file_path), True, None
-#         elif extension == 'odg':
-#             return extract_text_from_odg(file_path), True, None
-#     except Exception as e:
-#         erro_msg = f"Erro ao processar arquivo ODF ({extension}): {e}"
-#         return "", False, erro_msg
-
-
 # def extract_text_from_xlsx(file_path_or_content):
+#     """
+#     Extrai o texto de todas as planilhas de um arquivo .xlsx.
+
+#     Parâmetros:
+#     - file_path_or_content (str ou bytes): Caminho para o arquivo .xlsx ou conteúdo em bytes.
+
+#     Retorna:
+#     - texto_extraido (str): O texto extraído de todas as planilhas.
+
+#     Lança:
+#     - FileNotFoundError: Se o arquivo não existir.
+#     - ValueError: Se o arquivo não for um arquivo Excel válido.
+#     - TypeError: Se o parâmetro 'file_path_or_content' não for do tipo esperado.
+#     - Exception: Para outros erros inesperados.
+#     """
+#     if isinstance(file_path_or_content, bytes):
+#         # Conteúdo em bytes
+#         file_content = BytesIO(file_path_or_content)
+#         excel_file = file_content
+#     elif isinstance(file_path_or_content, str):
+#         # Caminho do arquivo
+#         if not os.path.exists(file_path_or_content):
+#             raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não existe.")
+#         excel_file = file_path_or_content
+#     else:
+#         raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
 
 #     try:
-#         if isinstance(file_path_or_content, bytes):
-#             file_content = BytesIO(file_path_or_content)
-#             df = pd.read_excel(file_content, engine='openpyxl')
-#         else:
-#             df = pd.read_excel(file_path_or_content, engine='openpyxl')
-#         return df.to_string(), True
+#         # Lê todas as planilhas do arquivo Excel
+#         df_dict = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
+#         texto_extraido = ''
+
+#         for nome_planilha, df in df_dict.items():
+#             texto_extraido += f"=== Planilha: {nome_planilha} ===\n"
+#             texto_extraido += df.to_string(index=False)
+#             texto_extraido += '\n\n'
+
+#         return texto_extraido
+
+#     except FileNotFoundError:
+#         raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
+#     except ValueError as ve:
+#         raise ValueError(f"Erro ao ler o arquivo xlsx: {ve}")
+#     except KeyError as ke:
+#         if "xl/sharedStrings.xml" in str(ke):
+#             # Tratamento específico para a ausência de sharedStrings.xml
+#             return "O arquivo não contém strings compartilhadas ou está vazio."
+#         raise Exception(f"Erro inesperado ao processar o arquivo: {ke}")
 #     except Exception as e:
-#         print(f"Erro ao ler arquivo xlsx: {e}")
-#         return "", False
+#         raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
 
 
 def extract_text_from_xlsx(file_path_or_content):
     """
     Extrai o texto de todas as planilhas de um arquivo .xlsx.
+
+    Caso o arquivo não possua "xl/sharedStrings.xml", utiliza a função "extrair_texto_xlsx".
 
     Parâmetros:
     - file_path_or_content (str ou bytes): Caminho para o arquivo .xlsx ou conteúdo em bytes.
@@ -848,7 +547,7 @@ def extract_text_from_xlsx(file_path_or_content):
         raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
 
     try:
-        # Lê todas as planilhas do arquivo Excel
+        # Tenta ler todas as planilhas do arquivo Excel
         df_dict = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
         texto_extraido = ''
 
@@ -859,229 +558,147 @@ def extract_text_from_xlsx(file_path_or_content):
 
         return texto_extraido
 
-    except FileNotFoundError:
-        # O arquivo não foi encontrado durante a leitura
-        raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
-    except ValueError as ve:
-        # Erro ao ler o arquivo Excel
-        raise ValueError(f"Erro ao ler o arquivo xlsx: {ve}")
+    except KeyError as ke:
+        if "xl/sharedStrings.xml" in str(ke):
+            # Tratamento específico para a ausência de sharedStrings.xml
+            return extrair_texto_xlsx(file_path_or_content)
+        raise Exception(f"Erro inesperado ao processar o arquivo: {ke}")
     except Exception as e:
-        # Outros erros inesperados
         raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
 
-# Está funcionando - Deu erro em apenas alguns arquivos específicos (pag 1420 - id 35913 )
-# def extract_text_from_xls(file_path):
-  
-#     """
-#     Detecta o formato real do arquivo e extrai o texto.
 
-#     Parâmetros:
-#     caminho_arquivo_xls (str): Caminho para o arquivo de entrada.
-
-#     Retorna:
-#     str: Texto extraído do documento.
-#     """
-
-    # # Verifica o formato real do arquivo
-    # with open(file_path, 'rb') as f:
-    #     inicio = f.read(1024).lower()
-
-    # try:
-    #     if b'<html' in inicio or b'<table' in inicio:
-    #         # Trata como HTML
-    #         texto = extract_text_from_html(file_path)
-    #     elif inicio.startswith(b'pk'):
-    #         # Trata como XLSX (arquivo xlsx
-    #         texto = extract_text_from_xlsx(file_path)
-    #     else:
-    #         try:
-    #             workbook = xlrd.open_workbook(file_path)
-    #             texto = ''
-    #             for sheet in workbook.sheets():
-    #                 texto += f"=== Planilha: {sheet.name} ===\n"
-    #                 for row_idx in range(sheet.nrows):
-    #                     row = sheet.row_values(row_idx)
-    #                     texto += ', '.join(map(str, row)) + '\n'
-    #             # return texto
-    #         except Exception as e:
-    #             print(f"Erro ao extrair texto do XLS: {e}")
-    #             raise e
-    #     return texto
-    # except Exception as e:
-    #     print(f"Erro ao extrair texto: {e}")
-    #     raise e
-
-
-# Função ajustada a partir do id_documento 35913
-
-def extract_text_from_xls(file_path):
+def extrair_texto_xlsx(caminho_arquivo):
     """
-    Função mestre que tenta ler um arquivo como planilha ou similar,
-    delegando para funções específicas conforme necessário.
+    Extrai texto de um arquivo .xlsx, lidando com a ausência de xl/sharedStrings.xml.
+    A função explora arquivos sheetN.xml na pasta xl/worksheets e insere espaços entre os textos das colunas.
 
     Args:
-        file_path (str): Caminho para o arquivo XLS.
+        caminho_arquivo (str): Caminho para o arquivo .xlsx.
 
     Returns:
-        str: Texto extraído do arquivo.
+        str: Texto extraído de todas as planilhas, concatenado.
     """
+    def extrair_texto_com_espacos(elemento):
+        """
+        Extrai texto de um elemento XML com espaços entre colunas.
+        """
+        texto = []
+        for filho in elemento:
+            if filho.text:
+                texto.append(filho.text.strip())
+            if filho.tail:
+                texto.append(filho.tail.strip())
+            texto.extend(extrair_texto_com_espacos(filho))
+        return texto
+
+    resultados = []
+
     try:
-        # Verifica o formato real do arquivo
-        with open(file_path, 'rb') as f:
-            inicio = f.read(1024).lower()
+        with zipfile.ZipFile(caminho_arquivo, 'r') as arquivo_zip:
+            # Lista arquivos no ZIP
+            arquivos = arquivo_zip.namelist()
+            sheets = [arq for arq in arquivos if arq.startswith('xl/worksheets/sheet') and arq.endswith('.xml')]
 
-        # Trata como HTML
-        if b'<html' in inicio or b'<table' in inicio:
-            print("Detectado formato HTML.")
-            return extract_text_from_html(file_path)
+            if not sheets:
+                return "Nenhuma planilha encontrada no arquivo .xlsx"
 
-        # Trata como XLSX (arquivo ZIP)
-        elif inicio.startswith(b'pk'):
-            print("Detectado formato XLSX.")
-            return extract_text_from_xlsx(file_path)
-
-        # Trata como XLS (formato binário legado)
-        elif b'workbook' in inicio or b'excel' in inicio:
-            print("Detectado formato XLS.")
-            try:
-                workbook = xlrd.open_workbook(file_path)
-                texto = ''
-                for sheet in workbook.sheets():
-                    texto += f"=== Planilha: {sheet.name} ===\n"
-                    for row_idx in range(sheet.nrows):
-                        row = sheet.row_values(row_idx)
-                        texto += ', '.join(map(str, row)) + '\n'
-                return texto.strip()
-            except Exception as e:
-                print(f"Erro ao extrair texto do XLS: {e}")
-                raise e
-
-        # Tenta detectar encoding e processar como texto
-        else:
-            with open(file_path, 'rb') as f:
-                raw_data = f.read()
-                encoding_result = chardet.detect(raw_data)
-                encoding = encoding_result.get('encoding', 'utf-8')  # Define um padrão caso seja None
-                if not encoding:  # Caso continue indefinido, usa 'utf-8'
-                    print("Encoding não detectado. Usando 'utf-8' como padrão.")
-                    encoding = 'utf-8'
-
-            try:
-                texto = raw_data.decode(encoding, errors='replace')
-            except Exception as e:
-                print(f"Erro ao decodificar o arquivo com encoding '{encoding}': {e}")
-                raise e
-
-            # Verifica se é HTML
-            if texto.lower().startswith("<!doctype html") or "<html" in texto.lower() or "<table" in texto.lower():
-                print("Detectado conteúdo HTML.")
-                soup = BeautifulSoup(texto, "html.parser")
-                return soup.get_text(separator='\n').strip()
-
-            # Verifica se é CSV
-            elif ("," in texto or ";" in texto) and len(texto.splitlines()) > 1:
-                print("Detectado formato CSV.")
-                # try:
-                #     delimitador = "," if "," in texto else ";"  # Detecta delimitador
-                #     leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)
-                #     linhas_csv = list(leitor_csv)
-                #     return "\n".join([", ".join(linha) for linha in linhas_csv]).strip()
-                # except csv.Error as e:
-                #     print(f"Erro ao processar CSV: {e}")
-                #     raise e
-
+            for sheet in sheets:
                 try:
-                    # Detecta delimitador automaticamente
-                    delimitador = csv.Sniffer().sniff(texto[:1024]).delimiter
-                    print(f"Delimitador detectado: '{delimitador}'")
-                    leitor_csv = csv.reader(texto.splitlines(), delimiter=delimitador)
-                    linhas_csv = list(leitor_csv)
-                    return "\n".join([", ".join(linha) for linha in linhas_csv]).strip()
-                except csv.Error as e:
-                    print(f"Erro ao processar CSV: {e}")
-                    raise e
+                    with arquivo_zip.open(sheet) as arquivo_xml:
+                        arvore = ET.parse(arquivo_xml)
+                        raiz = arvore.getroot()
 
-            # Trata como texto puro
-            # print("Detectado texto puro.")
-            return texto.strip()
+                        # Extrai texto com espaços entre as colunas
+                        texto_extraido = " ".join(extrair_texto_com_espacos(raiz)).strip()
+                        if texto_extraido:
+                            resultados.append(texto_extraido)
+                except Exception as e:
+                    resultados.append(f"Erro ao processar {sheet}: {e}")
 
     except FileNotFoundError:
-        return f"Arquivo não encontrado: {file_path}"
+        return f"Arquivo não encontrado: {caminho_arquivo}"
+    except zipfile.BadZipFile:
+        return "O arquivo fornecido não é um arquivo ZIP válido."
     except Exception as e:
-        return f"Erro ao processar arquivo: {e}"
+        return f"Erro inesperado: {e}"
+
+    return "\n\n".join(resultados)
 
 
-# def process_excel_file(file_path):
-#     """
-#     Lê todas as abas de um arquivo Excel (.xls ou .xlsx) e retorna o texto extraído.
+def extract_text_from_xls(xls_file_path):
+    """
+    Extrai texto de um arquivo .xls, tentando primeiro converter para .xlsx e, se falhar, tenta ler como CSV ou HTML.
 
-#     Args:
-#         file_path (str): Caminho para o arquivo Excel.
+    Parâmetros:
+    - xls_file_path (str): Caminho para o arquivo .xls.
 
-#     Returns:
-#         str: Texto consolidado de todas as abas do arquivo ou mensagem de erro.
-#     """
-#     try:
-#         # Verifica se o arquivo existe
-#         if not os.path.exists(file_path):
-#             return f"Erro: O arquivo {file_path} não foi encontrado."
+    Retorna:
+    - str: Texto extraído do arquivo.
+    """
+    try:
+        # Tenta abrir o arquivo .xls
+        workbook_xls = xlrd.open_workbook(xls_file_path)
+        xlsx_file_path = xls_file_path.replace('.xls', '.xlsx')
+        workbook_xlsx = Workbook()
 
-#         # Detecta o tipo do arquivo
-#         mime_type, _ = mimetypes.guess_type(file_path)
-#         texto = ""
+        for sheet_index in range(workbook_xls.nsheets):
+            sheet_xls = workbook_xls.sheet_by_index(sheet_index)
+            sheet_name = sheet_xls.name
 
-#         if mime_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-#             # Trata arquivos .xlsx
-#             print("Detectado formato XLSX.")
-#             workbook = load_workbook(filename=file_path, data_only=True)
-#             for sheet_name in workbook.sheetnames:
-#                 texto += f"\n=== Aba: {sheet_name} ===\n"
-#                 sheet = workbook[sheet_name]
-#                 for row in sheet.iter_rows(values_only=True):
-#                     if any(row):  # Garante que pelo menos uma célula tem valor
-#                         texto += ", ".join(map(str, row)) + "\n"
-#             return texto.strip()
+            # Cria uma aba correspondente no .xlsx
+            sheet_xlsx = workbook_xlsx.create_sheet(title=sheet_name) if sheet_index > 0 else workbook_xlsx.active
+            sheet_xlsx.title = sheet_name
 
-#         elif mime_type == 'application/vnd.ms-excel':
-#             # Trata arquivos .xls
-#             print("Detectado formato XLS.")
-#             workbook = xlrd.open_workbook(file_path)
-#             for sheet in workbook.sheets():
-#                 texto += f"\n=== Aba: {sheet.name} ===\n"
-#                 for row_idx in range(sheet.nrows):
-#                     row = sheet.row_values(row_idx)
-#                     if any(row):  # Garante que pelo menos uma célula tem valor
-#                         texto += ", ".join(map(str, row)) + "\n"
-#             return texto.strip()
+            # Copia os dados da aba
+            for row in range(sheet_xls.nrows):
+                for col in range(sheet_xls.ncols):
+                    sheet_xlsx.cell(row=row + 1, column=col + 1, value=sheet_xls.cell_value(row, col))
 
-#         else:
-#             return f"Erro: Formato do arquivo não reconhecido ({mime_type})."
+        # Remove a aba padrão criada automaticamente
+        if "Sheet" in workbook_xlsx.sheetnames:
+            del workbook_xlsx["Sheet"]
 
-#     except xlrd.biffh.XLRDError as e:
-#         return f"Erro ao processar arquivo XLS: {e}"
-#     except Exception as e:
-#         return f"Erro ao processar arquivo: {e}"
+        # Salva o arquivo convertido
+        workbook_xlsx.save(xlsx_file_path)
+
+        # Agora, extrai o texto do arquivo .xlsx convertido
+        return extract_text_from_xlsx(xlsx_file_path)
+
+    except (ValueError, xlrd.XLRDError) as e:
+        print(f"Erro ao abrir o arquivo .xls: {e}. Tentando ler como CSV ou HTML.")  # Log
+        resultados = read_file_as_csv_or_html(xls_file_path)
+        return resultados
 
 
-# def extract_text_from_xls(file_path):
-#     """
-#     Função mestre que tenta ler um arquivo como planilha ou similar.
+def read_file_as_csv_or_html(file_path):
+    """
+    Tenta ler o arquivo como CSV ou HTML e extrair texto.
 
-#     Args:
-#         file_path (str): Caminho para o arquivo XLS ou similar.
+    Parâmetros:
+    - file_path (str): Caminho para o arquivo.
 
-#     Returns:
-#         str: Texto extraído do arquivo.
-#     """
-    
-#     try:
-#         return process_excel_file(file_path)
-#     except Exception as e:
-#         return f"Erro ao processar arquivo: {e}"
+    Retorna:
+    - str: Texto extraído do arquivo.
+    """
+    try:
+        # Tenta ler como CSV
+        df = pd.read_csv(file_path)
+        return df.to_string(index=False)
+
+    except Exception as e:
+        print(f"Erro ao ler como CSV: {e}. Tentando ler como HTML.")  # Log
+        try:
+            # Tenta ler como HTML
+            df = pd.read_html(file_path)
+            return "\n".join([df.to_string(index=False) for df in df])
+
+        except Exception as e:
+            print(f"Erro ao ler como HTML: {e}")  # Log
+            return "Não foi possível extrair texto do arquivo"
 
 
+# def extract_text_from_xltx(file_path_or_content):
 
-# def extract_text_from_xltx(file_path_or_content): 
 def extract_text_from_xltx(file_path_or_content):
     """
     Extrai o texto de todas as planilhas de um arquivo .xltx.
@@ -1099,10 +716,12 @@ def extract_text_from_xltx(file_path_or_content):
     elif isinstance(file_path_or_content, str):
         # Caminho do arquivo
         if not os.path.exists(file_path_or_content):
-            raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não existe.")
+            raise FileNotFoundError(
+                f"O arquivo '{file_path_or_content}' não existe.")
         excel_file = file_path_or_content
     else:
-        raise TypeError("O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
+        raise TypeError(
+            "O parâmetro 'file_path_or_content' deve ser um caminho de arquivo (str) ou conteúdo em bytes.")
 
     try:
         # Lê todas as planilhas do arquivo Excel
@@ -1119,47 +738,12 @@ def extract_text_from_xltx(file_path_or_content):
         return texto_extraido
 
     except FileNotFoundError:
-        raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
+        raise FileNotFoundError(
+            f"O arquivo '{file_path_or_content}' não foi encontrado.")
     except ValueError as ve:
         raise ValueError(f"Erro ao ler o arquivo xltx: {ve}")
     except Exception as e:
         raise Exception(f"Erro inesperado ao processar o arquivo: {e}")
-
-
-# def extract_text_from_csv(file_path_or_content):
-#     """
-#     Extrai o texto de um arquivo CSV.
-
-#     Parâmetros:
-#     - file_path_or_content (str ou bytes): Caminho para o arquivo CSV ou conteúdo em bytes.
-
-#     Retorna:
-#     - texto_extraido (str): O texto extraído do arquivo CSV.
-#     - sucesso (bool): Indica se a extração foi bem-sucedida.
-#     - erro_msg (str): Mensagem de erro, se houver.
-
-#     Exceções:
-#     - Gera e imprime uma mensagem de erro se ocorrer qualquer exceção durante a leitura do arquivo CSV.
-#     """
-#     try:
-#         # Verifica se o conteúdo é binário (baixado de uma URL e não de um arquivo local)
-#         if isinstance(file_path_or_content, bytes):
-#             # Converte bytes para string usando StringIO
-#             file_content = StringIO(file_path_or_content.decode('utf-8'))
-#         else:
-#             # Se for um caminho local, abre o arquivo e lê o conteúdo
-#             file_content = file_path_or_content
-
-#         # Usa pandas para ler o CSV e convertê-lo em uma string
-#         df = pd.read_csv(file_content, on_bad_lines='skip')
-#         return df.to_string(), True, ""  # Retorna o conteúdo como string, status de sucesso e erro vazio
-#     except Exception as e:
-#         erro_msg = f"Erro ao ler arquivo CSV: {e}"
-#         print(erro_msg)
-#         return "", False, erro_msg
-
-
-# def extract_csv_with_libreoffice(file_path, output_dir=None):
 
 
 def extract_text_from_csv(file_path_or_content, delimiter=None):
@@ -1186,7 +770,8 @@ def extract_text_from_csv(file_path_or_content, delimiter=None):
         else:
             # Verifica se o caminho existe
             if not os.path.exists(file_path_or_content):
-                raise FileNotFoundError(f"O arquivo '{file_path_or_content}' não foi encontrado.")
+                raise FileNotFoundError(
+                    f"O arquivo '{file_path_or_content}' não foi encontrado.")
             file_content = file_path_or_content
 
         # Detecta automaticamente o delimitador, se não fornecido
@@ -1216,7 +801,8 @@ def extract_text_from_csv(file_path_or_content, delimiter=None):
                 continue  # Tenta a próxima codificação
         else:
             # Se nenhuma codificação funcionar
-            raise UnicodeDecodeError(f"Não foi possível decodificar o arquivo usando as codificações: {encodings}")
+            raise UnicodeDecodeError(
+                f"Não foi possível decodificar o arquivo usando as codificações: {encodings}")
 
         if df.empty:
             return "", False, f"O arquivo CSV está vazio ou não contém dados legíveis. Separador detectado: '{delimiter}'."
@@ -1237,7 +823,7 @@ def extract_text_from_csv(file_path_or_content, delimiter=None):
         erro_msg = f"Erro ao ler arquivo CSV: {e}"
         print(erro_msg)
         return "", False, erro_msg
-    
+
 
 # def extract_text_and_images_from_docx(file_path_or_content):
 #     try:
@@ -1397,58 +983,279 @@ def extract_text_from_csv(file_path_or_content, delimiter=None):
 #         return "", False, erro_msg
 
 
-def extract_text_and_images_from_docx(file_path_or_content):
+# ###################################################### Iníci0 do Tratamendo DOCX versão 7 FUNCIONANDO para o range quase todo
+# def extract_text_and_images_from_docx(file_path_or_content):
+#     """
+#     Extrai texto e realiza OCR em imagens embutidas em arquivos DOCX.
+
+#     Args:
+#         file_path_or_content (str ou bytes): Caminho para o arquivo DOCX ou conteúdo em bytes.
+
+#     Returns:
+#         tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+#     """
+#     try:
+#         if isinstance(file_path_or_content, bytes):
+#             doc = Document(BytesIO(file_path_or_content))
+#         else:
+#             doc = Document(file_path_or_content)
+
+#         all_text = ""
+#         extracted_text_from_images = []
+
+#         # Extrai texto de parágrafos
+#         for para in doc.paragraphs:
+#             all_text += para.text + "\n"
+
+#         # Extrai texto de tabelas
+#         for table in doc.tables:
+#             for row in table.rows:
+#                 row_text = "\t".join(cell.text.strip() for cell in row.cells)
+#                 all_text += row_text + "\n"
+
+#         # Processa imagens embutidas no documento usando a função de extração de imagens
+#         for rel in doc.part.rels.values():
+#             if "image" in rel.target_ref:
+#                 image_data = rel.target_part.blob
+#                 with BytesIO(image_data) as image_stream:
+#                     # Salva a imagem em memória e chama a função de extração
+#                     image_path = image_stream  # Simula o caminho do arquivo
+#                     text_from_image, success, error_msg = extract_text_from_image(image_path)
+
+#                     if success and text_from_image.strip():
+#                         extracted_text_from_images.append(text_from_image)
+
+#         # Combina texto extraído de parágrafos, tabelas e imagens
+#         combined_text = all_text.strip()
+#         if extracted_text_from_images:
+#             combined_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(extracted_text_from_images)
+
+#         return combined_text, True, ""
+
+#     except Exception as e:
+#         erro_msg = f"Erro ao processar o arquivo DOCX: {e}"
+#         print(erro_msg)
+#         return "", False, erro_msg
+
+#  ###################################################### FIM do Tratamendo DOCX versão 7 FUNCIONANDO para o range quase todo
+
+
+# ####################### Funcionou, mas não extraiu texto de imagens
+# def extract_text_and_images_from_docx(file_path_or_content):
+#     """
+#     Extrai texto e realiza OCR em imagens embutidas em arquivos DOCX.
+
+#     Args:
+#         file_path_or_content (str ou bytes): Caminho para o arquivo DOCX ou conteúdo em bytes.
+
+#     Returns:
+#         tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+#     """
+#     try:
+#         # Carrega o documento
+#         if isinstance(file_path_or_content, bytes):
+#             doc = Document(BytesIO(file_path_or_content))
+#         else:
+#             doc = Document(file_path_or_content)
+
+#         all_text = ""
+#         extracted_text_from_images = []
+
+#         # Extrai texto de parágrafos
+#         for para in doc.paragraphs:
+#             all_text += para.text + "\n"
+
+#         # Extrai texto de tabelas
+#         for table in doc.tables:
+#             for row in table.rows:
+#                 row_text = "\t".join(cell.text.strip() for cell in row.cells)
+#                 all_text += row_text + "\n"
+
+#         # Processa imagens embutidas no documento
+#         for rel in doc.part.rels.values():
+#             try:
+        # # Ignora relações externas
+        # if rel.target_mode == "External":
+        #     continue
+
+#                 # Verifica se a relação é uma imagem
+#                 if "image" in rel.target_ref:
+#                     image_data = rel.target_part.blob
+#                     with BytesIO(image_data) as image_stream:
+#                         image = Image.open(image_stream)
+
+#                         # Realiza OCR na imagem
+#                         text_from_image = pytesseract.image_to_string(
+#                             image, lang='por', config='--psm 6'
+#                         )
+
+#                         if text_from_image.strip():
+#                             extracted_text_from_images.append(text_from_image)
+#             except AttributeError:
+#                 # Ignora relações sem target_part ou inválidas
+#                 continue
+#             except Exception as img_err:
+#                 print(f"Erro ao processar imagem: {img_err}")
+#                 continue
+
+#         # Combina texto extraído de parágrafos, tabelas e imagens
+#         combined_text = all_text.strip()
+#         if extracted_text_from_images:
+#             combined_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(extracted_text_from_images)
+
+#         return combined_text, True, ""
+
+#     except Exception as e:
+#         erro_msg = f"Erro ao processar o arquivo DOCX: {e}"
+#         print(erro_msg)
+#         return "", False, erro_msg
+
+
+# ###################################################### FIM Funcionou, mas não extraiu texto de imagens
+
+
+def extract_text_and_images_from_docx(docx_path):
     """
-    Extrai texto e realiza OCR em imagens embutidas em arquivos DOCX.
+    Extrai texto de um arquivo DOCX, incluindo imagens e tabelas, e combina os resultados.
 
     Args:
-        file_path_or_content (str ou bytes): Caminho para o arquivo DOCX ou conteúdo em bytes.
+        docx_path (str): Caminho para o arquivo DOCX.
 
     Returns:
-        tuple: Texto extraído (str), sucesso (bool), mensagem de erro (str).
+        str: Texto extraído do documento DOCX.
     """
+    all_text = ""
+    extracted_text_from_images = []
+
     try:
-        if isinstance(file_path_or_content, bytes):
-            doc = Document(BytesIO(file_path_or_content))
-        else:
-            doc = Document(file_path_or_content)
+        # Cria um diretório temporário para salvar imagens extraídas
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Abre o documento DOCX
+            doc = Document(docx_path)
 
-        all_text = ""
-        extracted_text_from_images = []
+            # Extrai texto do corpo principal do documento
+            for paragraph in doc.paragraphs:
+                all_text += paragraph.text.strip() + "\n"
 
-        # Extrai texto de parágrafos
-        for para in doc.paragraphs:
-            all_text += para.text + "\n"
+            # Extrai texto de tabelas
+            for table in doc.tables:
+                for row in table.rows:
+                    row_text = "\t".join(cell.text.strip()
+                                         for cell in row.cells)
+                    all_text += row_text + "\n"
 
-        # Extrai texto de tabelas
-        for table in doc.tables:
-            for row in table.rows:
-                row_text = "\t".join(cell.text.strip() for cell in row.cells)
-                all_text += row_text + "\n"
+            # # Processa as imagens do documento
+            # for rel in doc.part.rels.values():
+            #     try:
 
-        # Processa imagens embutidas no documento usando a função de extração de imagens
-        for rel in doc.part.rels.values():
-            if "image" in rel.target_ref:
-                image_data = rel.target_part.blob
-                with BytesIO(image_data) as image_stream:
-                    # Salva a imagem em memória e chama a função de extração
-                    image_path = image_stream  # Simula o caminho do arquivo
-                    text_from_image, success, error_msg = extract_text_from_image(image_path)
+            #         # Ignora relações externas
+            #         if rel.target_mode == "External":
+            #             continue
 
-                    if success and text_from_image.strip():
-                        extracted_text_from_images.append(text_from_image)
+            #         if "image" in rel.target_ref:
+            #             print(f"Processando imagem: {rel.target_ref}")
+            #             image_data = rel.target_part.blob
 
-        # Combina texto extraído de parágrafos, tabelas e imagens
-        combined_text = all_text.strip()
+            #             # Determina a extensão da imagem com base no MIME type
+            #             mime_type = rel.target_part.content_type
+            #             ext = {
+            #                 "image/png": "png",
+            #                 "image/jpeg": "jpg",
+            #                 "image/jpg": "jpg",
+            #                 "image/bmp": "bmp",
+            #                 "image/gif": "gif",
+            #             }.get(mime_type, "png")  # Default para 'png' se não identificado
+            #             print(f"Extensão da imagem: {ext}")
+
+            #             temp_image_name = f"temp_image_{uuid.uuid4().hex}.{ext}"
+            #             temp_image_path = os.path.join(temp_dir, temp_image_name)
+            #             temp_image_path = os.path.join(temp_dir, f"temp_image_{uuid.uuid4().hex}.{ext}")
+            #             with open(temp_image_path, "wb") as temp_image_file:
+            #                 temp_image_file.write(image_data)
+
+            #             # Chama a função externa para processar a imagem
+            #             text_from_image, success, error = extract_text_from_image(temp_image_path)
+
+            #             if success and text_from_image.strip():
+            #                 extracted_text_from_images.append(text_from_image)
+
+            #     except AttributeError:
+            #         # Ignora relações sem target_part ou inválidas
+            #         continue
+            #     except Exception as img_err:
+            #         print(f"Erro ao processar imagem: {img_err}")
+            #         continue
+
+            # Processa as imagens do documento
+            for rel in doc.part.rels.values():
+                try:
+                    # Verifica se a relação possui target_ref
+                    if not hasattr(rel, "target_ref") or not rel.target_ref:
+                        print(f"Relação inválida ou sem referência: {rel}")
+                        continue
+
+                    # Ignora relações externas explicitamente
+                    if getattr(rel, "target_mode", None) == "External":
+                        print(f"Relação externa ignorada: {rel.target_ref}")
+                        continue
+
+                    # Verifica se a relação é de imagem e possui target_part
+                    if "image" in rel.target_ref and hasattr(rel, "target_part") and rel.target_part:
+                        print(f"Processando imagem: {rel.target_ref}")
+                        image_data = rel.target_part.blob
+
+                        # Determina a extensão da imagem com base no MIME type
+                        mime_type = getattr(
+                            rel.target_part, "content_type", "image/png")
+                        ext = {
+                            "image/png": "png",
+                            "image/jpeg": "jpg",
+                            "image/jpg": "jpg",
+                            "image/bmp": "bmp",
+                            "image/gif": "gif",
+                        }.get(mime_type, "png")  # Default para 'png' se não identificado
+
+                        temp_image_name = f"temp_image_{uuid.uuid4().hex}.{ext}"
+                        temp_image_path = os.path.join(
+                            temp_dir, temp_image_name)
+                        print(
+                            f"Salvando imagem temporária em: {temp_image_path}")
+
+                        # Salva a imagem
+                        with open(temp_image_path, "wb") as temp_image_file:
+                            temp_image_file.write(image_data)
+
+                        # Chama a função externa para processar a imagem
+                        text_from_image, success, error = extract_text_from_image(
+                            temp_image_path)
+
+                        if success and text_from_image.strip():
+                            extracted_text_from_images.append(text_from_image)
+                        else:
+                            print(
+                                f"Falha ao extrair texto da imagem: {temp_image_path} | Erro: {error}")
+                    else:
+                        print(f"Relação ignorada: {rel.target_ref}")
+
+                except AttributeError as attr_err:
+                    print(f"Erro ao acessar atributos da relação: {attr_err}")
+                    continue
+
+                except Exception as img_err:
+                    print(f"Erro ao processar imagem: {img_err}")
+                    continue
+
+        # Combina os textos extraídos
         if extracted_text_from_images:
-            combined_text += "\n\n--- Texto das Imagens ---\n" + "\n".join(extracted_text_from_images)
+            all_text += "\n\n--- Texto das Imagens ---\n" + \
+                "\n".join(extracted_text_from_images)
 
-        return combined_text, True, ""
+        return all_text.strip(), True, ""
 
     except Exception as e:
-        erro_msg = f"Erro ao processar o arquivo DOCX: {e}"
-        print(erro_msg)
-        return "", False, erro_msg
+        error_message = f"Erro ao processar o arquivo DOCX: {e}"
+        print(error_message)
+        return "", False, f"Erro ao processar o arquivo DOCX: {e}"
 
 
 def download_and_convert_doc_to_docx(file_path, diretorio_saida=None):
@@ -1465,7 +1272,7 @@ def download_and_convert_doc_to_docx(file_path, diretorio_saida=None):
     """
     if diretorio_saida is None:
         diretorio_saida = os.path.dirname(file_path)
-    
+
     try:
         # Executa o comando de conversão
         subprocess.run([
@@ -1475,16 +1282,17 @@ def download_and_convert_doc_to_docx(file_path, diretorio_saida=None):
             file_path,
             '--outdir', diretorio_saida
         ], check=True)
-        
+
         # Obtém o nome base do arquivo sem extensão
         nome_base = os.path.splitext(os.path.basename(file_path))[0]
         caminho_docx = os.path.join(diretorio_saida, f"{nome_base}.docx")
-        
+
         if os.path.exists(caminho_docx):
             return caminho_docx
         else:
-            raise FileNotFoundError(f"Arquivo convertido {caminho_docx} não encontrado.")
-    
+            raise FileNotFoundError(
+                f"Arquivo convertido {caminho_docx} não encontrado.")
+
     except subprocess.CalledProcessError as e:
         print(f"Erro na conversão do arquivo: {e}")
         raise e
@@ -1544,13 +1352,16 @@ def extract_text_from_image(image_path):
         image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
         enhancer = ImageEnhance.Contrast(image)
         image = enhancer.enhance(2)  # Aumenta o contraste
-        image = ImageOps.autocontrast(image)  # Ajusta brilho e contraste automaticamente
+        # Ajusta brilho e contraste automaticamente
+        image = ImageOps.autocontrast(image)
 
         # Aplica OCR para texto geral
-        text_general = pytesseract.image_to_string(image, lang='por', config='--psm 6')
+        text_general = pytesseract.image_to_string(
+            image, lang='por', config='--psm 6')
 
         # Remove espaços extras e normaliza o texto geral
-        text_general = "\n".join([line.strip() for line in text_general.splitlines() if line.strip()])
+        text_general = "\n".join(
+            [line.strip() for line in text_general.splitlines() if line.strip()])
 
         # Converte a imagem para formato OpenCV
         image_cv = cv2.cvtColor(np.array(image), cv2.COLOR_GRAY2BGR)
@@ -1561,7 +1372,8 @@ def extract_text_from_image(image_path):
         edges = cv2.Canny(blurred, 50, 150)
 
         # Detecta contornos
-        contours, _ = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(
+            edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         # Filtra contornos que podem representar células de tabela
         table_contours = [c for c in contours if cv2.contourArea(c) > 100]
@@ -1570,10 +1382,12 @@ def extract_text_from_image(image_path):
         if table_contours:
             # Pré-processa novamente para OCR de tabela
             custom_config = '--psm 11'  # Modo de layout para tabelas
-            text_table = pytesseract.image_to_string(image, lang='por', config=custom_config)
+            text_table = pytesseract.image_to_string(
+                image, lang='por', config=custom_config)
 
             # Remove espaços extras e normaliza o texto das tabelas
-            text_table = "\n".join([line.strip() for line in text_table.splitlines() if line.strip()])
+            text_table = "\n".join(
+                [line.strip() for line in text_table.splitlines() if line.strip()])
 
         # Combina texto geral e texto de tabelas
         combined_text = text_general
@@ -1642,7 +1456,8 @@ def extract_text_from_image(image_path):
 
 #         # Extrai texto visível do HTML
 #         text = soup.get_text(separator="\n")
-#         text = "\n".join(line.strip() for line in text.splitlines() if line.strip())  # Remove linhas vazias/extras
+#         text = "\n".join(line.strip() for line in text.splitlines()
+#                          if line.strip())  # Remove linhas vazias/extras
 
 #         return text, True, ""
 #     except Exception as e:
@@ -1665,8 +1480,10 @@ def extract_text_from_html(file_path_or_content):
         # Detecta codificação e lê o conteúdo HTML
         if isinstance(file_path_or_content, bytes):
             # Detecta a codificação se o conteúdo for em bytes
-            detected_encoding = chardet.detect(file_path_or_content)['encoding']
-            file_content = file_path_or_content.decode(detected_encoding, errors='replace')
+            detected_encoding = chardet.detect(
+                file_path_or_content)['encoding']
+            file_content = file_path_or_content.decode(
+                detected_encoding, errors='replace')
         elif isinstance(file_path_or_content, str):
             if "<html" in file_path_or_content.lower():
                 # Caso seja diretamente o conteúdo HTML em string
@@ -1676,9 +1493,11 @@ def extract_text_from_html(file_path_or_content):
                 with open(file_path_or_content, 'rb') as file:
                     raw_data = file.read()
                     detected_encoding = chardet.detect(raw_data)['encoding']
-                    file_content = raw_data.decode(detected_encoding, errors='replace')
+                    file_content = raw_data.decode(
+                        detected_encoding, errors='replace')
         else:
-            raise TypeError("O parâmetro 'file_path_or_content' deve ser str ou bytes.")
+            raise TypeError(
+                "O parâmetro 'file_path_or_content' deve ser str ou bytes.")
 
         # Usa BeautifulSoup para processar o HTML
         soup = BeautifulSoup(file_content, 'html.parser')
@@ -1689,7 +1508,8 @@ def extract_text_from_html(file_path_or_content):
 
         # Extrai texto visível do HTML
         text = soup.get_text(separator="\n")
-        text = "\n".join(line.strip() for line in text.splitlines() if line.strip())  # Remove linhas vazias/extras
+        text = "\n".join(line.strip() for line in text.splitlines()
+                         if line.strip())  # Remove linhas vazias/extras
 
         return text, True, ""
     except Exception as e:
@@ -1751,9 +1571,11 @@ def extract_text_from_pptx(file_path_or_content):
     """
     try:
         if isinstance(file_path_or_content, (bytes, BytesIO)):
-            file_content = BytesIO(file_path_or_content) if isinstance(file_path_or_content, bytes) else file_path_or_content
+            file_content = BytesIO(file_path_or_content) if isinstance(
+                file_path_or_content, bytes) else file_path_or_content
         elif isinstance(file_path_or_content, str) and (file_path_or_content.startswith("http://") or file_path_or_content.startswith("https://")):
-            response = requests.get(file_path_or_content, timeout=45)  # Adiciona timeout de 45 segundos
+            # Adiciona timeout de 45 segundos
+            response = requests.get(file_path_or_content, timeout=45)
             response.raise_for_status()
             file_content = BytesIO(response.content)
         else:
@@ -1765,7 +1587,7 @@ def extract_text_from_pptx(file_path_or_content):
         # Itera sobre os slides para garantir a extração de texto de todos os slides
         for slide_num, slide in enumerate(prs.slides, start=1):
             slide_text = f"\n--- Slide {slide_num} ---\n"
-            
+
             # Extrair o texto dos shapes
             for shape in slide.shapes:
                 if hasattr(shape, "text"):
@@ -1786,7 +1608,7 @@ def extract_text_from_pptx(file_path_or_content):
                     image = Image.open(image_stream)
                     ocr_text = pytesseract.image_to_string(image, lang='por')
                     slide_text += f"\n[Imagem OCR]:\n{ocr_text}\n"
-            
+
             all_text.append(slide_text)
 
         # Junta todo o texto extraído dos slides
@@ -1808,7 +1630,8 @@ def enhance_image(image):
     image = image.filter(ImageFilter.SHARPEN)  # Aumenta a nitidez
     enhancer = ImageEnhance.Contrast(image)
     image = enhancer.enhance(2)  # Aumenta o contraste
-    image = ImageOps.autocontrast(image)  # Ajusta o brilho e contraste automaticamente
+    # Ajusta o brilho e contraste automaticamente
+    image = ImageOps.autocontrast(image)
     return image
 
 
@@ -1835,7 +1658,7 @@ def download_pdf(url):
 #     try:
 #         all_text = []
 #         doc = fitz.open(file_path)
-        
+
 #         for page_num in range(doc.page_count):
 #             page = doc.load_page(page_num)
 #             page_text = []
@@ -1855,42 +1678,42 @@ def download_pdf(url):
 
 #             # Renderiza em alta resolução
 #             pix = page.get_pixmap(matrix=fitz.Matrix(400/72, 400/72))
-            
+
 #             # Pré-processamento
 #             img_gray = img.convert("L")
 #             img_gray = ImageOps.autocontrast(img_gray, cutoff=2)
 #             img_gray = img_gray.filter(ImageFilter.UnsharpMask(radius=2, percent=150))
-            
+
 #             # OCR para texto
 #             text_config = '--psm 6 --oem 3 -c preserve_interword_spaces=1'
 #             page_content = pytesseract.image_to_string(img_gray, lang='por', config=text_config)
-            
+
 #             if page_content.strip():
 #                 page_text.append(page_content)
 
 #             # 3. Processa tabelas apenas se não encontrou texto pesquisável
 #             img_cv = cv2.cvtColor(np.array(img_gray), cv2.COLOR_GRAY2BGR)
-            
+
 #             for thickness in [1, 2, 3]:
 #                 horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (50, thickness))
 #                 vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (thickness, 50))
-                
+
 #                 horizontal = cv2.erode(img_cv, horizontal_kernel, iterations=1)
 #                 vertical = cv2.erode(img_cv, vertical_kernel, iterations=1)
-                
+
 #                 mask = cv2.add(horizontal, vertical)
-#                 contours, _ = cv2.findContours(cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY), 
-#                                              cv2.RETR_EXTERNAL, 
+#                 contours, _ = cv2.findContours(cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY),
+#                                              cv2.RETR_EXTERNAL,
 #                                              cv2.CHAIN_APPROX_SIMPLE)
-                
+
 #                 for contour in contours:
 #                     if cv2.contourArea(contour) > 3000:
 #                         x, y, w, h = cv2.boundingRect(contour)
 #                         table_region = img_gray.crop((x, y, x+w, y+h))
-                        
+
 #                         table_config = '--psm 6 --oem 3 -c preserve_interword_spaces=1'
 #                         table_text = pytesseract.image_to_string(table_region, lang='por', config=table_config)
-                        
+
 #                         if table_text.strip():
 #                             page_text.append(f"\n=== TABELA DETECTADA ===\n{table_text}\n")
 
@@ -1902,7 +1725,7 @@ def download_pdf(url):
 
 #         doc.close()
 #         final_text = "\n".join(all_text).strip()
-        
+
 #         return final_text if final_text else "Documento sem conteúdo extraível", True, None
 
 #     except Exception as e:
@@ -1926,7 +1749,7 @@ def extract_text_from_pdf_content(file_path):
     try:
         all_text = []
         doc = fitz.open(file_path)
-        
+
         for page_num in range(doc.page_count):
             page = doc.load_page(page_num)
             page_text = []
@@ -1935,33 +1758,42 @@ def extract_text_from_pdf_content(file_path):
             searchable_text = page.get_text("text").strip()
             if searchable_text:
                 page_text.append(searchable_text)
-                all_text.append(f"\n=== PÁGINA {page_num + 1} ===\n{searchable_text}")
+                all_text.append(
+                    f"\n=== PÁGINA {page_num + 1} ===\n{searchable_text}")
 
             # 2. Tenta extrair tabelas
-            table_text = page.get_text("text").strip()  # Extrai texto de tabelas
+            # Extrai texto de tabelas
+            table_text = page.get_text("text").strip()
             if table_text and table_text != searchable_text:
-                all_text.append(f"\n=== TABELA NA PÁGINA {page_num + 1} ===\n{table_text}")
+                all_text.append(
+                    f"\n=== TABELA NA PÁGINA {page_num + 1} ===\n{table_text}")
 
             # 3. Se não encontrou texto pesquisável, aplica OCR
             if not searchable_text:
                 # Renderiza em alta resolução
-                pix = page.get_pixmap(matrix=fitz.Matrix(300/72, 300/72))  # Aumenta a resolução para melhor OCR
-                img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                # Aumenta a resolução para melhor OCR
+                pix = page.get_pixmap(matrix=fitz.Matrix(300/72, 300/72))
+                img = Image.frombytes(
+                    "RGB", [pix.width, pix.height], pix.samples)
 
                 # Aplica OCR na imagem
-                text_from_image = pytesseract.image_to_string(img, lang='por', config='--psm 6')
+                text_from_image = pytesseract.image_to_string(
+                    img, lang='por', config='--psm 6')
                 if text_from_image.strip():
                     page_text.append(text_from_image)
-                    all_text.append(f"\n=== PÁGINA {page_num + 1} (OCR) ===\n{text_from_image}")
+                    all_text.append(
+                        f"\n=== PÁGINA {page_num + 1} (OCR) ===\n{text_from_image}")
 
                 # 4. Tenta extrair tabelas da imagem usando OCR
-                table_data = pytesseract.image_to_string(img, lang='por', config='--psm 6 --oem 3')
+                table_data = pytesseract.image_to_string(
+                    img, lang='por', config='--psm 6 --oem 3')
                 if table_data.strip() and table_data != text_from_image:
-                    all_text.append(f"\n=== TABELA NA PÁGINA {page_num + 1} (OCR) ===\n{table_data}")
+                    all_text.append(
+                        f"\n=== TABELA NA PÁGINA {page_num + 1} (OCR) ===\n{table_data}")
 
         doc.close()
         final_text = "\n".join(all_text).strip()
-        
+
         return final_text if final_text else "Documento sem conteúdo extraível ou conteudo vazio", True, None
 
     except Exception as e:

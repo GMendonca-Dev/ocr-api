@@ -119,7 +119,7 @@ def extract_compressed_file(file_path, temp_dir, original_data):
         raise
 
 
-def extract_text_by_extension(file_path, id_zip=None, original_data=None):
+def extract_text_by_extension(file_path, extensao, id_zip=None, original_data=None):
     """
     Função que determina a extração de conteúdo com base na extensão do arquivo.
     """
@@ -136,6 +136,9 @@ def extract_text_by_extension(file_path, id_zip=None, original_data=None):
             response.raise_for_status()
             _, extension = os.path.splitext(file_path)
             extension = extension.lower().lstrip('.')
+            if not extension:
+                extension = extensao  # Se extensão não existir, tenta obter a extensão do nome original
+                print(f"Nova extensão no tratamento: {extensao}")
 
             # Cria um arquivo temporário
             with tempfile.NamedTemporaryFile(delete=False, suffix=f".{extension}") as temp_file:
@@ -157,6 +160,9 @@ def extract_text_by_extension(file_path, id_zip=None, original_data=None):
     else:
         _, extension = os.path.splitext(file_path)
         extension = extension.lower().lstrip('.')
+        if not extension:
+            extension = extensao  # Se extensão não existir, tenta obter a extensão do nome original
+            print(f"Nova extensão no tratamento - else (arquivo é path e não url): {extensao}")
         return process_file_by_extension(file_path, extension, original_data)
 
 
@@ -194,7 +200,7 @@ def process_file_by_extension(file_path, extension, original_data=None):
             result = (extract_text_and_images_from_docx(docx_path), True, None)
         elif extension == 'pdf' or extension == '' or extension == "pdf'":
             result = (extract_text_from_pdf_content(file_path), True, None)
-        elif extension in ['jpg', 'jpeg', 'png']:
+        elif extension in ['jpg', 'jpeg', 'png', 'tif', 'tiff', 'bmp', 'gif']:
             result = (extract_text_from_image(file_path), True, None)
         elif extension in ['html', 'htm']:
             result = (extract_text_from_html(file_path), True, None)

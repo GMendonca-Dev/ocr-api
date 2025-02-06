@@ -22,13 +22,13 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 2101      # Número da página inicial
-END_PAGE = 2200        # Número da página final # parei na 2000
+START_PAGE = 3868      # Número da página inicial 
+END_PAGE = 3868        # Número da página final # parei na 
 DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 # Pasta 'oficiosadministrativos' já resolvido - Transferi o conteúdo da pasta oficiosadministrativos_old para oficiosadministrativos
 
-MAX_PAGES = 100  # Define o número máximo de páginas a serem processadas
+MAX_PAGES = 300  # Define o número máximo de páginas a serem processadas
 
 
 class ExtractionError(Exception):
@@ -226,7 +226,7 @@ def save_data_to_db(data, page_number):
         data (list): Lista de documentos a serem processados.
         page_number (int): Número da página sendo processada.
     """
-    #print("Em 'save data to db'")
+    # print("Em 'save data to db'")
     total_registros = len(data)
     registros_sucesso = 0
     erros_extracao = []
@@ -243,9 +243,19 @@ def save_data_to_db(data, page_number):
     for item in data:
         # Mapeamento de campos
         nome_original = item.get('nome')  # Nome original do arquivo
-        extensao = item['arquivo'].split('.')[-1].lower() if item.get('arquivo') else None
+        extensao = item['arquivo'].split('.')[-1].lower() if item.get('arquivo') else ''
         caminho_completo = item.get('caminho')
         arquivo_existe = item.get('fileexists', 0)
+        print(f"Extensão obtida do caminho: {extensao}")
+        if extensao is None or extensao == '' and nome_original is not None:
+            file_path = Path(nome_original)
+            extensao = file_path.suffix.split('.')[-1].lower()
+            # print(f"Extensão obtida do nome original: {extensao}")
+
+        # # Verifica se a extensão está vazia e se o nome_original não é None ou vazio
+        # if not extensao and nome_original:  
+        #     extensao = nome_original.split('.')[-1].lower() # Se extensão não existir, tenta obter a extensão do nome original
+        #     print(f"Nova extensão: {extensao}")
 
         # Valida se os campos necessários estão presentes
         if not sftp_config['path_sftp'] or not item.get('pasta') or not item.get('arquivo'):
@@ -274,13 +284,16 @@ def save_data_to_db(data, page_number):
 
         # Tenta extrair o conteúdo do arquivo, caso falhe, registra o erro
         try:
-            conteudo, sucesso, erro_extracao = extract_text_by_extension(caminho_completo)
+            # print(f"Extensão no bloco de extração de caracteres : {extensao}")
+            conteudo, sucesso, erro_extracao = extract_text_by_extension(caminho_completo, extensao)
             if not sucesso:
                 raise ExtractionError(f"Falha ao processar {item['arquivo']}: {erro_extracao}")
 
             # Limpa o conteúdo extraído
             conteudo_texto = conteudo[0] if isinstance(conteudo, tuple) else conteudo
             conteudo_limpo = conteudo_texto.replace('\x00', '') if conteudo_texto else ''
+
+            # print(f"Extensão a ser salva: {extensao}")  # Para depuração
 
             # Insere no banco
             insert_data_into_main_table((

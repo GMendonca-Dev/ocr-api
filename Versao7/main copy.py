@@ -246,7 +246,7 @@ def save_data_to_db(data, page_number):
         extensao = item['arquivo'].split('.')[-1].lower() if item.get('arquivo') else ''
         caminho_completo = item.get('caminho')
         arquivo_existe = item.get('fileexists', 0)
-        print(f"Extensão obtida do caminho: {extensao}")
+        #print(f"Extensão obtida do caminho: {extensao}")
         if extensao is None or extensao == '' and nome_original is not None:
             file_path = Path(nome_original)
             extensao = file_path.suffix.split('.')[-1].lower()

@@ -342,6 +342,137 @@ def create_error_table_if_not_exists():
 #         cursor.close()
 #         connection.close()
 
+# ########################## Funcionando em 06/02/2025 ########################################
+# def insert_data_into_main_table(data):
+#     """
+#     Insere ou atualiza dados na tabela principal. Caso o conteúdo exceda o limite do tsvector, divide em múltiplas partes.
+
+#     Args:
+#         data (tuple): Dados a serem inseridos na tabela principal.
+
+#     Returns:
+#         None
+#     """
+#     connection = get_db_connection()
+#     cursor = connection.cursor()
+
+#     try:
+#         # Dados recebidos
+#         id_documento, email, num, ano, nome_original, arquivo, extensao, pasta, caminho, conteudo, page_number = data
+#         #print(f"Extensão no arquivo - db_operations - : {extensao}")
+
+#         # Tamanho máximo para tsvector no PostgreSQL
+#         max_tsvector_size = 1048575  # 1 MB em bytes
+
+#         # Verifica se o conteúdo precisa ser dividido
+#         if isinstance(conteudo, str) and len(conteudo.encode('utf-8')) > max_tsvector_size:
+#             # Divide o conteúdo em partes menores
+#             chunk_size = max_tsvector_size // 2  # Divisão conservadora
+#             chunks = [conteudo[i:i + chunk_size] for i in range(0, len(conteudo), chunk_size)]
+
+#             for idx, chunk in enumerate(chunks):
+#                 # Adiciona um sufixo ao nome_original para identificar as partes
+#                 nome_original_chunk = f"{nome_original}_parte{idx + 1}"
+
+#                 # Insere ou atualiza o chunk
+#                 cursor.execute(
+#                 #     """
+#                 #     INSERT INTO ocr_documentosocr (
+#                 #         id_documento, email_usuario, num_op, ano_op, nome_original,
+#                 #         arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+#                 #     )
+#                 #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+#                 #     ON CONFLICT (id_documento, nome_original) DO UPDATE
+#                 #     SET conteudo = CASE
+#                 #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
+#                 #         ELSE ocr_documentosocr.conteudo
+#                 #     END,
+#                 #     data_leitura = CASE
+#                 #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
+#                 #         ELSE ocr_documentosocr.data_leitura
+#                 #     END
+#                 #     """,
+#                 #     (
+#                 #         id_documento, email, num, ano, nome_original_chunk, arquivo, extensao,
+#                 #         pasta, caminho, chunk, page_number
+#                 #     )
+#                 # )
+
+#                     """
+#                     INSERT INTO ocr_documentosocr (
+#                         id_documento, email_usuario, num_op, ano_op, nome_original,
+#                         arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+#                     )
+#                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+#                     ON CONFLICT (id_documento, nome_original) DO UPDATE
+#                     SET extensao_arquivo = EXCLUDED.extensao_arquivo,  -- Atualiza a extensão sempre
+#                         conteudo = CASE
+#                             WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
+#                             ELSE ocr_documentosocr.conteudo
+#                         END,
+#                         data_leitura = CASE
+#                             WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
+#                             ELSE ocr_documentosocr.data_leitura
+#                         END
+#                     """,
+#                     (
+#                         id_documento, email, num, ano, nome_original_chunk, arquivo, extensao,
+#                         pasta, caminho, chunk, page_number
+#                     )
+
+#                 )
+#         else:
+#             #print(f"Extensão no arquivo - db_operations - else : {extensao}")
+#             # Conteúdo não excede o limite, salva diretamente
+#             cursor.execute(
+#             #     """
+#             #     INSERT INTO ocr_documentosocr (
+#             #         id_documento, email_usuario, num_op, ano_op, nome_original,
+#             #         arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+#             #     )
+#             #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+#             #     ON CONFLICT (id_documento, nome_original) DO UPDATE
+#             #     SET conteudo = CASE
+#             #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
+#             #         ELSE ocr_documentosocr.conteudo
+#             #     END,
+#             #     data_leitura = CASE
+#             #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
+#             #         ELSE ocr_documentosocr.data_leitura
+#             #     END
+#             #     """,
+#             #     data
+#             # )
+#                 """
+#                 INSERT INTO ocr_documentosocr (
+#                     id_documento, email_usuario, num_op, ano_op, nome_original,
+#                     arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+#                 )
+#                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+#                 ON CONFLICT (id_documento, nome_original) DO UPDATE
+#                 SET extensao_arquivo = EXCLUDED.extensao_arquivo,  -- Atualiza a extensão sempre
+#                     conteudo = CASE
+#                         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
+#                         ELSE ocr_documentosocr.conteudo
+#                     END,
+#                     data_leitura = CASE
+#                         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
+#                         ELSE ocr_documentosocr.data_leitura
+#                     END
+#                 """,
+#                 data
+#                 )
+#         connection.commit()
+#     except Exception as e:
+#         connection.rollback()
+#         print(f"Erro ao inserir dados no banco: {e}")
+#         raise
+#     finally:
+#         cursor.close()
+#         connection.close()
+# ########################## Fim do Funcionando em 06/02/2025 ########################################
+
+# ########################## Nova função insert_data_into_main_table em 06/02/2025 ########################################
 
 def insert_data_into_main_table(data):
     """
@@ -358,54 +489,35 @@ def insert_data_into_main_table(data):
 
     try:
         # Dados recebidos
-        id_documento, email, num, ano, nome_original, arquivo, extensao, pasta, caminho, conteudo, page_number = data
-        #print(f"Extensão no arquivo - db_operations - : {extensao}")
+        id_documento, email, num, ano, nome_original, arquivo, extensao, pasta, id_tipo_documento, caminho, conteudo, page_number = data
 
-        # Tamanho máximo para tsvector no PostgreSQL
-        max_tsvector_size = 1048575  # 1 MB em bytes
+        # Garantir que id_tipo_documento seja sempre uma string válida
+        id_tipo_documento = str(id_tipo_documento) if id_tipo_documento else "N/A"
+
+        # Tamanho máximo para tsvector no PostgreSQL (1 MB em bytes)
+        max_tsvector_size = 1048575  
 
         # Verifica se o conteúdo precisa ser dividido
         if isinstance(conteudo, str) and len(conteudo.encode('utf-8')) > max_tsvector_size:
             # Divide o conteúdo em partes menores
-            chunk_size = max_tsvector_size // 2  # Divisão conservadora
+            chunk_size = max_tsvector_size // 2  
             chunks = [conteudo[i:i + chunk_size] for i in range(0, len(conteudo), chunk_size)]
 
             for idx, chunk in enumerate(chunks):
                 # Adiciona um sufixo ao nome_original para identificar as partes
                 nome_original_chunk = f"{nome_original}_parte{idx + 1}"
 
-                # Insere ou atualiza o chunk
+                # Insere ou atualiza cada parte
                 cursor.execute(
-                #     """
-                #     INSERT INTO ocr_documentosocr (
-                #         id_documento, email_usuario, num_op, ano_op, nome_original,
-                #         arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
-                #     )
-                #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
-                #     ON CONFLICT (id_documento, nome_original) DO UPDATE
-                #     SET conteudo = CASE
-                #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
-                #         ELSE ocr_documentosocr.conteudo
-                #     END,
-                #     data_leitura = CASE
-                #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
-                #         ELSE ocr_documentosocr.data_leitura
-                #     END
-                #     """,
-                #     (
-                #         id_documento, email, num, ano, nome_original_chunk, arquivo, extensao,
-                #         pasta, caminho, chunk, page_number
-                #     )
-                # )
-
                     """
                     INSERT INTO ocr_documentosocr (
                         id_documento, email_usuario, num_op, ano_op, nome_original,
-                        arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+                        arquivo, extensao_arquivo, pasta, id_tipo_documento, caminho, conteudo, numero_pagina, data_leitura
                     )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
                     ON CONFLICT (id_documento, nome_original) DO UPDATE
-                    SET extensao_arquivo = EXCLUDED.extensao_arquivo,  -- Atualiza a extensão sempre
+                    SET extensao_arquivo = EXCLUDED.extensao_arquivo,
+                        id_tipo_documento = EXCLUDED.id_tipo_documento,
                         conteudo = CASE
                             WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
                             ELSE ocr_documentosocr.conteudo
@@ -417,40 +529,21 @@ def insert_data_into_main_table(data):
                     """,
                     (
                         id_documento, email, num, ano, nome_original_chunk, arquivo, extensao,
-                        pasta, caminho, chunk, page_number
+                        pasta, id_tipo_documento, caminho, chunk, page_number  # , arquivo_existe
                     )
-
                 )
         else:
-            #print(f"Extensão no arquivo - db_operations - else : {extensao}")
             # Conteúdo não excede o limite, salva diretamente
             cursor.execute(
-            #     """
-            #     INSERT INTO ocr_documentosocr (
-            #         id_documento, email_usuario, num_op, ano_op, nome_original,
-            #         arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
-            #     )
-            #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
-            #     ON CONFLICT (id_documento, nome_original) DO UPDATE
-            #     SET conteudo = CASE
-            #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
-            #         ELSE ocr_documentosocr.conteudo
-            #     END,
-            #     data_leitura = CASE
-            #         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN NOW()
-            #         ELSE ocr_documentosocr.data_leitura
-            #     END
-            #     """,
-            #     data
-            # )
                 """
                 INSERT INTO ocr_documentosocr (
                     id_documento, email_usuario, num_op, ano_op, nome_original,
-                    arquivo, extensao_arquivo, pasta, caminho, conteudo, numero_pagina, data_leitura
+                    arquivo, extensao_arquivo, pasta, id_tipo_documento, caminho, conteudo, numero_pagina, data_leitura
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
                 ON CONFLICT (id_documento, nome_original) DO UPDATE
-                SET extensao_arquivo = EXCLUDED.extensao_arquivo,  -- Atualiza a extensão sempre
+                SET extensao_arquivo = EXCLUDED.extensao_arquivo,
+                    id_tipo_documento = EXCLUDED.id_tipo_documento,
                     conteudo = CASE
                         WHEN ocr_documentosocr.conteudo != EXCLUDED.conteudo THEN EXCLUDED.conteudo
                         ELSE ocr_documentosocr.conteudo
@@ -460,8 +553,12 @@ def insert_data_into_main_table(data):
                         ELSE ocr_documentosocr.data_leitura
                     END
                 """,
-                data
+                (
+                    id_documento, email, num, ano, nome_original, arquivo, extensao,
+                    pasta, id_tipo_documento, caminho, conteudo, page_number  # , arquivo_existe
                 )
+            )
+
         connection.commit()
     except Exception as e:
         connection.rollback()
@@ -470,6 +567,9 @@ def insert_data_into_main_table(data):
     finally:
         cursor.close()
         connection.close()
+
+
+# ########################## FIM da Nova função insert_error_into_table em 06/02/2025 ########################################
 
 
 def insert_error_into_table(error_data):

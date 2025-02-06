@@ -1201,7 +1201,7 @@ def extract_text_and_images_from_docx(docx_path):
 
                     # Verifica se a relação é de imagem e possui target_part
                     if "image" in rel.target_ref and hasattr(rel, "target_part") and rel.target_part:
-                        print(f"Processando imagem: {rel.target_ref}")
+                        # print(f"Processando imagem: {rel.target_ref}")
                         image_data = rel.target_part.blob
 
                         # Determina a extensão da imagem com base no MIME type
@@ -1218,8 +1218,8 @@ def extract_text_and_images_from_docx(docx_path):
                         temp_image_name = f"temp_image_{uuid.uuid4().hex}.{ext}"
                         temp_image_path = os.path.join(
                             temp_dir, temp_image_name)
-                        print(
-                            f"Salvando imagem temporária em: {temp_image_path}")
+                        # print(
+                        #     f"Salvando imagem temporária em: {temp_image_path}")
 
                         # Salva a imagem
                         with open(temp_image_path, "wb") as temp_image_file:
@@ -1235,7 +1235,8 @@ def extract_text_and_images_from_docx(docx_path):
                             print(
                                 f"Falha ao extrair texto da imagem: {temp_image_path} | Erro: {error}")
                     else:
-                        print(f"Relação ignorada: {rel.target_ref}")
+                        #print(f"Relação ignorada: {rel.target_ref}")
+                        continue
 
                 except AttributeError as attr_err:
                     print(f"Erro ao acessar atributos da relação: {attr_err}")
