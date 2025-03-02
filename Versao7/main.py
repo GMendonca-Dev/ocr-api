@@ -22,8 +22,8 @@ sys.path.insert(0, './Versao7')
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 warnings.simplefilter("ignore", UserWarning)
 
-START_PAGE = 3916      # Número da página inicial 
-END_PAGE = 3937        # Número da página final # parei na 
+START_PAGE = 3938      # Número da página inicial 
+END_PAGE = 3993       # Número da página final # parei na 
 DOCUMENT_ID = None   # ID do documento a ser processado (coloque o ID ou None) "93727"
 
 # Pasta 'oficiosadministrativos' já resolvido - Transferi o conteúdo da pasta oficiosadministrativos_old para oficiosadministrativos
